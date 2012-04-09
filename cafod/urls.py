@@ -1,4 +1,5 @@
 from django.conf.urls import patterns, include, url
+from settings import *
 
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
@@ -26,3 +27,11 @@ urlpatterns = patterns('',
     url(r'^tagging_autocomplete/', include('tagging_autocomplete.urls')),
     url(r'^foro/', include('foros.urls')),
 )
+
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+urlpatterns += staticfiles_urlpatterns()
+
+if DEBUG:
+    urlpatterns += patterns('',
+                (r'^uploads/(?P<path>.*)$', 'django.views.static.serve', {'document_root': MEDIA_ROOT}),
+                )

@@ -19,6 +19,7 @@ def crear_agenda(request):
             form_uncommited = form.save(commit=False)
             form_uncommited.user = request.user
             form_uncommited.save()
+            
             form1_uncommitd = form1.save(commit=False)
             form1_uncommitd.content_object = form_uncommited
             form1_uncommitd.adjunto = request.POST['adjunto']

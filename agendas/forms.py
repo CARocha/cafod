@@ -13,7 +13,6 @@ class AgendaForm(ModelForm):
     	exclude = ('user',)
 
 class DocuForm(forms.ModelForm):
-    adjunto = forms.FileField()
     class Meta:
     	model = Documentos
     	exclude = ('content_type', 'object_id', 'content_object',)

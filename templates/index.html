@@ -1,0 +1,24 @@
+{% extends "base.html"%}
+
+{%block contenido%}
+   <p>Esta es una prueba</p>
+   {% for nota in notas%}
+   	<img src="" alt="{{nota.titulo}}"><br>
+   	titulo: {{nota.titulo}}<br>
+   	contenido: {{nota.contenido}}<br>
+   	<a href="{{nota.get_absolute_url}}">Leer más</a><br>
+   	<hr>
+   {% endfor %}
+{%endblock%}
+
+{% block footer %}
+   {{contra}}
+
+   {% for k,v in contra.items %}
+   <br>
+   	pais:{{k}}<br>
+   	    {% for i in v %} 
+   	        {% for a in i %}  {{a}}<br> {% endfor %}
+   	    {%endfor%}
+   {% endfor %}
+{% endblock %}

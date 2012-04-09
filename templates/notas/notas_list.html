@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block contenido %}
+<br>
+    {% for nota in object_list %}
+    	<a href="{{nota.get_absolute_url}}">{{nota.titulo}}</a><br>
+        {{nota.contenido|safe}} <br>
+        <hr>
+    {% endfor %}
+
+{% endblock %}

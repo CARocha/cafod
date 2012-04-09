@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block contenido %}
+<br>
+    {% for agenda in object_list %}
+    	<a href="{{agenda.get_absolute_url}}">{{agenda.evento}}</a><br>
+        {{agenda.descripcion|safe}} <br>
+        <hr>
+    {% endfor %}
+
+{% endblock %}

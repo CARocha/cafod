@@ -1,0 +1,25 @@
+<!doctype html>
+<html>
+<head>
+	<title>{%block title%}CAFOD{%endblock%}</title>
+	{%block extra_js%}{%endblock%}
+</head>
+<body>
+	{% block header %}
+            <div id="header_banner" class="izq"></div>
+            <div id="sesion" class="der">
+             {% if user.username %}
+
+  	      Bienvenido {{ user.username }} | <a href="/admin" ><img src="/media/imagen/ayuda.jpg" >Administrar</a> | <a href="/accounts/logout" title="Salir de Administración" class="vtip" >Salir</a> 
+
+  	      {% else %}
+
+  	      <a href="/accounts/login"> <img src="/media/imagen/usuario.jpg" > Entrar</a>
+
+  	      {% endif %}
+
+	{% endblock %}
+	{%block contenido%}{%endblock%}
+	{%block footer%}{%endblock%}
+</body>
+</html>

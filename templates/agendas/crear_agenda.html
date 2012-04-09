@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+
+{% block contenido %}
+	<form action="." method="post" accept-charset="utf-8">{% csrf_token %}
+		{{form.as_p}}
+		{{form1.as_p}}
+		<input id="boton-preguntar" type="submit" value="Guardar">
+	</form>
+{% endblock %}

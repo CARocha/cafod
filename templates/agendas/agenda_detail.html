@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block title %}{{object.nombre}}{% endblock %}
+
+{% block contenido %}
+
+<div class="titulo-foro"> {% if notas.user == request.user or request.user.is_superuser %}
+    <a href="/agendas/editar/{{object.id}}">[editar]</a>|
+    <a href="/agendas/borrar/{{object.id}}">[borrar]</a>{% endif %}
+</div>
+
+
+    <br>
+         Nombre: {{object.evento}}<br> 
+         
+         Descripción: {{object.descripcion}} <br>
+         {% if object.inicio %}
+             Fecha de inicio del evento: {{object.inicio}}<br>
+         {% endif %}
+         {% if object.final %}
+             Fecha de final del evento: {{object.final}}<br>
+         {% endif %}
+         {% if object.generalidades %}
+             Generalidades: {{object.generalidades|safe}}<br>
+         {% endif %}
+         {% if object.adjunto %}
+             {% for a in object.adjunto.all %}
+                 N_Adjunto: {{a.nombre}}<br>
+                 a_ad: {{a.adjunto}}
+             {% endfor %}
+         {% endif %}
+                
+{% endblock %}

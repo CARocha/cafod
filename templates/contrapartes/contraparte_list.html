@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block contenido %}
+<br>
+    {% for contraparte in object_list %}
+    	Nombre: <a href="{{contraparte.get_absolute_url}}">{{contraparte.nombre}}</a><br>
+         {% if contraparte.logo %}
+             Logo: <img src="{{contraparte.logo}}" alt="{{contraparte.nombre}}"> <br>
+         {% endif %}
+         Pais: {{contraparte.pais}} <br>
+         {% if contraparte.fundacion %}
+             Año de Fundación: {{contraparte.fundacion}}<br>
+         {% endif %}
+        <hr>
+    {% endfor %}
+
+{% endblock %}

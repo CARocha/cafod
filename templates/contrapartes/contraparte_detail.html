@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block title %}{{object.nombre}}{% endblock %}
+
+{% block contenido %}
+
+<div class="titulo-foro"> {% if notas.user == request.user or request.user.is_superuser %}
+    <a href="/contrapartes/editar/{{object.id}}">[editar]</a>|
+    <a href="/contrapartes/borrar/{{object.id}}">[borrar]</a>{% endif %}
+</div>
+
+
+    <br>
+         Nombre: {{object.nombre}}<br> 
+         {% if object.logo %}
+             Logo: <img src="{{object.logo}}" alt="{{object.nombre}}"> <br>
+         {% endif %}
+         Pais: {{object.pais}} <br>
+         {% if object.fundacion %}
+             Año de Fundación: {{object.fundacion}}<br>
+         {% endif %}
+         {% if object.temas %}
+             Temas: {{object.temas}}<br>
+         {% endif %}
+         {% if object.generalidades %}
+             Generalidades: {{object.generalidades|safe}}<br>
+         {% endif %}
+         {% if object.contacto %}
+             Contacto: {{object.contacto}}<br>
+         {% endif %}
+         {% if object.telefono %}
+             Telefono: {{object.telefono}}<br>
+         {% endif %}
+         {% if object.sitio_web %}
+             Sitio Web: {{object.sitio_web}}<br>
+         {% endif %}
+         {% if object.rss %}
+             RSS: {{object.rss}}<br>
+         {% endif %}
+
+                
+{% endblock %}

@@ -53,7 +53,7 @@ def editar_nota(request, id):
     if not nota.user == request.user:
     	return HttpResponse("Usted no puede editar esta nota")
     if request.method == 'POST':
-    	form = NotasForms(request.POST, instance)
+    	form = NotasForms(request.POST, instance = nota)
     	if form.is_valid():
             nota.titulo = request.POST['titulo']
             nota.contenido = request.POST['contenido']

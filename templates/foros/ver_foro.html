@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block contenido %}
+
+<h1>Discusion/foro</h1>
+<h2>{{discusion.nombre}}</h2>
+<p>{{discusion.contenido}}</p>
+<strong>creado: {{discusion.creacion}}</strong>
+<h2>Aporte a Discusion/Foro</h2>
+{% for respuesta in discusion.aportes_set.all %}
+        <strong> <h5>{{respuesta.user}}</h5> </strong> 
+	{{respuesta.contenido}}<br>
+	{% if respuesta.contenido%}
+	   <a href="/foros/ver_comentario/{{respuesta.id}}">Comentar</a>
+        {% endif %}
+	<hr>
+{% endfor %}
+	----<h3>comentarios a los aportes</h3>
+		{%for a in aportes.comentarios_set.all%}
+			{{a}}
+		{%endfor%}
+
+<h2>Aportar a Discusion/Foro</h2>
+<div>
+    <form action="." method="POST">{% csrf_token %}
+        {{form}}
+        <input id="boton-preguntar" type="submit" value="Responder">
+     </form>
+</div>
+
+
+{% endblock %}

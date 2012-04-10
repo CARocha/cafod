@@ -7,10 +7,12 @@ class ForosForm(ModelForm):
     	model = Foros
     	exclude = ('contraparte','creacion',)
 
-class AportesForm(ModelForm):
+class AporteForm(ModelForm):
     class Meta:
     	model = Aportes
+    	exclude = ('foro','fecha','user',)
 
-class CometariosForm(ModelForm):
+class ComentarioForm(ModelForm):
     class Meta:
     	model = Cometarios
+    	exclude = ('fecha','aporte','usuario')

@@ -34,7 +34,9 @@ def crear_agenda(request):
 @login_required
 def editar_agenda(request, id):
     agenda = get_object_or_404(Agendas, id=id)
-    docu = ContentType.objects.get_for_model(Agendas)
+    agenda_type = ContentType.objects.get(app_label="foros",model="documentos")
+    docu = agenda_type.get_object_for_this_type(object_id=id) 
+    #docu = ContentType.objects.get_for_model(Agendas)
     if not agenda.user == request.user:
     	return HttpResponse("Usted no puede editar esta Agenda")
     if request.method == 'POST':

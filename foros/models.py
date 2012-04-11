@@ -22,11 +22,11 @@ class Imagen(models.Model):
     object_id = models.IntegerField(db_index=True)
     content_object = generic.GenericForeignKey('content_type', 'object_id')
 
-    nombre = models.CharField(max_length=200)
+    nombre = models.CharField(max_length=200, null=True, blank=True)
     foto = ImageWithThumbsField(upload_to=get_file_path,
                                    sizes=((350,250), (132,117)), 
                                    null=True, blank=True)
-    tags = TagAutocompleteField(help_text='Separar elementos con "," ')
+    tags = TagAutocompleteField(help_text='Separar elementos con "," ', null=True, blank=True)
     fileDir = 'fotos/'
     class Meta:
     	verbose_name_plural = "Imagenes"
@@ -40,9 +40,9 @@ class Documentos(models.Model):
     object_id = models.IntegerField(db_index=True)
     content_object = generic.GenericForeignKey('content_type', 'object_id')
 
-    nombre = models.CharField(max_length=200)
+    nombre = models.CharField(max_length=200, null=True, blank=True)
     adjunto = models.FileField(upload_to=get_file_path, null=True, blank=True)
-    tags = TagAutocompleteField(help_text='Separar elementos con "," ')
+    tags = TagAutocompleteField(help_text='Separar elementos con "," ', null=True, blank=True)
 
     fileDir = 'documentos/'
 
@@ -58,9 +58,9 @@ class Videos(models.Model):
     object_id = models.IntegerField(db_index=True)
     content_object = generic.GenericForeignKey('content_type', 'object_id')
 
-    nombre = models.CharField(max_length=200)
-    url = models.URLField()
-    tags = TagAutocompleteField(help_text='Separar elementos con "," ')
+    nombre = models.CharField(max_length=200, null=True, blank=True)
+    url = models.URLField(null=True, blank=True)
+    tags = TagAutocompleteField(help_text='Separar elementos con "," ', null=True, blank=True)
 
     class Meta:
     	verbose_name_plural = "Videos"
@@ -74,9 +74,9 @@ class Audios(models.Model):
     object_id = models.IntegerField(db_index=True)
     content_object = generic.GenericForeignKey('content_type', 'object_id')
 
-    nombre = models.CharField(max_length=200)
+    nombre = models.CharField(max_length=200, null=True, blank=True)
     audio = models.FileField(upload_to=get_file_path, null=True, blank=True)
-    tags = TagAutocompleteField(help_text='Separar elementos con "," ')
+    tags = TagAutocompleteField(help_text='Separar elementos con "," ', null=True, blank=True)
 
     fileDir = 'audios/'
 

@@ -63,14 +63,40 @@ def comentario_foro(request, aporte_id):
 def crear_foro(request):
     if request.method == 'POST':
         form = ForosForm(request.POST)
+        form2 = ImagenForm(request.POST, request.FILES)
+        form3 = DocumentoForm(request.POST, request.FILES)
+        form4 = VideoForm(request.POST)
+        form5 = AudioForm(request.POST, request.FILES)
+
         if form.is_valid():
             form_uncommited = form.save(commit=False)
             form_uncommited.contraparte = request.user
             form_uncommited.save()
+
+            form2_uncommitd = form2.save(commit=False)
+            form2_uncommitd.content_object = form_uncommited
+            form2_uncommitd.save()
+
+            form3_uncommitd = form3.save(commit=False)
+            form3_uncommitd.content_object = form_uncommited
+            form3_uncommitd.save()
+
+            form4_uncommitd = form4.save(commit=False)
+            form4_uncommitd.content_object = form_uncommited
+            form4_uncommitd.save()
+
+            form5_uncommitd = form5.save(commit=False)
+            form5_uncommitd.content_object = form_uncommited
+            form5_uncommitd.save()
+
             return HttpResponseRedirect('/foros')
             
     else:
         form = ForosForm()
+        form2 = ImagenForm()
+        form3 = DocumentoForm()
+        form4 = VideoForm()
+        form5 = AudioForm()
     return render_to_response('foros/crear_foro.html', RequestContext(request, locals()))
 
 @login_required

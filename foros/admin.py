@@ -23,9 +23,12 @@ class ForoAdmin(admin.ModelAdmin):
               VideosInline, AudiosInline]
 
 class AportesAdmin(admin.ModelAdmin):
-	inlines = [DocumentosInline, ImagenInline, 
+    inlines = [DocumentosInline, ImagenInline, 
               VideosInline, AudiosInline]
+
+class ComentariosAdmin(admin.ModelAdmin):
+    list_display = ('fecha', 'usuario', 'aporte')
 
 admin.site.register(Foros, ForoAdmin)
 admin.site.register(Aportes, AportesAdmin)
-admin.site.register(Comentarios)
+admin.site.register(Comentarios, ComentariosAdmin)

@@ -1,0 +1,96 @@
+@import "lib_style.less";
+@import "button_framework.less";
+
+.clean{clear:both;}
+
+/*Sobre escribiendo propiedades de Bootstrap */
+.navbar{
+	margin-bottom:0px;
+}
+
+.navbar .brand {
+	color:#c6cbab;
+    font-size: 14px;
+    padding-top:12px;
+}
+
+/* Header */
+
+#grisheader{
+	background:#d9d9d5;
+	height:200px;
+}
+
+#menulogo{
+	height:80px;
+	background:#fff url(/files/img/cafodlogo.jpg) no-repeat 10px 10px;
+	.rounded-corners-bottom(8px);
+	border:#d9d9d5 1px solid;
+	// outline:#e9e9e9 1px solid;
+	.box-shadow(0px,1px,0px,#e9e9e9);
+	
+}
+
+#menu a{
+	display: block;
+	padding-left:35px;
+	float:left;
+	margin-right:20px;
+	color:#666666;
+	font-size:14px;
+	height:79px;
+	line-height:79px;
+
+	&:hover{
+		text-decoration:none;
+		color:#000;
+	}
+}
+
+.blogmenu{
+	background:url(/files/img/blogmenu.png) no-repeat center left;
+}
+
+.blogmenu:hover{
+	background:url(/files/img/blogmenu.png) no-repeat center left,
+	url(/files/img/hovermenu.png) no-repeat center bottom;
+}
+
+.acercamenu{
+	background:url(/files/img/acercamenu.png) no-repeat center left;
+	padding-left:40px !important;
+}
+
+.acercamenu:hover{
+	background:url(/files/img/acercamenu.png) no-repeat center left,
+	url(/files/img/hovermenu.png) no-repeat center bottom;
+}
+
+.contrapartemenu{
+	background:url(/files/img/contrapartemenu.png) no-repeat center left;
+	padding-left:40px !important;
+}
+
+.contrapartemenu:hover{
+	background:url(/files/img/contrapartemenu.png) no-repeat center left,
+	url(/files/img/hovermenu.png) no-repeat center bottom;
+}
+
+.eventomenu{
+	background:url(/files/img/eventomenu.png) no-repeat center left;
+}
+
+.eventomenu:hover{
+	background:url(/files/img/eventomenu.png) no-repeat center left,
+	url(/files/img/hovermenu.png) no-repeat center bottom;
+}
+
+#banner img{
+	margin-top:-60px;
+	margin-right:35px !important;
+}
+
+#actualidad{
+	background:yellow;
+	height:180px;
+}

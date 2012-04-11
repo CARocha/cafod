@@ -1,11 +1,69 @@
-<!doctype html>
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
+  <!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
 	<title>{%block title%}CAFOD{%endblock%}</title>
-	{%block extra_js%}{%endblock%}
+  <!--[<link type="text/css" rel="stylesheet"  href="/files/css/cafod.css">-->
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+  <link type="text/css" rel="stylesheet"  href="/files/bootstrap/css/bootstrap.css" >
+  <script type="text/javascript" src="/files/bootstrap/js/bootstrap.js"></script>
+  <link type="text/css" rel="stylesheet/less" href="/files/css/cafod.less">
+  <script type="text/javascript" src="/files/js/less.min.js"></script>
+	
+  {%block extra_js%}{%endblock%}
 </head>
 <body>
 	{% block header %}
+  
+    <div class="navbar ">
+        <div class="navbar-inner">
+            <div class="container">
+              <a class="brand" href="#">
+                Plataforma de comunicacion y aprendizaje
+              </a>
+              <ul class="nav pull-right">
+                  <li class="divider-vertical"></li>
+                  <li><a href="#">Entrar</a></li>
+              </ul>
+              <form class="navbar-search pull-right">
+                <input type="text" class="search-query" placeholder="Search">
+              </form>
+            </div>
+        </div>
+    </div>
+    <div class="row" id="grisheader">
+      <div class="container">
+        <div class="span12" id="menulogo">
+            <div class="row">
+                <div class="span6 offset6" id="menu">
+                    <a href="#" class="blogmenu">Blog</a>
+                    <a href="#" class="acercamenu">Acerca de</a>
+                    <a href="#" class="contrapartemenu">Contrapartes</a>
+                    <a href="#" class="eventomenu">Eventos</a>
+                    <div class="clean"></div>
+                </div>
+            </div>
+        </div>
+        <div class="span12">
+          <div class="row">
+             <div class="span6" id="banner">
+                  <img src="/files/img/banner.png">
+              </div>
+             <div class="span6">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Sed posuere consectetur est at lobortis. Donec sed odio dui.</div>
+          </div>
+        </div>
+    </div>
+  </div>
+  <div class="row" id="actualidad">
+    <div class="container">
+      <div class="span12">
+        Curabitur blandit tempus porttitor. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Aenean lacinia bibendum nulla sed consectetur. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Donec sed odio dui.
+      </div>
+    </div>
+  </div>
+
             <div id="header_banner" class="izq"></div>
             <div id="sesion" class="der">
              {% if user.username %}
@@ -17,6 +75,8 @@
   	      <a href="/accounts/login"> <img src="/media/imagen/usuario.jpg" > Entrar</a>
 
   	      {% endif %}
+
+
 
 	{% endblock %}
 	{%block contenido%}{%endblock%}

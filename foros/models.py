@@ -106,9 +106,12 @@ class Foros(models.Model):
     def __unicode__(self):
     	return self.nombre
 
+    def get_absolute_url(self):
+        return "/foros/%d" % (self.id)
+
 class Aportes(models.Model):
     foro = models.ForeignKey(Foros)
-    fecha = models.DateField()
+    fecha = models.DateField(default=datetime.datetime.now())
     contenido = models.TextField()
     user = models.ForeignKey(User)
     documentos = generic.GenericRelation(Documentos)
@@ -123,7 +126,7 @@ class Aportes(models.Model):
         return self.foro.nombre
 
 class Cometarios(models.Model):
-    fecha = models.DateField()
+    fecha = models.DateField(default=datetime.datetime.now())
     usuario = models.ForeignKey(User)
     cometario = models.TextField()
     aporte = models.ForeignKey(Aportes)
@@ -132,4 +135,4 @@ class Cometarios(models.Model):
         verbose_name_plural = "Comentarios"
 
     def __unicode__(self):
-        return self.usuario.nombre
+        return self.usuario.username

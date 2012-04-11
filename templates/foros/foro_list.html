@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block contenido %}
+<br>
+    {% for foro in object_list %}
+    	<a href="{{foro.get_absolute_url}}">{{foro.nombre}}</a><br>
+        {{foro.contenido|safe}} <br>
+        <hr>
+    {% endfor %}
+
+{% endblock %}

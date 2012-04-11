@@ -6,20 +6,26 @@
 <h2>{{discusion.nombre}}</h2>
 <p>{{discusion.contenido}}</p>
 <strong>creado: {{discusion.creacion}}</strong>
-<h2>Aporte a Discusion/Foro</h2>
+
+
+<h2>Aportes a Discusion/Foro</h2>
 {% for respuesta in discusion.aportes_set.all %}
         <strong> <h5>{{respuesta.user}}</h5> </strong> 
 	{{respuesta.contenido}}<br>
 	{% if respuesta.contenido%}
 	   <a href="/foros/ver_comentario/{{respuesta.id}}">Comentar</a>
+	      
+	   	<h3>comentarios al aporte</h3>
+	        {% for comentario in respuesta.comentarios_set.all %}
+	       		{{comentario.comentario}}<br>
+	        {% endfor %}
+	      
         {% endif %}
+
 	<hr>
 {% endfor %}
-	----<h3>comentarios a los aportes</h3>
-		{%for a in aportes.comentarios_set.all%}
-			{{a}}
-		{%endfor%}
 
+<hr>
 <h2>Aportar a Discusion/Foro</h2>
 <div>
     <form action="." method="POST">{% csrf_token %}

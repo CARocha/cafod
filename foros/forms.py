@@ -14,5 +14,5 @@ class AporteForm(ModelForm):
 
 class ComentarioForm(ModelForm):
     class Meta:
-    	model = Cometarios
+    	model = Comentarios
     	exclude = ('fecha','aporte','usuario')

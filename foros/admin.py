@@ -28,4 +28,4 @@ class AportesAdmin(admin.ModelAdmin):
 
 admin.site.register(Foros, ForoAdmin)
 admin.site.register(Aportes, AportesAdmin)
-admin.site.register(Cometarios)
+admin.site.register(Comentarios)

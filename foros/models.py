@@ -107,7 +107,7 @@ class Foros(models.Model):
     	return self.nombre
 
     def get_absolute_url(self):
-        return "/foros/%d" % (self.id)
+        return "/foros/ver/%d" % (self.id)
 
 class Aportes(models.Model):
     foro = models.ForeignKey(Foros)
@@ -125,10 +125,10 @@ class Aportes(models.Model):
     def __unicode__(self):
         return self.foro.nombre
 
-class Cometarios(models.Model):
+class Comentarios(models.Model):
     fecha = models.DateField(default=datetime.datetime.now())
     usuario = models.ForeignKey(User)
-    cometario = models.TextField()
+    comentario = models.TextField()
     aporte = models.ForeignKey(Aportes)
 
     class Meta:

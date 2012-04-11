@@ -7,8 +7,7 @@ from django.core.mail import EmailMultiAlternatives
 from django.core.mail import send_mail
 from django.http import HttpResponse
 from django.http import HttpResponseRedirect
-from django.shortcuts import get_object_or_404, redirect
-from django.shortcuts import render_to_response, render
+from django.shortcuts import get_object_or_404, redirect, render_to_response
 from django.template import RequestContext
 from django.template.loader import render_to_string
 from forms import *
@@ -28,9 +27,8 @@ def lista_foro(request):
 
 @login_required
 def ver_foro(request, foro_id):
-    discusion = get_object_or_404(Foros, id=foro_id)
-    aporte = Comentarios.objects.filter(foro_id=foro_id)
-    print aporte
+    discusion = get_object_or_404(Foros, id=foro_id)   
+
     if request.method == 'POST':
         form = AporteForm(request.POST)
 
@@ -56,7 +54,7 @@ def comentario_foro(request, aporte_id):
             form1_uncommited.usuario = request.user
             form1_uncommited.aporte = aporte
             form1_uncommited.save()
-            return HttpResponseRedirect('/foros')
+            return HttpResponseRedirect('/foros/ver/%d' % aporte.foro_id)
     else:
         form1 = ComentarioForm()
     return render_to_response('foros/comentario.html', RequestContext(request, locals()))

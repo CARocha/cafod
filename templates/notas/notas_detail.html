@@ -15,13 +15,13 @@
     {{object.fecha}}<br>
     {{object.contenido}}<br>
     Imgenes<br><hr>
-    {% for imagen in object.imagenes.all%}
+    {% for imagen in object.fotos.all%}
         {{imagen.nombre}}<br>
-        <img src="{{imagen.foto.url_350x250}}" alt="{{imagen.nombre}}" title="{{imagen.nombre}}"><br>
+        <img src="{{imagen.fotos.url_350x250}}" alt="{{imagen.nombre}}" title="{{imagen.nombre}}"><br>
     {% endfor %}
     <br>
 Documentos<br><hr>
-    {% for adjuntos in object.adjunto.all%}
+    {% for adjuntos in object.adjuntos.all%}
         {{adjuntos.nombre}}<br>
         {{adjuntos.adjunto}}
     {% endfor %}

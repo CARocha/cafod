@@ -1,8 +1,16 @@
 {% extends "base.html"%}
 
 {% block contenido%}
-    <form action="." method="post">{% csrf_token %}
+    <form enctype="multipart/form-data" action="." method="post">{% csrf_token %}
         {{form.as_p}}
+        <h6>Agregar Imagen</h6>
+        {{form2.as_p}}
+        <h6>Agregar Documentos</h6>
+        {{form3.as_p}}
+        <h6>Agregar Videos</h6>
+        {{form4.as_p}}
+        <h6>Agregar Sonido</h6>
+        {{form5.as_p}}
         <input id="boton-preguntar" type="submit" value="Guardar">
     </form>
 {% endblock%}

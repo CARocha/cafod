@@ -16,7 +16,7 @@ class NotasAdmin(admin.ModelAdmin):
     	    "all": ("css/custom.css",)
     	}
     prepopulated_fields = { 'slug': ['titulo']}
-    inlines = [DocumentosInline, ImagenInline]
+    inlines = [ImagenInline, DocumentosInline, ]
 
 
 admin.site.register(Notas, NotasAdmin)

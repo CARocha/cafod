@@ -2,6 +2,8 @@
 
 from django.db import models
 from django.contrib.auth.models import User
+from thumbs import ImageWithThumbsField
+from utils import *
 
 # Create your models here.
 class Pais(models.Model):
@@ -17,7 +19,10 @@ class Pais(models.Model):
 
 class Contraparte(models.Model):
     nombre = models.CharField(max_length=200)
-    logo = models.ImageField(upload_to="logos/", blank=True, null=True)
+    logo = ImageWithThumbsField(upload_to=get_file_path,
+                                   sizes=((350,250), (132,117)), 
+                                   null=True, blank=True)
+    fileDir = 'contrapartes/logos/'
     pais = models.ForeignKey(Pais)
     fundacion = models.CharField('Año de fundacion', max_length=200, 
                                  blank=True, null=True)
@@ -52,3 +57,6 @@ class UserProfile(models.Model):
     user = models.OneToOneField(User)
     # Other fields here
     contraparte = models.ForeignKey(Contraparte)
+
+    def __unicode__(self):
+        return u"%s - %s" % (self.user.username, self.contraparte.nombre)

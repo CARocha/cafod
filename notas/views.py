@@ -33,17 +33,27 @@ def index(request):
 @login_required
 def crear_nota(request):
     if request.method == 'POST':
-    	form = NotasForms(request.POST)
-    	if form.is_valid():
-            obj = Notas()
-            obj.titulo = request.POST['titulo']
-            obj.contenido = request.POST['contenido']
-            obj.fecha = datetime.datetime.now()
-            obj.user = request.user
-            obj.save()
+    	form = NotasForms(request.POST, request.FILES)
+        form1 = FotoForm(request.POST, request.FILES)
+        form2 = AdjuntoForm(request.POST, request.FILES)
+    	if form.is_valid() and form1.is_valid() and form2.is_valid():
+            form_uncommited = form.save(commit=False)
+            form_uncommited.user = request.user
+            form_uncommited.save()
+
+            form1_uncommited = form1.save(commit=False)
+            form1_uncommited.content_object = form_uncommited
+            form1_uncommited.save()
+
+            form2_uncommited = form2.save(commit=False)
+            form2_uncommited.content_object = form_uncommited
+            form2_uncommited.save()
+
             return HttpResponseRedirect('/notas')
     else:
     	form = NotasForms()
+        form1 = FotoForm()
+        form2 = AdjuntoForm()
     return render_to_response('notas/crear_nota.html', locals(),
     	                         context_instance=RequestContext(request))
 

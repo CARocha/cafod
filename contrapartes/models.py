@@ -57,3 +57,6 @@ class UserProfile(models.Model):
     user = models.OneToOneField(User)
     # Other fields here
     contraparte = models.ForeignKey(Contraparte)
+
+    def __unicode__(self):
+        return u"%s - %s" % (self.user.username, self.contraparte.nombre)

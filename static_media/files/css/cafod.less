@@ -17,7 +17,7 @@
 /* Header */
 
 #grisheader{
-	background:#d9d9d5;
+	background:#d9d9d5 url(/files/img/cafodtrans.png) no-repeat right bottom;
 	height:200px;
 }
 
@@ -86,11 +86,129 @@
 }
 
 #banner img{
-	margin-top:-60px;
+	margin-top:-59px;
 	margin-right:35px !important;
+
 }
 
+.bienvenida{
+	font-size:12px;
+	margin-top:20px;
+}
+
+#bienvenida-title{
+	color:#016a68;
+	font-size:14px;
+	font-weight:bold;
+}
+
+// Index
+
 #actualidad{
-	background:yellow;
-	height:180px;
+	
+	.box-shadow(0px, -4px, 5px,#b9b9b9);
+	z-index:999;
+	position: relative;
+	.linear-gradient(#fff,#ebebeb,70%);
+	padding-bottom:15px;
+}
+
+.encabezado{
+	height:30px;
+	border-bottom:#ddd 1px solid;
+	margin-bottom:10px;
+}
+
+.encabezado-title{
+	color:#757575;
+	line-height:30px;
+	font-size:12px;
+	background:url(/files/img/encabezadoicon.png) no-repeat center left;
+	padding-left:25px;
+}
+
+.pais-index{
+	font-size:11px;
+	color:#aaa;
+	float:right;
+	img{margin-left:7px;}
+	margin-bottom:5px;
+}
+
+.imagen-noticia-index{
+	margin-bottom:5px;
+}
+
+.titulo-noticia-index{
+	color:#016a68;
+	font-weight:bold;
+	font-size:16px;
+	margin-bottom:5px;
+}
+
+.detalle-noticia-index{
+	font-size:12px;
+	margin-bottom:5px;
+}
+
+.enlace-noticia-index{
+	font-size:12px;
+	color:#99a92e;
+	font-weight:bold;
+
+	&:hover{
+		color:#99a92e;
+	}
+}
+
+.pais-footer{
+	font-size:13px;
+	color:#888;
+	height:30px;
+	line-height:30px;
+	margin-bottom:10px;
+	img{
+		margin-right:5px;
+	}
+}
+
+.org-footer ul{
+	margin-left:0px;
+	li{
+		background:url(/files/img/orgdivider.png) no-repeat bottom center;
+		height:34px;
+		line-height:34px;
+		list-style:none;
+		a{
+			font-size:13px;
+			font-weight:bold;
+			color:#01a09e;
+		}
+	}
+}
+
+.dividerline{
+	background:url(/files/img/dividerline.png) repeat-x;
+	height:11px;
+	margin-top:15px;
+}
+
+.footer{
+	background:#01aca9 url(/files/img/fondofooter.png) repeat-x;
+	height:90px;
+	.footerinterior{
+		margin-top:20px;
+		background:url(/files/img/logofooter.png) no-repeat center right;
+		height:65px;
+	}
+	.footertext1{
+		color:#fff;
+		font-size:12px;
+	}
+	.footertext2{
+		color:#19544f;
+		font-size:12px;
+		margin-top:2px;
+		.text-shadow(0px,1px,0px,#01d0cd);
+	}
 }

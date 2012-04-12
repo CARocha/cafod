@@ -15,7 +15,8 @@
   {%block extra_js%}{%endblock%}
 </head>
 <body>
-	{% block header %}
+
+{% block header %}
   
     <div class="navbar ">
         <div class="navbar-inner">
@@ -25,7 +26,13 @@
               </a>
               <ul class="nav pull-right">
                   <li class="divider-vertical"></li>
-                  <li><a href="#">Entrar</a></li>
+                  {% if user.username %}
+                    <li ><a href="">Bienvenido {{ user.username }}</a></li>
+                    <li class="divider-vertical"></li>
+                    <li><a href="/accounts/logout" title="Salir de Administración">Salir</a></li>
+                  {% else %}
+                    <li><a href="/accounts/login">Entrar</a></li>
+                  {% endif %}
               </ul>
               <form class="navbar-search pull-right">
                 <input type="text" class="search-query" placeholder="Search">
@@ -35,51 +42,54 @@
     </div>
     <div class="row" id="grisheader">
       <div class="container">
-        <div class="span12" id="menulogo">
-            <div class="row">
-                <div class="span6 offset6" id="menu">
-                    <a href="#" class="blogmenu">Blog</a>
-                    <a href="#" class="acercamenu">Acerca de</a>
-                    <a href="#" class="contrapartemenu">Contrapartes</a>
-                    <a href="#" class="eventomenu">Eventos</a>
-                    <div class="clean"></div>
-                </div>
-            </div>
-        </div>
-        <div class="span12">
-          <div class="row">
-             <div class="span6" id="banner">
-                  <img src="/files/img/banner.png">
+        <div class="row">
+          <div class="span12" id="menulogo">
+              <div class="row">
+                  <div class="span6 offset6" id="menu">
+                      <a href="#" class="blogmenu">Blog</a>
+                      <a href="#" class="acercamenu">Acerca de</a>
+                      <a href="#" class="contrapartemenu">Contrapartes</a>
+                      <a href="#" class="eventomenu">Eventos</a>
+                      <div class="clean"></div>
+                  </div>
               </div>
-             <div class="span6">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Sed posuere consectetur est at lobortis. Donec sed odio dui.</div>
           </div>
-        </div>
-    </div>
-  </div>
-  <div class="row" id="actualidad">
-    <div class="container">
-      <div class="span12">
-        Curabitur blandit tempus porttitor. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Aenean lacinia bibendum nulla sed consectetur. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Donec sed odio dui.
+          <div class="span12">
+            <div class="row">
+               <div class="span6" id="banner">
+                    <img src="/files/img/banner.png">
+                </div>
+               <div class="span6 bienvenida">
+                   <div id="bienvenida-title">Programa Medios de Vida Sostenible </div>
+                   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Sed posuere consectetur est at lobortis. Donec sed odio dui.
+               </div>
+            </div>
+          </div>
       </div>
     </div>
   </div>
 
-            <div id="header_banner" class="izq"></div>
-            <div id="sesion" class="der">
-             {% if user.username %}
+{% endblock %}
 
-  	      Bienvenido {{ user.username }} | <a href="/admin" ><img src="/media/imagen/ayuda.jpg" >Administrar</a> | <a href="/accounts/logout" title="Salir de Administración" class="vtip" >Salir</a> 
-
-  	      {% else %}
-
-  	      <a href="/accounts/login"> <img src="/media/imagen/usuario.jpg" > Entrar</a>
-
-  	      {% endif %}
+{%block contenido%}{%endblock%}
 
 
+{%block footer%}
+  <footer>
+      <div class="row dividerline">
+      </div>
+      <div class="row footer">
+        <div class="container">
+            <div class="row">
+              <div class="span12 footerinterior">
+                <div class="footertext1">Programa Medios de Vida Sostenible</div>
+                <div class="footertext2">CAFOD is the official Catholic aid agency for England and Wales</div>
+              </div>
+            </div>
+        </div>
+      </div>
+  </footer>
+{%endblock%}
 
-	{% endblock %}
-	{%block contenido%}{%endblock%}
-	{%block footer%}{%endblock%}
 </body>
 </html>

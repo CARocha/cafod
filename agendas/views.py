@@ -16,6 +16,7 @@ def crear_agenda(request):
     if request.method == 'POST':
         form = AgendaForm(request.POST, request.FILES)
         form1 = DocuForm(request.POST, request.FILES)
+        
         if form.is_valid() and form1.is_valid():
             form_uncommited = form.save(commit=False)
             form_uncommited.user = request.user
@@ -35,7 +36,8 @@ def crear_agenda(request):
 def editar_agenda(request, id):
     agenda = get_object_or_404(Agendas, id=id)
     agenda_type = ContentType.objects.get(app_label="foros",model="documentos")
-    docu = agenda_type.get_object_for_this_type(object_id=id) 
+    docu = agenda_type.get_object_for_this_type(object_id=id)
+
     #docu = ContentType.objects.get_for_model(Agendas)
     if not agenda.user == request.user:
     	return HttpResponse("Usted no puede editar esta Agenda")

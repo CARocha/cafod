@@ -10,10 +10,10 @@ class NotasForms(ModelForm):
 
 class FotoForm(ModelForm):
 	class Meta:
-		model = Imagen
-		exclude = ('content_type', 'object_id', 'content_object',)
+	    model = Imagen
+	    exclude = ('content_type', 'object_id', 'content_object',)
 
 class AdjuntoForm(ModelForm):
 	class Meta:
-		model = Documentos
-		exclude = ('content_type', 'object_id', 'content_object',)
+	    model = Documentos
+	    exclude = ('content_type', 'object_id', 'content_object',)

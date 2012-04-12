@@ -22,7 +22,7 @@ class Imagen(models.Model):
     object_id = models.IntegerField(db_index=True)
     content_object = generic.GenericForeignKey('content_type', 'object_id')
 
-    nombre = models.CharField(max_length=200, null=True, blank=True)
+    nombre_img = models.CharField(max_length=200, null=True, blank=True)
     foto = ImageWithThumbsField(upload_to=get_file_path,
                                    sizes=((350,250), (132,117)), 
                                    null=True, blank=True)
@@ -32,7 +32,7 @@ class Imagen(models.Model):
     	verbose_name_plural = "Imagenes"
 
     def __unicode__(self):
-    	return self.nombre
+    	return self.nombre_img
 
 class Documentos(models.Model):
     ''' Modelo generico para subir los documentos en distintos app'''
@@ -40,7 +40,7 @@ class Documentos(models.Model):
     object_id = models.IntegerField(db_index=True)
     content_object = generic.GenericForeignKey('content_type', 'object_id')
 
-    nombre = models.CharField(max_length=200, null=True, blank=True)
+    nombre_doc = models.CharField(max_length=200, null=True, blank=True)
     adjunto = models.FileField(upload_to=get_file_path, null=True, blank=True)
     tags = TagAutocompleteField(help_text='Separar elementos con "," ', null=True, blank=True)
 
@@ -50,7 +50,7 @@ class Documentos(models.Model):
     	verbose_name_plural = "Documentos"
 
     def __unicode__(self):
-    	return self.nombre
+    	return self.nombre_doc
 
 class Videos(models.Model):
     ''' Modelo generico para subir videos en todos los app'''
@@ -58,7 +58,7 @@ class Videos(models.Model):
     object_id = models.IntegerField(db_index=True)
     content_object = generic.GenericForeignKey('content_type', 'object_id')
 
-    nombre = models.CharField(max_length=200, null=True, blank=True)
+    nombre_video = models.CharField(max_length=200, null=True, blank=True)
     url = models.URLField(null=True, blank=True)
     tags = TagAutocompleteField(help_text='Separar elementos con "," ', null=True, blank=True)
 
@@ -66,7 +66,7 @@ class Videos(models.Model):
     	verbose_name_plural = "Videos"
 
     def __unicode__(self):
-    	return self.nombre
+    	return self.nombre_video
 
 class Audios(models.Model):
     '''' Modelo generico para subir audios en todos los demas app '''
@@ -74,7 +74,7 @@ class Audios(models.Model):
     object_id = models.IntegerField(db_index=True)
     content_object = generic.GenericForeignKey('content_type', 'object_id')
 
-    nombre = models.CharField(max_length=200, null=True, blank=True)
+    nombre_audio = models.CharField(max_length=200, null=True, blank=True)
     audio = models.FileField(upload_to=get_file_path, null=True, blank=True)
     tags = TagAutocompleteField(help_text='Separar elementos con "," ', null=True, blank=True)
 
@@ -84,7 +84,7 @@ class Audios(models.Model):
     	verbose_name_plural = "Audios"
 
     def __unicode__(self):
-    	return self.nombre
+    	return self.nombre_audio
 
 class Foros(models.Model):
     nombre = models.CharField(max_length=200)

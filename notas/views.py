@@ -36,6 +36,7 @@ def crear_nota(request):
     	form = NotasForms(request.POST, request.FILES)
         form1 = FotoForm(request.POST, request.FILES)
         form2 = AdjuntoForm(request.POST, request.FILES)
+        
     	if form.is_valid() and form1.is_valid() and form2.is_valid():
             form_uncommited = form.save(commit=False)
             form_uncommited.user = request.user

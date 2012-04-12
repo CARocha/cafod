@@ -8,6 +8,7 @@ from django.template import RequestContext
 from models import *
 from contrapartes.models import *
 from forms import *
+from django.contrib.contenttypes.generic import generic_inlineformset_factory
 
 # Create your views here.
 
@@ -33,25 +34,18 @@ def index(request):
 @login_required
 def crear_nota(request):
     if request.method == 'POST':
-        form = NotasForms(request.POST, request.FILES)
-        form1 = FotoForm(request.POST, request.FILES)
-        form2 = AdjuntoForm(request.POST, request.FILES)
-        
-    	if form.is_valid() and form1.is_valid() and form2.is_valid():
-            form_uncommited = form.save(commit=False)
-            form_uncommited.user = request.user
-            print form_uncommited
-            form_uncommited.save()
+        form = NotasForms(request.POST)
+        NotaFormset = generic_inlineformset_factory(Imagen, extra=5)
+        nota = Notas.objects.get(form.id)
+        formset = NotaFormset(instance=nota, data=request.POST)
 
-            form1_uncommited = form1.save(commit=False)
-            form1_uncommited.content_object = form_uncommited
-            print form1_uncommited
-            form1_uncommited.save()
+    	if formset.is_valid():
+            formset.save()
+            #form_uncommited = form.save(commit=False)
+            #form_uncommited.user = request.user
+            #form_uncommited.save()
 
-            form2_uncommited = form2.save(commit=False)
-            form2_uncommited.content_object = form_uncommited
-            print form2_uncommited
-            form2_uncommited.save()
+            
 
             return HttpResponseRedirect('/notas')
     else:

@@ -16,7 +16,7 @@ def crear_agenda(request):
     if request.method == 'POST':
         form = AgendaForm(request.POST, request.FILES)
         form1 = DocuForm(request.POST, request.FILES)
-        
+
         if form.is_valid() and form1.is_valid():
             form_uncommited = form.save(commit=False)
             form_uncommited.user = request.user

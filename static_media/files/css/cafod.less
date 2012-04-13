@@ -14,11 +14,20 @@
     padding-top:12px;
 }
 
+[class^="icon-"]:last-child, [class*=" icon-"]:last-child {
+	margin-right:5px;
+}
+
 /* Header */
 
 #grisheader{
 	background:#d9d9d5 url(/files/img/cafodtrans.png) no-repeat right bottom;
 	height:200px;
+}
+
+#grisheader-interna{
+	background:#d9d9d5 url(/files/img/cafodtrans.png) no-repeat right bottom;
+	height:130px;
 }
 
 #menulogo{
@@ -33,7 +42,7 @@
 
 #menu a{
 	display: block;
-	padding-left:35px;
+	padding-left:31px;
 	float:left;
 	margin-right:20px;
 	color:#666666;
@@ -210,5 +219,23 @@
 		font-size:12px;
 		margin-top:2px;
 		.text-shadow(0px,1px,0px,#01d0cd);
+		a{color:#19544f;font-weight:bold;}
 	}
+}
+
+// Noticias 
+
+.titulo-medio{
+	font-size:16px;
+	color:#016a68;
+	font-weight:bold;
+}
+
+.extrainfo{
+	color:#a5a5a5;
+	font-weight:bold;
+	font-size:13px;
+	border-bottom:#c6c6c6 3px double;
+	margin-bottom:5px;
+	padding-bottom:5px;
 }

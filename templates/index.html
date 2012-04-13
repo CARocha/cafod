@@ -17,17 +17,16 @@
          {% for nota in notas%}
             <div class="span3">
              <div class="pais-index">Nicaragua<img src="/files/img/ni.png"></div>
-             <img class="imagen-noticia-index" src="/files/img/noticia.png">
+             {%for thumb in nota.fotos.all|slice:"1"%} 
+                   <img class="imagen-noticia-index" src="{{thumb.foto.url_220x160}}">
+             {%endfor%}
              <div class="titulo-noticia-index">
                {{nota.titulo}}
              </div>
              <div class="detalle-noticia-index">
                {{nota.contenido|safe|truncatewords_html:20}}
              </div>
-             <a href="/notas/{{nota.slug}}" class="enlace-noticia-index">Leer mas</a>
-             {%for algo in nota.fotos.all%}
-             {{algo.foto}}
-             {%endfor%}
+             <a href="/notas/{{nota.id}}" class="btn btn-inverse btn-mini"><i class="icon-plus-sign icon-white"></i>Leer mas</a>
            </div>
         {% endfor %}
       </div>
@@ -45,50 +44,19 @@
     </div>
     <div class="container">
       <div class="row">
-        <div class="span3 org-footer">
-          <div class="pais-footer"><img src="/files/img/ni-g.png">NICARAGUA</div>
-          <ul>
-            <li><a href="">Caritas Jinotega</a></li>
-            <li><a href="">Juan XVII</a></li>
-            <li><a href="">ASOMUPRO</a></li>
-          </ul>
-        </div>
-        <div class="span3 org-footer">
-          <div class="pais-footer"><img src="/files/img/hn-g.png">HONDURAS</div>
-          <ul>
-            <li><a href="">Caritas Jinotega</a></li>
-            <li><a href="">Juan XVII</a></li>
-            <li><a href="">ASOMUPRO</a></li>
-          </ul>
-        </div>
-        <div class="span3 org-footer">
-          <div class="pais-footer"><img src="/files/img/sl-g.png">EL SALVADOR</div>
-          <ul>
-            <li><a href="">Caritas Jinotega</a></li>
-            <li><a href="">Juan XVII</a></li>
-            <li><a href="">ASOMUPRO</a></li>
-          </ul>
-        </div>
-        <div class="span3 org-footer">
-          <div class="pais-footer"><img src="/files/img/gt-g.png">GUATEMALA</div>
-          <ul>
-            <li><a href="">Caritas Jinotega</a></li>
-            <li><a href="">Juan XVII</a></li>
-            <li><a href="">ASOMUPRO</a></li>
-          </ul>
-        </div>
+         {%for p in paises%}
+            <div class="span3 org-footer">
+               <div class="pais-footer"><img src="/files/img/{{p.codigo}}-g.png">{{p.nombre}}</div>
+               <ul>
+                  {%for c in contrapartes%}
+                      {%if c.pais.id == p.id %}
+                         <li><a href="{{c.get_absolute_url}}">{{c.nombre}}</a></li>  
+                      {%endif%}
+                  {%endfor%}       
+               </ul>
+            </div>
+         {%endfor%}
       </div>
     </div>
   </div>
-
 {%endblock%}
-
-   {{contra}}
-
-   {% for k,v in contra.items %}
-   <br>
-      pais:{{k}}<br>
-          {% for i in v %} 
-              {% for a in i %}  {{a}}<br> {% endfor %}
-          {%endfor%}
-   {% endfor %}

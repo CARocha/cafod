@@ -39,3 +39,16 @@ class Notas(models.Model):
 
     def get_absolute_url(self):
     	return '/notas/%d/' % (self.id,)
+
+    # Para obtener el pais de la noticia
+    def pais(self):
+        usuario = UserProfile.objects.get(pk=self.user.id)
+        contraparte = Contraparte.objects.get(pk=usuario.contraparte.id)
+        pais = Pais.objects.get(pk=contraparte.pais.id)
+        return pais
+
+    # Para obtener la contraparte de la noticia
+    def contraparte(self):
+        usuario = UserProfile.objects.get(pk=self.user.id)
+        contraparte = Contraparte.objects.get(pk=usuario.contraparte.id)
+        return contraparte

@@ -10,6 +10,7 @@ class Pais(models.Model):
     nombre = models.CharField(max_length=200)
     latitud = models.FloatField(blank=True, null=True)
     longitud = models.FloatField(blank=True, null=True)
+    codigo = models.CharField(max_length=2, help_text='Codigo de 2 letras del pais, ejemplo : Nicaragua (ni)')
 
     class Meta:
         verbose_name_plural = "Paises"
@@ -32,7 +33,6 @@ class Contraparte(models.Model):
     telefono = models.IntegerField(blank=True, null=True)
     sitio_web = models.URLField(blank=True, null=True)
     rss = models.CharField(max_length=200,blank=True, null=True)
-    user = models.ForeignKey(User)
 
     class Meta:
         verbose_name_plural = "Contrapartes"

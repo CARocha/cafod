@@ -1,11 +1,44 @@
-{% extends "base.html" %}
-
+{% extends "baseinterna.html" %}
 {% block contenido %}
-<br>
-    {% for nota in object_list %}
-    	<a href="{{nota.get_absolute_url}}">{{nota.titulo}}</a><br>
-        {{nota.contenido|safe}} <br>
-        <hr>
-    {% endfor %}
-
+<div class="row">
+	<div class="encabezado">
+	  <div class="container">
+		    <div class="row">
+			    <div class="span8">
+			    	<div class="encabezado-title">
+			      		NOTAS
+			  		</div>
+			    </div>
+			    <div class="span4">
+					<div class="btn-group">
+						Filtrar por {{cosa}}
+					  <button class="btn">1</button>
+					  <button class="btn">2</button>
+					  <button class="btn">3</button>
+					</div>
+			    </div>
+	        </div>
+	  </div>
+	</div>
+</div>
+<div class="row">
+	<div class="container">
+		{% for nota in object_list %}
+			<div class="row">
+				<div class="span3">
+				 {%for thumb in nota.fotos.all|slice:"1"%} 
+	                   <img  src="{{thumb.foto.url_220x160}}">
+	             {%endfor%}
+				</div>
+				<div class="span9">
+						<div class="extrainfo">{{nota.fecha}}  |  {{nota.pais.nombre}} | {{nota.contraparte.nombre}}</div>
+						<a href="{{nota.get_absolute_url}}" class="titulo-medio">{{nota.titulo}}</a><br>
+						{{nota.contenido|safe|truncatewords_html:50}} <br><br>
+						<a href="" class="btn btn-success btn-mini"><i class="icon-plus-sign icon-white"></i>Leer mas</a>
+				</div>
+			</div>
+			<hr>
+		{% endfor %}
+	</div>
+</div>
 {% endblock %}

@@ -1,6 +1,7 @@
 from django.conf.urls.defaults import *
 from django.views.generic import ListView, DetailView
-from models import Notas
+from models import Notas 
+from contrapartes.models import Pais
 
 urlpatterns = patterns('notas.views',
     url(r'^$', ListView.as_view(model=Notas, template_name="notas/notas_list.html")),

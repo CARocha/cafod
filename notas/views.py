@@ -33,26 +33,30 @@ def index(request):
 
 @login_required
 def crear_nota(request):
-    
-    NotaFormset = generic_inlineformset_factory(Imagen, extra=2)
-    
     if request.method == 'POST':
         form = NotasForms(request.POST)
-        formset = NotaFormset(request.POST or None)
-    	if form.is_valid():
+        form2 = FotoForm(request.POST, request.FILES)
+        form3 = AdjuntoForm(request.POST, request.FILES)
+
+    	if form.is_valid() and form2.is_valid():
             form_uncommited = form.save(commit=False)
             form_uncommited.user = request.user
             form_uncommited.save()
-        if formset.is_valid():
-            formset = NotaFormset(request.POST, request.FILES, instance=form_uncommited) 
-            #formset_uncommited = formset.save(commit=False)
-            #formset_uncommited.content_object = form_uncommited
-            #formset_uncommited.save()
-            formset.save()
+
+            form2_uncommited = form2.save(commit=False)
+            form2_uncommited.content_object = form_uncommited
+            form2_uncommited.save()
+            form2.save()
+
+            form3_uncommited = form3.save(commit=False)
+            form3_uncommited.content_object = form_uncommited
+            form2_uncommited.save()
+            form3.save()
             return HttpResponseRedirect('/notas')
     else:
         form = NotasForms()
-        formset = NotaFormset()
+        form2 = FotoForm()
+        form3 = AdjuntoForm()
 
     return render_to_response('notas/crear_nota.html', locals(),
     	                         context_instance=RequestContext(request))
@@ -60,19 +64,34 @@ def crear_nota(request):
 @login_required
 def editar_nota(request, id):
     nota = get_object_or_404(Notas, id=id)
+    NotaFormSet = generic_inlineformset_factory(Imagen, extra=2)
+    Nota2FormSet = generic_inlineformset_factory(Documentos, extra=2)
+    form2 = NotaFormSet(instance=nota)
+    form3 = Nota2FormSet(instance=nota)
+
     if not nota.user == request.user:
     	return HttpResponse("Usted no puede editar esta nota")
+
     if request.method == 'POST':
-    	form = NotasForms(request.POST, instance=nota)
-    	if form.is_valid():
+        form = NotasForms(request.POST, instance=nota)
+        form2 = NotaFormSet(data=request.POST, files=request.FILES, instance=nota)
+        form3 = Nota2FormSet(data=request.POST, files=request.FILES, instance=nota)
+
+    	if form.is_valid() and form2.is_valid() and form3.is_valid():
             nota.titulo = request.POST['titulo']
             nota.contenido = request.POST['contenido']
             nota.fecha = datetime.datetime.now()
             nota.user = request.user
             nota.save()
+            #salvando inline
+            form2.save()
+            form3.save()
             return HttpResponseRedirect('/notas')
     else:
-    	form = NotasForms(instance=nota)
+        form = NotasForms(instance=nota)
+        form2 = NotaFormSet(instance=nota)
+        form3 = Nota2FormSet(instance=nota)
+
     return render_to_response('notas/crear_nota.html', locals(),
     	                         context_instance=RequestContext(request))
 

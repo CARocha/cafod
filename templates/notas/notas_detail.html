@@ -16,7 +16,7 @@
     {{object.contenido}}<br>
     Imgenes<br><hr>
     {% for imagen in object.fotos.all%}
-        {{imagen.nombre}}<br>
+        {{imagen.nombre_img}}<br>
         <img src="{{imagen.fotos.url_350x250}}" alt="{{imagen.nombre}}" title="{{imagen.nombre}}"><br>
     {% endfor %}
     <br>

@@ -38,13 +38,13 @@ def crear_nota(request):
     
     if request.method == 'POST':
         form = NotasForms(request.POST)
-        formset = NotaFormset(request.POST, request.FILES)
-    	if form.is_valid() and formset.is_valid():
+        formset = NotaFormset(request.POST or None)
+    	if form.is_valid():
             form_uncommited = form.save(commit=False)
             form_uncommited.user = request.user
             form_uncommited.save()
-
-            formset = NotaFormset(request.POST) 
+        if formset.is_valid():
+            formset = NotaFormset(request.POST, request.FILES, instance=form_uncommited) 
             #formset_uncommited = formset.save(commit=False)
             #formset_uncommited.content_object = form_uncommited
             #formset_uncommited.save()

@@ -33,25 +33,27 @@ def index(request):
 
 @login_required
 def crear_nota(request):
+    
+    NotaFormset = generic_inlineformset_factory(Imagen, extra=2)
+    
     if request.method == 'POST':
         form = NotasForms(request.POST)
-        NotaFormset = generic_inlineformset_factory(Imagen, extra=5)
-        nota = Notas.objects.get(form.id)
-        formset = NotaFormset(instance=nota, data=request.POST)
+        formset = NotaFormset(request.POST, request.FILES)
+    	if form.is_valid() and formset.is_valid():
+            form_uncommited = form.save(commit=False)
+            form_uncommited.user = request.user
+            form_uncommited.save()
 
-    	if formset.is_valid():
+            formset = NotaFormset(request.POST) 
+            #formset_uncommited = formset.save(commit=False)
+            #formset_uncommited.content_object = form_uncommited
+            #formset_uncommited.save()
             formset.save()
-            #form_uncommited = form.save(commit=False)
-            #form_uncommited.user = request.user
-            #form_uncommited.save()
-
-            
-
             return HttpResponseRedirect('/notas')
     else:
         form = NotasForms()
-        form1 = FotoForm()
-        form2 = AdjuntoForm()
+        formset = NotaFormset()
+
     return render_to_response('notas/crear_nota.html', locals(),
     	                         context_instance=RequestContext(request))
 

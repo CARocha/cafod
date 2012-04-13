@@ -22,3 +22,4 @@ local_settings.py
 .DS_Store
 /datos
 static_media/files/uploads/*
+.ropeproject

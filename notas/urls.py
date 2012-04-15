@@ -4,7 +4,8 @@ from models import Notas
 from contrapartes.models import Pais
 
 urlpatterns = patterns('notas.views',
-    url(r'^$', ListView.as_view(model=Notas, template_name="notas/notas_list.html")),
+    url(r'^$', ListView.as_view(model=Notas, paginate_by=2, template_name="notas/notas_list.html"),
+    	name='notas_list'),
     url(r'^(?P<pk>\d+)/$', DetailView.as_view(model=Notas, 
     	                                            template_name='notas/notas_detail.html'),
                                                     name='notas_detail'),

@@ -1,0 +1,23 @@
+#gris{
+	background:#d9d9d5;
+	height:200px;
+	padding:10px;
+}
+
+#menulogo{
+	height:80px;
+	background:#fff;
+
+}
+
+
+/*Sobre escribiendo propiedades de Bootstrap */
+.navbar{
+	margin-bottom:0px;
+}
+
+.navbar .brand {
+	color:#c6cbab;
+    font-size: 14px;
+    padding-top:12px;
+}

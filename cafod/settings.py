@@ -65,6 +65,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.contrib.auth.context_processors.auth',
     'django.contrib.messages.context_processors.messages',
     'django.core.context_processors.request',
+    #'pagination.middleware.PaginationMiddleware',
 )
 
 ROOT_URLCONF = 'cafod.urls'
@@ -97,6 +98,7 @@ INSTALLED_APPS = (
     'south',
     'tagging',
     'tagging_autocomplete',
+   # 'pagination',
 )
 
 # A sample logging configuration. The only tangible logging

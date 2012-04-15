@@ -19,15 +19,8 @@ def logout_page(request):
 def index(request):
 
     notas = Notas.objects.all().order_by('-fecha')[:4]
-
-    contra = {}
-    for pais in Pais.objects.all():
-    	for contraparte in Contraparte.objects.filter(pais__id=pais.id):
-    	    	if not pais.nombre in contra.keys():
-    	    	    contra[pais.nombre] = [[contraparte.nombre],]
-    	    	else:
-    	    	    contra[pais.nombre].append([contraparte.nombre])
-
+    paises = Pais.objects.all()
+    contrapartes = Contraparte.objects.all()
     return render_to_response('index.html', locals(),
                               context_instance=RequestContext(request))
 

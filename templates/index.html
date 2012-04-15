@@ -1,24 +1,62 @@
 {% extends "base.html"%}
 
 {%block contenido%}
-   <p>Esta es una prueba</p>
-   {% for nota in notas%}
-   	<img src="" alt="{{nota.titulo}}"><br>
-   	titulo: {{nota.titulo}}<br>
-   	contenido: {{nota.contenido}}<br>
-   	<a href="{{nota.get_absolute_url}}">Leer más</a><br>
-   	<hr>
-   {% endfor %}
+
+  <div class="row" id="actualidad">
+    <div class="encabezado">
+      <div class="container">
+        <div class="row">
+        <div class="span12 encabezado-title">
+          ACTUALIDAD DE CONTRAPARTES
+        </div>
+      </div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="row">
+         {% for nota in notas%}
+            <div class="span3">
+             <div class="pais-index">Nicaragua<img src="/files/img/ni.png"></div>
+             {%for thumb in nota.fotos.all|slice:"1"%} 
+                   <img class="imagen-noticia-index" src="{{thumb.foto.url_220x160}}">
+             {%endfor%}
+             <div class="titulo-noticia-index">
+               {{nota.titulo}}
+             </div>
+             <div class="detalle-noticia-index">
+               {{nota.contenido|safe|truncatewords_html:20}}
+             </div>
+             <a href="/notas/{{nota.id}}" class="btn btn-inverse btn-mini"><i class="icon-plus-sign icon-white"></i>Leer mas</a>
+           </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="encabezado">
+      <div class="container">
+        <div class="row">
+        <div class="span12 encabezado-title">
+          MIEMBROS
+        </div>
+      </div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="row">
+         {%for p in paises%}
+            <div class="span3 org-footer">
+               <div class="pais-footer"><img src="/files/img/{{p.codigo}}-g.png">{{p.nombre}}</div>
+               <ul>
+                  {%for c in contrapartes%}
+                      {%if c.pais.id == p.id %}
+                         <li><a href="{{c.get_absolute_url}}">{{c.nombre}}</a></li>  
+                      {%endif%}
+                  {%endfor%}       
+               </ul>
+            </div>
+         {%endfor%}
+      </div>
+    </div>
+  </div>
 {%endblock%}
-
-{% block footer %}
-   {{contra}}
-
-   {% for k,v in contra.items %}
-   <br>
-   	pais:{{k}}<br>
-   	    {% for i in v %} 
-   	        {% for a in i %}  {{a}}<br> {% endfor %}
-   	    {%endfor%}
-   {% endfor %}
-{% endblock %}

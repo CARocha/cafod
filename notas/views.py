@@ -9,18 +9,43 @@ from models import *
 from contrapartes.models import *
 from forms import *
 from django.contrib.contenttypes.generic import generic_inlineformset_factory
-
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 # Create your views here.
 
 def logout_page(request):
   logout(request)
   return HttpResponseRedirect('/')
 
+def lista_notas(request):
+    notas_list = Notas.objects.all().order_by('-fecha')[:4]
+    paises = Pais.objects.all()
+
+    paginator = Paginator(notas_list, 2)
+
+    page = request.GET.get('page')
+    try:
+        notas = paginator.page(page)
+    except PageNotAnInteger:
+        notas = paginator.page(1)
+    except EmptyPage:
+        notas = paginator.page(paginator.num_pages)
+
+    return render_to_response('notas/notas_list.html', locals(),
+                              context_instance=RequestContext(request))
+
+
 def index(request):
 
     notas = Notas.objects.all().order_by('-fecha')[:4]
-    paises = Pais.objects.all()
-    contrapartes = Contraparte.objects.all()
+
+    contra = {}
+    for pais in Pais.objects.all():
+    	for contraparte in Contraparte.objects.filter(pais__id=pais.id):
+    	    	if not pais.nombre in contra.keys():
+    	    	    contra[pais.nombre] = [[contraparte.nombre],]
+    	    	else:
+    	    	    contra[pais.nombre].append([contraparte.nombre])
+
     return render_to_response('index.html', locals(),
                               context_instance=RequestContext(request))
 

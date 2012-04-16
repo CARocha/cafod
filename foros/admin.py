@@ -21,13 +21,22 @@ class AudiosInline(generic.GenericTabularInline):
 class ForoAdmin(admin.ModelAdmin):
     inlines = [DocumentosInline, ImagenInline, 
               VideosInline, AudiosInline]
+    class Media:
+        js = ['../files/js/tiny_mce/tiny_mce.js',
+              '../files/js/editores/textareas.js',]
 
 class AportesAdmin(admin.ModelAdmin):
     inlines = [DocumentosInline, ImagenInline, 
               VideosInline, AudiosInline]
+    class Media:
+        js = ['../files/js/tiny_mce/tiny_mce.js',
+              '../files/js/editores/textareas.js',]
 
 class ComentariosAdmin(admin.ModelAdmin):
     list_display = ('fecha', 'usuario', 'aporte')
+    class Media:
+        js = ['../files/js/tiny_mce/tiny_mce.js',
+              '../files/js/editores/textareas.js',]
 
 admin.site.register(Foros, ForoAdmin)
 admin.site.register(Aportes, AportesAdmin)

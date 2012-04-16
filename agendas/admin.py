@@ -6,7 +6,11 @@ class DocumentosInline(generic.GenericTabularInline):
     extra = 1
 
 class AgendasAdmin(admin.ModelAdmin):
-	inlines = [DocumentosInline,]
+    inlines = [DocumentosInline,]
+    class Media:
+        js = ['../files/js/tiny_mce/tiny_mce.js',
+              '../files/js/editores/textareas.js',]
+
 
 
 

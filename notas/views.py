@@ -17,7 +17,7 @@ def logout_page(request):
   return HttpResponseRedirect('/')
 
 def lista_notas(request):
-    notas_list = Notas.objects.all().order_by('-fecha')[:4]
+    notas_list = Notas.objects.all().order_by('-fecha')
     paises = Pais.objects.all()
 
     paginator = Paginator(notas_list, 2)

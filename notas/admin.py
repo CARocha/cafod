@@ -12,10 +12,13 @@ class ImagenInline(generic.GenericTabularInline):
 
 class NotasAdmin(admin.ModelAdmin):
     class Media:
-    	css = {
-    	    "all": ("css/custom.css",)
-    	}
-    prepopulated_fields = { 'slug': ['titulo']}
+        js = ['../files/js/tiny_mce/tiny_mce.js',
+              '../files/js/editores/textareas.js',]
+    #class Media:
+    #	css = {
+    #	    "all": ("css/custom.css",)
+    #	}
+
     inlines = [ImagenInline, DocumentosInline, ]
 
 

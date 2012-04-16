@@ -1,5 +1,10 @@
 {% extends "base.html"%}
 
+{% block extra_js %}
+<link href="/files/css/jquery.autocomplete.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="/files/js/autocomplete/jquery.autocomplete.js"></script>
+{% endblock %}
+
 {% block contenido%}
     <form enctype="multipart/form-data" action="." method="post">{% csrf_token %}
         {{form.as_p}}

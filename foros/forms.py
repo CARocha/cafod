@@ -1,38 +1,51 @@
-from django.db import models
-from django.forms import ModelForm
-from models import *
+# -*- coding: UTF-8 -*-
 
-class ForosForm(ModelForm):
+from django.db import models
+#from django.forms import ModelForm
+from tagging.forms import TagField
+from tagging_autocomplete.widgets import TagAutocomplete
+from models import *
+from django import forms
+
+class ForosForm(forms.ModelForm):
     class Meta:
     	model = Foros
     	exclude = ('contraparte','creacion',)
 
-class AporteForm(ModelForm):
+class AporteForm(forms.ModelForm):
     class Meta:
     	model = Aportes
     	exclude = ('foro','fecha','user',)
 
-class ComentarioForm(ModelForm):
+class ComentarioForm(forms.ModelForm):
     class Meta:
     	model = Comentarios
     	exclude = ('fecha','aporte','usuario')
 
-class ImagenForm(ModelForm):
+class ImagenForm(forms.ModelForm):
+    tags = TagField(widget=TagAutocomplete())
+
     class Meta:
     	model = Imagen
     	exclude = ('content_type', 'object_id', 'content_object',)
 
-class DocumentoForm(ModelForm):
+class DocumentoForm(forms.ModelForm):
+    tags = TagField(widget=TagAutocomplete())
+
     class Meta:
     	model = Documentos
     	exclude = ('content_type', 'object_id', 'content_object',)
 
-class VideoForm(ModelForm):
+class VideoForm(forms.ModelForm):
+    tags = TagField(widget=TagAutocomplete())
+
     class Meta:
     	model = Videos
     	exclude = ('content_type', 'object_id', 'content_object',)
 
-class AudioForm(ModelForm):
+class AudioForm(forms.ModelForm):
+    tags = TagField(widget=TagAutocomplete())
+
     class Meta:
     	model = Audios
     	exclude = ('content_type', 'object_id', 'content_object',)

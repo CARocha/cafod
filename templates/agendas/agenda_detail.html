@@ -25,7 +25,7 @@
          {% endif %}
          {% if object.adjunto %}
              {% for a in object.adjunto.all %}
-                 N_Adjunto: {{a.nombre}}<br>
+                 N_Adjunto: {{a.nombre_doc}}<br>
                  a_ad: {{a.adjunto}}
              {% endfor %}
          {% endif %}

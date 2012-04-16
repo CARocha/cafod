@@ -7,6 +7,23 @@
 <p>{{discusion.contenido}}</p>
 <strong>creado: {{discusion.creacion}}</strong>
 
+<h4>Cosas adjuntas</h4><br>
+<strong>imagenes</strong><br>
+{% for img in discusion.fotos.all%}
+	{{img.nombre_img}}:{{img.foto}}<br>
+{% endfor %}
+<strong>Documentos</strong><br>
+{% for img in discusion.documentos.all%}
+	{{img.nombre_doc}}: {{img.adjunto}}<br>
+{% endfor %}
+<strong>Url video</strong><br>
+{% for img in discusion.video.all%}
+	{{img.nombre_video}}: {{img.url}}<br>
+{% endfor %}
+<strong>Audio</strong><br>
+{% for img in discusion.audio.all%}
+	{{img.nombre_audio}}: {{img.audio}}<br>
+{% endfor %}
 
 <h2>Aportes a Discusion/Foro</h2>
 {% for respuesta in discusion.aportes_set.all %}

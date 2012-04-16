@@ -34,25 +34,12 @@
 						<div class="extrainfo">{{nota.fecha}}  |  {{nota.pais.nombre}} | {{nota.contraparte.nombre}}</div>
 						<a href="{{nota.get_absolute_url}}" class="titulo-medio">{{nota.titulo}}</a><br>
 						{{nota.contenido|safe|truncatewords_html:50}} <br><br>
-						<a href="" class="btn btn-success btn-mini"><i class="icon-plus-sign icon-white"></i>Leer mas</a>
+						<a href="" class="btn btn-success btn-mini">Leer mas</a>
 				</div>
 			</div>
 			<hr>
 		{% endfor %}
-{% if is_paginated %}
-        {% if page_obj.has_previous %}
-          <a href="{% url notas_list %}?page={{ page_obj.previous_page_number }}">
-             Previous</a>
-        {% endif %}
-            <!-- current page -->
-                Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
-            <!-- end current page -->
-        {% if page_obj.has_next %}
-         <a href="{% url notas_list %}?page={{ page_obj.next_page_number }}">
-                Next</a>
-         {% endif %}
-{% endif %}
-
+		{% include "paginador.html" %}
 	</div>
 </div>
 {% endblock %}

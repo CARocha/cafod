@@ -1,0 +1,21 @@
+{% if is_paginated %}
+    <ul class="pagination">
+        {% if page_obj.has_previous %}
+        <li>
+          <a href="{% url notas_list %}?page={{ page_obj.previous_page_number }}">
+            ← Anterior</a>
+        </li>
+        {% endif %}
+        <li class="active">
+            <!-- current page -->
+               <a href="#"> Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</a>
+            <!-- end current page -->
+        </li>
+        {% if page_obj.has_next %}
+         <li>
+         <a href="{% url notas_list %}?page={{ page_obj.next_page_number }}">
+                Siguiente →</a>
+         </li>
+         {% endif %}
+    </ul>
+{% endif %}

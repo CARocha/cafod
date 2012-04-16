@@ -20,7 +20,25 @@ def lista_notas(request):
     notas_list = Notas.objects.all().order_by('-fecha')
     paises = Pais.objects.all()
 
-    paginator = Paginator(notas_list, 2)
+    paginator = Paginator(notas_list, 4)
+
+    page = request.GET.get('page')
+    try:
+        notas = paginator.page(page)
+    except PageNotAnInteger:
+        notas = paginator.page(1)
+    except EmptyPage:
+        notas = paginator.page(paginator.num_pages)
+
+    return render_to_response('notas/notas_list.html', locals(),
+                              context_instance=RequestContext(request))
+
+def lista_notas_pais(request,id):
+    notas_list = Notas.objects.filter(user__userprofile__contraparte__pais__id=id).order_by('-fecha')
+    paises = Pais.objects.all()
+    pais_selecto = Pais.objects.get(pk=id)
+
+    paginator = Paginator(notas_list, 4)
 
     page = request.GET.get('page')
     try:

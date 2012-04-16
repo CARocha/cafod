@@ -4,17 +4,17 @@
 	<div class="encabezado">
 	  <div class="container">
 		    <div class="row">
-			    <div class="span7">
+			    <div class="span5">
 			    	<div class="encabezado-title">
-			      		NOTAS
+			      		NOTAS {%if pais_selecto%}: <b>{{pais_selecto.nombre}}</b>{%endif%}
 			  		</div>
 			    </div>
-			    <div class="span5">
+			    <div class="span7">
 					<div class="btn-group filtrospais">
 					  <a class="btn disabled">Filtrar por</a>
-					  <button class="btn"><img src="/files/img/ni.png">Nicaragua</button>
-					  <button class="btn"><img src="/files/img/ni.png">Guatemala</button>
-					  <button class="btn"><img src="/files/img/ni.png">El salvador</button>
+					  {%for pais in paises%}
+					  <a href="/notas/pais/{{pais.id}}" {%if pais.id == pais_selecto.id %} class="btn active"{%else%}class="btn"{%endif%}><img src="/files/img/{{pais.codigo}}.png">{{pais.nombre}}</a>
+					  {%endfor%}
 					</div>
 			    </div>
 	        </div>
@@ -39,27 +39,25 @@
 			</div>
 			<hr>
 		{% endfor %}
-{% if is_paginated %}
-    <ul class="pagination">
-        {% if notas.has_previous %}
-        <li>
-          <a href="{% url notas_list %}?page={{ notas.previous_page_number }}">
-            ← Anterior</a>
-        </li>
-        {% endif %}
-        <li class="active">
-            <!-- current page -->
-               <a href="#"> Page {{ notas.number }} of {{ notas.paginator.num_pages }}</a>
-            <!-- end current page -->
-        </li>
-        {% if notas.has_next %}
-         <li>
-         <a href="{% url notas_list %}?page={{ notas.next_page_number }}">
-                Siguiente →</a>
-         </li>
-         {% endif %}
-    </ul>
-{% endif %}
+	    <ul class="pagination">
+	        {% if notas.has_previous %}
+	        <li>
+	          <a href="{% url notas_list %}?page={{ notas.previous_page_number }}">
+	            ← Anterior</a>
+	        </li>
+	        {% endif %}
+	        <li class="active">
+	            <!-- current page -->
+	               <a href="#"> Page {{ notas.number }} of {{ notas.paginator.num_pages }}</a>
+	            <!-- end current page -->
+	        </li>
+	        {% if notas.has_next %}
+	         <li>
+	         <a href="{% url notas_list %}?page={{ notas.next_page_number }}">
+	                Siguiente →</a>
+	         </li>
+	         {% endif %}
+	    </ul>
 	</div>
 </div>
 {% endblock %}

@@ -1,30 +1,73 @@
-{% extends "base.html" %}
-
-{% block title %}{{object.titulo}}{% endblock %}
-
+{% extends "baseinterna.html" %}
+{% block extra_js%}
+<script type="text/javascript" src="/files/js/jquery.bxSlider.min.js"></script>
+<script type="text/javascript">
+  $(document).ready(function(){
+    $('#slider1').bxSlider();
+  });
+</script>
+{%endblock%}
 {% block contenido %}
 
-<div class="titulo-foro"> {% if notas.user == request.user or request.user.is_superuser %}
-    <a href="/notas/editar/{{object.id}}">[editar]</a>|
-    <a href="/notas/borrar/{{object.id}}">[borrar]</a>{% endif %}
+
+
+<div class="row">
+    <div class="encabezado">
+      <div class="container">
+            <div class="row">
+                <div class="span5">
+                    <div class="encabezado-title">
+                        NOTAS
+                    </div>
+                </div>
+                <div class="span7">
+                    <div class="btn-group acciones">
+                        {% if notas.user == request.user or request.user.is_superuser %}
+                            <a class="btn" href="/notas/editar/{{object.id}}"><i class="icon-pencil"></i>Editar</a>
+                            <a class="btn" href="/notas/borrar/{{object.id}}"><i class="icon-remove-sign"></i>Borrar</a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+      </div>
+    </div>
+</div>
+<div class="row">
+    <div class="container">
+        <div class="row">
+            <div class="span7">
+               <h1 class="titulo-grande">{{object.titulo}}</h1>
+               <div class="extrainfofull">{{object.fecha}}  |  {{object.pais.nombre}}</div>
+            </div>
+            <div class="span5">
+                {{object.contraparte.nombre}}
+            </div>
+        </div>
+        <div class="row ">
+            <div class="span7 divisordoble">
+                {{object.contenido}}
+            </div>
+            <div class="span5 divisordoble">
+                <div id="slider1">
+                    {% for imagen in object.fotos.all%}
+                    <div>
+                        {{imagen.nombre_img}}<br>
+                        <img src="{{imagen.foto.url_380x250}}" alt="{{imagen.nombre}}" title="{{imagen.nombre}}">
+                    </div>
+                    {% endfor %}
+                </div>
+
+                <br>
+            Documentos<br><hr>
+                {% for adjuntos in object.adjuntos.all%}
+                    {{adjuntos.nombre}}<br>
+                    {{adjuntos.adjunto}}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
 </div>
 
-
-    <br>
-    {{object.titulo}}<br>
-    {{object.fecha}}<br>
-    {{object.contenido}}<br>
-    Imgenes<br><hr>
-    {% for imagen in object.fotos.all%}
-        {{imagen.nombre_img}}<br>
-        <img src="{{imagen.fotos.url_350x250}}" alt="{{imagen.nombre}}" title="{{imagen.nombre}}"><br>
-    {% endfor %}
-    <br>
-Documentos<br><hr>
-    {% for adjuntos in object.adjuntos.all%}
-        {{adjuntos.nombre}}<br>
-        {{adjuntos.adjunto}}
-    {% endfor %}
 
                 
 {% endblock %}

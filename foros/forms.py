@@ -23,28 +23,28 @@ class ComentarioForm(forms.ModelForm):
     	exclude = ('fecha','aporte','usuario')
 
 class ImagenForm(forms.ModelForm):
-    tags = TagField(widget=TagAutocomplete())
+    tags_img = TagField(widget=TagAutocomplete(), required=False)
 
     class Meta:
     	model = Imagen
     	exclude = ('content_type', 'object_id', 'content_object',)
 
 class DocumentoForm(forms.ModelForm):
-    tags = TagField(widget=TagAutocomplete())
+    tags_doc = TagField(widget=TagAutocomplete(), required=False)
 
     class Meta:
     	model = Documentos
     	exclude = ('content_type', 'object_id', 'content_object',)
 
 class VideoForm(forms.ModelForm):
-    tags = TagField(widget=TagAutocomplete())
+    tags_vid = TagField(widget=TagAutocomplete(), required=False)
 
     class Meta:
     	model = Videos
     	exclude = ('content_type', 'object_id', 'content_object',)
 
 class AudioForm(forms.ModelForm):
-    tags = TagField(widget=TagAutocomplete())
+    tags_aud = TagField(widget=TagAutocomplete(), required=False)
 
     class Meta:
     	model = Audios

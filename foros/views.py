@@ -68,7 +68,7 @@ def crear_foro(request):
         form4 = VideoForm(request.POST)
         form5 = AudioForm(request.POST, request.FILES)
 
-        if form.is_valid():
+        if form.is_valid() and form2.is_valid() and form3.is_valid() and form4.is_valid() and form5.is_valid():
             form_uncommited = form.save(commit=False)
             form_uncommited.contraparte = request.user
             form_uncommited.save()

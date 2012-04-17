@@ -42,7 +42,7 @@ tinyMCE.init({
     invalid_elements: "script,form,textarea,input,label,div",
     file_browser_callback: "CustomFileBrowser",
     // Example word content CSS (should be your site CSS) this one removes paragraph margins
-    content_css : "/static_media/js/tiny_mce/css/word.css",
+    content_css : "/files/js/tiny_mce/css/word.css",
     height: "400",
     width: "700"
 });

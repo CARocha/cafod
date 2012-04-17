@@ -28,9 +28,6 @@
 </script>
 {%endblock%}
 {% block contenido %}
-
-
-
 <div class="row">
     <div class="encabezado">
       <div class="container">
@@ -60,8 +57,8 @@
                <div class="extrainfofull">{{object.fecha}}  |  {{object.pais.nombre}}</div>
             </div>
             <div class="span5">
-                <img src="{{object.contraparte.logo.url_70x60}}">
-                <a href="/contraparte/{{object.contraparte.id}}">{{object.contraparte.nombre}}</a>
+                
+                <a class="contraparte-nota btn " href="/contrapartes/{{object.contraparte.id}}"><img src="{{object.contraparte.logo.url_70x60}}">{{object.contraparte.nombre}}</a>
             </div>
         </div>
         <div class="row ">
@@ -102,8 +99,5 @@
             </div>
         </div>
     </div>
-</div>
-
-
-                
+</div>              
 {% endblock %}

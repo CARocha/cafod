@@ -2,7 +2,7 @@
 
 from django.db import models
 from django.contrib.auth.models import User
-from thumbs import ImageWithThumbsField
+from thumbs_logo import ImageWithThumbsField
 from utils import *
 
 # Create your models here.
@@ -21,7 +21,7 @@ class Pais(models.Model):
 class Contraparte(models.Model):
     nombre = models.CharField(max_length=200)
     logo = ImageWithThumbsField(upload_to=get_file_path,
-                                   sizes=((350,250), (70,60)), 
+                                   sizes=((350,250), (70,60),(180,160)), 
                                    null=True, blank=True)
     fileDir = 'contrapartes/logos/'
     pais = models.ForeignKey(Pais)

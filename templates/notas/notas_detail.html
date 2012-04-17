@@ -3,8 +3,28 @@
 <script type="text/javascript" src="/files/js/jquery.bxSlider.min.js"></script>
 <script type="text/javascript">
   $(document).ready(function(){
-    $('#slider1').bxSlider();
+  // assign the slider to a variable
+  var slider = $('#slider1').bxSlider({
+    controls: false
   });
+
+  // assign a click event to the external thumbnails
+  $('.thumbs a').click(function(){
+   var thumbIndex = $('.thumbs a').index(this);
+    // call the "goToSlide" public function
+    slider.goToSlide(thumbIndex);
+  
+    // remove all active classes
+    $('.thumbs a').removeClass('pager-active');
+    // assisgn "pager-active" to clicked thumb
+    $(this).addClass('pager-active');
+    // very important! you must kill the links default behavior
+    return false;
+  });
+
+  // assign "pager-active" class to the first thumb
+  $('.thumbs a:first').addClass('pager-active');
+});
 </script>
 {%endblock%}
 {% block contenido %}
@@ -40,29 +60,45 @@
                <div class="extrainfofull">{{object.fecha}}  |  {{object.pais.nombre}}</div>
             </div>
             <div class="span5">
-                {{object.contraparte.nombre}}
+                <img src="{{object.contraparte.logo.url_70x60}}">
+                <a href="/contraparte/{{object.contraparte.id}}">{{object.contraparte.nombre}}</a>
             </div>
         </div>
         <div class="row ">
             <div class="span7 divisordoble">
-                {{object.contenido}}
+                {{object.contenido|safe}}
             </div>
             <div class="span5 divisordoble">
                 <div id="slider1">
                     {% for imagen in object.fotos.all%}
                     <div>
-                        {{imagen.nombre_img}}<br>
-                        <img src="{{imagen.foto.url_380x250}}" alt="{{imagen.nombre}}" title="{{imagen.nombre}}">
+                        <img class="imagen-slider" src="{{imagen.foto.url_380x250}}" alt="{{imagen.nombre}}" title="{{imagen.nombre}}">
+                        <span class="label label-success">{{imagen.nombre_img}}</span>
                     </div>
                     {% endfor %}
                 </div>
-
-                <br>
-            Documentos<br><hr>
-                {% for adjuntos in object.adjuntos.all%}
-                    {{adjuntos.nombre}}<br>
-                    {{adjuntos.adjunto}}
-                {% endfor %}
+                {%if object.fotos.all.count > 1%}
+                <div class="thumbs">
+                  {% for imagen in object.fotos.all%}
+                        <a href="#"><img width="65" height="65" src="{{imagen.foto.url_80x80}}" alt="{{imagen.nombre}}" title="{{imagen.nombre}}"></a>
+                    {% endfor %}
+                    <div class="clean"></div>
+                </div>
+                {%endif%}
+                {%if object.adjuntos.all %}
+                    <div class="sidebar-title">Documentos</div>
+                    <div class="dividerline"></div>
+                    <table class="table  table-bordered table-condensed doc-sidebar">
+                      <tbody>
+                        {% for adjuntos in object.adjuntos.all%}
+                        <tr>
+                            <td>{{adjuntos.nombre_doc}}</td>
+                            <td><center><a href="{{adjuntos.adjunto}}" class=" btn btn-info btn-mini dropdown-toggle"><i class="icon-download-alt icon-white"></i>Descargar</a></center></td>
+                            </tr>
+                        {% endfor %}
+                      </tbody>
+                    </table>
+                {%endif%}
             </div>
         </div>
     </div>

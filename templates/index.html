@@ -16,7 +16,7 @@
       <div class="row">
          {% for nota in notas%}
             <div class="span3">
-             <div class="pais-index">Nicaragua<img src="/files/img/ni.png"></div>
+             <div class="pais-index">{{nota.pais.nombre}}<img src="/files/img/{{nota.pais.codigo}}.png"></div>
              {%for thumb in nota.fotos.all|slice:"1"%} 
                    <img class="imagen-noticia-index" src="{{thumb.foto.url_220x160}}">
              {%endfor%}

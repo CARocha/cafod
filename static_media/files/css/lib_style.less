@@ -15,6 +15,19 @@
 
 /* CSS3 Elements */
 
+/* General styles for gradients */
+
+.linear-gradient(@start:#eee,@end:#fff,@stop:25%){
+    background-color: @start;
+    background-repeat: no-repeat;
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(@start), color-stop(@stop, @start), to(@end));
+    background-image: -webkit-linear-gradient(@start, @start @stop, @end);
+    background-image: -moz-linear-gradient(top, @start, @start @stop, @end);
+    background-image: -ms-linear-gradient(@start, @start @stop, @end);
+    background-image: -o-linear-gradient(@start, @start @stop, @end);
+    background-image: linear-gradient(@start, @start @stop, @end);
+}
+
 .opacidad(@o:0.7){
     opacity: @o;
     -moz-opacity: @o;

@@ -21,7 +21,7 @@ class Pais(models.Model):
 class Contraparte(models.Model):
     nombre = models.CharField(max_length=200)
     logo = ImageWithThumbsField(upload_to=get_file_path,
-                                   sizes=((350,250), (132,117)), 
+                                   sizes=((350,250), (70,60)), 
                                    null=True, blank=True)
     fileDir = 'contrapartes/logos/'
     pais = models.ForeignKey(Pais)

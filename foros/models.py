@@ -26,7 +26,7 @@ class Imagen(models.Model):
     foto = ImageWithThumbsField(upload_to=get_file_path,
                                    sizes=((220,160), (80,80),(380,250),(640,480)), 
                                    null=True, blank=True)
-    tags = TagAutocompleteField(help_text='Separar elementos con "," ', null=True, blank=True)
+    tags_img = TagAutocompleteField(help_text='Separar elementos con "," ', null=True, blank=True)
     fileDir = 'fotos/'
     class Meta:
     	verbose_name_plural = "Imagenes"
@@ -42,7 +42,7 @@ class Documentos(models.Model):
 
     nombre_doc = models.CharField(max_length=200, null=True, blank=True)
     adjunto = models.FileField(upload_to=get_file_path, null=True, blank=True)
-    tags = TagAutocompleteField(help_text='Separar elementos con "," ', null=True, blank=True)
+    tags_doc = TagAutocompleteField(help_text='Separar elementos con "," ', null=True, blank=True)
 
     fileDir = 'documentos/'
 
@@ -60,7 +60,7 @@ class Videos(models.Model):
 
     nombre_video = models.CharField(max_length=200, null=True, blank=True)
     url = models.URLField(null=True, blank=True)
-    tags = TagAutocompleteField(help_text='Separar elementos con "," ', null=True, blank=True)
+    tags_vid = TagAutocompleteField(help_text='Separar elementos con "," ', null=True, blank=True)
 
     class Meta:
     	verbose_name_plural = "Videos"
@@ -76,7 +76,7 @@ class Audios(models.Model):
 
     nombre_audio = models.CharField(max_length=200, null=True, blank=True)
     audio = models.FileField(upload_to=get_file_path, null=True, blank=True)
-    tags = TagAutocompleteField(help_text='Separar elementos con "," ', null=True, blank=True)
+    tags_aud = TagAutocompleteField(help_text='Separar elementos con "," ', null=True, blank=True)
 
     fileDir = 'audios/'
 

@@ -36,8 +36,17 @@ def crear_contraparte(request):
 @login_required
 def editar_contraparte(request, id):
     contra = get_object_or_404(Contraparte, id=id)
-    if not contra.user == request.user:
+    carlos = UserProfile.objects.filter(contraparte_id=request.user.id)
+    #print carlos
+
+    nada = []
+    for obj in carlos:
+        nada.append(obj.user)
+    print nada
+
+    if not request.user in nada:
         return HttpResponse("Usted no puede editar esta Contraparte")
+
     if request.method == 'POST':
         form = ContraparteForms(request.POST, instance = contra)
         if form.is_valid():

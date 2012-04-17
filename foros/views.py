@@ -14,6 +14,7 @@ from forms import *
 from models import *
 from tagging.models import Tag
 from tagging.models import TaggedItem
+from django.contrib.contenttypes.generic import generic_inlineformset_factory
 
 
 # Create your views here.
@@ -102,16 +103,43 @@ def crear_foro(request):
 @login_required
 def editar_foro(request, id):
     foro = get_object_or_404(Foros, id=id)
+    ForoImgFormSet = generic_inlineformset_factory(Imagen, extra=5, max_num=5)
+    ForoDocuFormSet = generic_inlineformset_factory(Documentos, extra=5, max_num=5)
+    ForoVideoFormSet = generic_inlineformset_factory(Videos, extra=5, max_num=5)
+    ForoAudioFormSet = generic_inlineformset_factory(Audios, extra=5, max_num=5)
+    form2 = ForoImgFormSet(instance=foro)
+    form3 = ForoDocuFormSet(instance=foro)
+    form4 = ForoVideoFormSet(instance=foro)
+    form5 = ForoAudioFormSet(instance=foro)
+
+    if not foro.contraparte == request.user and not request.user.is_superuser:
+        return HttpResponse("Usted no puede editar este Foro")
+
     if request.method == 'POST':
         form = ForosForm(request.POST, instance=foro)
-        if form.is_valid():
+        form2 = ForoImgFormSet(data=request.POST, files=request.FILES, instance=foro)
+        form3 = ForoDocuFormSet(data=request.POST, files=request.FILES, instance=foro)
+        form4 = ForoVideoFormSet(data=request.POST, files=request.FILES, instance=foro)
+        form5 = ForoAudioFormSet(data=request.POST, files=request.FILES, instance=foro)
+
+        if form.is_valid() and form2.is_valid() and form3.is_valid() and form4.is_valid() and form5.is_valid():
             form_uncommited = form.save(commit=False)
             form_uncommited.contraparte = request.user
             form_uncommited.save()
+
+            form2.save()
+            form3.save()
+            form4.save()
+            form5.save()
             return HttpResponseRedirect('/foros')
             
     else:
         form = ForosForm(instance=foro)
+        form2 = ForoImgFormSet(instance=foro)
+        form3 = ForoDocuFormSet(instance=foro)
+        form4 = ForoVideoFormSet(instance=foro)
+        form5 = ForoAudioFormSet(instance=foro)
+
     return render_to_response('foros/crear_foro.html', RequestContext(request, locals()))
 
 @login_required

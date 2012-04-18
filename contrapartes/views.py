@@ -38,6 +38,9 @@ def editar_contraparte(request, id):
     contra = get_object_or_404(Contraparte, id=id)
     usuarios = UserProfile.objects.filter(contraparte_id=contra.id)
 
+    user_profile = request.user.get_profile().user.id
+    print user_profile
+
     nombres = []
     for obj in usuarios:
         nombres.append(obj.user.username)

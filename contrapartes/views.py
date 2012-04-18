@@ -7,15 +7,20 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.template import RequestContext
 from models import *
 from forms import *
+from notas.models import *
 
 # Create your views here.
-
 #def contrapartes_index(request):
-
 #    contra = Contraparte.objects.all()
-
 #    return render_to_response('contrapartes/contraparte_index.html', locals(),
 #                                 context_instance=RequestContext(request))
+
+
+def detalle_contraparte(request,id):
+    contra = get_object_or_404(Contraparte, id=id)
+    notas = Notas.objects.filter(user__userprofile__contraparte__id=id).order_by('-fecha')
+    return render_to_response('contrapartes/contraparte_detail.html', locals(),
+                                 context_instance=RequestContext(request))
 
 @login_required
 def crear_contraparte(request):
@@ -37,15 +42,12 @@ def crear_contraparte(request):
 def editar_contraparte(request, id):
     contra = get_object_or_404(Contraparte, id=id)
     usuarios = UserProfile.objects.filter(contraparte_id=contra.id)
-
-    user_profile = request.user.get_profile().user.id
-    print user_profile
-
+    # user_profile = request.user.get_profile().user.id
     nombres = []
     for obj in usuarios:
-        nombres.append(obj.user.username)
+        nombres.append(obj.user.id)
 
-    if not request.user.username in [i for i in nombres]:
+    if not request.user.id in [i for i in nombres]:
         return HttpResponse("Usted no puede editar esta Contraparte")
 
     if request.method == 'POST':

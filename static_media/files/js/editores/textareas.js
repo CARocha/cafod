@@ -32,9 +32,9 @@ tinyMCE.init({
     plugins : "pagebreak,spellchecker,style,layer,table,save,advhr,advimage,advlink,emotions,iespell,insertdatetime,preview,media,searchreplace,print,contextmenu,paste,directionality,fullscreen,noneditable,visualchars,nonbreaking,xhtmlxtras,template,inlinepopups,autosave",
     // Theme options
     skin : "cirkuit",
-    theme_advanced_buttons1 : "bold,italic,underline,|,justifyleft,justifycenter,justifyright,justifyfull,|,formatselect",
-    theme_advanced_buttons2 : "cut,copy,pastetext,|,bullist,numlist,outdent,indent,|,blockquote,|,undo,redo,|,link,unlink,image,code,|,emotions,inserttime,preview,|",
-    theme_advanced_buttons3 : "tablecontrols,|,hr,removeformat,visualaid,|,charmap,emotions,iespell,advhr,|,fullscreen,",
+    theme_advanced_buttons1 : "bold,italic,underline,|,justifyleft,justifycenter,justifyright,justifyfull,|,formatselect|cut,copy,pastetext,|,bullist,numlist,outdent,indent,|,blockquote,|,undo,redo,|,link,unlink,|,preview,|",
+    theme_advanced_buttons2 : "tablecontrols,|",
+    theme_advanced_buttons3 : "",
     theme_advanced_buttons4 : "",
     theme_advanced_toolbar_location : "top",
     theme_advanced_toolbar_align : "left",

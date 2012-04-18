@@ -36,15 +36,13 @@ def crear_contraparte(request):
 @login_required
 def editar_contraparte(request, id):
     contra = get_object_or_404(Contraparte, id=id)
-    carlos = UserProfile.objects.filter(contraparte_id=request.user.id)
-    #print carlos
+    usuarios = UserProfile.objects.filter(contraparte_id=contra.id)
 
-    nada = []
-    for obj in carlos:
-        nada.append(obj.user)
-    print nada
+    nombres = []
+    for obj in usuarios:
+        nombres.append(obj.user.username)
 
-    if not request.user in nada:
+    if not request.user.username in [i for i in nombres]:
         return HttpResponse("Usted no puede editar esta Contraparte")
 
     if request.method == 'POST':

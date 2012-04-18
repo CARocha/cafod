@@ -61,8 +61,13 @@ def editar_contraparte(request, id):
 @login_required
 def borrar_contraparte(request, id):
     contra = get_object_or_404(Contraparte, pk=id)
+    usuarios = UserProfile.objects.filter(Contraparte_id=contra.id)
 
-    if contra.user == request.user or request.user.is_superuser:
+    nombres = []
+    for obj in usuarios:
+        nombres.append(obj.user.username)
+
+    if request.user.username in [i for i in nombres] or request.user.is_superuser:
         contra.delete()
         return redirect('contraparte-list')
     else:

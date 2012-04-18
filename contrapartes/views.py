@@ -36,8 +36,18 @@ def crear_contraparte(request):
 @login_required
 def editar_contraparte(request, id):
     contra = get_object_or_404(Contraparte, id=id)
-    if not contra.user == request.user:
+    usuarios = UserProfile.objects.filter(contraparte_id=contra.id)
+
+    user_profile = request.user.get_profile().user.id
+    print user_profile
+
+    nombres = []
+    for obj in usuarios:
+        nombres.append(obj.user.username)
+
+    if not request.user.username in [i for i in nombres]:
         return HttpResponse("Usted no puede editar esta Contraparte")
+
     if request.method == 'POST':
         form = ContraparteForms(request.POST, instance = contra)
         if form.is_valid():
@@ -54,8 +64,13 @@ def editar_contraparte(request, id):
 @login_required
 def borrar_contraparte(request, id):
     contra = get_object_or_404(Contraparte, pk=id)
+    usuarios = UserProfile.objects.filter(Contraparte_id=contra.id)
 
-    if contra.user == request.user or request.user.is_superuser:
+    nombres = []
+    for obj in usuarios:
+        nombres.append(obj.user.username)
+
+    if request.user.username in [i for i in nombres] or request.user.is_superuser:
         contra.delete()
         return redirect('contraparte-list')
     else:

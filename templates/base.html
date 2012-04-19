@@ -1,25 +1,95 @@
-<!doctype html>
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
+  <!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
 	<title>{%block title%}CAFOD{%endblock%}</title>
-	{%block extra_js%}{%endblock%}
+  <!--[<link type="text/css" rel="stylesheet"  href="/files/css/cafod.css">-->
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+  <link type="text/css" rel="stylesheet"  href="/files/bootstrap/css/bootstrap.css" >
+  <script type="text/javascript" src="/files/bootstrap/js/bootstrap.js"></script>
+  <link type="text/css" rel="stylesheet/less" href="/files/css/cafod.less">
+  <script type="text/javascript" src="/files/js/less.min.js"></script>
+	
+  {%block extra_js%}{%endblock%}
 </head>
 <body>
-	{% block header %}
-            <div id="header_banner" class="izq"></div>
-            <div id="sesion" class="der">
-             {% if user.username %}
 
-  	      Bienvenido {{ user.username }} | <a href="/admin" ><img src="/media/imagen/ayuda.jpg" >Administrar</a> | <a href="/accounts/logout" title="Salir de Administración" class="vtip" >Salir</a> 
+{% block header %}
+  
+    <div class="navbar ">
+        <div class="navbar-inner">
+            <div class="container">
+              <a class="brand" href="/">
+                Plataforma de comunicacion y aprendizaje
+              </a>
+              <ul class="nav pull-right">
+                  <li class="divider-vertical"></li>
+                  {% if user.username %}
+                    <li ><a href="">Bienvenido {{ user.username }}</a></li>
+                    <li class="divider-vertical"></li>
+                    <li><a href="/accounts/logout" title="Salir de Administración">Salir</a></li>
+                  {% else %}
+                    <li><a href="/accounts/login">Entrar</a></li>
+                  {% endif %}
+              </ul>
+              <form class="navbar-search pull-right">
+                <input type="text" class="search-query" placeholder="Buscar">
+              </form>
+            </div>
+        </div>
+    </div>
+    <div class="row" id="grisheader">
+      <div class="container">
+        <div class="row">
+          <div class="span12" id="menulogo">
+              <div class="row">
+                  <div class="span6 offset6" id="menu">
+                      <a href="/notas" class="blogmenu">Notas</a>
+                      <a href="/acerca" class="acercamenu">Acerca de</a>
+                      <a href="/contrapartes" class="contrapartemenu">Contrapartes</a>
+                      <a href="/agendas" class="eventomenu">Eventos</a>
+                      <div class="clean"></div>
+                  </div>
+              </div>
+          </div>
+          <div class="span12">
+            <div class="row">
+               <div class="span6" id="banner">
+                    <img src="/files/img/banner.png">
+                </div>
+               <div class="span6 bienvenida">
+                   <div id="bienvenida-title">Programa Medios de Vida Sostenible </div>
+                   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Sed posuere consectetur est at lobortis. Donec sed odio dui.
+               </div>
+            </div>
+          </div>
+      </div>
+    </div>
+  </div>
 
-  	      {% else %}
+{% endblock %}
 
-  	      <a href="/accounts/login"> <img src="/media/imagen/usuario.jpg" > Entrar</a>
+{%block contenido%}{%endblock%}
 
-  	      {% endif %}
+{%block footer%}
+  <footer>
+      <div class="row dividerline">
+      </div>
+      <div class="row footer">
+        <div class="container">
+            <div class="row">
+              <div class="span12 footerinterior">
+                <div class="footertext1">Programa Medios de Vida Sostenible</div>
+                <div class="footertext2">CAFOD is the official Catholic aid agency for England and Wales</div>
+                <div class="footertext2">Desarrollado por <a href="http://www.simas.org.ni/">SIMAS</a></div>
+              </div>
+            </div>
+        </div>
+      </div>
+  </footer>
+{%endblock%}
 
-	{% endblock %}
-	{%block contenido%}{%endblock%}
-	{%block footer%}{%endblock%}
 </body>
 </html>

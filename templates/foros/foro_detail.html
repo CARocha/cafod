@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block title %}{{object.nombre}}{% endblock %}
+
+{% block contenido %}
+
+<div class="titulo-foro"> {% if foros.user == request.user or request.user.is_superuser %}
+    <a href="/foros/editar/{{object.id}}">[editar]</a>|
+    <a href="/foros/borrar/{{object.id}}">[borrar]</a>{% endif %}
+</div>
+
+
+    <br>
+    {{object.nombre}}<br>
+    {{object.creacion}}<br>
+    {{object.contenido}}<br>
+    <hr>
+    <br>
+
+    Documentos<br><hr>
+    {% for adjuntos in object.adjunto.all%}
+        {{adjuntos.nombre}}<br>
+        {{adjuntos.adjunto}}
+    {% endfor %}
+
+                
+{% endblock %}

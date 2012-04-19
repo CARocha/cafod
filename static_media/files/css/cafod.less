@@ -1,0 +1,390 @@
+@import "lib_style.less";
+@import "button_framework.less";
+
+.clean{clear:both;}
+
+/*Sobre escribiendo propiedades de Bootstrap */
+.navbar{
+	margin-bottom:0px;
+}
+
+.navbar .brand {
+	color:#c6cbab;
+    font-size: 14px;
+    padding-top:12px;
+}
+
+[class^="icon-"]:last-child, [class*=" icon-"]:last-child {
+	margin-right:5px;
+}
+
+.pagination li a{
+	color:#5BB75B;
+}
+
+p{margin-bottom:15px;}
+
+label{font-weight:bold;text-transform:uppercase;font-size:11px;color:#828282;}
+
+form hr{margin-top:10px; margin-bottom:10px;}
+
+.input-append .add-on, .input-append .btn {
+    margin-top: -9px;
+}
+
+/* Header */
+
+#grisheader{
+	background:#d9d9d5 url(/files/img/cafodtrans.png) no-repeat right bottom;
+	height:200px;
+}
+
+#grisheader-interna{
+	background:#d9d9d5 url(/files/img/cafodtrans.png) no-repeat right bottom;
+	height:130px;
+}
+
+#menulogo{
+	height:80px;
+	background:#fff url(/files/img/cafodlogo.jpg) no-repeat 10px 10px;
+	.rounded-corners-bottom(8px);
+	border:#d9d9d5 1px solid;
+	// outline:#e9e9e9 1px solid;
+	.box-shadow(0px,1px,0px,#e9e9e9);
+	
+}
+
+#menu a{
+	display: block;
+	padding-left:31px;
+	float:left;
+	margin-right:20px;
+	color:#666666;
+	font-size:14px;
+	height:79px;
+	line-height:79px;
+
+	&:hover{
+		text-decoration:none;
+		color:#000;
+	}
+}
+
+.blogmenu{
+	background:url(/files/img/blogmenu.png) no-repeat center left;
+}
+
+.blogmenu:hover{
+	background:url(/files/img/blogmenu.png) no-repeat center left,
+	url(/files/img/hovermenu.png) no-repeat center bottom;
+}
+
+.acercamenu{
+	background:url(/files/img/acercamenu.png) no-repeat center left;
+	padding-left:40px !important;
+}
+
+.acercamenu:hover{
+	background:url(/files/img/acercamenu.png) no-repeat center left,
+	url(/files/img/hovermenu.png) no-repeat center bottom;
+}
+
+.contrapartemenu{
+	background:url(/files/img/contrapartemenu.png) no-repeat center left;
+	padding-left:40px !important;
+}
+
+.contrapartemenu:hover{
+	background:url(/files/img/contrapartemenu.png) no-repeat center left,
+	url(/files/img/hovermenu.png) no-repeat center bottom;
+}
+
+.eventomenu{
+	background:url(/files/img/eventomenu.png) no-repeat center left;
+}
+
+.eventomenu:hover{
+	background:url(/files/img/eventomenu.png) no-repeat center left,
+	url(/files/img/hovermenu.png) no-repeat center bottom;
+}
+
+#banner img{
+	margin-top:-59px;
+	margin-right:35px !important;
+
+}
+
+.bienvenida{
+	font-size:12px;
+	margin-top:20px;
+}
+
+#bienvenida-title{
+	color:#016a68;
+	font-size:14px;
+	font-weight:bold;
+}
+
+// Index
+
+.body-content{
+	margin-bottom:15px;
+}
+
+#actualidad{
+	
+	.box-shadow(0px, -4px, 5px,#b9b9b9);
+	z-index:999;
+	position: relative;
+	.linear-gradient(#fff,#ebebeb,70%);
+	padding-bottom:15px;
+}
+
+.encabezado{
+	height:31px;
+	border-bottom:#ddd 1px solid;
+	margin-bottom:10px;
+}
+
+.encabezado-title{
+	color:#757575;
+	line-height:31px;
+	font-size:12px;
+	background:url(/files/img/encabezadoicon.png) no-repeat center left;
+	padding-left:25px;
+}
+
+.pais-index{
+	font-size:11px;
+	color:#aaa;
+	float:right;
+	img{margin-left:7px;}
+	margin-bottom:5px;
+}
+
+.imagen-noticia-index{
+	margin-bottom:5px;
+}
+
+.titulo-noticia-index{
+	color:#016a68;
+	font-weight:bold;
+	font-size:16px;
+	margin-bottom:5px;
+}
+
+.detalle-noticia-index{
+	font-size:12px;
+	margin-bottom:5px;
+}
+
+.enlace-noticia-index{
+	font-size:12px;
+	color:#99a92e;
+	font-weight:bold;
+
+	&:hover{
+		color:#99a92e;
+	}
+}
+
+.pais-footer{
+	font-size:13px;
+	color:#888;
+	height:30px;
+	line-height:30px;
+	margin-bottom:10px;
+	img{
+		margin-right:5px;
+	}
+}
+
+.org-footer{margin-bottom:15px}
+
+.org-footer ul{
+	margin-left:0px;
+	li{
+		background:url(/files/img/orgdivider.png) no-repeat bottom center;
+		height:34px;
+		line-height:34px;
+		list-style:none;
+		a{
+			font-size:13px;
+			font-weight:bold;
+			color:#01a09e;
+		}
+	}
+}
+
+.dividerline{
+	background:url(/files/img/dividerline.png) repeat-x;
+	height:11px;
+}
+
+.footer{
+	background:#01aca9 url(/files/img/fondofooter.png) repeat-x;
+	height:90px;
+	.footerinterior{
+		margin-top:20px;
+		background:url(/files/img/logofooter.png) no-repeat center right;
+		height:65px;
+	}
+	.footertext1{
+		color:#fff;
+		font-size:12px;
+	}
+	.footertext2{
+		color:#19544f;
+		font-size:12px;
+		margin-top:2px;
+		.text-shadow(0px,1px,0px,#01d0cd);
+		a{color:#19544f;font-weight:bold;}
+	}
+}
+
+// Noticias 
+
+.titulo-medio{
+	font-size:16px;
+	color:#016a68;
+	font-weight:bold;
+}
+
+.titulo-medio:hover{
+	color:#016A68
+}
+
+.titulo-grande{
+	font-size:22px;
+	color:#016a68;
+	font-weight:bold;
+	line-height:1.2;
+	margin-bottom:5px;
+}
+
+.extrainfo{
+	color:#a5a5a5;
+	font-weight:bold;
+	font-size:13px;
+	border-bottom:#c6c6c6 3px double;
+	margin-bottom:5px;
+	padding-bottom:5px;
+}
+
+.extrainfofull{
+	color:#a5a5a5;
+	font-weight:bold;
+	font-size:13px;
+
+}
+
+.divisordoble{
+	border-top:#c6c6c6 3px double;
+	margin-top:5px;
+	padding-top:5px;
+}
+.filtrospais{
+	margin-top:1px;
+	float:right;
+	img{
+		margin-right:4px;
+		float: left;
+		padding-top:2px;
+	}
+}
+
+.acciones{
+	margin-top:1px;
+	float:right;
+}
+
+.thumbs{
+	margin-top:-10px;
+}
+
+.thumbs img{
+	float:left;
+	margin-right:10px;
+	margin-bottom:10px;
+	.rounded-corners(4px);
+	.box-shadow(0px,1px,2px,#333)
+}
+
+.thumbs img:hover{
+	.opacidad(0.8);
+}
+
+.imagen-slider{
+	margin-bottom:4px;
+}
+
+.detalle-full{
+	margin-bottom:15px;
+}
+
+// Sidebar
+
+.sidebar-title{
+	text-transform:uppercase;
+	font-weight:bold;
+	margin-top:15px;
+	color:#959595;
+	font-size:11px;
+}
+
+.doc-sidebar{
+	margin-top:10px;
+	font-size:12px;
+}
+
+.contraparte-nota{
+	width:360px;
+	img{margin-right:10px;}
+}
+
+.nota-sidebar{
+	border-bottom:#eee 1px solid;
+	padding-bottom:10px;
+	padding-top:10px;
+	.nota-sidebar-title{
+		float:left;
+		width:300px;
+		margin-top:10px;
+		a{
+			color:#9eb31b;
+			font-weight:bold;
+		}
+	}
+	img{
+		float:left;
+		margin-right:10px;
+	}
+}
+
+// Contrapartes
+.contraparte-detalle-logo{
+	float:left;
+}
+
+.contraparte-tabla{
+	float: right;
+	width:350px;
+	margin-top:10px;
+}
+
+.destacado-content{
+	color:#016a68;
+	font-size:15px;
+	font-weight:bold;
+	border-bottom:#eee 1px solid;
+	padding-bottom:4px;
+	margin-bottom:10px;
+}
+
+
+.form-inline{
+	width:270px;
+	float: left;
+	margin-right:10px;
+	.add-on{margin-top:0px;}
+}

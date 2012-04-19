@@ -7,15 +7,20 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.template import RequestContext
 from models import *
 from forms import *
+from notas.models import *
 
 # Create your views here.
-
 #def contrapartes_index(request):
-
 #    contra = Contraparte.objects.all()
-
 #    return render_to_response('contrapartes/contraparte_index.html', locals(),
 #                                 context_instance=RequestContext(request))
+
+
+def detalle_contraparte(request,id):
+    contra = get_object_or_404(Contraparte, id=id)
+    notas = Notas.objects.filter(user__userprofile__contraparte__id=id).order_by('-fecha')
+    return render_to_response('contrapartes/contraparte_detail.html', locals(),
+                                 context_instance=RequestContext(request))
 
 @login_required
 def crear_contraparte(request):
@@ -36,8 +41,18 @@ def crear_contraparte(request):
 @login_required
 def editar_contraparte(request, id):
     contra = get_object_or_404(Contraparte, id=id)
-    if not contra.user == request.user:
-        return HttpResponse("Usted no puede editar esta Contraparte")
+    usuarios = UserProfile.objects.filter(contraparte_id=contra.id)
+    # user_profile = request.user.get_profile().user.id
+    nombres = []
+    for obj in usuarios:
+        nombres.append(obj.user.id)
+
+    if not request.user.id in [i for i in nombres]:
+        if request.user.is_superuser:
+            pass
+        else:
+            return HttpResponse("Usted no puede editar esta Contraparte")
+
     if request.method == 'POST':
         form = ContraparteForms(request.POST, instance = contra)
         if form.is_valid():
@@ -54,8 +69,13 @@ def editar_contraparte(request, id):
 @login_required
 def borrar_contraparte(request, id):
     contra = get_object_or_404(Contraparte, pk=id)
+    usuarios = UserProfile.objects.filter(Contraparte_id=contra.id)
 
-    if contra.user == request.user or request.user.is_superuser:
+    nombres = []
+    for obj in usuarios:
+        nombres.append(obj.user.username)
+
+    if request.user.username in [i for i in nombres] or request.user.is_superuser:
         contra.delete()
         return redirect('contraparte-list')
     else:

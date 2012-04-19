@@ -1,4 +1,5 @@
 from django.conf.urls import patterns, include, url
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from settings import *
 
 # Uncomment the next two lines to enable the admin:
@@ -17,9 +18,7 @@ urlpatterns = patterns('',
     (r'^accounts/login/$', 'django.contrib.auth.views.login'),
     (r'^accounts/logout/$', 'notas.views.logout_page'),
     (r'^$', 'notas.views.index'),
-    #url(r'^accounts/login/$', 'django.contrib.auth.views.login', {'template_name': 'registration/login.html'}, 
-        #name='user-login'),
-    #url(r'^logout/$', 'notas.views.logout_page', name="logout"),
+    (r'^ckeditor/', include('ckeditor.urls')),
     url(r'^notas/', include('notas.urls')),
     url(r'^contrapartes/', include('contrapartes.urls')),
     url(r'^agendas/', include('agendas.urls')),

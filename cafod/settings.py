@@ -65,6 +65,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.contrib.auth.context_processors.auth',
     'django.contrib.messages.context_processors.messages',
     'django.core.context_processors.request',
+    #'pagination.middleware.PaginationMiddleware',
 )
 
 ROOT_URLCONF = 'cafod.urls'
@@ -78,6 +79,20 @@ TEMPLATE_DIRS = (
     # Don't forget to use absolute paths, not relative paths.
     os.path.join(PROJECT_DIR, 'templates'),
 )
+
+CKEDITOR_MEDIA_PREFIX = '/files/media/ckeditor/'
+
+CKEDITOR_UPLOAD_PATH = os.path.join(PROJECT_DIR, 'static_media/uploads/')
+
+CKEDITOR_RESTRICT_BY_USER = True
+
+CKEDITOR_CONFIGS = {
+    'default': {
+        'toolbar': 'Full',
+        'height': 300,
+        'width': 650,
+    },
+}
 
 INSTALLED_APPS = (
     'django.contrib.auth',
@@ -97,6 +112,7 @@ INSTALLED_APPS = (
     'south',
     'tagging',
     'tagging_autocomplete',
+    'ckeditor',
 )
 
 # A sample logging configuration. The only tangible logging
@@ -129,3 +145,29 @@ LOGGING = {
 }
 AUTH_PROFILE_MODULE = 'contrapartes.UserProfile'
 LOGIN_REDIRECT_URL = '/'
+
+CKEDITOR_CONFIGS = {
+    'default': {
+        'toolbar': [
+            [      'Undo', 'Redo',
+              '-', 'Bold', 'Italic', 'Underline',
+              '-','JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock',
+              '-', 'Link', 'Unlink', 'Anchor',
+              '-', 'Format',
+              '-', 'SpellChecker', 'Scayt',
+              '-', 'Maximize',
+            ],
+            [      'HorizontalRule',
+              '-', 'Table',
+              '-', 'BulletedList', 'NumberedList','-','Outdent','Indent',
+              '-', 'Cut','Copy','PasteText',
+              '-', 'Source',
+            ]
+        ],
+        'width': 'auto',
+        'height': 170,
+        'toolbarCanCollapse': False,
+        'skin':'kama',
+        'uiColor': '#EEe',
+    }
+}

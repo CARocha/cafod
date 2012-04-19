@@ -1,11 +1,63 @@
-{% extends "base.html" %}
-
+{% extends "baseinterna.html" %}
 {% block contenido %}
-<br>
-    {% for nota in object_list %}
-    	<a href="{{nota.get_absolute_url}}">{{nota.titulo}}</a><br>
-        {{nota.contenido|safe}} <br>
-        <hr>
-    {% endfor %}
-
+<div class="row">
+	<div class="encabezado">
+	  <div class="container">
+		    <div class="row">
+			    <div class="span5">
+			    	<div class="encabezado-title">
+			      		NOTAS {%if pais_selecto%}: <b>{{pais_selecto.nombre}}</b>{%endif%}
+			  		</div>
+			    </div>
+			    <div class="span7">
+					<div class="btn-group filtrospais">
+					  <a class="btn disabled">Filtrar por</a>
+					  {%for pais in paises%}
+					  <a href="/notas/pais/{{pais.id}}" {%if pais.id == pais_selecto.id %} class="btn active"{%else%}class="btn"{%endif%}><img src="/files/img/{{pais.codigo}}.png">{{pais.nombre}}</a>
+					  {%endfor%}
+					</div>
+			    </div>
+	        </div>
+	  </div>
+	</div>
+</div>
+<div class="row">
+	<div class="container">
+		{% for nota in notas %}
+			<div class="row">
+				<div class="span3">
+				 {%for thumb in nota.fotos.all|slice:"1"%} 
+	                   <img  src="{{thumb.foto.url_220x160}}">
+	             {%endfor%}
+				</div>
+				<div class="span9">
+						<div class="extrainfo">{{nota.fecha}}  |  {{nota.pais.nombre}} | {{nota.contraparte.nombre}}</div>
+						<a href="{{nota.get_absolute_url}}" class="titulo-medio">{{nota.titulo}}</a><br>
+						{{nota.contenido|safe|truncatewords_html:50}} <br><br>
+						<a href="" class="btn btn-success btn-mini">Leer mas</a>
+				</div>
+			</div>
+			<hr>
+		{% endfor %}
+	    <ul class="pagination">
+	        {% if notas.has_previous %}
+	        <li>
+	          <a href="{% url notas_list %}?page={{ notas.previous_page_number }}">
+	            ← Anterior</a>
+	        </li>
+	        {% endif %}
+	        <li class="active">
+	            <!-- current page -->
+	               <a href="#"> Page {{ notas.number }} of {{ notas.paginator.num_pages }}</a>
+	            <!-- end current page -->
+	        </li>
+	        {% if notas.has_next %}
+	         <li>
+	         <a href="{% url notas_list %}?page={{ notas.next_page_number }}">
+	                Siguiente →</a>
+	         </li>
+	         {% endif %}
+	    </ul>
+	</div>
+</div>
 {% endblock %}

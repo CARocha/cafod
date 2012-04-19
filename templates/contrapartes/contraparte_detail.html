@@ -1,42 +1,102 @@
-{% extends "base.html" %}
-
-{% block title %}{{object.nombre}}{% endblock %}
-
+{% extends "baseinterna.html" %}
+{% block title %}{{contra.nombre}}{% endblock %}
 {% block contenido %}
-
-<div class="titulo-foro"> {% if notas.user == request.user or request.user.is_superuser %}
-    <a href="/contrapartes/editar/{{object.id}}">[editar]</a>|
-    <a href="/contrapartes/borrar/{{object.id}}">[borrar]</a>{% endif %}
+<div class="row">
+    <div class="encabezado">
+      <div class="container">
+            <div class="row">
+                <div class="span5">
+                    <div class="encabezado-title">
+                        CONTRAPARTES
+                    </div>
+                </div>
+                <div class="span7">
+                 <div class="btn-group acciones">
+                        {% if request.user.get_profile.contraparte.id == contra.id or request.user.is_superuser %}
+                            <a class="btn" href="/contrapartes/editar/{{contra.id}}"><i class="icon-pencil"></i>Editar</a>
+                            <a class="btn" href="/contrapartes/borrar/{{contra.id}}"><i class="icon-remove-sign"></i>Borrar</a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+      </div>
+    </div>
 </div>
 
-
-    <br>
-         Nombre: {{object.nombre}}<br> 
-         {% if object.logo %}
-             Logo: <img src="{{object.logo}}" alt="{{object.nombre}}"> <br>
-         {% endif %}
-         Pais: {{object.pais}} <br>
-         {% if object.fundacion %}
-             Año de Fundación: {{object.fundacion}}<br>
-         {% endif %}
-         {% if object.temas %}
-             Temas: {{object.temas}}<br>
-         {% endif %}
-         {% if object.generalidades %}
-             Generalidades: {{object.generalidades|safe}}<br>
-         {% endif %}
-         {% if object.contacto %}
-             Contacto: {{object.contacto}}<br>
-         {% endif %}
-         {% if object.telefono %}
-             Telefono: {{object.telefono}}<br>
-         {% endif %}
-         {% if object.sitio_web %}
-             Sitio Web: {{object.sitio_web}}<br>
-         {% endif %}
-         {% if object.rss %}
-             RSS: {{object.rss}}<br>
-         {% endif %}
-
-                
+<div class="row">
+    <div class="container">
+        <div class="row">
+            <div class="span7">
+               <h1 class="titulo-grande">{{contra.nombre}}</h1>
+            </div>
+            <div class="span5">
+            </div>
+        </div>
+        <div class="row detalle-full">
+            <div class="span7 divisordoble">
+                <img class="contraparte-detalle-logo"src="{{contra.logo.url_180x160}}" alt="{{contra.nombre}}">
+                <table class="table  table-bordered table-striped table-condensed contraparte-tabla">
+                    <tbody>
+                        {%if contra.pais %}
+                        <tr>
+                            <td><b>Pais</b></td>
+                            <td><img style="margin-top:-3px" src="/files/img/{{contra.pais.codigo}}.png"> {{contra.pais}}</td>
+                        </tr>
+                        {%endif%}
+                        {%if contra.fundacion%}
+                        <tr>
+                            <td><b>Año de Fundación</b></td>
+                            <td>{{contra.fundacion}}</td>
+                        </tr>
+                        {%endif%}
+                        {%if contra.contacto%}
+                        <tr>
+                            <td><b>Contacto</b></td>
+                            <td>{{contra.contacto}}</td>
+                        </tr>
+                        {%endif%}
+                        {%if contra.telefono%}
+                        <tr>
+                            <td><b>Telefono</b></td>
+                            <td>{{contra.telefono}}</td>
+                        </tr>
+                        {%endif%}
+                        {%if contra.sitio_web%}
+                        <tr>
+                            <td><b>Sitio Web</b></td>
+                            <td><a href="{{contra.sitio_web}}">{{contra.sitio_web}}</a></td>
+                        </tr>
+                        {%endif%}
+                    </tbody> 
+                </table>
+                <div class="clean"></div>
+                <br>
+                 {% if contra.temas %}
+                     <div class="destacado-content">Temas</div>
+                     {{contra.temas|safe}}
+                 {% endif %}
+                 {% if contra.generalidades %}
+                     <div class="destacado-content">Generalidades</div>
+                    {{contra.generalidades|safe}}
+                 {% endif %}
+            </div>
+            <div class="span5 divisordoble">
+                <div class="sidebar-title">NOTAS DE ESTA CONTRAPARTE</div>
+                <div class="dividerline"></div>
+                {%for nota in notas%}
+                    <div class="nota-sidebar">
+                        {%for thumb in nota.fotos.all|slice:"1"%} 
+                            <img width="60" height="60" class="" src="{{thumb.foto.url_80x80}}">
+                        {%endfor%}
+                        <div class="nota-sidebar-title">
+                            <a href="/notas/{{nota.id}}">{{nota.titulo}}</a>
+                        </div>
+                        <div class="clean"></div>
+                    </div>
+                {%endfor%}
+            </div>
+        </div>
+    </div>
+</div> 
+         
 {% endblock %}

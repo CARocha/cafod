@@ -1,17 +1,40 @@
-{% extends "base.html" %}
+{% extends "baseinterna.html" %}
 
 {% block contenido %}
-<br>
-    {% for contraparte in object_list %}
-    	Nombre: <a href="{{contraparte.get_absolute_url}}">{{contraparte.nombre}}</a><br>
-         {% if contraparte.logo %}
-             Logo: <img src="{{contraparte.logo}}" alt="{{contraparte.nombre}}"> <br>
-         {% endif %}
-         Pais: {{contraparte.pais}} <br>
-         {% if contraparte.fundacion %}
-             Año de Fundación: {{contraparte.fundacion}}<br>
-         {% endif %}
-        <hr>
-    {% endfor %}
+<div class="row">
+    <div class="encabezado">
+      <div class="container">
+            <div class="row">
+                <div class="span5">
+                    <div class="encabezado-title">
+                        CONTRAPARTES
+                    </div>
+                </div>
+                <div class="span7">
 
+                </div>
+            </div>
+      </div>
+    </div>
+</div>
+<div class="row body-content">
+    <div class="container">
+        {% for contraparte in object_list %}
+        {%cycle '<div class="row">' ''%}
+                <div class="span3">
+                    <center><img src="{{contraparte.logo.url_180x160}}" alt="{{contraparte.nombre}}"></center>  
+                </div>
+                <div class="span3">
+                    <a href="{{contraparte.get_absolute_url}}" class="titulo-medio">{{contraparte.nombre}}</a>
+                    <div><img src="/files/img/{{contraparte.pais.codigo}}.png"> {{contraparte.pais}}</div><br>
+                    <div>{{contraparte.generalidades|safe|truncatewords_html:30}}</div>
+                    <a href="{{contraparte.get_absolute_url}}" class="btn btn-success btn-mini">Conocer</a> 
+                </div>
+            {%cycle '' '</div><hr>'%}
+            {%if forloop.last%}
+                {% if forloop.counter|divisibleby:2 %}{% else %}</div><hr>{% endif %}
+            {%endif%}
+        {% endfor %}
+    </div>
+</div>
 {% endblock %}

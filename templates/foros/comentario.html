@@ -1,0 +1,10 @@
+{% block contenido %}
+<h2>Agregue su comentario</h2>
+
+<form action="." method="POST">{% csrf_token %}
+		    {{ form.media }}
+        	{{form.as_p}}
+        <input id="boton-preguntar" type="submit" value="Responder">
+ </form>
+
+{% endblock %}

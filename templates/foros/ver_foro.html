@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block contenido %}
+
+<h1>Discusion/foro</h1>
+<h2>{{discusion.nombre}}</h2>
+<p>{{discusion.contenido}}</p>
+<strong>creado: {{discusion.creacion}}</strong>
+
+<h4>Cosas adjuntas</h4><br>
+<strong>imagenes</strong><br>
+{% for img in discusion.fotos.all%}
+	{{img.nombre_img}}:{{img.foto}}<br>
+{% endfor %}
+<strong>Documentos</strong><br>
+{% for img in discusion.documentos.all%}
+	{{img.nombre_doc}}: {{img.adjunto}}<br>
+{% endfor %}
+<strong>Url video</strong><br>
+{% for img in discusion.video.all%}
+	{{img.nombre_video}}: {{img.url}}<br>
+{% endfor %}
+<strong>Audio</strong><br>
+{% for img in discusion.audio.all%}
+	{{img.nombre_audio}}: {{img.audio}}<br>
+{% endfor %}
+
+<h2>Aportes a Discusion/Foro</h2>
+{% for respuesta in discusion.aportes_set.all %}
+        <strong> <h5>{{respuesta.user}}</h5> </strong> 
+	{{respuesta.contenido}}<br>
+	{% if respuesta.contenido%}
+	   <a href="/foros/ver_comentario/{{respuesta.id}}">Comentar</a>
+	      
+	   	<h3>comentarios al aporte</h3>
+	        {% for comentario in respuesta.comentarios_set.all %}
+	       		{{comentario.comentario}}<br>
+	        {% endfor %}
+	      
+        {% endif %}
+
+	<hr>
+{% endfor %}
+
+<hr>
+<h2>Aportar a Discusion/Foro</h2>
+<div>
+    <form action="." method="POST">{% csrf_token %}
+    	{{ form.media }}
+        {{form}}
+        <input id="boton-preguntar" type="submit" value="Responder">
+     </form>
+</div>
+
+
+{% endblock %}

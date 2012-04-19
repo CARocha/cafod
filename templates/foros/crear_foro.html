@@ -1,8 +1,23 @@
 {% extends "base.html"%}
 
+{% block extra_js %}
+<link href="/files/css/jquery.autocomplete.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+<script type="text/javascript" src="/files/js/autocompletejs/jquery.autocomplete.js"></script>
+{% endblock %}
+
 {% block contenido%}
-    <form action="." method="post">{% csrf_token %}
+    <form enctype="multipart/form-data" action="." method="post">{% csrf_token %}
+        {{ form.media }}
         {{form.as_p}}
+        <h6>Agregar Imagen</h6>
+        {{form2.as_p}}
+        <h6>Agregar Documentos</h6>
+        {{form3.as_p}}
+        <h6>Agregar Videos</h6>
+        {{form4.as_p}}
+        <h6>Agregar Sonido</h6>
+        {{form5.as_p}}
         <input id="boton-preguntar" type="submit" value="Guardar">
     </form>
 {% endblock%}

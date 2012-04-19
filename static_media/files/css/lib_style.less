@@ -1,0 +1,139 @@
+
+/* Variables de colores*/
+
+@rojo:red;
+@blanco:#fff;
+
+/* Variables de tipografias*/
+
+/* Generales */
+
+.wrapCenter(@width: 960px){
+    width: @width;
+    margin: 0 auto;
+}
+
+/* CSS3 Elements */
+
+/* General styles for gradients */
+
+.linear-gradient(@start:#eee,@end:#fff,@stop:25%){
+    background-color: @start;
+    background-repeat: no-repeat;
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(@start), color-stop(@stop, @start), to(@end));
+    background-image: -webkit-linear-gradient(@start, @start @stop, @end);
+    background-image: -moz-linear-gradient(top, @start, @start @stop, @end);
+    background-image: -ms-linear-gradient(@start, @start @stop, @end);
+    background-image: -o-linear-gradient(@start, @start @stop, @end);
+    background-image: linear-gradient(@start, @start @stop, @end);
+}
+
+.opacidad(@o:0.7){
+    opacity: @o;
+    -moz-opacity: @o;
+    filter:alpha(opacity=@o);
+}
+
+.box-shadow (@hor: 0px, @vert: 0px, @blur: 5px, @shadow: #929292){
+    -webkit-box-shadow: @arguments ;
+    -moz-box-shadow: @arguments;
+    box-shadow: @arguments;
+}
+
+.box-shadow-inset (@hor: 0px, @vert: 0px, @blur: 5px, @shadow: #929292){
+    -webkit-box-shadow: @arguments inset;
+    -moz-box-shadow: @arguments inset;
+    box-shadow: @arguments inset;
+}
+
+.text-shadow(@hor: 0px, @vert: 0px, @blur: 5px, @shadow: #929292){
+    text-shadow: @arguments;
+    -moz-text-shadow: @arguments;
+    -webkit-text-shadow: @arguments;
+}
+
+.rounded-corners(@radio: 5px){
+    border-radius: @radio;
+    -ms-border-radius: @radio;
+    -moz-border-radius: @radio;
+    -webkit-border-radius: @radio;
+    -khtml-border-radius: @radio;
+}
+
+.rounded-corners-bottom(@radio:5px){
+    border-bottom-right-radius:@radio;
+    border-bottom-left-radius:@radio;
+    -moz-border-radius-bottomright:@radio;
+    -moz-border-radius-bottomleft:@radio;
+    -webkit-border-bottom-left-radius:@radio;
+    -webkit-border-bottom-right-radius:@radio;
+}
+
+.rounded-corners-top(@radio:5px){
+    border-top-right-radius:@radio;
+    border-top-left-radius:@radio;
+    -moz-border-radius-topright:@radio;
+    -moz-border-radius-topleft:@radio;
+    -webkit-border-top-left-radius:@radio;
+    -webkit-border-top-right-radius:@radio;
+}
+
+.rounded-corners-right(@radio:5px){
+    border-top-right-radius:@radio;
+    border-bottom-right-radius:@radio;
+    -moz-border-radius-topright:@radio;
+    -moz-border-radius-bottomright:@radio;
+    -webkit-border-bottom-right-radius:@radio;
+    -webkit-border-top-right-radius:@radio;
+}
+
+.rounded-corners-left(@radio:5px){
+    border-top-left-radius:@radio;
+    border-bottom-left-radius:@radio;
+    -moz-border-radius-topleft:@radio;
+    -moz-border-radius-bottomleft:@radio;
+    -webkit-border-bottom-left-radius:@radio;
+    -webkit-border-top-left-radius:@radio;
+}
+
+.rounded-corners-combined(@radio:5px){
+    border-top-left-radius:@radio;
+    border-bottom-right-radius:@radio;
+    -moz-border-radius-topleft:@radio;
+    -moz-border-radius-bottomright:@radio;
+    -webkit-border-bottom-right-radius:@radio;
+    -webkit-border-top-left-radius:@radio;
+}
+
+.rounded-corners-right-bottom(@radio:5px){
+    border-bottom-right-radius:@radio;
+    -moz-border-radius-bottomright:@radio;
+    -webkit-border-bottom-right-radius:@radio;
+}
+
+.rounded-corners-left-bottom(@radio:5px){
+    border-bottom-left-radius:@radio;
+    -moz-border-radius-bottomleft:@radio;
+    -webkit-border-bottom-left-radius:@radio;
+}
+
+.rounded-corners-right-top(@radio:5px){
+    border-top-right-radius:@radio;
+    -moz-border-radius-topright:@radio;
+    -webkit-border-top-right-radius:@radio;
+}
+
+.boton-formulario{
+    border-top-left-radius:40px;
+    border-bottom-right-radius:40px;
+    -moz-border-radius-topleft:40px;
+    -moz-border-radius-bottomright:40px;
+    -webkit-border-bottom-right-radius:40px;
+    -webkit-border-top-left-radius:40px;
+    border-top-right-radius:40px;
+    border-bottom-left-radius:40px;
+    -moz-border-radius-topright:40px;
+    -moz-border-radius-bottomleft:40px;
+    -webkit-border-bottom-left-radius:40px;
+    -webkit-border-top-right-radius:40px;
+}

@@ -27,7 +27,7 @@
                 <div class="span3">
                     <a href="{{contraparte.get_absolute_url}}" class="titulo-medio">{{contraparte.nombre}}</a>
                     <div><img src="/files/img/{{contraparte.pais.codigo}}.png"> {{contraparte.pais}}</div><br>
-                    <div>{{contraparte.generalidades|safe|truncatewords_html:40}}</div>
+                    <div>{{contraparte.generalidades|safe|truncatewords_html:30}}</div>
                     <a href="{{contraparte.get_absolute_url}}" class="btn btn-success btn-mini">Conocer</a> 
                 </div>
             {%cycle '' '</div><hr>'%}

@@ -145,3 +145,29 @@ LOGGING = {
 }
 AUTH_PROFILE_MODULE = 'contrapartes.UserProfile'
 LOGIN_REDIRECT_URL = '/'
+
+CKEDITOR_CONFIGS = {
+    'default': {
+        'toolbar': [
+            [      'Undo', 'Redo',
+              '-', 'Bold', 'Italic', 'Underline',
+              '-','JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock',
+              '-', 'Link', 'Unlink', 'Anchor',
+              '-', 'Format',
+              '-', 'SpellChecker', 'Scayt',
+              '-', 'Maximize',
+            ],
+            [      'HorizontalRule',
+              '-', 'Table',
+              '-', 'BulletedList', 'NumberedList','-','Outdent','Indent',
+              '-', 'Cut','Copy','PasteText',
+              '-', 'Source',
+            ]
+        ],
+        'width': 'auto',
+        'height': 170,
+        'toolbarCanCollapse': False,
+        'skin':'kama',
+        'uiColor': '#EEe',
+    }
+}

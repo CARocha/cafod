@@ -48,7 +48,10 @@ def editar_contraparte(request, id):
         nombres.append(obj.user.id)
 
     if not request.user.id in [i for i in nombres]:
-        return HttpResponse("Usted no puede editar esta Contraparte")
+        if request.user.is_superuser:
+            pass
+        else:
+            return HttpResponse("Usted no puede editar esta Contraparte")
 
     if request.method == 'POST':
         form = ContraparteForms(request.POST, instance = contra)

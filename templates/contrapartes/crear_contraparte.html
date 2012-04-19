@@ -1,11 +1,95 @@
-{% extends "base.html" %}
-
+{% extends "baseinterna.html" %}
+{%block extra_js%}
+<script type="text/javascript">
+  $(document).ready(function(){
+$('input').tooltip({'placement':'right'})
+});
+</script>
+{%endblock%}
 {% block contenido %}
-
-<form enctype="multipart/form-data" method="post" action=".">{% csrf_token %}
-	{{ form.media }}
-	{{form.as_p}}
-<input type="submit" value="Guardar" />
-</form>
+<div class="row">
+    <div class="encabezado">
+      <div class="container">
+            <div class="row">
+                <div class="span5">
+                    <div class="encabezado-title">
+                        CONTRAPARTES : <b>EDITAR</b>
+                    </div>
+                </div>
+                <div class="span7">
+                </div>
+            </div>
+      </div>
+    </div>
+</div>
+<div class="row">
+	<div class="container">
+		<div class="row">
+			<form enctype="multipart/form-data" method="post" action=".">{% csrf_token %}
+					{{ form.media }}
+			<div class="span9">
+				<div class="well">
+				
+					{{form.errors}}
+					<label class="control-label">{{form.nombre.label}}</label>
+					{{form.nombre}}
+					<hr>
+					<label class="control-label">{{form.pais.label}}</label>
+					{{form.pais}}
+					<hr>
+					<label class="control-label">{{form.logo.label}}</label>
+					{{form.logo}}
+					<hr>
+					<label class="control-label">{{form.fundacion.label}}</label>
+					{{form.fundacion}}
+					<hr>
+					<div class="form-inline">
+						<div class="input-append">
+							<label class="control-label">{{form.contacto.label}}</label>
+							{{form.contacto}}<span class="add-on"><img src="/files/img/icon/user_green.png"></span>
+						</div>
+					</div>
+					<div class="form-inline">
+						<div class="input-append">
+							<label class="control-label">{{form.telefono.label}}</label>
+							{{form.telefono}}<span class="add-on"><img src="/files/img/icon/telephone.png"></span>
+						</div>
+					</div>
+					<div class="clean"></div>
+					<hr>
+					<div class="form-inline">
+						<div class="input-append">
+							<label class="control-label">{{form.sitio_web.label}}</label>
+							{{form.sitio_web}}<span class="add-on"><img src="/files/img/icon/link.png"></span>
+						</div>
+					</div>
+					<div class="form-inline">
+						<div class="input-append">
+							<label class="control-label">URL RSS</label>
+							{{form.rss}}<span class="add-on"><img src="/files/img/icon/rss.png"></span>
+						</div>
+					</div>
+					<div class="clean"></div>
+					<hr>
+					<label class="control-label">{{form.temas.label}}</label>
+					{{form.temas}}
+					<hr>
+					<label class="control-label">{{form.generalidades.label}}</label>
+					{{form.generalidades}}
+					<hr>
+				
+				
+				</div>
+			</div>
+			<div class="span3">
+				<div class="alert "><i class="icon-info-sign"></i>
+				  Esta es la informacion general de la contraparte que se presenta en la parte publica
+				</div>
+				<input class="btn btn-large btn-success" style=""type="submit" value="Guardar" />
+			</div>
+			</form>
+		</div>
+	</div>
+</div>
 
 {% endblock %}

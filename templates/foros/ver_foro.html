@@ -46,6 +46,7 @@
 <h2>Aportar a Discusion/Foro</h2>
 <div>
     <form action="." method="POST">{% csrf_token %}
+    	{{ form.media }}
         {{form}}
         <input id="boton-preguntar" type="submit" value="Responder">
      </form>

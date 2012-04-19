@@ -3,6 +3,7 @@
 {% block contenido %}
 
 <form enctype="multipart/form-data" method="post" action=".">{% csrf_token %}
+	{{ form.media }}
 	{{form.as_p}}
 <input type="submit" value="Guardar" />
 </form>

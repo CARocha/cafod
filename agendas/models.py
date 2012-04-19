@@ -4,12 +4,16 @@ from django.db import models
 from foros.models import Documentos
 from django.contrib.contenttypes import generic
 from django.contrib.auth.models import User
+from south.modelsinspector import add_introspection_rules
+from ckeditor.fields import RichTextField
+
+add_introspection_rules ([], ["^ckeditor\.fields\.RichTextField"])
 
 # Create your models here.
 
 class Agendas(models.Model):
     evento = models.CharField(max_length=200)
-    descripcion = models.TextField('Descripción')
+    descripcion = RichTextField()
     inicio = models.DateField('Fecha de Inicio')
     final = models.DateField('Fecha de Finalización')
     publico = models.BooleanField()

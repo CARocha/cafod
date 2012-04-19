@@ -5,6 +5,10 @@ from django.contrib.contenttypes import generic
 from contrapartes.models import *
 from foros.models import *
 from django.template.defaultfilters import slugify
+from south.modelsinspector import add_introspection_rules
+from ckeditor.fields import RichTextField
+
+add_introspection_rules ([], ["^ckeditor\.fields\.RichTextField"])
 
 # Create your models here.
 
@@ -12,7 +16,7 @@ class Notas(models.Model):
     titulo = models.CharField(max_length=200)
     slug = models.SlugField(max_length=200)
     fecha = models.DateField('Fecha de publicación', default=datetime.datetime.now())
-    contenido = models.TextField()
+    contenido = RichTextField()
     fotos = generic.GenericRelation(Imagen)
     adjuntos = generic.GenericRelation(Documentos)
 

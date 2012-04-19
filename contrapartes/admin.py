@@ -1,10 +1,13 @@
 from django.contrib import admin
 from models import *
+from ckeditor.widgets import CKEditorWidget
+from contrapartes.forms import *
 
 class ContraparteAdmin(admin.ModelAdmin):
-    class Media:
-        js = ['../files/js/tiny_mce/tiny_mce.js',
-              '../files/js/editores/textareas.js',]
+	form = ContraparteForms
+    #class Media:
+    #    js = ['../files/js/tiny_mce/tiny_mce.js',
+    #          '../files/js/editores/textareas.js',]
 
 admin.site.register(Pais)
 admin.site.register(Contraparte, ContraparteAdmin)

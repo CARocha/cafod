@@ -80,6 +80,20 @@ TEMPLATE_DIRS = (
     os.path.join(PROJECT_DIR, 'templates'),
 )
 
+CKEDITOR_MEDIA_PREFIX = '/files/media/ckeditor/'
+
+CKEDITOR_UPLOAD_PATH = os.path.join(PROJECT_DIR, 'static_media/uploads/')
+
+CKEDITOR_RESTRICT_BY_USER = True
+
+CKEDITOR_CONFIGS = {
+    'default': {
+        'toolbar': 'Full',
+        'height': 300,
+        'width': 650,
+    },
+}
+
 INSTALLED_APPS = (
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -98,7 +112,7 @@ INSTALLED_APPS = (
     'south',
     'tagging',
     'tagging_autocomplete',
-   # 'pagination',
+    'ckeditor',
 )
 
 # A sample logging configuration. The only tangible logging

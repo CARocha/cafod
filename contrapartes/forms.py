@@ -1,11 +1,13 @@
 from django.db import models
 from django.forms import ModelForm
 from models import *
-#from django.contrib.admin.widgets import AdminFileWidget
-#from django import forms
+from django import forms
+from ckeditor.widgets import CKEditorWidget
 
-class ContraparteForms(ModelForm):
-    #logo = forms.FileField(widget=AdminFileWidget)
+class ContraparteForms(forms.ModelForm):
+    temas = forms.CharField(widget=CKEditorWidget())
+    generalidades = forms.CharField(widget=CKEditorWidget())
+
     class Meta:
     	model = Contraparte
     	exclude = ('user',)

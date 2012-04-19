@@ -11,7 +11,10 @@ from django.contrib.auth.models import User
 from thumbs import ImageWithThumbsField
 from utils import *
 import datetime
+from south.modelsinspector import add_introspection_rules
+from ckeditor.fields import RichTextField
 
+add_introspection_rules ([], ["^ckeditor\.fields\.RichTextField"])
 add_introspection_rules ([], ["^tagging_autocomplete\.models\.TagAutocompleteField"])
 
 # Create your models here.
@@ -93,7 +96,7 @@ class Foros(models.Model):
     cierre = models.DateField('Cierre de aportes')
     fecha_skype = models.DateField('Propuesta de reunion skype')
     memoria = models.DateField('Propuesta entrega de memoria')
-    contenido = models.TextField()
+    contenido = RichTextField()
     contraparte = models.ForeignKey(User)
     documentos = generic.GenericRelation(Documentos)
     fotos = generic.GenericRelation(Imagen)
@@ -112,7 +115,7 @@ class Foros(models.Model):
 class Aportes(models.Model):
     foro = models.ForeignKey(Foros)
     fecha = models.DateField(default=datetime.datetime.now())
-    contenido = models.TextField()
+    contenido = RichTextField()
     user = models.ForeignKey(User)
     documentos = generic.GenericRelation(Documentos)
     fotos = generic.GenericRelation(Imagen)
@@ -128,7 +131,7 @@ class Aportes(models.Model):
 class Comentarios(models.Model):
     fecha = models.DateField(default=datetime.datetime.now())
     usuario = models.ForeignKey(User)
-    comentario = models.TextField()
+    comentario = RichTextField()
     aporte = models.ForeignKey(Aportes)
 
     class Meta:

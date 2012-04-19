@@ -1,6 +1,7 @@
 from django.contrib import admin
 from models import *
 from foros.models import *
+from foros.forms import *
 
 class DocumentosInline(generic.GenericTabularInline):
     model = Documentos
@@ -21,22 +22,16 @@ class AudiosInline(generic.GenericTabularInline):
 class ForoAdmin(admin.ModelAdmin):
     inlines = [DocumentosInline, ImagenInline, 
               VideosInline, AudiosInline]
-    class Media:
-        js = ['../files/js/tiny_mce/tiny_mce.js',
-              '../files/js/editores/textareas.js',]
+    form = ForosForm
 
 class AportesAdmin(admin.ModelAdmin):
     inlines = [DocumentosInline, ImagenInline, 
               VideosInline, AudiosInline]
-    class Media:
-        js = ['../files/js/tiny_mce/tiny_mce.js',
-              '../files/js/editores/textareas.js',]
+    form = AporteForm
 
 class ComentariosAdmin(admin.ModelAdmin):
     list_display = ('fecha', 'usuario', 'aporte')
-    class Media:
-        js = ['../files/js/tiny_mce/tiny_mce.js',
-              '../files/js/editores/textareas.js',]
+    form = ComentarioForm
 
 admin.site.register(Foros, ForoAdmin)
 admin.site.register(Aportes, AportesAdmin)

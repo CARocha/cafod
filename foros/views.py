@@ -49,15 +49,15 @@ def comentario_foro(request, aporte_id):
     aporte = get_object_or_404(Aportes, id=aporte_id)
 
     if request.method == 'POST':
-        form1 = ComentarioForm(request.POST)
-        if form1.is_valid():
-            form1_uncommited = form1.save(commit=False)
+        form = ComentarioForm(request.POST)
+        if form.is_valid():
+            form1_uncommited = form.save(commit=False)
             form1_uncommited.usuario = request.user
             form1_uncommited.aporte = aporte
             form1_uncommited.save()
             return HttpResponseRedirect('/foros/ver/%d' % aporte.foro_id)
     else:
-        form1 = ComentarioForm()
+        form = ComentarioForm()
     return render_to_response('foros/comentario.html', RequestContext(request, locals()))
 
 @login_required

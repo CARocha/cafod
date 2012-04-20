@@ -41,7 +41,6 @@ def crear_contraparte(request):
 @login_required
 def editar_contraparte(request, id):
     contra = get_object_or_404(Contraparte, id=id)
-    # user_profile = request.user.get_profile().user.id
     user_ids = UserProfile.objects.filter(contraparte__id=contra.id).values_list('user__id', flat=True)
 
     if not request.user.id in user_ids:
@@ -62,17 +61,17 @@ def editar_contraparte(request, id):
     return render_to_response('contrapartes/crear_contraparte.html', locals(),
                                  context_instance=RequestContext(request))
 
-@login_required
-def borrar_contraparte(request, id):
-    contra = get_object_or_404(Contraparte, pk=id)
-    usuarios = UserProfile.objects.filter(Contraparte_id=contra.id)
+# @login_required
+# def borrar_contraparte(request, id):
+#     contra = get_object_or_404(Contraparte, pk=id)
+#     usuarios = UserProfile.objects.filter(Contraparte_id=contra.id) # OJO con el campo con mayuscula XD
 
-    nombres = []
-    for obj in usuarios:
-        nombres.append(obj.user.username)
+#     nombres = []
+#     for obj in usuarios:
+#         nombres.append(obj.user.username)
 
-    if request.user.username in [i for i in nombres] or request.user.is_superuser:
-        contra.delete()
-        return redirect('contraparte-list')
-    else:
-        return redirect('/')
+#     if request.user.username in [i for i in nombres] or request.user.is_superuser:
+#         contra.delete()
+#         return redirect('contraparte-list')
+#     else:
+#         return redirect('/')

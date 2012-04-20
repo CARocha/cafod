@@ -1,9 +1,28 @@
 {% extends "baseinterna.html" %}
 {%block extra_js%}
 <script type="text/javascript">
-  $(document).ready(function(){
-$('input').tooltip({'placement':'right'})
-});
+    $(document).ready(function(){
+		$('input').tooltip({'placement':'right'})
+	});
+</script>
+<style type="text/css">
+	.fixed{position: fixed; top: 10px;}
+</style>
+<script type="text/javascript">
+	$(function() {
+		$elem = $('#submitfoo');
+		
+		// detectar el scroll de la ventana y fixear el elemento
+	    $(window).bind('scroll', function() {
+	    	var windowTop = $(this).scrollTop();
+	    	if(windowTop>=310){
+	    		$elem.addClass('fixed');
+	    	}else{
+	    		// volver elemento a su lugar
+	    		$elem.removeClass('fixed');
+	    	}
+	    }); 
+	});
 </script>
 {%endblock%}
 {% block contenido %}
@@ -85,11 +104,10 @@ $('input').tooltip({'placement':'right'})
 				<div class="alert "><i class="icon-info-sign"></i>
 				  Esta es la informacion general de la contraparte que se presenta en la parte publica
 				</div>
-				<input class="btn btn-large btn-success" style=""type="submit" value="Guardar" />
+				<input class="btn btn-large btn-success" style="" type="submit" id="submitfoo" value="Guardar" />
 			</div>
 			</form>
 		</div>
 	</div>
 </div>
-
 {% endblock %}

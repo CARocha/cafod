@@ -1,5 +1,15 @@
 {% extends "baseinterna.html" %}
 {% block title %}{{contra.nombre}}{% endblock %}
+{% block extra_js %}
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $('.close').click(function(){
+                $(this).parent().slideUp();
+                return false;
+            });
+        });
+    </script>
+{% endblock %}
 {% block contenido %}
 <div class="row">
     <div class="encabezado">
@@ -27,6 +37,12 @@
     <div class="container">
         <div class="row">
             <div class="span7">
+                {% if request.GET.shva == 'ok' %}
+                <div class="alert">
+                    La informaci&oacute;n de su contraparte ha sido editada con &eacute;xito!
+                    <a class="close" href="#">x</a>
+                </div>
+                {% endif %}
                <h1 class="titulo-grande">{{contra.nombre}}</h1>
             </div>
             <div class="span5">

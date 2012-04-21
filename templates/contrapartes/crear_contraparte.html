@@ -10,8 +10,7 @@
 </style>
 <script type="text/javascript">
 	$(function() {
-		$elem = $('#submitfoo');
-		
+		$elem = $('#submitfoo');		
 		// detectar el scroll de la ventana y fixear el elemento
 	    $(window).bind('scroll', function() {
 	    	var windowTop = $(this).scrollTop();
@@ -22,6 +21,11 @@
 	    		$elem.removeClass('fixed');
 	    	}
 	    }); 
+	    var $file = $('.file > a');
+	    var url = $file.text();
+	    $file.html('');
+	    $file.append('<img src="/uploads/'+url+'" width="60" height="60">');
+
 	});
 </script>
 {%endblock%}
@@ -57,7 +61,9 @@
 					{{form.pais}}
 					<hr>
 					<label class="control-label">{{form.logo.label}}</label>
+					<span class="file">
 					{{form.logo}}
+					</span>
 					<hr>
 					<label class="control-label">{{form.fundacion.label}}</label>
 					{{form.fundacion}}

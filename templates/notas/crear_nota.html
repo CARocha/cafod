@@ -27,7 +27,10 @@
 	    $file.html('');
 	    $file.append('<img src="/uploads/'+url+'" width="60" height="60">');
 
-	    $(".collapse").collapse();
+	    //para definir el alto de las tabs igual a su contenido
+	    var alto = $('.tab-content').height();
+	    $('.nav-tab-media').height(alto);
+
 	});
 </script>
 {%endblock%}

@@ -33,6 +33,19 @@ def lista_notas(request):
     return render_to_response('notas/notas_list.html', locals(),
                               context_instance=RequestContext(request))
 
+def detalle_notas(request, pk):
+    objects = get_object_or_404(Notas, pk=pk)
+    nada = objects.adjuntos.all()
+    var1 = 0
+    for a in nada:
+        if a.nombre_doc == '':
+            var1 = 0
+        else:
+            var1 = 1
+    
+    return render_to_response('notas/notas_detail.html', locals(),
+                                 context_instance=RequestContext(request))
+
 def lista_notas_pais(request,id):
     notas_list = Notas.objects.filter(user__userprofile__contraparte__pais__id=id).order_by('-fecha')
     paises = Pais.objects.all()

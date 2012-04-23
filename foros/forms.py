@@ -29,7 +29,6 @@ class ComentarioForm(forms.ModelForm):
 
 class ImagenForm(forms.ModelForm):
     tags_img = TagField(widget=TagAutocomplete(), required=False)
-    foto = forms.FileField(widget=forms.ClearableFileInput(attrs={'class':'filebonito','size': 10}))
 
     class Meta:
     	model = Imagen

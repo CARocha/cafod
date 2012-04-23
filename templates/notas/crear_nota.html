@@ -64,50 +64,25 @@
 					<label class="control-label">{{form.contenido.label}}</label>
 					{{form.contenido}}
 					<hr>
-
-
-
-
-
-
-					<div class="row mediasgenerics">
-						<div class="span3">
-							<div class="input-append">
-								<label class="control-label">Fotos</label>
-								<div id="accordion2" class="accordion">
-								{%for fotoform in form2%}
-								    <div class="accordion-group">
-								      <div class="accordion-heading">
-								        <a href="#{{forloop.counter}}" data-parent="#accordion2" data-toggle="collapse" class="accordion-toggle">
-								          foto
-								        </a>
-								      </div>
-								      <div class="accordion-body collapse in" id="{{forloop.counter}}">
-								        <div class="accordion-inner">
-								        	{{fotoform.nombre_img}}
-								        	<div class="filefield">
-								          {{fotoform.foto}}
-								      </div>
-								          {{fotoform.tags_img}}
-								        </div>
-								      </div>
-								    </div>
-								{%endfor%}
-								</div>	
-							</div>
+					<div class="tabbable tabs-left">
+						<ul class="nav nav-tabs nav-tab-media">
+						  <li class="active"><a href="#fotos" data-toggle="tab"><i class="icon-camera"></i>Fotos e imagenes</a></li>
+						  <li><a href="#documentos" data-toggle="tab"><i class="icon-file"></i>Documentos</a></li>
+						</ul>
+						<div class="tab-content tab-media">
+						  <div class="tab-pane active" id="fotos">
+							<b>FOTOS</b>
+							{{form2.as_p}}
+							<hr>
+						  </div>
+						  <div class="tab-pane" id="documentos">
+							<b>DODCUMENTOS</b>
+							{{form3.as_p}}
+							<hr>
+						  </div>
 						</div>
-
-
-						<div class="span-3">
-							<div class="input-append">
-								<label class="control-label">Documentos</label>
-								{{form3.as_p}}
-							</div>
-						</div>
-					
+						<div class="clean"></div> 
 					</div>
-
-					<hr>
 				</div>
 			</div>
 			<div class="span3">

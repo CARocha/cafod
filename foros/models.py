@@ -25,11 +25,11 @@ class Imagen(models.Model):
     object_id = models.IntegerField(db_index=True)
     content_object = generic.GenericForeignKey('content_type', 'object_id')
 
-    nombre_img = models.CharField(max_length=200, null=True, blank=True)
-    foto = ImageWithThumbsField(upload_to=get_file_path,
+    nombre_img = models.CharField("Nombre",max_length=200, null=True, blank=True)
+    foto = ImageWithThumbsField("Foto",upload_to=get_file_path,
                                    sizes=((220,160), (80,80),(380,250),(640,480)), 
                                    null=True, blank=True)
-    tags_img = TagAutocompleteField(help_text='Separar elementos con "," ', null=True, blank=True)
+    tags_img = TagAutocompleteField("Tags",help_text='Separar elementos con "," ', null=True, blank=True)
     fileDir = 'fotos/'
     class Meta:
     	verbose_name_plural = "Imagenes"
@@ -43,9 +43,9 @@ class Documentos(models.Model):
     object_id = models.IntegerField(db_index=True)
     content_object = generic.GenericForeignKey('content_type', 'object_id')
 
-    nombre_doc = models.CharField(max_length=200, null=True, blank=True)
-    adjunto = models.FileField(upload_to=get_file_path, null=True, blank=True)
-    tags_doc = TagAutocompleteField(help_text='Separar elementos con "," ', null=True, blank=True)
+    nombre_doc = models.CharField("Nombre",max_length=200, null=True, blank=True)
+    adjunto = models.FileField("Adjunto",upload_to=get_file_path, null=True, blank=True)
+    tags_doc = TagAutocompleteField("Tags",help_text='Separar elementos con "," ', null=True, blank=True)
 
     fileDir = 'documentos/'
 

@@ -22,12 +22,14 @@
 	    		$elem.removeClass('fixed');
 	    	}
 	    }); 
-	    var $file = $('.file > a');
-	    var url = $file.text();
-	    $file.html('');
-	    $file.append('<img src="/uploads/'+url+'" width="60" height="60">');
+	    // var $file = $('.file > a');
+	    // var url = $file.text();
+	    // $file.html('');
+	    // $file.append('<img src="/uploads/'+url+'" width="60" height="60">');
 
-	    $(".collapse").collapse();
+	    //para definir el alto de las tabs igual a su contenido
+	    var alto = $('.tab-content').height();
+	    $('.nav-tab-media').height(alto);
 	});
 </script>
 {%endblock%}
@@ -71,18 +73,22 @@
 						</ul>
 						<div class="tab-content tab-media">
 						  <div class="tab-pane active" id="fotos">
-							<b>FOTOS</b>
+							<span class="label label-warning">FOTOS</span><hr>
 							{{ form2.management_form }}
 							{% for foto in form2.forms %}
-								{{foto}}
+								<div class="media-form-inline">
+									{{foto}}
+								</div>
 							{% endfor %}
 							<hr>
 						  </div>
 						  <div class="tab-pane" id="documentos">
-							<b>DODCUMENTOS</b>
+							<span class="label label-warning">DOCUMENTOS</span><hr>
 							{{ form3.management_form }}
 							{% for docu in form3.forms %}
-								{{foto}}
+								<div class="media-form-inline">
+									{{docu}}
+								</div>
 							{% endfor %}
 							<hr>
 						  </div>

@@ -4,6 +4,8 @@ from models import *
 from foros.models import *
 from django import forms
 from ckeditor.widgets import CKEditorWidget
+from tagging.forms import TagField
+from tagging_autocomplete.widgets import TagAutocomplete
 
 class NotasForms(forms.ModelForm):
     contenido = forms.CharField(widget=CKEditorWidget())
@@ -13,6 +15,7 @@ class NotasForms(forms.ModelForm):
     	exclude = ('slug','fecha','user',)
 
 class FotoForm(forms.ModelForm):
+	tags_img = TagField(widget=TagAutocomplete(), required=False, label="Tags")
 	class Meta:
 	    model = Imagen
 	    exclude = ('content_type', 'object_id', 'content_object',)

@@ -116,7 +116,7 @@ def editar_nota(request, id):
             #salvando inline
             form2.save()
             form3.save()
-            return HttpResponseRedirect('/notas')
+            return HttpResponseRedirect('%s?shva=ok' % nota.get_absolute_url())
     else:
         form = NotasForms(instance=nota)
         form2 = NotaFormSet(instance=nota)
@@ -131,7 +131,8 @@ def borrar_nota(request, id):
 
     if nota.user == request.user or request.user.is_superuser:
         nota.delete()
-        return redirect('/notas')
+        #return redirect('/notas')
+        return HttpResponseRedirect('/notas/?shva=erase')
     else:
         return redirect('/')
     

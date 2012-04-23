@@ -1,4 +1,11 @@
 {% extends "baseinterna.html" %}
+{% block extra_js %}
+    <script type="text/javascript">
+        $(document).ready(function(){
+			$(".alert").alert()
+        });
+    </script>
+{% endblock %}
 {% block contenido %}
 <div class="row">
 	<div class="encabezado">
@@ -23,6 +30,12 @@
 </div>
 <div class="row" style="margin-top:10px;">
 	<div class="container">
+		{% if request.GET.shva == 'erase' %}
+            <div class="alert fade in">
+                Se ha eliminado la nota de forma permanente
+                <a class="close" href="#" data-dismiss="alert">x</a>
+            </div>
+        {% endif %}
 		{% for nota in notas %}
 			<div class="row">
 				<div class="span3">

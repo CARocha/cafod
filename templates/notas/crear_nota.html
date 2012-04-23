@@ -1,13 +1,82 @@
-{% extends "base.html" %}
-
+{% extends "baseinterna.html" %}
+{%block extra_js%}
+<script type="text/javascript">
+    $(document).ready(function(){
+		$('input').tooltip({'placement':'right'})
+	});
+</script>
+<style type="text/css">
+	.fixed{position: fixed; top: 10px;}
+</style>
+<script type="text/javascript">
+	$(function() {
+		$elem = $('#actionbuttons');
+		
+		// detectar el scroll de la ventana y fixear el elemento
+	    $(window).bind('scroll', function() {
+	    	var windowTop = $(this).scrollTop();
+	    	if(windowTop>=310){
+	    		$elem.addClass('fixed');
+	    	}else{
+	    		// volver elemento a su lugar
+	    		$elem.removeClass('fixed');
+	    	}
+	    }); 
+	});
+</script>
+{%endblock%}
 {% block contenido %}
-	<form enctype="multipart/form-data" action="." method="post" accept-charset="utf-8">{% csrf_token %}
-		{{ form.media }}
-		{{form.as_p}}
+<div class="row">
+    <div class="encabezado">
+      <div class="container">
+            <div class="row">
+                <div class="span5">
+                    <div class="encabezado-title">
+                        NOTAS
+                    </div>
+                </div>
+                <div class="span7">
+                </div>
+            </div>
+      </div>
+    </div>
+</div>
+<div class="row">
+	<div class="container">
+		<div class="row">
+			<form enctype="multipart/form-data" method="post" action=".">{% csrf_token %}
+					{{ form.media }}
+			<div class="span9">
+				<div class="well">
+					{%if form.errors%}
+						<div class="alert alert-error"><b>Favor corregir los siguientes errores</b><br>{{form.errors}}</div>
+					{%endif%}
+					<label class="control-label">{{form.titulo.label}}</label>
+					{{form.titulo}}
+					<hr>
+
+					<label class="control-label">{{form.contenido.label}}</label>
+					{{form.contenido}}
+					<hr>
 		<h6>Agregar imagenes</h6>
 		{{form2.as_p}}
 		<h6>Agregar adjuntos</h6>
 		{{form3.as_p}}
-		<input id="boton-preguntar" type="submit" value="Guardar">
-	</form>
+				</div>
+			</div>
+			<div class="span3">
+				<div class="alert "><i class="icon-info-sign"></i>
+				  Crear una nota para presentar al publico un contenido destacado de tu organizacion
+				</div>
+				<div class="well" id="actionbuttons">
+				<input class="btn btn-large btn-success " style="" type="submit" id="submitfoo" value="Guardar" />
+				<a href="/notas/{{nota.id}}" class="btn btn-large">Cerrar</a>
+				</div>
+			</div>
+			</form>
+		</div>
+	</div>
+</div>
+
+
 {% endblock %}

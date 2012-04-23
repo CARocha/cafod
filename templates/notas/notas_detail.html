@@ -42,7 +42,7 @@ $(".alert").alert()
                 <div class="span7">
                     <div class="btn-group acciones">
                         {% if notas.user == request.user or request.user.is_superuser %}
-                            <a class="btn" href="/notas/editar/{{object.id}}"><i class="icon-pencil"></i>Editar</a>
+                            <a class="btn" href="/notas/editar/{{objects.id}}"><i class="icon-pencil"></i>Editar</a>
                             <a class="btn" data-toggle="modal" data-target="#myModal"  ><i class="icon-remove-sign"></i>Borrar</a>
                         {% endif %}
                        </div> 
@@ -56,7 +56,7 @@ $(".alert").alert()
                           </div>
                           <div class="modal-footer">
                             <a href="#" data-dismiss="modal" class="btn">Cerrar</a>
-                            <a href="/notas/borrar/{{object.id}}" class="btn btn-danger">Borrar Permanentemente</a>
+                            <a href="/notas/borrar/{{objects.id}}" class="btn btn-danger">Borrar Permanentemente</a>
                           </div>
                         </div>  
                 </div>
@@ -74,45 +74,45 @@ $(".alert").alert()
                       <a class="close" href="#" data-dismiss="alert">x</a>
                   </div>
                 {% endif %}
-               <h1 class="titulo-grande">{{object.titulo}}</h1>
-               <div class="extrainfofull">{{object.fecha}}  |  {{object.pais.nombre}}</div>
+               <h1 class="titulo-grande">{{objects.titulo}}</h1>
+               <div class="extrainfofull">{{objects.fecha}}  |  {{objects.pais.nombre}}</div>
             </div>
             <div class="span5">
                 
-                <a class="contraparte-nota btn " href="/contrapartes/{{object.contraparte.id}}"><img src="{{object.contraparte.logo.url_70x60}}">{{object.contraparte.nombre}}</a>
+                <a class="contraparte-nota btn " href="/contrapartes/{{objects.contraparte.id}}"><img src="{{objects.contraparte.logo.url_70x60}}">{{objects.contraparte.nombre}}</a>
             </div>
         </div>
         <div class="row ">
             <div class="span7 divisordoble">
-                {{object.contenido|safe}}
+                {{objects.contenido|safe}}
             </div>
             <div class="span5 divisordoble">
                 <div id="slider1">
-                    {% for imagen in object.fotos.all%}
+                    {% for imagen in objects.fotos.all%}
                     <div>
                         <img class="imagen-slider" src="{{imagen.foto.url_380x250}}" alt="{{imagen.nombre}}" title="{{imagen.nombre}}">
                         <span class="label label-success">{{imagen.nombre_img}}</span>
                     </div>
                     {% endfor %}
                 </div>
-                {%if object.fotos.all.count > 1%}
+                {%if objects.fotos.all.count > 1%}
                 <div class="thumbs">
-                  {% for imagen in object.fotos.all%}
+                  {% for imagen in objects.fotos.all%}
                         <a href="#"><img width="65" height="65" src="{{imagen.foto.url_80x80}}" alt="{{imagen.nombre}}" title="{{imagen.nombre}}"></a>
                     {% endfor %}
                     <div class="clean"></div>
                 </div>
                 {%endif%}
-                {%if object.adjuntos.all.count > 0 %}
+                {% if var1 >= 1 %}
                     <div class="sidebar-title">Documentos</div>
                     <div class="dividerline"></div>
                     <table class="table  table-bordered table-condensed doc-sidebar">
                       <tbody>
-                        {% for adjuntos in object.adjuntos.all%}
+                        {% for adjuntos in objects.adjuntos.all%}
                         <tr>
                             <td>{{adjuntos.nombre_doc}}</td>
                             <td><center><a href="{{adjuntos.adjunto}}" class=" btn btn-info btn-mini dropdown-toggle"><i class="icon-download-alt icon-white"></i>Descargar</a></center></td>
-                            </tr>
+                        </tr>
                         {% endfor %}
                       </tbody>
                     </table>

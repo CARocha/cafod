@@ -72,17 +72,17 @@
 						<div class="tab-content tab-media">
 						  <div class="tab-pane active" id="fotos">
 							<b>FOTOS</b>
-							{% for foto in form2 %}
-								{{foto.label_tag}}
+							{{ form2.management_form }}
+							{% for foto in form2.forms %}
 								{{foto}}
 							{% endfor %}
 							<hr>
 						  </div>
 						  <div class="tab-pane" id="documentos">
 							<b>DODCUMENTOS</b>
-							{% for docu in form3 %}
-								{{docu.label_tag}}
-								{{docu}}
+							{{ form3.management_form }}
+							{% for docu in form3.forms %}
+								{{foto}}
 							{% endfor %}
 							<hr>
 						  </div>

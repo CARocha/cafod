@@ -122,7 +122,7 @@ def editar_nota(request, id):
         form2 = NotaFormSet(instance=nota)
         form3 = Nota2FormSet(instance=nota)
 
-    return render_to_response('notas/crear_nota.html', locals(),
+    return render_to_response('notas/editar_nota.html', locals(),
     	                         context_instance=RequestContext(request))
 
 @login_required

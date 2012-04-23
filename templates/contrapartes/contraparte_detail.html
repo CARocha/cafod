@@ -24,7 +24,6 @@
                  <div class="btn-group acciones">
                         {% if request.user.get_profile.contraparte.id == contra.id or request.user.is_superuser %}
                             <a class="btn" href="/contrapartes/editar/{{contra.id}}"><i class="icon-pencil"></i>Editar</a>
-                            <a class="btn" href="/contrapartes/borrar/{{contra.id}}"><i class="icon-remove-sign"></i>Borrar</a>
                         {% endif %}
                     </div>
                 </div>

@@ -10,7 +10,7 @@
 </style>
 <script type="text/javascript">
 	$(function() {
-		$elem = $('#submitfoo');
+		$elem = $('#actionbuttons');
 		
 		// detectar el scroll de la ventana y fixear el elemento
 	    $(window).bind('scroll', function() {
@@ -48,8 +48,9 @@
 					{{ form.media }}
 			<div class="span9">
 				<div class="well">
-				
-					{{form.errors}}
+					{%if form.errors%}
+						<div class="alert alert-error"><b>Favor corregir los siguientes errores</b><br>{{form.errors}}</div>
+					{%endif%}
 					<label class="control-label">{{form.nombre.label}}</label>
 					{{form.nombre}}
 					<hr>
@@ -96,15 +97,16 @@
 					<label class="control-label">{{form.generalidades.label}}</label>
 					{{form.generalidades}}
 					<hr>
-				
-				
 				</div>
 			</div>
 			<div class="span3">
 				<div class="alert "><i class="icon-info-sign"></i>
 				  Esta es la informacion general de la contraparte que se presenta en la parte publica
 				</div>
-				<input class="btn btn-large btn-success" style="" type="submit" id="submitfoo" value="Guardar" />
+				<div class="well" id="actionbuttons">
+				<input class="btn btn-large btn-success " style="" type="submit" id="submitfoo" value="Guardar" />
+				<a href="/contrapartes/{{contra.id}}" class="btn btn-large">Cerrar</a>
+				</div>
 			</div>
 			</form>
 		</div>

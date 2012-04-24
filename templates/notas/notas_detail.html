@@ -41,7 +41,7 @@ $(".alert").alert()
                 </div>
                 <div class="span7">
                     <div class="btn-group acciones">
-                        {% if notas.user == request.user or request.user.is_superuser %}
+                        {% if objects.user == request.user or request.user.is_superuser %}
                             <a class="btn" href="/notas/editar/{{objects.id}}"><i class="icon-pencil"></i>Editar</a>
                             <a class="btn" data-toggle="modal" data-target="#myModal"  ><i class="icon-remove-sign"></i>Borrar</a>
                         {% endif %}

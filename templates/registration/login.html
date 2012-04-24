@@ -1,22 +1,63 @@
-{% extends "base.html" %}
+{% extends "baseinterna.html" %}
 
 {% block contenido %}
-<form method="post" action="{% url django.contrib.auth.views.login %}">{% csrf_token %}
-        <h3>Entrar al sistema</h3>
-        <div>
-		{{ form.username.label_tag }}
-		{{ form.username }}
+<div class="row">
+    <div class="encabezado">
+      <div class="container">
+            <div class="row">
+                <div class="span5">
+                    <div class="encabezado-title">
+                        INICIAR SESION
+                    </div>
+                </div>
+                <div class="span7">
+
+                </div>
+            </div>
+      </div>
+    </div>
+</div>
+<div class="row">
+	<div class="container">
+		<div class="row">
+			<div class="span4">
+			<form method="post" action="{% url django.contrib.auth.views.login %}">{% csrf_token %}
+				{%if form.errors%}
+				<div class="alert">
+					{{form.errors}}
+				</div>
+				{%endif%}
+			        <div>
+					{{ form.username.label_tag }}
+					{{ form.username }}
+				</div>
+				<div>
+					{{ form.password.label_tag }}
+					{{ form.password }}
+				</div>					
+				<input type="submit" class="btn btn-success"value="Entrar"></input>
+				<input type="hidden" name="next" value="{{ next }}" />
+			    
+			</form>
+			</div>
+			<div class="span8">
+				<div class="alert alert-success">
+					<p>Esta es una plataforma privada de CAFOD y contrapartes pertenecientes al programa medios de vida sostenible.</p>
+
+					<p>Si usted tiene algun problema para entrar en su cuenta o desea solicitar una nueva cuenta para entrar a la plataforma, le sugerimos escribir a los siguientes contactos</p>
+
+					<p>Byron Corrales
+					<b>byron@simas.org.ni</b></p>
+
+					<p>Martha Olivera
+					<b>martha@simas.org.ni</b></p>
+
+					<p>Wiston Berrios
+					<b>wberrios@cafod.org.uk </b></p>
+				</div>
+			</div>
+		</div>
 	</div>
-	<div>
-		{{ form.password.label_tag }}
-		{{ form.password }}
-	</div>
-    
-							
-	<input type="submit" value="Entrar"></input>
-	<input type="hidden" name="next" value="{{ next }}" />
-    
-        
-</form>
+</div>
 
 {% endblock %}

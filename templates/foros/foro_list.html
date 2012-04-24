@@ -1,11 +1,15 @@
-{% extends "base.html" %}
+{% extends "baseadmin.html" %}
 
 {% block contenido %}
 <br>
+<div class="row">
+	<div class="span12">
     {% for foro in object_list %}
     	<a href="{{foro.get_absolute_url}}">{{foro.nombre}}</a><br>
         {{foro.contenido|safe}} <br>
         <hr>
     {% endfor %}
+	</div>
+</div>
 
 {% endblock %}

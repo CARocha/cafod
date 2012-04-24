@@ -15,6 +15,7 @@ from models import *
 from tagging.models import Tag
 from tagging.models import TaggedItem
 from django.contrib.contenttypes.generic import generic_inlineformset_factory
+from agendas.models import *
 
 
 # Create your views here.
@@ -179,5 +180,6 @@ def borrar_foro(request, id):
 def perfil(request):
     usuario = request.user.id
     foros = Foros.objects.filter(contraparte_id=usuario)
+    agendas = Agendas.objects.filter(user_id=usuario)
 
     return render_to_response('registration/perfil.html', RequestContext(request, locals()))

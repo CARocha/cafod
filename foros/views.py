@@ -150,3 +150,7 @@ def borrar_foro(request, id):
         return redirect('/foros')
     else:
         return redirect('/')
+
+@login_required
+def perfil(request):
+    return render_to_response('registration/perfil.html', RequestContext(request, locals()))

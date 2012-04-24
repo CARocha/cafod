@@ -1,5 +1,6 @@
 {% extends "baseinterna.html" %}
 {%block extra_js%}
+<script type="text/javascript" src="/files/js/autocompletejs/jquery.autocomplete.js"></script>
 <script type="text/javascript">
     $(document).ready(function(){
 		$('input').tooltip({'placement':'right'});
@@ -7,6 +8,31 @@
 </script>
 <style type="text/css">
 	.fixed{position: fixed; top: 10px;}
+	.media-form-inline p{
+		margin: 0;
+		padding: 0;
+		overflow: hidden;
+		margin-bottom: 3px;
+	}
+	.media-form-inline span{display: none;}
+	.media-form-inline .imgpreview img{
+		float: left;
+	}
+	.media-form-inline .inputreplace{
+		margin-top: -15px;
+		margin-left: 5px;
+	}
+	.media-form-inline p input{
+		float: left;
+	}
+	.media-form-inline p label{
+		float: left;
+		width: 60px;
+	}
+	.media-form-inline .hideclear{
+		display: none;
+	}
+	
 </style>
 <script type="text/javascript">
 	$(function() {
@@ -22,17 +48,26 @@
 	    		$elem.removeClass('fixed');
 	    	}
 	    }); 
-	    // var $file = $('.file > a');
-	    // var url = $file.text();
-	    // $file.html('');
-	    // $file.append('<img src="/uploads/'+url+'" width="60" height="60">');
+
+	    $('a[href^="/uploads/fotos"]').each(function(index, item){
+	    	$(item).html('');
+	    	$(item).append('<img src="'+$(item).attr('href')+'" width="60" height="60">');
+	    });
+	    
+	    $('p:has(input[type="file"])').each(function(index, item){
+	    	$(item).children('a').addClass('imgpreview').siblings('input').addClass('inputreplace');	    	
+	    	$(item).html(function(id, html){
+	    		return html.replace('Actualmente:', '').replace('Modificar:', '');
+	    	});
+	    });
+	    $('input[id*="clear"], label[for*="clear"]').addClass('hideclear');
 
 	    //para definir el alto de las tabs igual a su contenido
 	    var alto = $('.tab-content').height();
 	    $('.nav-tab-media').height(alto);
 	});
 </script>
-{%endblock%}
+{% endblock %}
 {% block contenido %}
 <div class="row">
     <div class="encabezado">
@@ -77,7 +112,7 @@
 							{{ form2.management_form }}
 							{% for foto in form2.forms %}
 								<div class="media-form-inline">
-									{{foto}}
+									{{foto.as_p}}
 								</div>
 							{% endfor %}
 							<hr>

@@ -29,6 +29,10 @@
 {% for respuesta in discusion.aportes_set.all %}
         <strong> <h5>{{respuesta.user}}</h5> </strong> 
 	{{respuesta.contenido}}<br>
+	{% for foto in respuesta.fotos.all %}
+		{{foto.nombre_img}}: {{foto.foto}}
+	{% endfor %}
+
 	{% if respuesta.contenido%}
 	   <a href="/foros/ver_comentario/{{respuesta.id}}">Comentar</a>
 	      
@@ -48,6 +52,14 @@
     <form action="." method="POST">{% csrf_token %}
     	{{ form.media }}
         {{form}}
+        <h6>Agregar Imagen</h6>
+        {{form2.as_p}}
+        <h6>Agregar Documentos</h6>
+        {{form3.as_p}}
+        <h6>Agregar Videos</h6>
+        {{form4.as_p}}
+        <h6>Agregar Sonido</h6>
+        {{form5.as_p}}
         <input id="boton-preguntar" type="submit" value="Responder">
      </form>
 </div>

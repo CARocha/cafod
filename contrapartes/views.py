@@ -27,12 +27,10 @@ def crear_contraparte(request):
     form = ContraparteForms(request.POST, request.FILES)
     if request.method == 'POST':
     	if form.is_valid():
-	    form_uncommited = form.save(commit=False)
-	    form_uncommited.user = request.user
-	    form_uncommited.save()
-    	    
-    	    #obj.save()
-    	    return HttpResponseRedirect('/')
+            form_uncommited = form.save(commit=False)
+            form_uncommited.user = request.user
+            form_uncommited.save()
+            return HttpResponseRedirect('/')
     else:
     	form = ContraparteForms()
     return render_to_response('contrapartes/crear_contraparte.html', locals(),

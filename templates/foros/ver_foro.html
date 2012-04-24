@@ -30,9 +30,9 @@
         <strong> <h5>{{respuesta.user}}</h5> </strong> 
 	{{respuesta.contenido}}<br>
 	{% for foto in respuesta.fotos.all %}
-		{{foto.nombre_img}}: {{foto.foto}}
+		{{foto}}
 	{% endfor %}
-
+<br>
 	{% if respuesta.contenido%}
 	   <a href="/foros/ver_comentario/{{respuesta.id}}">Comentar</a>
 	      

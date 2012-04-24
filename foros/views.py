@@ -177,4 +177,7 @@ def borrar_foro(request, id):
 
 @login_required
 def perfil(request):
+    usuario = request.user.id
+    foros = Foros.objects.filter(contraparte_id=usuario)
+
     return render_to_response('registration/perfil.html', RequestContext(request, locals()))

@@ -35,9 +35,9 @@ def lista_notas(request):
 
 def detalle_notas(request, pk):
     objects = get_object_or_404(Notas, pk=pk)
-    nada = objects.adjuntos.all()
+    adjuntos = objects.adjuntos.all()
     var1 = 0
-    for a in nada:
+    for a in adjuntos:
         if a.nombre_doc == '':
             var1 = 0
         else:

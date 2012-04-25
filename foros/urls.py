@@ -16,5 +16,8 @@ urlpatterns = patterns('foros.views',
     url(r'^ver/(?P<foro_id>\d+)/$', 'ver_foro', name='ver-foro'),
     url(r'^ver_comentario/(?P<aporte_id>\d+)/$', 'comentario_foro', name='cometario-foro'),
     url(r'^perfil/$', 'perfil', name='ver-perfil'),
+    url(r'^privado/nota/$', 'notas_personales', name='notas-personales'),
+    url(r'^privado/agenda/$', 'agenda_personales', name='agenda-personales'),
+    url(r'^privado/documento/$', 'documento', name='documentos'),
 
 )

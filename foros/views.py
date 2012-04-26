@@ -221,6 +221,13 @@ def agenda_personales(request):
 @login_required
 def documento(request):
     documentos = Documentos.objects.all()
-    tag = Tag.objects.all()
+    tags = Tag.objects.all()
 
     return render_to_response('privados/documentos.html', RequestContext(request, locals()))
+
+@login_required
+def busqueda_tag(request, tags):
+    tag = get_object_or_404(Tag, name=tags)
+    tags = Tag.objects.all()
+    todos = TaggedItem.objects.get_by_model(Documentos, tag.name)
+    return render_to_response('privados/documentos_tag.html', RequestContext(request, locals()))

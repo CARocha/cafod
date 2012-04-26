@@ -1,0 +1,69 @@
+{% extends "baseadmin.html" %}
+{% block extra_js %}
+    <script type="text/javascript">
+        $(document).ready(function(){
+			$(".alert").alert()
+        });
+    </script>
+{% endblock %}
+{% block contenido %}
+<div class="row">
+	<div class="encabezado">
+	  <div class="container">
+		    <div class="row">
+			    <div class="span5">
+			    	<div class="encabezado-title">
+			  		</div>
+			    </div>
+			    <div class="span7">
+					<div class="btn-group filtrospais">
+					</div>
+			    </div>
+	        </div>
+	  </div>
+	</div>
+</div>
+<div class="row" style="margin-top:10px;">
+	<div class="container">
+		{% if request.GET.shva == 'erase' %}
+            <div class="alert fade in">
+                Se ha eliminado la nota de forma permanente
+                <a class="close" href="#" data-dismiss="alert">x</a>
+            </div>
+        {% endif %}
+		{% for nota in agenda %}
+			<div class="row">
+				<div class="span3">
+				</div>
+				<div class="span9">
+						<div class="extrainfo">Inicio: {{nota.inicio}}  | final: {{nota.final}} | Usuario: {{nota.user.username}}</div>
+						<a href="{{nota.get_absolute_url}}" class="titulo-medio">{{nota.evento}}</a><br>
+						{{nota.descripcion|safe|truncatewords_html:50}}</a><br>
+						<br>
+						<a href="{{nota.get_absolute_url}}" class="btn btn-success btn-mini">Leer mas</a>
+				</div>
+			</div>
+			<hr>
+		{% endfor %}
+	    <ul class="pagination">
+	        {% if agenda.has_previous %}
+	        <li>
+	          <a href="{% url agenda-personales %}?page={{ agenda.previous_page_number }}">
+	            ← Anterior</a>
+	        </li>
+	        {% endif %}
+	        <li class="active">
+	            <!-- current page -->
+	               <a href="#"> Page {{ agenda.number }} of {{ agenda.paginator.num_pages }}</a>
+	            <!-- end current page -->
+	        </li>
+	        {% if agenda.has_next %}
+	         <li>
+	         <a href="{% url agenda-personales %}?page={{ agenda.next_page_number }}">
+	                Siguiente →</a>
+	         </li>
+	         {% endif %}
+	    </ul>
+	</div>
+</div>
+{% endblock %}

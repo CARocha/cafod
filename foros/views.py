@@ -15,7 +15,11 @@ from models import *
 from tagging.models import Tag
 from tagging.models import TaggedItem
 from django.contrib.contenttypes.generic import generic_inlineformset_factory
-
+from agendas.models import *
+from notas.models import *
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from tagging.models import Tag
+from tagging.models import TaggedItem
 
 # Create your views here.
 
@@ -177,4 +181,53 @@ def borrar_foro(request, id):
 
 @login_required
 def perfil(request):
+    foros = Foros.objects.filter(contraparte_id=request.user.id)
+    agendas = Agendas.objects.filter(user_id=request.user.id)
+
     return render_to_response('registration/perfil.html', RequestContext(request, locals()))
+
+@login_required
+def notas_personales(request):
+    nota = Notas.objects.filter(user_id=request.user.id)
+
+    paginator = Paginator(nota, 2)
+
+    page = request.GET.get('page')
+    try:
+        notas = paginator.page(page)
+    except PageNotAnInteger:
+        notas = paginator.page(1)
+    except EmptyPage:
+        notas = paginator.page(paginator.num_pages)
+
+    return render_to_response('privados/notas.html', RequestContext(request, locals()))
+
+@login_required
+def agenda_personales(request):
+    agendas = Agendas.objects.filter(user_id=request.user.id)
+
+    paginator = Paginator(agendas, 2)
+
+    page = request.GET.get('page')
+    try:
+        agenda = paginator.page(page)
+    except PageNotAnInteger:
+        agenda = paginator.page(1)
+    except EmptyPage:
+        agenda = paginator.page(paginator.num_pages)
+
+    return render_to_response('privados/agenda.html', RequestContext(request, locals()))
+
+@login_required
+def documento(request):
+    documentos = Documentos.objects.all()
+    tags = Tag.objects.all()
+
+    return render_to_response('privados/documentos.html', RequestContext(request, locals()))
+
+@login_required
+def busqueda_tag(request, tags):
+    tag = get_object_or_404(Tag, name=tags)
+    tags = Tag.objects.all()
+    todos = TaggedItem.objects.get_by_model(Documentos, tag.name)
+    return render_to_response('privados/documentos_tag.html', RequestContext(request, locals()))

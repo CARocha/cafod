@@ -1,0 +1,14 @@
+{{foro.contraparte}} ha publicado un nuevo Foro en
+los Foros de la plataforma CAFOD
+
+
+Fecha: {{foro.creacion|date:"D d M Y"}}
+Titulo: {{foro.nombre}}
+Haga click al enlace de abajo para ir al Foro: 
+http://{{url}}
+
+Para hacer un aporte a este Foro
+http://{{url_aporte}}
+
+CAFOD
+is the official Catholic aid agency for England and Wales. 

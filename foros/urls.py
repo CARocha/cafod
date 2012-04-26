@@ -22,5 +22,4 @@ urlpatterns = patterns('foros.views',
     url(r'^privado/documento/$', 'documento', name='documentos'),
     url(r'^privado/documento_tag/(?P<tags>\w+)/$', 'busqueda_tag', name='busqueda-tag'),
 
-
 )

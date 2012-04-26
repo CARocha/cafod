@@ -18,6 +18,7 @@ from django.contrib.contenttypes.generic import generic_inlineformset_factory
 from agendas.models import *
 from notas.models import *
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.contrib.sites.models import Site
 # Create your views here.
 
 #def lista_foro(request):
@@ -27,7 +28,7 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 @login_required
 def ver_foro(request, foro_id):
-    discusion = get_object_or_404(Foros, id=foro_id)   
+    discusion = get_object_or_404(Foros, id=foro_id)  
 
     if request.method == 'POST':
         form = AporteForm(request.POST)
@@ -36,7 +37,7 @@ def ver_foro(request, foro_id):
         form4 = VideoForm(request.POST)
         form5 = AudioForm(request.POST, request.FILES)
 
-        if form.is_valid():
+        if form.is_valid() and form2.is_valid() and form3.is_valid() and form4.is_valid() and form5.is_valid():
             form_uncommited = form.save(commit=False)
             form_uncommited.user = request.user
             form_uncommited.foro = discusion
@@ -57,6 +58,9 @@ def ver_foro(request, foro_id):
             form5_uncommitd = form5.save(commit=False)
             form5_uncommitd.content_object = form_uncommited
             form5_uncommitd.save()
+
+            carlos = thread.start_new_thread(notify_all_aporte, (form_uncommited,))
+            print carlos
 
             return HttpResponseRedirect('/foros/ver/%d' % discusion.id)
     else:
@@ -112,6 +116,8 @@ def crear_foro(request):
             form5_uncommitd = form5.save(commit=False)
             form5_uncommitd.content_object = form_uncommited
             form5_uncommitd.save()
+            
+            thread.start_new_thread(notify_all_foro, (form_uncommited,))
 
             return HttpResponseRedirect('/foros')
             
@@ -168,7 +174,7 @@ def editar_foro(request, id):
 @login_required
 def borrar_foro(request, id):
     foro = get_object_or_404(Foros, id=id)
-    if foro.user == request.user or request.user.is_superuser:
+    if foro.contraparte == request.user or request.user.is_superuser:
         foro.delete()
         return redirect('/foros')
     else:
@@ -226,3 +232,21 @@ def busqueda_tag(request, tags):
     tags = Tag.objects.all()
     todos = TaggedItem.objects.get_by_model(Documentos, tag.name)
     return render_to_response('privados/documentos_tag.html', RequestContext(request, locals()))
+
+def notify_all_foro(foros):
+    site = Site.objects.get_current()
+    users = User.objects.all() #.exclude(username=foros.contraparte.username)
+    contenido = render_to_string('foros/notify_new_foro.txt', {'foro': foros,
+                                 'url': '%s/foros/ver/%s' % (site, foros.id),
+                                 'url_aporte': '%s/foros/ver/%s/#aporte' % (site, foros.id),
+                                 })
+    send_mail('Nuevo Foro en CAFOD', contenido, 'develop@cafodca.org', [user.email for user in users if user.email])
+
+def notify_all_aporte(aportes):
+    site = Site.objects.get_current()
+    users = User.objects.all() #.exclude(username=foros.contraparte.username)
+    contenido = render_to_string('foros/notify_new_aporte.txt', {'aporte': aportes,
+                                 #'url': '%s/foros/ver/%s' % (site, foros.id),
+                                 'url_aporte': '%s/foros/ver/%s/#%s' % (site, aportes.foro.id, aportes.id),
+                                 })
+    send_mail('Nuevo Aporte en CAFOD', contenido, 'develop@cafodca.org', [user.email for user in users if user.email])

@@ -26,7 +26,7 @@
 		{% for foro in object_list %}
 		<div class="row">
 			<div class="span2">
-				<div class="label label-warning aportes">45 aportes</div>
+				<div class="label label-warning aportes">{{foro.aportes_set.all|length}}</div>
 			</div>
 			<div class="span10">
 				<a href="{{foro.get_absolute_url}}" class="titulo-medio">{{foro.nombre}}</a><hr>

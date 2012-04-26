@@ -74,7 +74,7 @@
 						</ul>
 						<div class="tab-content tab-media">
 						  <div class="tab-pane active" id="fotos">
-							<b>FOTOS</b>
+						  	<span class="label label-warning">FOTOS</span><hr>
 							{% for foto in form2 %}
 								{{foto.label_tag}}
 								{{foto}}
@@ -82,7 +82,7 @@
 							<hr>
 						  </div>
 						  <div class="tab-pane" id="documentos">
-							<b>DODCUMENTOS</b>
+						  	<span class="label label-warning">DODCUMENTOS</span><hr>
 							{% for docu in form3 %}
 								{{docu.label_tag}}
 								{{docu}}

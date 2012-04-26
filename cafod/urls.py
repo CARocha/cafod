@@ -24,7 +24,7 @@ urlpatterns = patterns('',
     url(r'^agendas/', include('agendas.urls')),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^tagging_autocomplete/', include('tagging_autocomplete.urls')),
-    url(r'^foro/', include('foros.urls')),
+    url(r'^foros/', include('foros.urls')),
 )
 
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns

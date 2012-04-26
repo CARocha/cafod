@@ -18,17 +18,12 @@ from django.contrib.contenttypes.generic import generic_inlineformset_factory
 from agendas.models import *
 from notas.models import *
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from tagging.models import Tag
-from tagging.models import TaggedItem
-
 # Create your views here.
 
-def lista_foro(request):
-    discusiones = Foros.objects.all().order_by('-creacion')
-
-
-    return render_to_response('index.html', locals(), 
-    	           context_instance=RequestContext(request))
+#def lista_foro(request):
+#    object_list = Foros.objects.all().order_by('-creacion')
+#    return render_to_response('foros/foro_list.html', locals(), 
+#   	           context_instance=RequestContext(request))
 
 @login_required
 def ver_foro(request, foro_id):

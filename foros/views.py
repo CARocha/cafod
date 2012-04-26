@@ -59,8 +59,7 @@ def ver_foro(request, foro_id):
             form5_uncommitd.content_object = form_uncommited
             form5_uncommitd.save()
 
-            carlos = thread.start_new_thread(notify_all_aporte, (form_uncommited,))
-            print carlos
+            thread.start_new_thread(notify_all_aporte, (form_uncommited,))
 
             return HttpResponseRedirect('/foros/ver/%d' % discusion.id)
     else:

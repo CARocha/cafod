@@ -1,4 +1,4 @@
-{% extends "baseinterna.html" %}
+{% extends "baseadmin.html" %}
 {%block extra_js%}
 <script type="text/javascript" src="/files/js/autocompletejs/jquery.autocomplete.js"></script>
 <script type="text/javascript">
@@ -6,34 +6,7 @@
 		$('input').tooltip({'placement':'right'});
 	});
 </script>
-<style type="text/css">
-	.fixed{position: fixed; top: 10px;}
-	.media-form-inline p{
-		margin: 0;
-		padding: 0;
-		overflow: hidden;
-		margin-bottom: 3px;
-	}
-	.media-form-inline span{display: none;}
-	.media-form-inline .imgpreview img{
-		float: left;
-	}
-	.media-form-inline .inputreplace{
-		margin-top: -15px;
-		margin-left: 5px;
-	}
-	.media-form-inline p input{
-		float: left;
-	}
-	.media-form-inline p label{
-		float: left;
-		width: 60px;
-	}
-	.media-form-inline .hideclear{
-		display: none;
-	}
-	
-</style>
+
 <script type="text/javascript">
 	$(function() {
 		$elem = $('#actionbuttons');

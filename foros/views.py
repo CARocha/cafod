@@ -190,7 +190,7 @@ def perfil(request):
 def notas_personales(request):
     nota = Notas.objects.filter(user_id=request.user.id)
 
-    paginator = Paginator(nota, 2)
+    paginator = Paginator(nota, 5)
 
     page = request.GET.get('page')
     try:

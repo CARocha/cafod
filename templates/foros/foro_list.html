@@ -1,14 +1,74 @@
 {% extends "baseadmin.html" %}
 
 {% block contenido %}
-<br>
+
 <div class="row">
-	<div class="span12">
-    {% for foro in object_list %}
-    	<a href="{{foro.get_absolute_url}}">{{foro.nombre}}</a><br>
-        {{foro.contenido|safe}} <br>
-        <hr>
-    {% endfor %}
+    <div class="encabezado">
+      <div class="container">
+            <div class="row">
+                <div class="span5">
+                    <div class="encabezado-title">
+                        LISTA DE FOROS ABIERTOS
+                    </div>
+                </div>
+                <div class="span7">
+					<div class="btn-group filtrospais">
+						<a href="/foros/crear" class="btn"><i class="icon-plus-sign"></i>Crear nuevo foro</a>
+					</div>
+                </div>
+            </div>
+      </div>
+    </div>
+</div>
+
+<div class="row">
+	<div class="container">
+		{% for foro in object_list %}
+		<div class="row">
+			<div class="span2">
+				<div class="label label-warning aportes">45 aportes</div>
+			</div>
+			<div class="span10">
+				<a href="{{foro.get_absolute_url}}" class="titulo-medio">{{foro.nombre}}</a><br>
+		        {{foro.contenido|safe}} <br>
+		        <table class="table table-bordered table-condensed table-striped">
+					<thead>
+		        	<tr>
+		        		<th>
+		        			Recepcion de aportes <img src="/files/img/group.png">
+		        		</th>
+		        		<th>
+		        			Cierre de aportes <img src="/files/img/group_delete.png">
+		        		</th>
+		        		<th>
+		        			Foro Skype <img src="/files/img/user_comment.png">
+		        		</th>
+		        		<th>
+		        			Entrega de memoria <img src="/files/img/page_edit.png">
+		        		</th>
+		        	</tr>
+		        	</thead>
+		        	<tbody>
+		        	<tr>
+		        		<td>
+		        			{{foro.apertura}} 
+		        		</td>
+		        		<td>
+		        			{{foro.cierre}}
+		        		</td>
+		        		<td>
+		        			{{foro.fecha_skype}}
+		        		</td>
+		        		<td>
+		        			{{foro.memoria}}
+		        		</td>
+		        	</tr>
+		        	</tbody>
+		        </table>
+		        <hr>
+			</div>
+		</div>
+		{% endfor %}
 	</div>
 </div>
 

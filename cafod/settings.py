@@ -149,7 +149,7 @@ LOGGING = {
     }
 }
 AUTH_PROFILE_MODULE = 'contrapartes.UserProfile'
-LOGIN_REDIRECT_URL = '/foro/perfil'
+LOGIN_REDIRECT_URL = '/foros/perfil'
 
 CKEDITOR_CONFIGS = {
     'default': {

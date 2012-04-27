@@ -29,8 +29,8 @@
 				<div class="label label-warning aportes">{{foro.aportes_set.all|length}}</div>
 			</div>
 			<div class="span10">
-				<a href="{{foro.get_absolute_url}}" class="titulo-medio">{{foro.nombre}}</a><br>
-		        {{foro.contenido|safe}} <br>
+				<a href="{{foro.get_absolute_url}}" class="titulo-medio">{{foro.nombre}}</a><hr>
+		        {{foro.contenido|safe|truncatewords_html:50}} <br>
 		        <table class="table table-bordered table-condensed table-striped">
 					<thead>
 		        	<tr>
@@ -65,8 +65,10 @@
 		        	</tr>
 		        	</tbody>
 		        </table>
-		        <hr>
 			</div>
+		</div>
+		<div class="row">
+			<div class="span12"><hr></div>
 		</div>
 		{% endfor %}
 	</div>

@@ -3,7 +3,24 @@
 {% block title %}{{object.nombre}}{% endblock %}
 
 {% block contenido %}
-
+<div class="row">
+    <div class="encabezado">
+      <div class="container">
+            <div class="row">
+                <div class="span5">
+                    <div class="encabezado-title">
+                        FORO
+                    </div>
+                </div>
+                <div class="span7">
+                    <div class="btn-group filtrospais">
+                        <a href="/notas/crear" class="btn"><i class="icon-plus-sign"></i>Crear nueva nota</a>
+                    </div>
+                </div>
+            </div>
+      </div>
+    </div>
+</div>
 <div class="titulo-foro"> {% if foros.user == request.user or request.user.is_superuser %}
     <a href="/foros/editar/{{object.id}}">[editar]</a>|
     <a href="/foros/borrar/{{object.id}}">[borrar]</a>{% endif %}

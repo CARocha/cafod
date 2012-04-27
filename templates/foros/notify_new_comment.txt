@@ -1,0 +1,8 @@
+El usuario {{comentario.usuario.username}} a comentado al aporte #{{comentario.aporte.id}}
+del Foro {{comentario.aporte.foro.nombre}}
+
+Pare ver el comentario dar click al enlace abajo:
+{{url}}
+
+CAFOD
+is the official Catholic aid agency for England and Wales. 

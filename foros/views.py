@@ -81,6 +81,9 @@ def comentario_foro(request, aporte_id):
             form1_uncommited.usuario = request.user
             form1_uncommited.aporte = aporte
             form1_uncommited.save()
+
+            thread.start_new_thread(notify_user_aporte, (form1_uncommited,))
+
             return HttpResponseRedirect('/foros/ver/%d' % aporte.foro_id)
     else:
         form = ComentarioForm()
@@ -249,3 +252,12 @@ def notify_all_aporte(aportes):
                                  'url_aporte': '%s/foros/ver/%s/#%s' % (site, aportes.foro.id, aportes.id),
                                  })
     send_mail('Nuevo Aporte en CAFOD', contenido, 'develop@cafodca.org', [user.email for user in users if user.email])
+
+def notify_user_aporte(comentario):
+    site = Site.objects.get_current()
+    contenido = render_to_string('foros/notify_new_comment.txt', {
+                                   'comentario': comentario,
+                                   'url': '%s/foros/ver/%s' % (site, comentario.aporte.foro.id)
+                                    })
+    send_mail('Nuevo comentario CAFOD', contenido, 'develop@cafodca.org', [comentario.aporte.user.email])
+    

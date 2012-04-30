@@ -42,22 +42,22 @@ def ver_foro(request, foro_id):
             form_uncommited.user = request.user
             form_uncommited.foro = discusion
             form_uncommited.save()
-
-            form2_uncommitd = form2.save(commit=False)
-            form2_uncommitd.content_object = form_uncommited
-            form2_uncommitd.save()
-
-            form3_uncommitd = form3.save(commit=False)
-            form3_uncommitd.content_object = form_uncommited
-            form3_uncommitd.save()
-
-            form4_uncommitd = form4.save(commit=False)
-            form4_uncommitd.content_object = form_uncommited
-            form4_uncommitd.save()
-
-            form5_uncommitd = form5.save(commit=False)
-            form5_uncommitd.content_object = form_uncommited
-            form5_uncommitd.save()
+            if form2.cleaned_data['nombre_img'] != '':
+                form2_uncommitd = form2.save(commit=False)
+                form2_uncommitd.content_object = form_uncommited
+                form2_uncommitd.save()
+            if form3.cleaned_data['nombre_doc'] != '':
+                form3_uncommitd = form3.save(commit=False)
+                form3_uncommitd.content_object = form_uncommited
+                form3_uncommitd.save()
+            if form4.cleaned_data['nombre_video'] != '':
+                form4_uncommitd = form4.save(commit=False)
+                form4_uncommitd.content_object = form_uncommited
+                form4_uncommitd.save()
+            if form5.cleaned_data['nombre_audio'] != '':
+                form5_uncommitd = form5.save(commit=False)
+                form5_uncommitd.content_object = form_uncommited
+                form5_uncommitd.save()
 
             thread.start_new_thread(notify_all_aporte, (form_uncommited,))
 
@@ -102,22 +102,22 @@ def crear_foro(request):
             form_uncommited = form.save(commit=False)
             form_uncommited.contraparte = request.user
             form_uncommited.save()
-
-            form2_uncommitd = form2.save(commit=False)
-            form2_uncommitd.content_object = form_uncommited
-            form2_uncommitd.save()
-
-            form3_uncommitd = form3.save(commit=False)
-            form3_uncommitd.content_object = form_uncommited
-            form3_uncommitd.save()
-
-            form4_uncommitd = form4.save(commit=False)
-            form4_uncommitd.content_object = form_uncommited
-            form4_uncommitd.save()
-
-            form5_uncommitd = form5.save(commit=False)
-            form5_uncommitd.content_object = form_uncommited
-            form5_uncommitd.save()
+            if form2.cleaned_data['nombre_img'] != '':
+                form2_uncommitd = form2.save(commit=False)
+                form2_uncommitd.content_object = form_uncommited
+                form2_uncommitd.save()
+            if form3.cleaned_data['nombre_doc'] != '':
+                form3_uncommitd = form3.save(commit=False)
+                form3_uncommitd.content_object = form_uncommited
+                form3_uncommitd.save()
+            if form4.cleaned_data['nombre_video'] != '':
+                form4_uncommitd = form4.save(commit=False)
+                form4_uncommitd.content_object = form_uncommited
+                form4_uncommitd.save()
+            if form5.cleaned_data['nombre_audio'] != '':
+                form5_uncommitd = form5.save(commit=False)
+                form5_uncommitd.content_object = form_uncommited
+                form5_uncommitd.save()
             
             thread.start_new_thread(notify_all_foro, (form_uncommited,))
 

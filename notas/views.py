@@ -81,18 +81,18 @@ def crear_nota(request):
         form2 = FotoForm(request.POST, request.FILES)
         form3 = AdjuntoForm(request.POST, request.FILES)
 
-    	if form.is_valid():
+    	if form.is_valid() and form2.is_valid() and form3.is_valid():
             form_uncommited = form.save(commit=False)
             form_uncommited.user = request.user
             form_uncommited.save()
-        if form2.is_valid():
-            form2_uncommited = form2.save(commit=False)
-            form2_uncommited.content_object = form_uncommited
-            form2_uncommited.save()
-        if form3.is_valid():    
-            form3_uncommited = form3.save(commit=False)
-            form3_uncommited.content_object = form_uncommited
-            form3_uncommited.save()
+            if form2.cleaned_data['nombre_img'] != '':
+                form2_uncommited = form2.save(commit=False)
+                form2_uncommited.content_object = form_uncommited
+                form2_uncommited.save()
+            if form3.cleaned_data['nombre_doc'] != '':    
+                form3_uncommited = form3.save(commit=False)
+                form3_uncommited.content_object = form_uncommited
+                form3_uncommited.save()
            
             return HttpResponseRedirect('/notas')
     else:

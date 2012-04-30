@@ -155,7 +155,7 @@
 					<div class="btn-group foro-edit">
 					    <a class="btn btn-mini" href="/foros/aporte/editar/{{respuesta.id}}"><i class="icon-pencil"></i></a>
 					    <a class="btn btn-mini" href="/foros/aporte/borrar/{{respuesta.id}}"><i class="icon-trash"></i></a>
-				    </div>
+				        </div>
 				{% endif %}
 			</div>
 			<div class="span7">
@@ -164,6 +164,12 @@
 				   	<a href="/foros/ver_comentario/{{respuesta.id}}" class="btn btn-mini btn-warning"><i class="icon-comment icon-white"></i>Comentar</a>
 				    </p>
 					        {% for comentario in respuesta.comentarios_set.all %}
+					        {% if respuesta.user == request.user or request.user.is_superuser %}
+							<div class="btn-group foro-edit">
+					    			<a class="btn btn-mini" href="/foros/comentario/editar/{{comentario.id}}"><i class="icon-pencil"></i></a>
+					    			<a class="btn btn-mini" href="/foros/comentario/borrar/{{comentario.id}}"><i class="icon-trash"></i></a>
+				        		</div>
+				       			{% endif %}
 					       		<div class="well">{{comentario.comentario|safe}}</div>
 					        {% endfor %}
 			</div>

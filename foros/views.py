@@ -303,3 +303,39 @@ def editar_aporte(request, aporte_id):
         form5 = AporteAudioFormSet(instance=aporte)
 
     return render_to_response('foros/editar_aporte.html', RequestContext(request, locals()))
+
+@login_required
+def editar_comentario(request, comen_id):
+    comentario = get_object_or_404(Comentarios, id=comen_id)
+
+    if not comentario.usuario == request.user and not request.user.is_superuser:
+        return HttpResponse("Usted no puede editar este Comentario")
+
+    if request.method == 'POST':
+        form = ComentarioForm(request.POST, instance=comentario)
+        if form.is_valid():
+            form_uncommited = form.save(commit=False)
+            form_uncommited.usuario = request.user
+            form_uncommited.save()
+    else:
+        form = ComentarioForm(instance=comentario)
+
+    return render_to_response('foros/comentario.html', RequestContext(request, locals()))
+
+@login_required
+def borrar_aporte(request, id):
+    aporte = get_object_or_404(Aportes, id=id)
+    if aporte.user == request.user or request.user.is_superuser:
+        aporte.delete()
+        return redirect('/foros')
+    else:
+        return redirect('/')
+
+@login_required
+def borrar_comentario(request, id):
+    comentario = get_object_or_404(Comentarios, id=id)
+    if comentario.usuario == request.user or request.user.is_superuser:
+        comentario.delete()
+        return redirect('/foros')
+    else:
+        return redirect('/')

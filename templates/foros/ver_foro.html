@@ -81,7 +81,7 @@
 				{%endif%}
 				{%if discusion.video.all%}
 					<div class="sidebar-title">Videos</div>
-	                <table class="table  table-bordered table-condensed doc-sidebar">
+	                <table class="table table-bordered table-condensed doc-sidebar">
 	                  <tbody>
 	                    {% for video in discusion.video.all%}
 	                    <tr>
@@ -89,7 +89,7 @@
 	                        	<img src="/files/img/player.png" class="player-icon"></a>
 	                        </td>
 	                    </tr>
-	                        <div class="modal fade hide" id="myModal{{video.id}}">
+	                        <div class="modal fade hide modal-video" id="myModal{{video.id}}">
 	                          <div class="modal-header">
 	                            <a class="close" data-dismiss="modal">×</a>
 	                            <h3>{{video.nombre_video}}</h3>
@@ -155,9 +155,9 @@
 			</div>
 			<div class="span7">
 				{{respuesta.contenido|safe}}
-				   	<h3>comentarios al aporte</h3>
-				   	<a href="/foros/ver_comentario/{{respuesta.id}}">Comentar</a>
-
+					<p>
+				   	<a href="/foros/ver_comentario/{{respuesta.id}}" class="btn btn-mini btn-warning"><i class="icon-comment icon-white"></i>Comentar</a>
+				    </p>
 					        {% for comentario in respuesta.comentarios_set.all %}
 					       		<div class="well">{{comentario.comentario|safe}}</div>
 					        {% endfor %}

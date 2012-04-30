@@ -1,55 +1,209 @@
-{% extends "base.html" %}
-
+{% extends "baseadmin.html" %}
+{%comment%}{% load magicembed %}{%endcomment%}
 {% block contenido %}
+<div class="row">
+    <div class="encabezado">
+      <div class="container">
+            <div class="row">
+                <div class="span5">
+                    <div class="encabezado-title">
+                        FORO
+                    </div>
+                </div>
+                <div class="span7">
+                    <div class="btn-group filtrospais">
+                        <a href="/foros/editar/{{discusion.id}}" class="btn"><i class="icon-pencil"></i>Editar foro</a>
+                    </div>
+                </div>
+            </div>
+      </div>
+    </div>
+</div>
+<div class="row">
+	<div class="container">
+		<div class="row">
+			<div class="span8">
+				<h1 class="titulo-grande">{{discusion.nombre}}</h1>
+				<div class="extrainfofull"></div>
+				{{discusion.contenido|safe}}
 
-<h1>Discusion/foro</h1>
-<h2>{{discusion.nombre}}</h2>
-<p>{{discusion.contenido}}</p>
-<strong>creado: {{discusion.creacion}}</strong>
+				<div class="sidebar-title">Fotos</div>
+					{%if discusion.fotos.all%}
+						<div class="thumbs" style="margin-top:10px">
+						{% for img in discusion.fotos.all%}
+							<a href="#"><img src="{{img.foto.url_80x80}}" alt="{{imagen.nombre}}" title="{{imagen.nombre}}"></a>
+						{% endfor %}
+						<div class="clean"></div>
+					    </div>
+					{%endif%}
+			</div>
+			<div class="span4">
+				<table class="table table-bordered table-condensed table-striped">
+					<tbody>
+						<tr>
+							<td><img src="/files/img/date.png"></td>
+							<td><b>Creado</b></td>
+							<td>{{discusion.creacion}}</td>
+						</tr>
+						<tr>
+							<td><img src="/files/img/group.png"></td>
+							<td><b>Apertura</b> </td>
+							<td>{{discusion.apertura}}</td>
+						</tr>
+						<tr>
+							<td><img src="/files/img/group_delete.png"></td>
+							<td><b>Cierre de aportes</b></td>
+							<td>{{discusion.cierre}}</td>
+						</tr>
+						<tr>
+							<td><img src="/files/img/user_comment.png"></td>
+							<td><b>Reunion skype</b></td>
+							<td>{{discusion.fecha_skype}}</td>
+						</tr>
+						<tr>
+							<td><img src="/files/img/page_edit.png"></td>
+							<td><b>Memoria</b></td>
+							<td>{{discusion.memoria}}</td>
+						</tr>
+					</tbody>
+				</table>
+				{%if discusion.documentos.all%}
+					<div class="sidebar-title">Documentos</div>
+	                <table class="table  table-bordered table-condensed doc-sidebar">
+	                  <tbody>
+	                    {% for doc in discusion.documentos.all%}
+	                    <tr>
+	                        <td>{{doc.nombre_doc}}</td>
+	                        <td><center><a href="{{doc.adjunto}}" class=" btn btn-info btn-mini dropdown-toggle"><i class="icon-download-alt icon-white"></i>Descargar</a></center></td>
+	                    </tr>
+	                    {% endfor %}
+	                  </tbody>
+	                </table>
+				{%endif%}
+				{%if discusion.video.all%}
+					<div class="sidebar-title">Videos</div>
+	                <table class="table  table-bordered table-condensed doc-sidebar">
+	                  <tbody>
+	                    {% for video in discusion.video.all%}
+	                    <tr>
+	                        <td><center>{%comment%}{{video.url|magicembed:"250x200"|safe}}{%endcomment%}</center></td>
+	                    </tr>
+	                    {% endfor %}
+	                  </tbody>
+	                </table>
+				{%endif%}
+				{%if discusion.audio.all%}
+					<div class="sidebar-title">Audio</div>
+	                <table class="table  table-bordered table-condensed doc-sidebar">
+	                  <tbody>
+	                    {% for audio in discusion.audio.all%}
+	                    <tr>
+	                    	<td>{{audio.nombre_audio}}</br>
+								<object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" width="280" height="20"
+								    codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab">
+								    <param name="movie" value="/files/js/singlemp3player.swf?file=/uploads/{{audio.audio}}&showDownload=true" />
+								    <param name="wmode" value="transparent" />
+								    <embed wmode="transparent" width="280" height="20" src="/files/js/singlemp3player.swf?file=/uploads/{{audio.audio}}&showDownload=true"
+								    type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" />
+								</object>
+	                    	</td>
+	                    </tr>
+	                    {% endfor %}
+	                  </tbody>
+	                </table>
+				{%endif%}
+			</div>
+		</div>
+		<div class="row">
+			<div class="span12">
+				<div class="dividerline"></div>
+			</div>
+		</div>
 
-<h4>Cosas adjuntas</h4><br>
-<strong>imagenes</strong><br>
-{% for img in discusion.fotos.all%}
-	{{img.nombre_img}}:{{img.foto}}<br>
-{% endfor %}
-<strong>Documentos</strong><br>
-{% for img in discusion.documentos.all%}
-	{{img.nombre_doc}}: {{img.adjunto}}<br>
-{% endfor %}
-<strong>Url video</strong><br>
-{% for img in discusion.video.all%}
-	{{img.nombre_video}}: {{img.url}}<br>
-{% endfor %}
-<strong>Audio</strong><br>
-{% for img in discusion.audio.all%}
-	{{img.nombre_audio}}: {{img.audio}}<br>
-{% endfor %}
+		{% for respuesta in discusion.aportes_set.all %}
+		<div class="row">
+			<div class="span12">
+				<div class="encabezado-title raya">APORTES</div>
+			</div>
+		</div>
+		<div class="row ">
+			<div class="span1">
+				<div class="label">Aporte # {{respuesta.id}}</div>
+				<br><img src="/files/img/avatarpeque.png"><br>
+				<small>{{respuesta.user}}</small>
+			</div>
+			<div class="span7">
+				{{respuesta.contenido|safe}}
+				   	<h3>comentarios al aporte</h3>
+				   	<a href="/foros/ver_comentario/{{respuesta.id}}">Comentar</a>
 
-<h2>Aportes a Discusion/Foro</h2>
-{% for respuesta in discusion.aportes_set.all %}
-        <strong> <h5>{{respuesta.user}}</h5> </strong> 
-<div class="titulo-foro"> {% if respuesta.user == request.user or request.user.is_superuser %}
-    <a href="/foros/aporte/editar/{{respuesta.id}}">[editar]</a>|
-    <a href="/foros/aporte/borrar/{{respuesta.id}}">[borrar]</a>{% endif %}
+					        {% for comentario in respuesta.comentarios_set.all %}
+					       		<div class="well">{{comentario.comentario|safe}}</div>
+					        {% endfor %}
+			</div>
+			<div class="span4">
+				{%if respuesta.fotos.all%}
+				<div class="sidebar-title">Fotos</div>
+						<div class="thumbs" style="margin-top:10px">
+						{% for img in respuesta.fotos.all%}
+							<a href="#"><img src="{{img.foto.url_80x80}}" alt="{{imagen.nombre}}" title="{{imagen.nombre}}"></a>
+						{% endfor %}
+						<div class="clean"></div>
+					    </div>
+					{%endif%}
+				{%if respuesta.documentos.all %}
+					<div class="sidebar-title">Documentos</div>
+	                <table class="table  table-bordered table-condensed doc-sidebar">
+	                  <tbody>
+	                    {% for doc in respuesta.documentos.all%}
+	                    <tr>
+	                        <td>{{doc.nombre_doc}}</td>
+	                        <td><center><a href="{{doc.adjunto}}" class=" btn btn-info btn-mini dropdown-toggle"><i class="icon-download-alt icon-white"></i>Descargar</a></center></td>
+	                    </tr>
+	                    {% endfor %}
+	                  </tbody>
+	                </table>
+				{%endif%}
+				{%if respuesta.video.all%}
+					<div class="sidebar-title">Videos</div>
+	                <table class="table  table-bordered table-condensed doc-sidebar">
+	                  <tbody>
+	                    {% for video in respuesta.video.all%}
+	                    <tr>
+	                        <td><center>{%comment%}{{video.url|magicembed:"250x200"|safe}}{%endcomment%}</center></td>
+	                    </tr>
+	                    {% endfor %}
+	                  </tbody>
+	                </table>
+				{%endif%}
+				{%if respuesta.audio.all%}
+					<div class="sidebar-title">Audio</div>
+	                <table class="table  table-bordered table-condensed doc-sidebar">
+	                  <tbody>
+	                    {% for audio in respuesta.audio.all%}
+	                    <tr>
+	                    	<td>{{audio.nombre_audio}}</br>
+								<object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" width="280" height="20"
+								    codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab">
+								    <param name="movie" value="/files/js/singlemp3player.swf?file=/uploads/{{audio.audio}}&showDownload=true" />
+								    <param name="wmode" value="transparent" />
+								    <embed wmode="transparent" width="280" height="20" src="/files/js/singlemp3player.swf?file=/uploads/{{audio.audio}}&showDownload=true"
+								    type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" />
+								</object>
+	                    	</td>
+	                    </tr>
+	                    {% endfor %}
+	                  </tbody>
+	                </table>
+				{%endif%}
+			</div>
+		</div>
+
+		{% endfor %}
+
+	</div>
 </div>
 
-	{{respuesta.contenido}}<br>
-	{% for foto in respuesta.fotos.all %}
-		{{foto}}
-	{% endfor %}
-<br>
-	{% if respuesta.contenido%}
-	   <a href="/foros/ver_comentario/{{respuesta.id}}">Comentar</a>
-	      
-	   	<h3>comentarios al aporte</h3>
-	        {% for comentario in respuesta.comentarios_set.all %}
-	       		{{comentario.comentario}}<br>
-	        {% endfor %}
-	      
-        {% endif %}
-
-	<hr>
-{% endfor %}
 
 <hr>
 <h2>Aportar a Discusion/Foro</h2>

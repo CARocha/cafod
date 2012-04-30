@@ -162,7 +162,7 @@ def editar_foro(request, id):
             form3.save()
             form4.save()
             form5.save()
-            return HttpResponseRedirect('/foros')
+            return HttpResponseRedirect('/foros/ver/'+id)
             
     else:
         form = ForosForm(instance=foro)

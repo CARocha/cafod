@@ -1,5 +1,5 @@
 {% extends "baseadmin.html" %}
-{%comment%}{% load magicembed %}{%endcomment%}
+{% load magicembed_tags %}
 {% block contenido %}
 <div class="row">
     <div class="encabezado">
@@ -26,7 +26,6 @@
 				<h1 class="titulo-grande">{{discusion.nombre}}</h1>
 				<div class="extrainfofull"></div>
 				{{discusion.contenido|safe}}
-
 				<div class="sidebar-title">Fotos</div>
 					{%if discusion.fotos.all%}
 						<div class="thumbs" style="margin-top:10px">
@@ -86,8 +85,22 @@
 	                  <tbody>
 	                    {% for video in discusion.video.all%}
 	                    <tr>
-	                        <td><center>{%comment%}{{video.url|magicembed:"250x200"|safe}}{%endcomment%}</center></td>
+	                        <td><a data-toggle="modal" data-target="#myModal{{video.id}}" href="#"><img  src="{{video.url|magicthumbnail}}" width="290" height="150">
+	                        	<img src="/files/img/player.png" class="player-icon"></a>
+	                        </td>
 	                    </tr>
+	                        <div class="modal fade hide" id="myModal{{video.id}}">
+	                          <div class="modal-header">
+	                            <a class="close" data-dismiss="modal">×</a>
+	                            <h3>{{video.nombre_video}}</h3>
+	                          </div>
+	                          <div class="modal-body">
+	                            <p>{{ video.url|magicembed:"640x480" }}</p>
+	                          </div>
+	                          <div class="modal-footer">
+	                            <a href="#" data-dismiss="modal" class="btn">Cerrar</a>
+	                          </div>
+	                        </div>  
 	                    {% endfor %}
 	                  </tbody>
 	                </table>
@@ -120,17 +133,25 @@
 			</div>
 		</div>
 
-		{% for respuesta in discusion.aportes_set.all %}
 		<div class="row">
 			<div class="span12">
 				<div class="encabezado-title raya">APORTES</div>
 			</div>
 		</div>
+
+		{% for respuesta in discusion.aportes_set.all %}
+
 		<div class="row ">
 			<div class="span1">
 				<div class="label">Aporte # {{respuesta.id}}</div>
 				<br><img src="/files/img/avatarpeque.png"><br>
 				<small>{{respuesta.user}}</small>
+				{% if respuesta.user == request.user or request.user.is_superuser %}
+					<div class="btn-group foro-edit">
+					    <a class="btn btn-mini" href="/foros/aporte/editar/{{respuesta.id}}"><i class="icon-pencil"></i></a>
+					    <a class="btn btn-mini" href="/foros/aporte/borrar/{{respuesta.id}}"><i class="icon-trash"></i></a>
+				    </div>
+				{% endif %}
 			</div>
 			<div class="span7">
 				{{respuesta.contenido|safe}}
@@ -170,7 +191,7 @@
 	                  <tbody>
 	                    {% for video in respuesta.video.all%}
 	                    <tr>
-	                        <td><center>{%comment%}{{video.url|magicembed:"250x200"|safe}}{%endcomment%}</center></td>
+	                        <td><center><img src="{{video.url|magicthumbnail}}" width="290" height="150"></center></td>
 	                    </tr>
 	                    {% endfor %}
 	                  </tbody>
@@ -198,13 +219,11 @@
 				{%endif%}
 			</div>
 		</div>
-
+		<hr>
 		{% endfor %}
 
 	</div>
 </div>
-
-
 
 
 <hr>

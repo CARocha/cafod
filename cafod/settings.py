@@ -112,7 +112,7 @@ INSTALLED_APPS = (
     # 'django.contrib.admindocs',
     'agendas',
     'contrapartes',
-    #'cafod.magicembed',
+    'magicembed',
     'foros',
     'notas',
     'south',

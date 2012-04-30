@@ -1,0 +1,11 @@
+El usuario {{aporte.user}} ha publicado un nuevo Aporte en
+el Foro {{aporte}} de la plataforma CAFOD
+
+
+Fecha: {{aporte.fecha|date:"D d M Y"}}
+Foro al que aporta: {{aporte}}
+Haga click al enlace de abajo para ir a ver el aporte: 
+http://{{url_aporte}}
+
+CAFOD
+is the official Catholic aid agency for England and Wales. 

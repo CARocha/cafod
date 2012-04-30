@@ -18,6 +18,7 @@ from django.contrib.contenttypes.generic import generic_inlineformset_factory
 from agendas.models import *
 from notas.models import *
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.contrib.sites.models import Site
 # Create your views here.
 
 #def lista_foro(request):
@@ -27,7 +28,7 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 @login_required
 def ver_foro(request, foro_id):
-    discusion = get_object_or_404(Foros, id=foro_id)   
+    discusion = get_object_or_404(Foros, id=foro_id)  
 
     if request.method == 'POST':
         form = AporteForm(request.POST)
@@ -36,27 +37,29 @@ def ver_foro(request, foro_id):
         form4 = VideoForm(request.POST)
         form5 = AudioForm(request.POST, request.FILES)
 
-        if form.is_valid():
+        if form.is_valid() and form2.is_valid() and form3.is_valid() and form4.is_valid() and form5.is_valid():
             form_uncommited = form.save(commit=False)
             form_uncommited.user = request.user
             form_uncommited.foro = discusion
             form_uncommited.save()
+            if form2.cleaned_data['nombre_img'] != '':
+                form2_uncommitd = form2.save(commit=False)
+                form2_uncommitd.content_object = form_uncommited
+                form2_uncommitd.save()
+            if form3.cleaned_data['nombre_doc'] != '':
+                form3_uncommitd = form3.save(commit=False)
+                form3_uncommitd.content_object = form_uncommited
+                form3_uncommitd.save()
+            if form4.cleaned_data['nombre_video'] != '':
+                form4_uncommitd = form4.save(commit=False)
+                form4_uncommitd.content_object = form_uncommited
+                form4_uncommitd.save()
+            if form5.cleaned_data['nombre_audio'] != '':
+                form5_uncommitd = form5.save(commit=False)
+                form5_uncommitd.content_object = form_uncommited
+                form5_uncommitd.save()
 
-            form2_uncommitd = form2.save(commit=False)
-            form2_uncommitd.content_object = form_uncommited
-            form2_uncommitd.save()
-
-            form3_uncommitd = form3.save(commit=False)
-            form3_uncommitd.content_object = form_uncommited
-            form3_uncommitd.save()
-
-            form4_uncommitd = form4.save(commit=False)
-            form4_uncommitd.content_object = form_uncommited
-            form4_uncommitd.save()
-
-            form5_uncommitd = form5.save(commit=False)
-            form5_uncommitd.content_object = form_uncommited
-            form5_uncommitd.save()
+            thread.start_new_thread(notify_all_aporte, (form_uncommited,))
 
             return HttpResponseRedirect('/foros/ver/%d' % discusion.id)
     else:
@@ -78,6 +81,9 @@ def comentario_foro(request, aporte_id):
             form1_uncommited.usuario = request.user
             form1_uncommited.aporte = aporte
             form1_uncommited.save()
+
+            thread.start_new_thread(notify_user_aporte, (form1_uncommited,))
+
             return HttpResponseRedirect('/foros/ver/%d' % aporte.foro_id)
     else:
         form = ComentarioForm()
@@ -96,22 +102,24 @@ def crear_foro(request):
             form_uncommited = form.save(commit=False)
             form_uncommited.contraparte = request.user
             form_uncommited.save()
-
-            form2_uncommitd = form2.save(commit=False)
-            form2_uncommitd.content_object = form_uncommited
-            form2_uncommitd.save()
-
-            form3_uncommitd = form3.save(commit=False)
-            form3_uncommitd.content_object = form_uncommited
-            form3_uncommitd.save()
-
-            form4_uncommitd = form4.save(commit=False)
-            form4_uncommitd.content_object = form_uncommited
-            form4_uncommitd.save()
-
-            form5_uncommitd = form5.save(commit=False)
-            form5_uncommitd.content_object = form_uncommited
-            form5_uncommitd.save()
+            if form2.cleaned_data['nombre_img'] != '':
+                form2_uncommitd = form2.save(commit=False)
+                form2_uncommitd.content_object = form_uncommited
+                form2_uncommitd.save()
+            if form3.cleaned_data['nombre_doc'] != '':
+                form3_uncommitd = form3.save(commit=False)
+                form3_uncommitd.content_object = form_uncommited
+                form3_uncommitd.save()
+            if form4.cleaned_data['nombre_video'] != '':
+                form4_uncommitd = form4.save(commit=False)
+                form4_uncommitd.content_object = form_uncommited
+                form4_uncommitd.save()
+            if form5.cleaned_data['nombre_audio'] != '':
+                form5_uncommitd = form5.save(commit=False)
+                form5_uncommitd.content_object = form_uncommited
+                form5_uncommitd.save()
+            
+            thread.start_new_thread(notify_all_foro, (form_uncommited,))
 
             return HttpResponseRedirect('/foros')
             
@@ -168,7 +176,7 @@ def editar_foro(request, id):
 @login_required
 def borrar_foro(request, id):
     foro = get_object_or_404(Foros, id=id)
-    if foro.user == request.user or request.user.is_superuser:
+    if foro.contraparte == request.user or request.user.is_superuser:
         foro.delete()
         return redirect('/foros')
     else:
@@ -226,3 +234,72 @@ def busqueda_tag(request, tags):
     tags = Tag.objects.all()
     todos = TaggedItem.objects.get_by_model(Documentos, tag.name)
     return render_to_response('privados/documentos_tag.html', RequestContext(request, locals()))
+
+def notify_all_foro(foros):
+    site = Site.objects.get_current()
+    users = User.objects.all() #.exclude(username=foros.contraparte.username)
+    contenido = render_to_string('foros/notify_new_foro.txt', {'foro': foros,
+                                 'url': '%s/foros/ver/%s' % (site, foros.id),
+                                 'url_aporte': '%s/foros/ver/%s/#aporte' % (site, foros.id),
+                                 })
+    send_mail('Nuevo Foro en CAFOD', contenido, 'develop@cafodca.org', [user.email for user in users if user.email])
+
+def notify_all_aporte(aportes):
+    site = Site.objects.get_current()
+    users = User.objects.all() #.exclude(username=foros.contraparte.username)
+    contenido = render_to_string('foros/notify_new_aporte.txt', {'aporte': aportes,
+                                 #'url': '%s/foros/ver/%s' % (site, foros.id),
+                                 'url_aporte': '%s/foros/ver/%s/#%s' % (site, aportes.foro.id, aportes.id),
+                                 })
+    send_mail('Nuevo Aporte en CAFOD', contenido, 'develop@cafodca.org', [user.email for user in users if user.email])
+
+def notify_user_aporte(comentario):
+    site = Site.objects.get_current()
+    contenido = render_to_string('foros/notify_new_comment.txt', {
+                                   'comentario': comentario,
+                                   'url': '%s/foros/ver/%s' % (site, comentario.aporte.foro.id)
+                                    })
+    send_mail('Nuevo comentario CAFOD', contenido, 'develop@cafodca.org', [comentario.aporte.user.email])
+
+@login_required
+def editar_aporte(request, aporte_id):
+    aporte = get_object_or_404(Aportes, id=aporte_id)  
+
+    AporteImgFormSet = generic_inlineformset_factory(Imagen, extra=5, max_num=5)
+    AporteDocuFormSet = generic_inlineformset_factory(Documentos, extra=5, max_num=5)
+    AporteVideoFormSet = generic_inlineformset_factory(Videos, extra=5, max_num=5)
+    AporteAudioFormSet = generic_inlineformset_factory(Audios, extra=5, max_num=5)
+    form2 = AporteImgFormSet(instance=aporte)
+    form3 = AporteDocuFormSet(instance=aporte)
+    form4 = AporteVideoFormSet(instance=aporte)
+    form5 = AporteAudioFormSet(instance=aporte)
+
+    if not aporte.user == request.user and not request.user.is_superuser:
+        return HttpResponse("Usted no puede editar este Foro")
+
+    if request.method == 'POST':
+        form = AporteForm(request.POST, instance=aporte)
+        form2 = AporteImgFormSet(data=request.POST, files=request.FILES, instance=aporte)
+        form3 = AporteDocuFormSet(data=request.POST, files=request.FILES, instance=aporte)
+        form4 = AporteVideoFormSet(data=request.POST, files=request.FILES, instance=aporte)
+        form5 = AporteAudioFormSet(data=request.POST, files=request.FILES, instance=aporte)
+
+        if form.is_valid() and form2.is_valid() and form3.is_valid() and form4.is_valid() and form5.is_valid():
+            form_uncommited = form.save(commit=False)
+            form_uncommited.contraparte = request.user
+            form_uncommited.save()
+
+            form2.save()
+            form3.save()
+            form4.save()
+            form5.save()
+            return HttpResponseRedirect('/foros')
+            
+    else:
+        form = AporteForm(instance=aporte)
+        form2 = AporteImgFormSet(instance=aporte)
+        form3 = AporteDocuFormSet(instance=aporte)
+        form4 = AporteVideoFormSet(instance=aporte)
+        form5 = AporteAudioFormSet(instance=aporte)
+
+    return render_to_response('foros/editar_aporte.html', RequestContext(request, locals()))

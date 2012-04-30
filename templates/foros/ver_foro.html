@@ -28,6 +28,11 @@
 <h2>Aportes a Discusion/Foro</h2>
 {% for respuesta in discusion.aportes_set.all %}
         <strong> <h5>{{respuesta.user}}</h5> </strong> 
+<div class="titulo-foro"> {% if respuesta.user == request.user or request.user.is_superuser %}
+    <a href="/foros/aporte/editar/{{respuesta.id}}">[editar]</a>|
+    <a href="/foros/aporte/borrar/{{respuesta.id}}">[borrar]</a>{% endif %}
+</div>
+
 	{{respuesta.contenido}}<br>
 	{% for foto in respuesta.fotos.all %}
 		{{foto}}

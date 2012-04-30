@@ -21,5 +21,7 @@ urlpatterns = patterns('foros.views',
     url(r'^privado/agenda/$', 'agenda_personales', name='agenda-personales'),
     url(r'^privado/documento/$', 'documento', name='documentos'),
     url(r'^privado/documento_tag/(?P<tags>\w+)/$', 'busqueda_tag', name='busqueda-tag'),
+    url(r'^aporte/editar/(?P<aporte_id>\d+)/$', 'editar_aporte', name='editar-aporte'),
+    #url(r'^aporte/borrar/(?P<id>\d+)/$', 'borrar_foro', name='borrar-foro'),
 
 )

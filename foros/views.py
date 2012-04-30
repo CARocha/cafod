@@ -260,4 +260,46 @@ def notify_user_aporte(comentario):
                                    'url': '%s/foros/ver/%s' % (site, comentario.aporte.foro.id)
                                     })
     send_mail('Nuevo comentario CAFOD', contenido, 'develop@cafodca.org', [comentario.aporte.user.email])
-    
+
+@login_required
+def editar_aporte(request, aporte_id):
+    aporte = get_object_or_404(Aportes, id=aporte_id)  
+
+    AporteImgFormSet = generic_inlineformset_factory(Imagen, extra=5, max_num=5)
+    AporteDocuFormSet = generic_inlineformset_factory(Documentos, extra=5, max_num=5)
+    AporteVideoFormSet = generic_inlineformset_factory(Videos, extra=5, max_num=5)
+    AporteAudioFormSet = generic_inlineformset_factory(Audios, extra=5, max_num=5)
+    form2 = AporteImgFormSet(instance=aporte)
+    form3 = AporteDocuFormSet(instance=aporte)
+    form4 = AporteVideoFormSet(instance=aporte)
+    form5 = AporteAudioFormSet(instance=aporte)
+
+    if not aporte.user == request.user and not request.user.is_superuser:
+        return HttpResponse("Usted no puede editar este Foro")
+
+    if request.method == 'POST':
+        form = AporteForm(request.POST, instance=aporte)
+        form2 = AporteImgFormSet(data=request.POST, files=request.FILES, instance=aporte)
+        form3 = AporteDocuFormSet(data=request.POST, files=request.FILES, instance=aporte)
+        form4 = AporteVideoFormSet(data=request.POST, files=request.FILES, instance=aporte)
+        form5 = AporteAudioFormSet(data=request.POST, files=request.FILES, instance=aporte)
+
+        if form.is_valid() and form2.is_valid() and form3.is_valid() and form4.is_valid() and form5.is_valid():
+            form_uncommited = form.save(commit=False)
+            form_uncommited.contraparte = request.user
+            form_uncommited.save()
+
+            form2.save()
+            form3.save()
+            form4.save()
+            form5.save()
+            return HttpResponseRedirect('/foros')
+            
+    else:
+        form = AporteForm(instance=aporte)
+        form2 = AporteImgFormSet(instance=aporte)
+        form3 = AporteDocuFormSet(instance=aporte)
+        form4 = AporteVideoFormSet(instance=aporte)
+        form5 = AporteAudioFormSet(instance=aporte)
+
+    return render_to_response('foros/editar_aporte.html', RequestContext(request, locals()))

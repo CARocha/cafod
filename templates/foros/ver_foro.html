@@ -1,4 +1,9 @@
 {% extends "baseadmin.html" %}
+{% block extra_js %}
+<link href="/files/css/jquery.autocomplete.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="/files/js/autocompletejs/jquery.autocomplete.js"></script>
+{% endblock %}
+
 {% load magicembed_tags %}
 {% block contenido %}
 <div class="row">

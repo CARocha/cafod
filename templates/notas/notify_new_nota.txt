@@ -1,0 +1,12 @@
+El usuario {{nota.user}} ha publicado una nueva Nota en
+la plataforma CAFOD
+
+
+Fecha: {{nota.fecha|date:"D d M Y"}}
+Titulo: {{nota.titulo}}
+Haga click al enlace de abajo para ver la Nota: 
+http://{{url}}
+
+
+CAFOD
+is the official Catholic aid agency for England and Wales. 

@@ -93,7 +93,8 @@ def crear_nota(request):
                 form3_uncommited = form3.save(commit=False)
                 form3_uncommited.content_object = form_uncommited
                 form3_uncommited.save()
-           
+
+            thread.start_new_thread(notify_all_notas, (form_uncommited,))
             return HttpResponseRedirect('/notas')
     else:
         form = NotasForms()
@@ -147,4 +148,13 @@ def borrar_nota(request, id):
         return HttpResponseRedirect('/notas/?shva=erase')
     else:
         return redirect('/')
+
+def notify_all_notas(notas):
+    site = Site.objects.get_current()
+    users = User.objects.all() #.exclude(username=foros.contraparte.username)
+    contenido = render_to_string('notas/notify_new_nota.txt', {'nota': notas,
+                                 'url': '%s/notas/%s' % (site, notas.id),
+                                 #'url_aporte': '%s/foros/ver/%s/#aporte' % (site, foros.id),
+                                 })
+    send_mail('Nueva Notas en CAFOD', contenido, 'develop@cafodca.org', [user.email for user in users if user.email])
     

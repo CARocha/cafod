@@ -33,18 +33,18 @@ def lista_notas(request):
     return render_to_response('notas/notas_list.html', locals(),
                               context_instance=RequestContext(request))
 
-def detalle_notas(request, pk):
-    objects = get_object_or_404(Notas, pk=pk)
-    adjuntos = objects.adjuntos.all()
-    var1 = 0
-    for a in adjuntos:
-        if a.nombre_doc == '':
-            var1 = 0
-        else:
-            var1 = 1
+#def detalle_notas(request, pk):
+#    objects = get_object_or_404(Notas, pk=pk)
+#    adjuntos = objects.adjuntos.all()
+#    var1 = 0
+#    for a in adjuntos:
+#        if a.nombre_doc == '':
+#            var1 = 0
+#        else:
+ #           var1 = 1
     
-    return render_to_response('notas/notas_detail.html', locals(),
-                                 context_instance=RequestContext(request))
+#    return render_to_response('notas/notas_detail.html', locals(),
+ #                                context_instance=RequestContext(request))
 
 def lista_notas_pais(request,id):
     notas_list = Notas.objects.filter(user__userprofile__contraparte__pais__id=id).order_by('-fecha')
@@ -93,7 +93,8 @@ def crear_nota(request):
                 form3_uncommited = form3.save(commit=False)
                 form3_uncommited.content_object = form_uncommited
                 form3_uncommited.save()
-           
+
+            thread.start_new_thread(notify_all_notas, (form_uncommited,))
             return HttpResponseRedirect('/notas')
     else:
         form = NotasForms()
@@ -147,4 +148,13 @@ def borrar_nota(request, id):
         return HttpResponseRedirect('/notas/?shva=erase')
     else:
         return redirect('/')
+
+def notify_all_notas(notas):
+    site = Site.objects.get_current()
+    users = User.objects.all() #.exclude(username=foros.contraparte.username)
+    contenido = render_to_string('notas/notify_new_nota.txt', {'nota': notas,
+                                 'url': '%s/notas/%s' % (site, notas.id),
+                                 #'url_aporte': '%s/foros/ver/%s/#aporte' % (site, foros.id),
+                                 })
+    send_mail('Nueva Notas en CAFOD', contenido, 'develop@cafodca.org', [user.email for user in users if user.email])
     

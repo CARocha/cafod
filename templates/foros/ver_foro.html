@@ -1,4 +1,9 @@
 {% extends "baseadmin.html" %}
+{% block extra_js %}
+<link href="/files/css/jquery.autocomplete.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="/files/js/autocompletejs/jquery.autocomplete.js"></script>
+{% endblock %}
+
 {% load magicembed_tags %}
 {% block contenido %}
 <div class="row">
@@ -150,7 +155,7 @@
 					<div class="btn-group foro-edit">
 					    <a class="btn btn-mini" href="/foros/aporte/editar/{{respuesta.id}}"><i class="icon-pencil"></i></a>
 					    <a class="btn btn-mini" href="/foros/aporte/borrar/{{respuesta.id}}"><i class="icon-trash"></i></a>
-				    </div>
+				        </div>
 				{% endif %}
 			</div>
 			<div class="span7">
@@ -159,6 +164,12 @@
 				   	<a href="/foros/ver_comentario/{{respuesta.id}}" class="btn btn-mini btn-warning"><i class="icon-comment icon-white"></i>Comentar</a>
 				    </p>
 					        {% for comentario in respuesta.comentarios_set.all %}
+					        {% if respuesta.user == request.user or request.user.is_superuser %}
+							<div class="btn-group foro-edit">
+					    			<a class="btn btn-mini" href="/foros/comentario/editar/{{comentario.id}}"><i class="icon-pencil"></i></a>
+					    			<a class="btn btn-mini" href="/foros/comentario/borrar/{{comentario.id}}"><i class="icon-trash"></i></a>
+				        		</div>
+				       			{% endif %}
 					       		<div class="well">{{comentario.comentario|safe}}
 					       			<div class="user-info"><i>escrito por</i> <img src="/files/img/avatarpeque.png" width="25" height="25"> <b>{{comentario.usuario.username}}</b></div>
 					       		</div>

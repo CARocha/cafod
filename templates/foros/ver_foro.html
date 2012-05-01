@@ -2,6 +2,20 @@
 {% block extra_js %}
 <link href="/files/css/jquery.autocomplete.css" rel="stylesheet" type="text/css">
 <script type="text/javascript" src="/files/js/autocompletejs/jquery.autocomplete.js"></script>
+<script type="text/javascript" >
+$(document).ready(function() {
+	$(".fancybox").fancybox({
+    	openEffect	: 'elastic',
+    	closeEffect	: 'elastic',
+
+    	helpers : {
+    		title : {
+    			type : 'inside'
+    		}
+    	}
+	});
+});
+</script>
 {% endblock %}
 
 {% load magicembed_tags %}
@@ -18,6 +32,7 @@
                 <div class="span7">
                     <div class="btn-group filtrospais">
                         <a href="/foros/editar/{{discusion.id}}" class="btn"><i class="icon-pencil"></i>Editar foro</a>
+                        <a href="#formaporte" class="btn"><i class="icon-comment"></i>Aportar al foro</a>
                     </div>
                 </div>
             </div>
@@ -35,7 +50,7 @@
 					{%if discusion.fotos.all%}
 						<div class="thumbs" style="margin-top:10px">
 						{% for img in discusion.fotos.all%}
-							<a href="#"><img src="{{img.foto.url_80x80}}" alt="{{imagen.nombre}}" title="{{imagen.nombre}}"></a>
+							<a class="fancybox" rel="galleryforo" title="{{img.nombre_img}}" href="{{img.foto.url_640x480}}"><img src="{{img.foto.url_80x80}}" alt="{{img.nombre}}" title="{{img.nombre}}"></a>
 						{% endfor %}
 						<div class="clean"></div>
 					    </div>
@@ -164,14 +179,15 @@
 				   	<a href="/foros/ver_comentario/{{respuesta.id}}" class="btn btn-mini btn-warning"><i class="icon-comment icon-white"></i>Comentar</a>
 				    </p>
 					        {% for comentario in respuesta.comentarios_set.all %}
-					        {% if respuesta.user == request.user or request.user.is_superuser %}
-							<div class="btn-group foro-edit">
-					    			<a class="btn btn-mini" href="/foros/comentario/editar/{{comentario.id}}"><i class="icon-pencil"></i></a>
-					    			<a class="btn btn-mini" href="/foros/comentario/borrar/{{comentario.id}}"><i class="icon-trash"></i></a>
-				        		</div>
-				       			{% endif %}
 					       		<div class="well">{{comentario.comentario|safe}}
-					       			<div class="user-info"><i>escrito por</i> <img src="/files/img/avatarpeque.png" width="25" height="25"> <b>{{comentario.usuario.username}}</b></div>
+					       			<div class="user-info"><i>escrito por</i> <img src="/files/img/avatarpeque.png" width="25" height="25"> <b>{{comentario.usuario.username}}</b>
+								        {% if respuesta.user == request.user or request.user.is_superuser %}
+										<div class="btn-group foro-edit" style="float:right;">
+								    			<a class="btn btn-mini" href="/foros/comentario/editar/{{comentario.id}}"><i class="icon-pencil"></i></a>
+								    			<a class="btn btn-mini" href="/foros/comentario/borrar/{{comentario.id}}"><i class="icon-trash"></i></a>
+							        		</div>
+							       		{% endif %}
+					       			</div>
 					       		</div>
 					        {% endfor %}
 			</div>
@@ -180,7 +196,7 @@
 				<div class="sidebar-title">Fotos</div>
 						<div class="thumbs" style="margin-top:10px">
 						{% for img in respuesta.fotos.all%}
-							<a href="#"><img src="{{img.foto.url_80x80}}" alt="{{imagen.nombre}}" title="{{imagen.nombre}}"></a>
+							<a class="fancybox" rel="gallery{{respuesta.id}}" title="{{imagen.nombre_img}}" href="{{img.foto.url_640x480}}"><img src="{{img.foto.url_80x80}}" alt="{{imagen.nombre}}" title="{{imagen.nombre}}"></a>
 						{% endfor %}
 						<div class="clean"></div>
 					    </div>
@@ -250,7 +266,7 @@
 	</div>
 </div>
 
-<div class="row">
+<div class="row" id="formaporte">
 	<div class="container">
             <div class="row">
                 <div class="span12">
@@ -260,7 +276,7 @@
                 </div>
             </div>
 		<div class="row">
-        <form enctype="multipart/form-data" action="." method="post">{% csrf_token %}
+        <form  enctype="multipart/form-data" action="." method="post">{% csrf_token %}
             {{ form.media }}
 			<div class="span9">
 				<div class="well">

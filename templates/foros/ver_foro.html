@@ -238,8 +238,16 @@
 
 	</div>
 </div>
+
 <div class="row">
 	<div class="container">
+            <div class="row">
+                <div class="span12">
+                    <div class="encabezado-title raya">
+                        AGREGAR APORTE A ESTE FORO
+                    </div>
+                </div>
+            </div>
 		<div class="row">
         <form enctype="multipart/form-data" action="." method="post">{% csrf_token %}
             {{ form.media }}

@@ -176,7 +176,7 @@ $(document).ready(function() {
 			<div class="span7">
 				{{respuesta.contenido|safe}}
 					<p>
-				   	<a href="/foros/ver_comentario/{{respuesta.id}}" class="btn btn-mini btn-warning"><i class="icon-comment icon-white"></i>Comentar</a>
+				   	<a data-fancybox-type="iframe" href="/foros/ver_comentario/{{respuesta.id}}" class="btn btn-mini btn-warning fancybox"><i class="icon-comment icon-white"></i>Comentar</a>
 				    </p>
 					        {% for comentario in respuesta.comentarios_set.all %}
 					       		<div class="well">{{comentario.comentario|safe}}

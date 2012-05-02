@@ -181,6 +181,7 @@ $(document).ready(function() {
 					<p>
 				   	<a data-fancybox-type="iframe" href="/foros/ver_comentario/{{respuesta.id}}" class="btn btn-mini btn-warning fancybox"><i class="icon-comment icon-white"></i>Comentar</a>
 				    </p>
+				    
 					        {% for comentario in respuesta.comentarios_set.all %}
 					
 					       		<div class="well">{{comentario.comentario|safe}}
@@ -212,7 +213,7 @@ $(document).ready(function() {
 	                    {% for doc in respuesta.documentos.all%}
 	                    <tr>
 	                        <td>{{doc.nombre_doc}}</td>
-	                        <td><center><a href="{{doc.adjunto}}" class=" btn btn-info btn-mini dropdown-toggle"><i class="icon-download-alt icon-white"></i>Descargar</a></center></td>
+	                        <td><center><a href="/uploads/{{doc.adjunto}}" class=" btn btn-info btn-mini dropdown-toggle"><i class="icon-download-alt icon-white"></i>Descargar</a></center></td>
 	                    </tr>
 	                    {% endfor %}
 	                  </tbody>

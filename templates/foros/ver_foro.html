@@ -15,7 +15,8 @@ $(document).ready(function() {
     		title : {
     			type : 'inside'
     		}
-    	}
+    	},
+    	afterClose: function() { window.location.href='/foros/ver/{{discusion.id}}';}
 	});
 });
 </script>
@@ -186,7 +187,7 @@ $(document).ready(function() {
 					
 					       		<div class="well">{{comentario.comentario|safe}}
 					       			<div class="user-info"><i>escrito por</i> <img src="/files/img/avatarpeque.png" width="25" height="25"> <b>{{comentario.usuario.username}}</b>
-								        {% if respuesta.user == request.user or request.user.is_superuser %}
+								        {% if comentario.usuario == request.user or request.user.is_superuser %}
 										<div class="btn-group foro-edit" style="float:right;">
 								    			<a class="btn btn-mini" href="/foros/comentario/editar/{{comentario.id}}"><i class="icon-pencil"></i></a>
 								    			<a class="btn btn-mini" href="/foros/comentario/borrar/{{comentario.id}}"><i class="icon-trash"></i></a>

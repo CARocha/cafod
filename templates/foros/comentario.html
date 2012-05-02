@@ -15,8 +15,8 @@ $('#commentform').submit(function(e) {
 <form id="commentform"action="." method="POST">{% csrf_token %}
 		{{ form.media }}
         	{{form.as_p}}
-<input id="boton-preguntar" type="submit" value="Responder">
-        <input type="hidden" name="next" href=""value="" />
+	 <a href="javascript:parent.jQuery.fancybox.close();" ><input id="boton-preguntar" type="submit" value="Responder"></a>
+        <input type="hidden" name="next" value="{{ next }}" >
  </form>
 
 {% endblock %}

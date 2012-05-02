@@ -261,7 +261,7 @@ def notify_all_foro(foros):
     users = User.objects.all() #.exclude(username=foros.contraparte.username)
     contenido = render_to_string('foros/notify_new_foro.txt', {'foro': foros,
                                  'url': '%s/foros/ver/%s' % (site, foros.id),
-                                 'url_aporte': '%s/foros/ver/%s/#aporte' % (site, foros.id),
+                                 'url_aporte': '%s/foros/ver/%s/#formaporte' % (site, foros.id),
                                  })
     send_mail('Nuevo Foro en CAFOD', contenido, 'develop@cafodca.org', [user.email for user in users if user.email])
 

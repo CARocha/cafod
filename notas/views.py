@@ -10,6 +10,8 @@ from contrapartes.models import *
 from forms import *
 from django.contrib.contenttypes.generic import generic_inlineformset_factory
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+import thread
+import datetime
 # Create your views here.
 
 def logout_page(request):

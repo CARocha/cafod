@@ -10,7 +10,7 @@ urlpatterns = patterns('contrapartes.views',
     # url(r'^(?P<pk>\d+)/$', DetailView.as_view(model=Contraparte, 
     # 	                                        template_name='notas/contraparte_detail.html'),
     #                                             name='contraparte-detail'),
-    # url(r'^crear/$', 'crear_contraparte', name="crear-contraparte"),
+    url(r'^crear/$', 'crear_contraparte', name="crear-contraparte"),
     url(r'^editar/(?P<id>\d+)/$', 'editar_contraparte', name='editar-contraparte'),
     # url(r'^borrar/(?P<id>\d+)/$', 'borrar_contraparte', name='borrar-contraparte'),
     )

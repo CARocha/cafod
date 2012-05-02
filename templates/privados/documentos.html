@@ -25,8 +25,8 @@
 					    BUSCAR
 					  </li>
 					  <li>
-						<form class="form-search form-inline">
-						  <input type="text" class="input-medium search-query" style="width:115px">
+						<form class="form-search form-inline" action="." method="GET">
+						  <input type="text" class="input-medium search-query" style="width:115px" name="q" value="{% if query %} {{query}} {% endif%}" />
 						  <button type="submit" class="btn"><i class="icon-search button-icon"></i></button>
 						</form>
 					  </li>

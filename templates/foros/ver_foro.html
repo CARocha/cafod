@@ -164,13 +164,17 @@
 				   	<a href="/foros/ver_comentario/{{respuesta.id}}" class="btn btn-mini btn-warning"><i class="icon-comment icon-white"></i>Comentar</a>
 				    </p>
 					        {% for comentario in respuesta.comentarios_set.all %}
+
 					        {% if respuesta.user == request.user or request.user.is_superuser %}
 							<div class="btn-group foro-edit">
 					    			<a class="btn btn-mini" href="/foros/comentario/editar/{{comentario.id}}"><i class="icon-pencil"></i></a>
 					    			<a class="btn btn-mini" href="/foros/comentario/borrar/{{comentario.id}}"><i class="icon-trash"></i></a>
 				        		</div>
 				       			{% endif %}
-					       		<div class="well">{{comentario.comentario|safe}}</div>
+					       	
+					       		<div class="well">{{comentario.comentario|safe}}
+					       			<div class="user-info"><i>escrito por</i> <img src="/files/img/avatarpeque.png" width="25" height="25"> <b>{{comentario.usuario.username}}</b></div>
+					       		</div>
 					        {% endfor %}
 			</div>
 			<div class="span4">
@@ -202,8 +206,20 @@
 	                  <tbody>
 	                    {% for video in respuesta.video.all%}
 	                    <tr>
-	                        <td><center><img src="{{video.url|magicthumbnail}}" width="290" height="150"></center></td>
+	                        <td><a href="" data-toggle="modal" data-target="#myModalresp{{video.id}}"><img src="{{video.url|magicthumbnail}}" width="290" height="150"><img src="/files/img/player.png" class="player-icon"></a></td>
 	                    </tr>
+	                        <div class="modal fade hide modal-video" id="myModalresp{{video.id}}">
+	                          <div class="modal-header">
+	                            <a class="close" data-dismiss="modal">×</a>
+	                            <h3>{{video.nombre_video}}</h3>
+	                          </div>
+	                          <div class="modal-body">
+	                            <p>{{ video.url|magicembed:"640x480" }}</p>
+	                          </div>
+	                          <div class="modal-footer">
+	                            <a href="#" data-dismiss="modal" class="btn">Cerrar</a>
+	                          </div>
+	                        </div> 
 	                    {% endfor %}
 	                  </tbody>
 	                </table>
@@ -235,25 +251,89 @@
 
 	</div>
 </div>
+<div class="row">
+	<div class="container">
+		<div class="row">
+        <form enctype="multipart/form-data" action="." method="post">{% csrf_token %}
+            {{ form.media }}
+			<div class="span9">
+				<div class="well">
+                {%if form.errors%}
+                        <div class="alert alert-error"><b>Favor corregir los siguientes errores</b><br>{{form.errors}}</div>
+                {%endif%}
+                 {{form.as_p}}
+                <div class="tabbable tabs-left">
+                        <ul class="nav nav-tabs nav-tab-media">
+                          <li class="active"><a href="#fotos" data-toggle="tab"><i class="icon-camera"></i>Fotos e imagenes</a></li>
+                          <li><a href="#documentos" data-toggle="tab"><i class="icon-file"></i>Documentos</a></li>
+                          <li><a href="#videos" data-toggle="tab"><i class="icon-film"></i>Videos</a></li>
+                          <li><a href="#audios" data-toggle="tab"><i class="icon-volume-up"></i>Audios</a></li>
+                        </ul>
+                        <div class="tab-content tab-media">
+                          <div class="tab-pane active" id="fotos">
+                               <span class="label label-warning">FOTOS</span><hr>
+                               {{ form2.management_form }}
+                                {% for foto in form2 %}
+                                <div class="media-form-inline">
+                                        {{foto.label_tag}}
+                                        {{foto}}
+                                </div>
+                                {% endfor %}
+                                <hr>
+                          </div>
+                          <div class="tab-pane" id="documentos">
+                                <span class="label label-warning">DODCUMENTOS</span><hr>
+                                {{ form3.management_form }}
+                                {% for docu in form3 %}
+                                <div class="media-form-inline">
+                                        {{docu.label_tag}}
+                                        {{docu}}
+                                </div>
+                                {% endfor %}
+                                <hr>
+                          </div>
+                          <div class="tab-pane" id="videos">
+                                <span class="label label-warning">VIDEOS</span><hr>
+                                {{ form4.management_form }}
+                                {% for video in form4 %}
+                                <div class="media-form-inline">
+                                        {{video.label_tag}}
+                                        {{video}}
+                                </div>
+                                {% endfor %}
+                                <hr>
+                          </div>
+                          <div class="tab-pane" id="audios">
+                                <span class="label label-warning">AUDIOS</span><hr>
+                                {{ form5.management_form }}
+                                {% for audio in form5 %}
+                                <div class="media-form-inline">
+                                        {{audio.label_tag}}
+                                        {{audio}}
+                                </div>
+                                {% endfor %}
+                                <hr>
+                          </div>
+                        </div>
+                    </div>
+                </div>
 
-
-<hr>
-<h2>Aportar a Discusion/Foro</h2>
-<div>
-    <form action="." method="POST">{% csrf_token %}
-    	{{ form.media }}
-        {{form}}
-        <h6>Agregar Imagen</h6>
-        {{form2.as_p}}
-        <h6>Agregar Documentos</h6>
-        {{form3.as_p}}
-        <h6>Agregar Videos</h6>
-        {{form4.as_p}}
-        <h6>Agregar Sonido</h6>
-        {{form5.as_p}}
-        <input id="boton-preguntar" type="submit" value="Responder">
-     </form>
+			</div>
+			<div class="span3">
+                <div class="alert "><i class="icon-info-sign"></i>
+                  Un aporte al foro
+                </div>
+                <div class="well" id="actionbuttons">
+                <input class="btn btn-large btn-success " style="" type="submit" id="submitfoo" value="Guardar" />
+                <a href="/foros" class="btn btn-large">Cerrar</a>
+                </div>
+			</div>
+		</form>
+		</div>
+	</div>
 </div>
+
+
 
 
 {% endblock %}

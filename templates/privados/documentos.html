@@ -22,6 +22,15 @@
 			<div class="span3">
 				<ul class="nav nav-list well">
 					  <li class="nav-header">
+					    BUSCAR
+					  </li>
+					  <li>
+						<form class="form-search form-inline">
+						  <input type="text" class="input-medium search-query" style="width:115px">
+						  <button type="submit" class="btn"><i class="icon-search button-icon"></i></button>
+						</form>
+					  </li>
+					  <li class="nav-header">
 					    TAGS
 					  </li>
 				{% for tag in tags %}
@@ -33,7 +42,7 @@
 				<table class="table  table-bordered table-condensed table-striped">
 					<thead>
 						<tr>
-							<th>Nombre</th>
+							<th width="610">Nombre del documento</th>
 							<th>descargar</th>
 						</tr>
 					</thead>
@@ -42,7 +51,7 @@
 							{% if a.nombre_doc != '' %}
 								<tr>
 									<td>{{a.nombre_doc}}</td>
-									<td><a href="{{a.adjunto}}" class="btn"><i class="icon-download-alt"></i></a></td>
+									<td><center><a href="/uploads/{{a.adjunto}}" class="btn btn-mini btn-info"><i class="icon-download-alt button-icon icon-white"></i></a></center></td>
 								</tr>
 							{% endif %}
 						{% endfor %}

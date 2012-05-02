@@ -54,7 +54,7 @@ $(".alert").alert();
                 <div class="span7">
                     <div class="btn-group acciones">
                         {% if object.user == request.user or request.user.is_superuser %}
-                            <a class="btn" href="/notas/editar/{{objects.id}}"><i class="icon-pencil"></i>Editar</a>
+                            <a class="btn" href="/notas/editar/{{object.id}}"><i class="icon-pencil"></i>Editar</a>
                             <a class="btn" data-toggle="modal" data-target="#myModal"  ><i class="icon-remove-sign"></i>Borrar</a>
                         {% endif %}
                        </div> 
@@ -68,7 +68,7 @@ $(".alert").alert();
                           </div>
                           <div class="modal-footer">
                             <a href="#" data-dismiss="modal" class="btn">Cerrar</a>
-                            <a href="/notas/borrar/{{objects.id}}" class="btn btn-danger">Borrar Permanentemente</a>
+                            <a href="/notas/borrar/{{object.id}}" class="btn btn-danger">Borrar Permanentemente</a>
                           </div>
                         </div>  
                 </div>

@@ -245,7 +245,7 @@ def documento(request):
             for item in TaggedItems:
                 lista.append(item)
         tags.sort(key=operator.itemgetter('count'), reverse=True)
-        prueba = list(set(lista))
+        documentos = list(set(lista))
 
     return render_to_response('privados/documentos.html', RequestContext(request, locals()))
 

@@ -25,7 +25,19 @@
   // assign "pager-active" class to the first thumb
   $('.thumbs a:first').addClass('pager-active');
 $('#myModal').modal('hide');
-$(".alert").alert()
+$(".alert").alert();
+
+  $(".fancybox").fancybox({
+      openEffect  : 'elastic',
+      closeEffect : 'elastic',
+
+      helpers : {
+        title : {
+          type : 'inside'
+        }
+      }
+  });
+
 });
 </script>
 {%endblock%}
@@ -90,7 +102,9 @@ $(".alert").alert()
                 <div id="slider1">
                     {% for imagen in object.fotos.all%}
                     <div>
+                      <a class="fancybox" rel="galleryforo" title="{{imagen.nombre_img}}" href="{{imagen.foto.url_640x480}}">
                         <img class="imagen-slider" src="{{imagen.foto.url_380x250}}" alt="{{imagen.nombre}}" title="{{imagen.nombre}}">
+                      </a>
                         <span class="label label-success">{{imagen.nombre_img}}</span>
                     </div>
                     {% endfor %}
@@ -98,7 +112,7 @@ $(".alert").alert()
                 {%if object.fotos.all.count > 1%}
                 <div class="thumbs">
                   {% for imagen in object.fotos.all%}
-                        <a href="#"><img width="65" height="65" src="{{imagen.foto.url_80x80}}" alt="{{imagen.nombre}}" title="{{imagen.nombre}}"></a>
+                        <a href="#"><img width="65" height="65" src="{{imagen.foto.url_80x80}}" alt="{{imagen.nombre_img}}" title="{{imagen.nombre_img}}"></a>
                     {% endfor %}
                     <div class="clean"></div>
                 </div>

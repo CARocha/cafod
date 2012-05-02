@@ -12,6 +12,11 @@ from django.contrib.contenttypes.generic import generic_inlineformset_factory
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 import thread
 import datetime
+import operator
+from django.core.mail import send_mail, EmailMultiAlternatives
+from django.template.loader import render_to_string
+from django.contrib.sites.models import Site
+
 # Create your views here.
 
 def logout_page(request):

@@ -1,10 +1,22 @@
+{% block extra_js %}
+<script type="text/javascript">
+$(document).ready(function() {    
+$('#commentform').submit(function(e) {
+    $parent.jQuery.fancybox.close();
+
+});
+});
+</script>
+{% endblock %}
 {% block contenido %}
+
 <h2>Agregue su comentario</h2>
 
-<form action="." method="POST">{% csrf_token %}
+<form id="commentform"action="." method="POST">{% csrf_token %}
 		{{ form.media }}
         	{{form.as_p}}
-        <input id="boton-preguntar" type="submit" value="Responder">
+<input id="boton-preguntar" type="submit" value="Responder">
+        <input type="hidden" name="next" href=""value="" />
  </form>
 
 {% endblock %}

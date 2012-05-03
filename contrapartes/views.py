@@ -103,17 +103,31 @@ def editar_usuario_perfil(request):
 
 @login_required
 def enviar_mensaje(request):
+    mensaje = Mensajero.objects.filter(user=request.user)
     if request.method == 'POST':
-        form = MensajeForm(data=request.POST)
+        form = MensajeForm(request.POST)
         if form.is_valid():
-            form.save()
+            #form.save()
+            form_uncommited = form.save(commit=False)
+            #form_uncommited.user = form.cleaned_data['user']
+            form_uncommited.save()
+            form.save_m2m()
 
-            return HttpResponseRedirect('/contrapartes/mensajes/')
+            thread.start_new_thread(notify_user_mensaje, (form, ))
+
+            return HttpResponseRedirect('/contrapartes/mensaje/ver/')
 
     else:
         form = MensajeForm()
-    return render_to_response('contrapartes/mensajes.html', locals(),
+    return render_to_response('contrapartes/mensaje.html', locals(),
                                 context_instance=RequestContext(request))
 
-def notify_all_mensaje(mensaje):
-    pass
+def notify_user_mensaje(mensaje):
+    p = mensaje
+
+    site = Site.objects.get_current()
+    contenido = render_to_string('contrapartes/notify_new_mensaje.txt', {
+                                   'mensaje': mensaje,
+                                   'url': '%s/mensaje/ver/' % (site,)
+                                    })
+    #send_mail('Nuevo mensaje CAFOD', contenido, 'develop@cafodca.org', [user.email for user in mensaje.user if user.email])

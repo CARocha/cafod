@@ -1,22 +1,28 @@
-{% block extra_js %}
-<script type="text/javascript">
-$(document).ready(function() {    
-$('#commentform').submit(function(e) {
-    $parent.jQuery.fancybox.close();
 
-});
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+	$("#boton-preguntar").click(function() {	
+		$.post('.', {
+			comentario: $('#id_comentario').val(),
+			csrfmiddlewaretoken: $('input[name="csrfmiddlewaretoken"]').val()
+		}, function (data){
+			window.top.location.href=data;			
+			window.top.location.reload();
+			window.parent.jQuery.fancybox.close();
+		});
+		
+		return false;
+	});
 });
 </script>
-{% endblock %}
-{% block contenido %}
+
 
 <h2>Agregue su comentario</h2>
 
 <form id="commentform"action="." method="POST">{% csrf_token %}
-		{{ form.media }}
         	{{form.as_p}}
-	 <a href="javascript:parent.jQuery.fancybox.close();" ><input id="boton-preguntar" type="submit" value="Responder"></a>
-        <input type="hidden" name="next" value="{{ next }}" >
+	 <input id="boton-preguntar" type="submit" value="Responder">
+        
  </form>
 
-{% endblock %}

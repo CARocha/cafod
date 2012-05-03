@@ -2,7 +2,7 @@
 {% block extra_js %}
 <link href="/files/css/jquery.autocomplete.css" rel="stylesheet" type="text/css">
 <script type="text/javascript" src="/files/js/autocompletejs/jquery.autocomplete.js"></script>
-<script type="text/javascript" src="https://raw.github.com/eos87/django-biodiversity/master/biodiversity/static_media/js/jquery.color.js"></script>
+<script type="text/javascript" src="/files/js/colors.js"></script>
 <script type="text/javascript" >
 $(document).ready(function() {
 	$(".fancybox").fancybox({
@@ -46,10 +46,12 @@ $(document).ready(function() {
                     </div>
                 </div>
                 <div class="span7">
+                	{% if discusion.contraparte == request.user or request.user.is_superuser %}
                     <div class="btn-group filtrospais">
                         <a href="/foros/editar/{{discusion.id}}" class="btn"><i class="icon-pencil"></i>Editar foro</a>
                         <a href="#formaporte" class="btn"><i class="icon-comment"></i>Aportar al foro</a>
                     </div>
+                    {%endif%}
                 </div>
             </div>
       </div>
@@ -180,6 +182,7 @@ $(document).ready(function() {
 		<div class="row ">
 			<div class="span1">
 				<div class="label">Aporte # {{respuesta.id}}</div>
+				<div class="user-info">{{respuesta.fecha|date:"d M"}}</div>
 				<br><img src="/files/img/avatarpeque.png"><br>
 				<small>{{respuesta.user}}</small>
 				{% if respuesta.user == request.user or request.user.is_superuser %}
@@ -196,10 +199,10 @@ $(document).ready(function() {
 				    </p>				    
 			        {% for comentario in respuesta.comentarios_set.all %}					
 		       		<div class="well" id="cmt{{comentario.id}}">{{comentario.comentario|safe}}
-		       			<div class="user-info"><i>escrito por</i> <img src="/files/img/avatarpeque.png" width="25" height="25"> <b>{{comentario.usuario.username}}</b>
+		       			<div class="user-info"><i>escrito por</i> <img src="/files/img/avatarpeque.png" width="25" height="25"> <b>{{comentario.usuario.username}}</b> - {{comentario.fecha|date:"d M"}}
 					        {% if comentario.usuario == request.user or request.user.is_superuser %}
 							<div class="btn-group foro-edit" style="float:right;">
-					    			<a class="btn btn-mini" href="/foros/comentario/editar/{{comentario.id}}"><i class="icon-pencil"></i></a>
+					    			<a data-fancybox-type="iframe"  class=" fancybox btn btn-mini" href="/foros/comentario/editar/{{comentario.id}}"><i class="icon-pencil"></i></a>
 					    			<a class="btn btn-mini" href="/foros/comentario/borrar/{{comentario.id}}"><i class="icon-trash"></i></a>
 				        		</div>
 				       		{% endif %}

@@ -105,6 +105,7 @@ class Foros(models.Model):
 
     class Meta:
     	verbose_name_plural = "Foros"
+        ordering = ['-creacion']
 
     def __unicode__(self):
     	return self.nombre

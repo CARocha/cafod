@@ -161,3 +161,8 @@ class ImageWithThumbsField(ImageField):
         self.height_field=height_field
         self.sizes = sizes
         super(ImageField, self).__init__(**kwargs)
+
+from south.modelsinspector import add_introspection_rules
+#add_introspection_rules = ([], ["^tagging_autocomplete\.models\.TagAutocompleteField"]) 
+# era la mia add_introspection_rules = ([], ["\.thumbs\.ImageWithThumbsField"]) 
+add_introspection_rules([], ["^thumbs_logo\.ImageWithThumbsField"])

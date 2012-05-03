@@ -52,6 +52,13 @@ class UserProfile(models.Model):
     user = models.OneToOneField(User)
     # Other fields here
     contraparte = models.ForeignKey(Contraparte)
+    avatar = ImageWithThumbsField(upload_to=get_file_path,
+                                   sizes=((350,250), (70,60),(180,160)), 
+                                   null=True, blank=True)
+    fileDir = 'usuario/avatar/'
 
     def __unicode__(self):
         return u"%s - %s" % (self.user.username, self.contraparte.nombre)
+
+    def get_absolute_url(self):
+        return '/usuario/%d/' % (self.user.id)

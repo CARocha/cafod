@@ -13,4 +13,5 @@ urlpatterns = patterns('contrapartes.views',
     url(r'^crear/$', 'crear_contraparte', name="crear-contraparte"),
     url(r'^editar/(?P<id>\d+)/$', 'editar_contraparte', name='editar-contraparte'),
     # url(r'^borrar/(?P<id>\d+)/$', 'borrar_contraparte', name='borrar-contraparte'),
+    url(r'^usuario/editar/$', 'editar_usuario_perfil', name='editar-usuario-perfil'),
     )

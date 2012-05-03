@@ -4,6 +4,7 @@ from django.forms import ModelForm
 from models import *
 from django import forms
 from ckeditor.widgets import CKEditorWidget
+from django.contrib.auth.models import User
 
 class ContraparteForms(forms.ModelForm):
 	temas = forms.CharField(widget=CKEditorWidget())
@@ -18,3 +19,14 @@ class ContraparteForms(forms.ModelForm):
 	class Meta:
 		model = Contraparte
 		exclude = ('user',)
+
+class UserForm(ModelForm):
+	class Meta:
+		model = User
+		fields = ('username', 'first_name', 'last_name', 'email')
+
+class UserProfileForm(ModelForm):
+	class Meta:
+		model = UserProfile
+		fields = ('avatar',)
+

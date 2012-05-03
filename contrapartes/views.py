@@ -62,7 +62,7 @@ def editar_contraparte(request, id):
 # @login_required
 # def borrar_contraparte(request, id):
 #     contra = get_object_or_404(Contraparte, pk=id)
-#     usuarios = UserProfile.objects.filter(Contraparte_id=contra.id) # OJO con el campo con mayuscula XD
+#     usuarios = UserProfile.objects.filter(contraparte_id=contra.id)
 
 #     nombres = []
 #     for obj in usuarios:
@@ -73,3 +73,25 @@ def editar_contraparte(request, id):
 #         return redirect('contraparte-list')
 #     else:
 #         return redirect('/')
+
+@login_required
+def editar_usuario_perfil(request):
+    #usuario = get_object_or_404(User, id=id)
+
+    if request.method == 'POST':
+        form = UserForm(data=request.POST, instance=request.user)
+        form1 = UserProfileForm(data=request.POST, instance=request.user.userprofile, files=request.FILES)
+        if form.is_valid() and form1.is_valid():
+            form.save()
+            form1.save()
+            #form_uncommited = form.save(commit=False)
+            #form_uncommited.user = request.user
+            #form_uncommited.save()
+
+            return HttpResponseRedirect('/foros/perfil')
+    else:
+        form = UserForm(instance=request.user)
+        form1 = UserProfileForm(instance=request.user.userprofile)
+    return render_to_response('contrapartes/editar_usuario.html', locals(),
+                                 context_instance=RequestContext(request))    
+    pass

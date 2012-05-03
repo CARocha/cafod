@@ -1,0 +1,15 @@
+{% extends "baseinterna.html" %}
+
+{% block contenido %}
+
+<form enctype="multipart/form-data" method="post" action=".">{% csrf_token %}
+	{{ form.media }}
+
+	{{form.as_p}}
+	{{form1.as_p}}
+				
+	<input class="btn btn-large btn-success " style="" type="submit" id="submitfoo" value="Guardar" />
+				
+</form>
+
+{% endblock%}

@@ -69,4 +69,4 @@ class Mensajero(models.Model):
     mensaje = RichTextField()
 
     def __unicode__(self):
-        return self.user.email
+        return u'%s - %s ' % (self.fecha, self.mensaje)

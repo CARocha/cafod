@@ -12,3 +12,4 @@ class ContraparteAdmin(admin.ModelAdmin):
 admin.site.register(Pais)
 admin.site.register(Contraparte, ContraparteAdmin)
 admin.site.register(UserProfile)
+admin.site.register(Mensajero)

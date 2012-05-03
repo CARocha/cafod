@@ -1,0 +1,17 @@
+{% extends "baseadmin.html" %}
+
+{% block contenido %}
+mensajes<br>
+{% for a in mensaje %}
+	{{a.mensaje}}, {% for b in a.user.all %} {{b}} {% endfor %}
+	<hr>
+{% endfor %}
+
+
+<form action="." method="post" accept-charset="utf-8">{% csrf_token %}
+	{{form.media}}
+	{{form.as_p}}
+	<input type="submit" name="enviar" value="Enviar">
+</form>
+
+{% endblock %}

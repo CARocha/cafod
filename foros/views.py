@@ -84,7 +84,7 @@ def comentario_foro(request, aporte_id):
 
             thread.start_new_thread(notify_user_comentario, (form1_uncommited,))
 
-            return HttpResponseRedirect('/foros/ver/%d' % aporte.foro_id)
+            return HttpResponse('/foros/ver/%d/#cmt%s' % (aporte.foro_id, form.instance.id))
     else:
         form = ComentarioForm()
     return render_to_response('foros/comentario.html', RequestContext(request, locals()))

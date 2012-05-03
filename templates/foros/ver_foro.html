@@ -2,6 +2,7 @@
 {% block extra_js %}
 <link href="/files/css/jquery.autocomplete.css" rel="stylesheet" type="text/css">
 <script type="text/javascript" src="/files/js/autocompletejs/jquery.autocomplete.js"></script>
+<script type="text/javascript" src="https://raw.github.com/eos87/django-biodiversity/master/biodiversity/static_media/js/jquery.color.js"></script>
 <script type="text/javascript" >
 $(document).ready(function() {
 	$(".fancybox").fancybox({
@@ -15,10 +16,21 @@ $(document).ready(function() {
     		title : {
     			type : 'inside'
     		}
-    	},
-    	afterClose: function() { window.location.href='/foros/ver/{{discusion.id}}';}
+    	}
+    	//afterClose: function() { window.location.href='/foros/ver/{{discusion.id}}';}
 	});
+	if (window.location.href.indexOf('#cmt')!=-1){
+	    var id = window.location.href.split('#')[1];
+	    $('html, body').animate({
+            scrollTop: $('#'+id).offset().top
+        }, 1000);
+
+        $("#"+id)
+        	.animate({backgroundColor: '#BEDA53'}, 10)
+        	.animate( { backgroundColor: '#F5F5F5' }, 2000);
+	}	
 });
+
 </script>
 {% endblock %}
 
@@ -181,21 +193,19 @@ $(document).ready(function() {
 				{{respuesta.contenido|safe}}
 					<p>
 				   	<a data-fancybox-type="iframe" href="/foros/ver_comentario/{{respuesta.id}}" class="btn btn-mini btn-warning fancybox"><i class="icon-comment icon-white"></i>Comentar</a>
-				    </p>
-				    
-					        {% for comentario in respuesta.comentarios_set.all %}
-					
-					       		<div class="well">{{comentario.comentario|safe}}
-					       			<div class="user-info"><i>escrito por</i> <img src="/files/img/avatarpeque.png" width="25" height="25"> <b>{{comentario.usuario.username}}</b>
-								        {% if comentario.usuario == request.user or request.user.is_superuser %}
-										<div class="btn-group foro-edit" style="float:right;">
-								    			<a class="btn btn-mini" href="/foros/comentario/editar/{{comentario.id}}"><i class="icon-pencil"></i></a>
-								    			<a class="btn btn-mini" href="/foros/comentario/borrar/{{comentario.id}}"><i class="icon-trash"></i></a>
-							        		</div>
-							       		{% endif %}
-					       			</div>
-					       		</div>
-					        {% endfor %}
+				    </p>				    
+			        {% for comentario in respuesta.comentarios_set.all %}					
+		       		<div class="well" id="cmt{{comentario.id}}">{{comentario.comentario|safe}}
+		       			<div class="user-info"><i>escrito por</i> <img src="/files/img/avatarpeque.png" width="25" height="25"> <b>{{comentario.usuario.username}}</b>
+					        {% if comentario.usuario == request.user or request.user.is_superuser %}
+							<div class="btn-group foro-edit" style="float:right;">
+					    			<a class="btn btn-mini" href="/foros/comentario/editar/{{comentario.id}}"><i class="icon-pencil"></i></a>
+					    			<a class="btn btn-mini" href="/foros/comentario/borrar/{{comentario.id}}"><i class="icon-trash"></i></a>
+				        		</div>
+				       		{% endif %}
+		       			</div>
+		       		</div>
+			        {% endfor %}
 			</div>
 			<div class="span4">
 				{%if respuesta.fotos.all%}

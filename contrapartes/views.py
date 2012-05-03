@@ -113,7 +113,7 @@ def enviar_mensaje(request):
             form_uncommited.save()
             form.save_m2m()
 
-            thread.start_new_thread(notify_user_mensaje, (form, ))
+            thread.start_new_thread(notify_user_mensaje, (form_uncommited, ))
 
             return HttpResponseRedirect('/contrapartes/mensaje/ver/')
 
@@ -123,11 +123,10 @@ def enviar_mensaje(request):
                                 context_instance=RequestContext(request))
 
 def notify_user_mensaje(mensaje):
-    p = mensaje
-
+    print mensaje.mensaje
     site = Site.objects.get_current()
     contenido = render_to_string('contrapartes/notify_new_mensaje.txt', {
-                                   'mensaje': mensaje,
-                                   'url': '%s/mensaje/ver/' % (site,)
+                                   'mensajes': mensaje,
+                                   'url': '%s/contrapartes/mensaje/ver/' % (site,)
                                     })
-    #send_mail('Nuevo mensaje CAFOD', contenido, 'develop@cafodca.org', [user.email for user in mensaje.user if user.email])
+    send_mail('Nuevo mensaje CAFOD', contenido, 'develop@cafodca.org', [user.email for user in mensaje.user.all() if user.email])

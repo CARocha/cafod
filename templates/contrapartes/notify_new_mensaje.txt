@@ -1,1 +1,6 @@
-{{mensaje.mensaje}}
+Usted tienen un nuevo mensaje
+por favor siga el link para leer el mensaje completo
+
+http://{{url}}
+
+CAFOD 

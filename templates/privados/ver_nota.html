@@ -53,8 +53,8 @@ $(".alert").alert();
                 </div>
                 <div class="span7">
                     <div class="btn-group acciones">
-                        {% if object.user == request.user or request.user.is_superuser %}
-                            <a class="btn" href="/objects/editar/{{object.id}}"><i class="icon-pencil"></i>Editar</a>
+                        {% if nota.user == request.user or request.user.is_superuser %}
+                            <a class="btn" href="/notas/editar/{{nota.id}}"><i class="icon-pencil"></i>Editar</a>
                             <a class="btn" data-toggle="modal" data-target="#myModal"  ><i class="icon-remove-sign"></i>Borrar</a>
                         {% endif %}
                        </div> 
@@ -64,11 +64,11 @@ $(".alert").alert();
                             <h3>Esta Seguro?</h3>
                           </div>
                           <div class="modal-body">
-                            <p>La object sera borrada permanentemente y no podra ser recuperada</p>
+                            <p>La nota sera borrada permanentemente y no podra ser recuperada</p>
                           </div>
                           <div class="modal-footer">
                             <a href="#" data-dismiss="modal" class="btn">Cerrar</a>
-                            <a href="/objects/borrar/{{object.id}}" class="btn btn-danger">Borrar Permanentemente</a>
+                            <a href="/notas/borrar/{{nota.id}}" class="btn btn-danger">Borrar Permanentemente</a>
                           </div>
                         </div>  
                 </div>
@@ -82,25 +82,25 @@ $(".alert").alert();
             <div class="span7">
                 {% if request.GET.shva == 'ok' %}
                   <div class="alert fade in">
-                      La object ha sido editada con &eacute;xito!
+                      La nota ha sido editada con &eacute;xito!
                       <a class="close" href="#" data-dismiss="alert">x</a>
                   </div>
                 {% endif %}
-               <h1 class="titulo-grande">{{object.titulo}}</h1>
-               <div class="extrainfofull">{{object.fecha}}  |  {{object.pais.nombre}}</div>
+               <h1 class="titulo-grande">{{nota.titulo}}</h1>
+               <div class="extrainfofull">{{nota.fecha}}  |  {{nota.pais.nombre}}</div>
             </div>
             <div class="span5">
                 
-                <a class="contraparte-object btn " href="/contrapartes/{{objects.contraparte.id}}"><img src="{{object.contraparte.logo.url_70x60}}">{{object.contraparte.nombre}}</a>
+                <a class="contraparte-nota btn " href="/contrapartes/{{notas.contraparte.id}}"><img src="{{nota.contraparte.logo.url_70x60}}">{{nota.contraparte.nombre}}</a>
             </div>
         </div>
         <div class="row ">
             <div class="span7 divisordoble">
-                {{object.contenido|safe}}
+                {{nota.contenido|safe}}
             </div>
             <div class="span5 divisordoble">
                 <div id="slider1">
-                    {% for imagen in object.fotos.all%}
+                    {% for imagen in nota.fotos.all%}
                     <div>
                       <a class="fancybox" rel="galleryforo" title="{{imagen.nombre_img}}" href="{{imagen.foto.url_640x480}}">
                         <img class="imagen-slider" src="{{imagen.foto.url_380x250}}" alt="{{imagen.nombre}}" title="{{imagen.nombre}}">
@@ -109,9 +109,9 @@ $(".alert").alert();
                     </div>
                     {% endfor %}
                 </div>
-                {%if object.fotos.all.count > 1%}
+                {%if nota.fotos.all.count > 1%}
                 <div class="thumbs">
-                  {% for imagen in object.fotos.all%}
+                  {% for imagen in nota.fotos.all%}
                         <a href="#"><img width="65" height="65" src="{{imagen.foto.url_80x80}}" alt="{{imagen.nombre_img}}" title="{{imagen.nombre_img}}"></a>
                     {% endfor %}
                     <div class="clean"></div>
@@ -122,7 +122,7 @@ $(".alert").alert();
                     <div class="dividerline"></div>
                     <table class="table  table-bordered table-condensed doc-sidebar">
                       <tbody>
-                        {% for adjuntos in object.adjuntos.all%}
+                        {% for adjuntos in nota.adjuntos.all%}
                         <tr>
                             <td>{{adjuntos.nombre_doc}}</td>
                             <td><center><a href="{{adjuntos.adjunto}}" class=" btn btn-info btn-mini dropdown-toggle"><i class="icon-download-alt icon-white"></i>Descargar</a></center></td>
@@ -135,4 +135,30 @@ $(".alert").alert();
         </div>
     </div>
 </div>
+Comentarios
+    {% for respuesta in nota.comentarionotas_set.all %}
+    
+        <div class="label">Comentario #{{respuesta.id}}</div>
+        
+        <small>{{respuesta.user}}</small>
+        {% if respuesta.user == request.user or request.user.is_superuser %}
+          <div class="btn-group foro-edit">
+              <a class="btn btn-mini" href="/foros/aporte/editar/{{respuesta.id}}"><i class="icon-pencil"></i></a>
+              <a class="btn btn-mini" href="/foros/aporte/borrar/{{respuesta.id}}"><i class="icon-trash"></i></a>
+                </div>
+        {% endif %}
+     <br>
+      
+        {{respuesta.comentario|safe}}
+
+      {% endfor %}
+     
+
+<form action="." method="post">{% csrf_token %}
+        {{form.media}}
+        {{form.as_p}}
+
+        <input class="btn btn-large btn-success " style="" type="submit" id="submitfoo" value="Guardar" />
+      
+</form>         
 {% endblock %}

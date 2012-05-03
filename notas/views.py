@@ -164,4 +164,24 @@ def notify_all_notas(notas):
                                  #'url_aporte': '%s/foros/ver/%s/#aporte' % (site, foros.id),
                                  })
     send_mail('Nueva Notas en CAFOD', contenido, 'develop@cafodca.org', [user.email for user in users if user.email])
-    
+
+@login_required
+def comentar_nota(request, id):
+    nota = get_object_or_404(Notas, id=id)
+
+    if request.method == 'POST':
+        form = ComentarioForm(request.POST)
+
+        if form.is_valid():
+            form_uncommited = form.save(commit=False)
+            form_uncommited.user = request.user
+            form_uncommited.nota = nota
+            form_uncommited.save()
+
+        return HttpResponseRedirect('/notas/ver/%d' % nota.id)
+
+    else:
+        form = ComentarioForm()
+
+    return render_to_response('privados/ver_nota.html', locals(),
+                                 context_instance=RequestContext(request))  

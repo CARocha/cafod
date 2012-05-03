@@ -55,3 +55,12 @@ class Notas(models.Model):
         usuario = UserProfile.objects.get(pk=self.user.id)
         contraparte = Contraparte.objects.get(pk=usuario.contraparte.id)
         return contraparte
+
+class ComentarioNotas(models.Model):
+    nota = models.ForeignKey(Notas)
+    fecha = models.DateField(default=datetime.datetime.now())
+    user = models.ForeignKey(User)
+    comentario = RichTextField()
+
+    def __unicode__(self):
+        return self.user.username

@@ -8,6 +8,12 @@ from django.template import RequestContext
 from models import *
 from forms import *
 from notas.models import *
+from django.contrib.sites.models import Site
+from django.core.mail import send_mail
+import operator
+import thread
+import datetime
+from django.template.loader import render_to_string
 
 # Create your views here.
 #def contrapartes_index(request):
@@ -93,5 +99,21 @@ def editar_usuario_perfil(request):
         form = UserForm(instance=request.user)
         form1 = UserProfileForm(instance=request.user.userprofile)
     return render_to_response('contrapartes/editar_usuario.html', locals(),
-                                 context_instance=RequestContext(request))    
+                                 context_instance=RequestContext(request))
+
+@login_required
+def enviar_mensaje(request):
+    if request.method == 'POST':
+        form = MensajeForm(data=request.POST)
+        if form.is_valid():
+            form.save()
+
+            return HttpResponseRedirect('/contrapartes/mensajes/')
+
+    else:
+        form = MensajeForm()
+    return render_to_response('contrapartes/mensajes.html', locals(),
+                                context_instance=RequestContext(request))
+
+def notify_all_mensaje(mensaje):
     pass

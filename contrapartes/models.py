@@ -62,3 +62,11 @@ class UserProfile(models.Model):
 
     def get_absolute_url(self):
         return '/usuario/%d/' % (self.user.id)
+
+class Mensajero(models.Model):
+    user = models.ManyToManyField(User)
+    fecha = models.DateField()
+    mensaje = RichTextField()
+
+    def __unicode__(self):
+        return self.user.email

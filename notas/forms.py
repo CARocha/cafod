@@ -15,12 +15,18 @@ class NotasForms(forms.ModelForm):
     	exclude = ('slug','fecha','user',)
 
 class FotoForm(forms.ModelForm):
-	tags_img = TagField(widget=TagAutocomplete(), required=False, label="Tags")
-	class Meta:
-	    model = Imagen
-	    exclude = ('content_type', 'object_id', 'content_object',)
+    tags_img = TagField(widget=TagAutocomplete(), required=False, label="Tags")
+    class Meta:
+	model = Imagen
+	exclude = ('content_type', 'object_id', 'content_object',)
 
 class AdjuntoForm(forms.ModelForm):
-	class Meta:
-	    model = Documentos
-	    exclude = ('content_type', 'object_id', 'content_object',)
+    class Meta:
+	model = Documentos
+	exclude = ('content_type', 'object_id', 'content_object',)
+
+class ComentarioForm(forms.ModelForm):
+    class Meta:
+    	model = ComentarioNotas
+    	exclude = ('nota', 'fecha', 'user')
+

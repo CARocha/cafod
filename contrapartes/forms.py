@@ -5,6 +5,9 @@ from models import *
 from django import forms
 from ckeditor.widgets import CKEditorWidget
 from django.contrib.auth.models import User
+from django.forms.fields import DateField, ChoiceField, MultipleChoiceField
+from django.forms.widgets import RadioSelect, CheckboxSelectMultiple
+from django.forms.extras.widgets import SelectDateWidget
 
 class ContraparteForms(forms.ModelForm):
     temas = forms.CharField(widget=CKEditorWidget())
@@ -30,6 +33,9 @@ class UserProfileForm(ModelForm):
 	model = UserProfile
 	fields = ('avatar',)
 
-class MensajeForm(ModelForm):
+class MensajeForm(forms.ModelForm):
+    #user = forms.ModelMultipleChoiceField(queryset = User.objects.all(),
+                                            #widget = forms.CheckboxSelectMultiple())
     class Meta:
+        widgets = {'user': forms.CheckboxSelectMultiple}
     	model = Mensajero

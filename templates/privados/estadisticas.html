@@ -1,0 +1,30 @@
+{% extends "baseadmin.html" %}
+
+{% block contenido %}
+
+<table border="1">
+<thead>
+	<tr>
+             <th>Nombre</th>
+             <th>Foros</th>
+             <th>Notas</th>
+             <th>Aportes</th>
+             <th>Comentarios</th>
+             <th>Documentos</th>
+             <th>Imagenes</th>
+             <th>Videos</th>
+             <th>Audios</th>
+	</tr>
+</thead>
+<tbody>
+    {% for k,v in total.items %}
+    <tr>
+    	<td>{{k}}</td>
+    	{% for a in v%}
+    	    <td>{{a}}</td>
+    	{%endfor%}
+    </tr>
+    {% endfor %}
+</tbody>
+</table>
+{% endblock %}

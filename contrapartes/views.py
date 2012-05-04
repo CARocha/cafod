@@ -123,10 +123,27 @@ def enviar_mensaje(request):
                                 context_instance=RequestContext(request))
 
 def notify_user_mensaje(mensaje):
-    print mensaje.mensaje
     site = Site.objects.get_current()
     contenido = render_to_string('contrapartes/notify_new_mensaje.txt', {
                                    'mensajes': mensaje,
                                    'url': '%s/contrapartes/mensaje/ver/' % (site,)
                                     })
     send_mail('Nuevo mensaje CAFOD', contenido, 'develop@cafodca.org', [user.email for user in mensaje.user.all() if user.email])
+
+@login_required
+def estadisticas(request):
+    total = {}
+    for usuario in User.objects.all():
+        foro = Foros.objects.filter(contraparte=usuario).count()
+        nota = Notas.objects.filter(user=usuario).count()
+        aporte = Aportes.objects.filter(user=usuario).count()
+        comentario = Comentarios.objects.filter(usuario=usuario).count()
+        documentos = Documentos.objects.filter(object_id=usuario.id).count()
+        imagenes = Imagen.objects.filter(object_id=usuario.id).count()
+        videos = Videos.objects.filter(object_id=usuario.id).count()
+        audios = Audios.objects.filter(object_id=usuario.id).count()
+
+        total[usuario] = (foro,nota,aporte,comentario,documentos,imagenes,videos,audios)
+
+    return render_to_response('privados/estadisticas.html', locals(),
+                                 context_instance=RequestContext(request))    

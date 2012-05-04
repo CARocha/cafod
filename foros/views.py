@@ -266,7 +266,6 @@ def notify_all_foro(foros):
     send_mail('Nuevo Foro en CAFOD', contenido, 'develop@cafodca.org', [user.email for user in users if user.email])
 
 def notify_all_aporte(aportes):
-    print aportes
     site = Site.objects.get_current()
     users = User.objects.all() #.exclude(username=foros.contraparte.username)
     contenido = render_to_string('foros/notify_new_aporte.txt', {'aporte': aportes,

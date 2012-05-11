@@ -251,10 +251,87 @@ def documento(request):
 
 @login_required
 def busqueda_tag(request, tags):
-    tag = get_object_or_404(Tag, name=tags)
+    tag_sel = get_object_or_404(Tag, name=tags)
     tags = Tag.objects.all()
-    todos = TaggedItem.objects.get_by_model(Documentos, tag.name)
+    todos = TaggedItem.objects.get_by_model(Documentos, tag_sel.name)
     return render_to_response('privados/documentos_tag.html', RequestContext(request, locals()))
+
+@login_required
+def multimedia_fotos(request):
+    imagenes= Imagen.objects.all()
+    tags = Tag.objects.all()
+
+    query = request.GET.get('q', '')
+    if query:
+        result_fotos = Imagen.objects.filter(nombre_img__icontains=query)
+        result_tags = Tag.objects.filter(name__icontains=query)
+        lista = []
+        tags = []
+        for n in result_fotos:
+            lista.append(n)
+        for rtag in result_tags:
+            TaggedItems = TaggedItem.objects.get_by_model(Imagen, rtag.name)
+            if not rtag.items.all().count() == 0:
+                li = []
+                for it in rtag.items.all():
+                    if it.object:
+                        li.append(it)
+                tags.append({'name':rtag.name, 'count': len(li)})
+            for item in TaggedItems:
+                lista.append(item)
+        tags.sort(key=operator.itemgetter('count'), reverse=True)
+        imagenes = list(set(lista))
+        tags = Tag.objects.all()
+
+    return render_to_response('privados/multimedia_fotos.html', RequestContext(request, locals()))
+@login_required
+def multimedia_fotos_tag(request, tags):
+    tag_sel = get_object_or_404(Tag, name=tags)
+    tags = Tag.objects.all()
+    imagenes = TaggedItem.objects.get_by_model(Imagen, tag_sel.name)
+    return render_to_response('privados/multimedia_fotos.html', RequestContext(request, locals()))
+
+@login_required
+def multimedia_videos(request):
+    videos= Videos.objects.all()
+    tags = Tag.objects.all()
+
+    query = request.GET.get('q', '')
+    if query:
+        result_fotos = Videos.objects.filter(nombre_video__icontains=query)
+        result_tags = Tag.objects.filter(name__icontains=query)
+        lista = []
+        tags = []
+        for n in result_fotos:
+            lista.append(n)
+        for rtag in result_tags:
+            TaggedItems = TaggedItem.objects.get_by_model(Videos, rtag.name)
+            if not rtag.items.all().count() == 0:
+                li = []
+                for it in rtag.items.all():
+                    if it.object:
+                        li.append(it)
+                tags.append({'name':rtag.name, 'count': len(li)})
+            for item in TaggedItems:
+                lista.append(item)
+        tags.sort(key=operator.itemgetter('count'), reverse=True)
+        videos = list(set(lista))
+        tags = Tag.objects.all()
+
+    return render_to_response('privados/multimedia_videos.html', RequestContext(request, locals()))
+
+@login_required
+def multimedia_videos_tag(request, tags):
+    tag_sel = get_object_or_404(Tag, name=tags)
+    tags = Tag.objects.all()
+    videos = TaggedItem.objects.get_by_model(Videos, tag_sel.name)
+    return render_to_response('privados/multimedia_videos.html', RequestContext(request, locals()))
+
+@login_required
+def multimedia_videos_sel(request, video):
+    video_sel = get_object_or_404(Videos, id=video)
+    tags = Tag.objects.all()
+    return render_to_response('privados/multimedia_videos.html', RequestContext(request, locals()))
 
 def notify_all_foro(foros):
     site = Site.objects.get_current()

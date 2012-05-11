@@ -32,6 +32,10 @@ form hr{margin-top:10px; margin-bottom:10px;}
     margin-top: -9px;
 }
 
+.nav-tabs > .active > a:hover {
+	cursor:pointer;
+}
+
 /* Header */
 
 #grisheader{
@@ -574,3 +578,34 @@ form hr{margin-top:10px; margin-bottom:10px;}
 	margin-right:0px !important;
 }
 
+/////Multimedia
+
+.multimedia_fotos{
+	img {
+		z-index:-1;
+		position: relative;
+	}
+}
+
+.imagen-gal{
+	float:left;
+	margin-right:4px;
+	margin-bottom:4px;
+	height:160px;
+	 &:hover{
+		 box-shadow:inset 0px 0px 85px rgba(0,0,0,.7);
+		-webkit-box-shadow:inset 0px 0px 85px rgba(0,0,0,.7);
+		-moz-box-shadow:inset 0px 0px 85px rgba(0,0,0,.7);
+	 }
+}
+
+.multimedia_video{
+	float:left;
+	margin-right:10px;
+	margin-bottom:10px;
+	border: #eee 1px solid;
+	.rounded-corners(3px);
+	padding:5px;
+	width:290px;
+
+}

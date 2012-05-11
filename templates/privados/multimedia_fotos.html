@@ -1,0 +1,81 @@
+{% extends "baseadmin.html" %}
+{% block extra_js%}
+<script type="text/javascript" src="/files/js/jquery.bxSlider.min.js"></script>
+<script type="text/javascript">
+  $(document).ready(function(){
+  $(".fancybox").fancybox({
+      openEffect  : 'elastic',
+      closeEffect : 'elastic',
+
+      helpers : {
+        title : {
+          type : 'inside'
+        }
+      }
+  });
+
+});
+</script>
+{%endblock%}
+{% block contenido %}
+<div class="row">
+    <div class="encabezado">
+      <div class="container">
+            <div class="row">
+                <div class="span5">
+                    <div class="encabezado-title">
+                        MULTIMEDIA
+                    </div>
+                </div>
+                <div class="span7">
+                </div>
+            </div>
+      </div>
+    </div>
+</div>
+<div class="row">
+	<div class="container">
+		<div class="row">
+			<div class="span12">
+				<div class="tabbable">
+					  <ul class="nav nav-tabs">
+					    <li class="active"><a href="#" ><i class="icon-camera"></i>Imágenes</a></li>
+					    <li><a href="/foros/privado/multimedia_videos/"><i class="icon-film"></i>Videos</a></li>
+					    <li><a href="/foros/privado/multimedia_audios/" ><i class="icon-volume-up"></i>Audios</a></li>
+					  </ul>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="span3">
+				<ul class="nav nav-list well">
+					  <li class="nav-header">
+					    BUSCAR
+					  </li>
+					  <li>
+						<form class="form-search form-inline" action="." method="GET">
+						  <input type="text" class="input-medium search-query" style="width:115px" name="q" value="{% if query %} {{query}} {% endif%}" />
+						  <button type="submit" class="btn"><i class="icon-search button-icon"></i></button>
+						</form>
+					  </li>
+					  <li class="nav-header">
+					    TAGS
+					  </li>
+				{% for tag in tags %}
+					<li {%if tag == tag_sel%}class="active"{%endif%}><a href="/foros/privado/multimedia_fotos_tag/{{tag}}"><i class="icon-tag"></i>{{tag}}</a></li>
+				{% endfor %}
+				</ul>
+			</div>
+			<div class="span9 multimedia_fotos">
+				{% for a in imagenes %}
+							<a class="imagen-gal fancybox" title="{{a.nombre_img}} <a class='btn btn-info btn-mini' style='float:right' href='/uploads/{{a.foto}}'>Descargar tamaño original</a>" href="{{a.foto.url_640x480}}">
+									<img src="{{a.foto.url_220x160}}">
+							</a>
+				{% endfor %}
+			</div>
+		</div>
+	</div>
+</div>
+
+
+{% endblock %}

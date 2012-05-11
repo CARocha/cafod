@@ -34,7 +34,7 @@
 					    TAGS
 					  </li>
 				{% for t in tags %}
-					<li {%if t.id == tag.id %} class="active"{%endif%} ><a href="/foros/privado/documento_tag/{{t}}"><i class="icon-tag"></i>{{t}}</a></li>
+					<li {%if t == tag_sel%}class="active"{%endif%} ><a href="/foros/privado/documento_tag/{{t}}"><i class="icon-tag"></i>{{t}}</a></li>
 				{% endfor %}
 				</ul>
 			</div>

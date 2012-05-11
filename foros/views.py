@@ -223,8 +223,10 @@ def agenda_personales(request):
 
 @login_required
 def documento(request):
-    documentos = Documentos.objects.all()
-    tags = Tag.objects.all()
+    tags = []
+    for docu in Documentos.objects.all():
+        for tag in Tag.objects.filter(name=docu.tags_doc):
+            tags.append(tag)
 
     query = request.GET.get('q', '')
     if query:
@@ -252,14 +254,19 @@ def documento(request):
 @login_required
 def busqueda_tag(request, tags):
     tag_sel = get_object_or_404(Tag, name=tags)
-    tags = Tag.objects.all()
+    tags = []
+    for docu in Documentos.objects.all():
+        for tag in Tag.objects.filter(name=docu.tags_doc):
+            tags.append(tag)
     todos = TaggedItem.objects.get_by_model(Documentos, tag_sel.name)
     return render_to_response('privados/documentos_tag.html', RequestContext(request, locals()))
 
 @login_required
 def multimedia_fotos(request):
-    imagenes= Imagen.objects.all()
-    tags = Tag.objects.all()
+    tags = []
+    for docu in Imagen.objects.all():
+        for tag in Tag.objects.filter(name=docu.tags_img):
+            tags.append(tag)
 
     query = request.GET.get('q', '')
     if query:
@@ -287,14 +294,19 @@ def multimedia_fotos(request):
 @login_required
 def multimedia_fotos_tag(request, tags):
     tag_sel = get_object_or_404(Tag, name=tags)
-    tags = Tag.objects.all()
+    tags = []
+    for docu in Imagen.objects.all():
+        for tag in Tag.objects.filter(name=docu.tags_img):
+            tags.append(tag)
     imagenes = TaggedItem.objects.get_by_model(Imagen, tag_sel.name)
     return render_to_response('privados/multimedia_fotos.html', RequestContext(request, locals()))
 
 @login_required
 def multimedia_videos(request):
-    videos= Videos.objects.all()
-    tags = Tag.objects.all()
+    tags = []
+    for docu in Videos.objects.all():
+        for tag in Tag.objects.filter(name=docu.tags_vid):
+            tags.append(tag)
 
     query = request.GET.get('q', '')
     if query:
@@ -322,8 +334,11 @@ def multimedia_videos(request):
 
 @login_required
 def multimedia_videos_tag(request, tags):
-    tag_sel = get_object_or_404(Tag, name=tags)
-    tags = Tag.objects.all()
+    tag_sel = get_object_or_404(Tag, name=tags_vid)
+    tags = []
+    for docu in Videos.objects.all():
+        for tag in Tag.objects.filter(name=docu.tags_vid):
+            tags.append(tag)
     videos = TaggedItem.objects.get_by_model(Videos, tag_sel.name)
     return render_to_response('privados/multimedia_videos.html', RequestContext(request, locals()))
 
@@ -331,6 +346,7 @@ def multimedia_videos_tag(request, tags):
 def multimedia_videos_sel(request, video):
     video_sel = get_object_or_404(Videos, id=video)
     tags = Tag.objects.all()
+    audios = TaggedItem.objects.get_by_model(Audios, tag.name)
     return render_to_response('privados/multimedia_videos.html', RequestContext(request, locals()))
 
 def notify_all_foro(foros):

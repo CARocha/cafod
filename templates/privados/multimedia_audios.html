@@ -45,7 +45,7 @@
 					    TAGS
 					  </li>
 				{% for tag in tags %}
-					<li><a href="/foros/privado/documento_tag/{{tag}}"><i class="icon-tag"></i>{{tag}}</a></li>
+					<li><a href="/foros/privado/multimedia_audios_tag/{{tag}}"><i class="icon-tag"></i>{{tag}}</a></li>
 				{% endfor %}
 				</ul>
 			</div>
@@ -62,7 +62,15 @@
 							{% if a.nombre_doc != '' %}
 								<tr>
 									<td>{{a.nombre_audio}}</td>
-									<td><center><a href="/uploads/{{a.audio}}" class="btn btn-mini btn-info"><i class="icon-download-alt button-icon icon-white"></i></a></center></td>
+									<td>
+										<object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" width="280" height="20"
+										    codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab">
+										    <param name="movie" value="/files/js/singlemp3player.swf?file=/uploads/{{a.audio}}&showDownload=true" />
+										    <param name="wmode" value="transparent" />
+										    <embed wmode="transparent" width="280" height="20" src="/files/js/singlemp3player.swf?file=/uploads/{{a.audio}}&showDownload=true"
+										    type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" />
+										</object>
+									</td>
 								</tr>
 							{% endif %}
 						{% endfor %}

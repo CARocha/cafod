@@ -223,6 +223,7 @@ def agenda_personales(request):
 
 @login_required
 def documento(request):
+    documentos = Documentos.objects.all()
     tags = []
     for docu in Documentos.objects.all():
         for tag in Tag.objects.filter(name=docu.tags_doc):
@@ -233,7 +234,7 @@ def documento(request):
         result_documento = Documentos.objects.filter(nombre_doc__icontains=query)
         result_tags = Tag.objects.filter(name__icontains=query)
         lista = []
-        tags = []
+        tags_lista = []
         for n in result_documento:
             lista.append(n)
         for rtag in result_tags:
@@ -243,10 +244,10 @@ def documento(request):
                 for it in rtag.items.all():
                     if it.object:
                         li.append(it)
-                tags.append({'name':rtag.name, 'count': len(li)})
+                tags_lista.append({'name':rtag.name, 'count': len(li)})
             for item in TaggedItems:
                 lista.append(item)
-        tags.sort(key=operator.itemgetter('count'), reverse=True)
+        #tags.sort(key=operator.itemgetter('count'), reverse=True)
         documentos = list(set(lista))
 
     return render_to_response('privados/documentos.html', RequestContext(request, locals()))
@@ -263,6 +264,7 @@ def busqueda_tag(request, tags):
 
 @login_required
 def multimedia_fotos(request):
+    imagenes = Imagen.objects.all()
     tags = []
     for docu in Imagen.objects.all():
         for tag in Tag.objects.filter(name=docu.tags_img):
@@ -273,7 +275,7 @@ def multimedia_fotos(request):
         result_fotos = Imagen.objects.filter(nombre_img__icontains=query)
         result_tags = Tag.objects.filter(name__icontains=query)
         lista = []
-        tags = []
+        tags_lista = []
         for n in result_fotos:
             lista.append(n)
         for rtag in result_tags:
@@ -283,12 +285,11 @@ def multimedia_fotos(request):
                 for it in rtag.items.all():
                     if it.object:
                         li.append(it)
-                tags.append({'name':rtag.name, 'count': len(li)})
+                tags_lista.append({'name':rtag.name, 'count': len(li)})
             for item in TaggedItems:
                 lista.append(item)
-        tags.sort(key=operator.itemgetter('count'), reverse=True)
+        #tags.sort(key=operator.itemgetter('count'), reverse=True)
         imagenes = list(set(lista))
-        tags = Tag.objects.all()
 
     return render_to_response('privados/multimedia_fotos.html', RequestContext(request, locals()))
 @login_required
@@ -303,6 +304,7 @@ def multimedia_fotos_tag(request, tags):
 
 @login_required
 def multimedia_videos(request):
+    videos = Videos.objects.all()
     tags = []
     for docu in Videos.objects.all():
         for tag in Tag.objects.filter(name=docu.tags_vid):
@@ -313,7 +315,7 @@ def multimedia_videos(request):
         result_fotos = Videos.objects.filter(nombre_video__icontains=query)
         result_tags = Tag.objects.filter(name__icontains=query)
         lista = []
-        tags = []
+        tags_lista = []
         for n in result_fotos:
             lista.append(n)
         for rtag in result_tags:
@@ -323,18 +325,17 @@ def multimedia_videos(request):
                 for it in rtag.items.all():
                     if it.object:
                         li.append(it)
-                tags.append({'name':rtag.name, 'count': len(li)})
+                tags_lista.append({'name':rtag.name, 'count': len(li)})
             for item in TaggedItems:
                 lista.append(item)
-        tags.sort(key=operator.itemgetter('count'), reverse=True)
+        #tags.sort(key=operator.itemgetter('count'), reverse=True)
         videos = list(set(lista))
-        tags = Tag.objects.all()
 
     return render_to_response('privados/multimedia_videos.html', RequestContext(request, locals()))
 
 @login_required
 def multimedia_videos_tag(request, tags):
-    tag_sel = get_object_or_404(Tag, name=tags_vid)
+    tag_sel = get_object_or_404(Tag, name=tags)
     tags = []
     for docu in Videos.objects.all():
         for tag in Tag.objects.filter(name=docu.tags_vid):
@@ -345,9 +346,53 @@ def multimedia_videos_tag(request, tags):
 @login_required
 def multimedia_videos_sel(request, video):
     video_sel = get_object_or_404(Videos, id=video)
-    tags = Tag.objects.all()
-    audios = TaggedItem.objects.get_by_model(Audios, tag.name)
+    tags = []
+    for docu in Videos.objects.all():
+        for tag in Tag.objects.filter(name=docu.tags_vid):
+            tags.append(tag)
     return render_to_response('privados/multimedia_videos.html', RequestContext(request, locals()))
+
+@login_required
+def multimedia_audios(request):
+    audios = Audios.objects.all()
+    tags = []
+    for docu in Audios.objects.all():
+        for tag in Tag.objects.filter(name=docu.tags_aud):
+            tags.append(tag)
+
+    query = request.GET.get('q', '')
+    if query:
+        result_fotos = Videos.objects.filter(nombre_aud__icontains=query)
+        result_tags = Tag.objects.filter(name__icontains=query)
+        lista = []
+        tags_lista = []
+        for n in result_fotos:
+            lista.append(n)
+        for rtag in result_tags:
+            TaggedItems = TaggedItem.objects.get_by_model(Videos, rtag.name)
+            if not rtag.items.all().count() == 0:
+                li = []
+                for it in rtag.items.all():
+                    if it.object:
+                        li.append(it)
+                tags_lista.append({'name':rtag.name, 'count': len(li)})
+            for item in TaggedItems:
+                lista.append(item)
+        #tags.sort(key=operator.itemgetter('count'), reverse=True)
+        audios = list(set(lista))
+
+    return render_to_response('privados/multimedia_audios.html', RequestContext(request, locals()))
+
+@login_required
+def multimedia_audios_tag(request, tags):
+    tag_sel = get_object_or_404(Tag, name=tags)
+    tags = []
+    for docu in Audios.objects.all():
+        for tag in Tag.objects.filter(name=docu.tags_aud):
+            tags.append(tag)
+    audios = TaggedItem.objects.get_by_model(Audios, tag_sel.name)
+    return render_to_response('privados/multimedia_audios.html', RequestContext(request, locals()))
+
 
 def notify_all_foro(foros):
     site = Site.objects.get_current()

@@ -26,9 +26,10 @@ urlpatterns = patterns('foros.views',
     url(r'^privado/multimedia_videos/$', 'multimedia_videos', name='multimedia_videos'),
     url(r'^privado/multimedia_videos_tag/(?P<tags>\w+)/$', 'multimedia_videos_tag', name='multimedia_videos_tag'),
     url(r'^privado/multimedia_videos_sel/(?P<video>\w+)/$', 'multimedia_videos_sel', name='multimedia_videos_sel'),
+    url(r'^privado/multimedia_audios/$', 'multimedia_audios', name='multimedia_audios'),
+    url(r'^privado/multimedia_audios_tag/(?P<tags>\w+)/$', 'multimedia_audios_tag', name='multimedia_audios_tag'),    
     url(r'^aporte/editar/(?P<aporte_id>\d+)/$', 'editar_aporte', name='editar-aporte'),
     url(r'^aporte/borrar/(?P<id>\d+)/$', 'borrar_aporte', name='borrar-aporte'),
     url(r'^comentario/editar/(?P<comen_id>\d+)/$', 'editar_comentario', name='editar-comentario'),
     url(r'^comentario/borrar/(?P<id>\d+)/$', 'borrar_comentario', name='borrar-comentarios'),
-
 )

@@ -1,0 +1,77 @@
+{% extends "baseadmin.html" %}
+
+{% block contenido %}
+<div class="row">
+    <div class="encabezado">
+      <div class="container">
+            <div class="row">
+                <div class="span5">
+                    <div class="encabezado-title">
+                        MULTIMEDIA
+                    </div>
+                </div>
+                <div class="span7">
+                </div>
+            </div>
+      </div>
+    </div>
+</div>
+<div class="row">
+	<div class="container">
+		<div class="row">
+			<div class="span12">
+				<div class="tabbable">
+					  <ul class="nav nav-tabs">
+					    <li ><a href="#" ><i class="icon-camera"></i>Imágenes</a></li>
+					    <li><a href="/foros/privado/multimedia_videos/"><i class="icon-film"></i>Videos</a></li>
+					    <li class="active"><a href="/foros/privado/multimedia_audios/" ><i class="icon-volume-up"></i>Audios</a></li>
+					  </ul>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="span3">
+				<ul class="nav nav-list well">
+					  <li class="nav-header">
+					    BUSCAR
+					  </li>
+					  <li>
+						<form class="form-search form-inline" action="." method="GET">
+						  <input type="text" class="input-medium search-query" style="width:115px" name="q" value="{% if query %} {{query}} {% endif%}" />
+						  <button type="submit" class="btn"><i class="icon-search button-icon"></i></button>
+						</form>
+					  </li>
+					  <li class="nav-header">
+					    TAGS
+					  </li>
+				{% for tag in tags %}
+					<li><a href="/foros/privado/documento_tag/{{tag}}"><i class="icon-tag"></i>{{tag}}</a></li>
+				{% endfor %}
+				</ul>
+			</div>
+			<div class="span9">
+				<table class="table  table-bordered table-condensed table-striped">
+					<thead>
+						<tr>
+							<th width="610">Audio</th>
+							<th>descargar</th>
+						</tr>
+					</thead>
+					<tbody>
+						{% for a in audios %}
+							{% if a.nombre_doc != '' %}
+								<tr>
+									<td>{{a.nombre_audio}}</td>
+									<td><center><a href="/uploads/{{a.audio}}" class="btn btn-mini btn-info"><i class="icon-download-alt button-icon icon-white"></i></a></center></td>
+								</tr>
+							{% endif %}
+						{% endfor %}
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+{% endblock %}

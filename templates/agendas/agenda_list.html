@@ -54,7 +54,7 @@
 			    </div>
 			    <div class="span7">
 					<div class="btn-group filtrospais">
-					  <a class="btn"href="/agendas/crear">Agregar Actividad</a>
+					  <a class="btn"href="/agendas/crear"><i class="icon-plus"></i>Agregar Actividad</a>
 					</div>
 			    </div>
 	        </div>
@@ -65,16 +65,55 @@
 	<div class="container">
 		{%if actividad %}
 		<div class="row">
-			<div class="span12">
-				<div class="alert alert-success">
-					<b>{{actividad.evento}}</b><br>
+			<div  {%if actividad.adjunto.all %}class="span8"{%else%} class="span12"{%endif%}>
+				<div class="evento">
+					<div class="fechas">
+						<span class="badge badge-warning"><i class="icon-calendar icon-white"></i>{{actividad.inicio|date:"d M"}}</span>
+						{%if actividad.final%}
+							→ <span class="badge badge-warning"><i class="icon-calendar icon-white"></i>{{actividad.final|date:"d M"}}</span>
+						{%endif%}
+					</div>
+					<div class="titulo-medio">{{actividad.evento}}</div>
 					{{actividad.descripcion|safe}}
-{% if notas.user == request.user or request.user.is_superuser %}
-    <a href="/agendas/editar/{{actividad.id}}">[editar]</a>|
-    <a href="/agendas/borrar/{{actividad.id}}">[borrar]</a>{% endif %}
+					{% if notas.user == request.user or request.user.is_superuser %}
+						<div class="botones-evento">
+					    <a class="btn btn-mini" href="/agendas/editar/{{actividad.id}}"><i class="icon-pencil"></i>Editar</a>
+					    <a  data-toggle="modal" data-target="#myModal" class="btn btn-mini btn-danger" href=""><i class="icon-trash icon-white"></i>Borrar</a>
+						</div>
+						<div class="clean"></div>
+	                        <div class="modal fade hide" id="myModal">
+	                          <div class="modal-header">
+	                            <a class="close" data-dismiss="modal">×</a>
+	                            <h3>Esta Seguro?</h3>
+	                          </div>
+	                          <div class="modal-body">
+	                            <p>El evento sera borrado permanentemente y no podra ser recuperado</p>
+	                          </div>
+	                          <div class="modal-footer">
+	                            <a href="#" data-dismiss="modal" class="btn">Cerrar</a>
+	                            <a href="/agendas/borrar/{{actividad.id}}" class="btn btn-danger">Borrar Permanentemente</a>
+	                          </div>
+	                        </div>  
+					 {% endif %}
 				</div>
 			</div>
+			{%if actividad.adjunto.all %}
+			<div class="span4">				
+				<div class="sidebar-title">Documentos</div>
+                <table class="table  table-bordered table-condensed doc-sidebar">
+                  <tbody>
+                    {% for doc in actividad.adjunto.all%}
+                    <tr>
+                        <td>{{doc.nombre_doc}}</td>
+                        <td><center><a href="/uploads/{{doc.adjunto}}" class=" btn btn-info btn-mini dropdown-toggle"><i class="icon-download-alt icon-white"></i>Descargar</a></center></td>
+                    </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+			</div>
+			{%endif%}
 		</div>
+		<hr>
 		{%endif%}
 		<div class="row">
 			<div class="span9">
@@ -85,37 +124,15 @@
 						<li class="nav-header">
 					    OPCIONES DE VISUALIZACION
 					  </li>
-					  						<form  action="." method="GET">
+					  						<form  action="." method="POST">
 						 <li>
 						 	<label class="checkbox">
-						 	<input type="checkbox" name="Mi organizacion" value="Cheese">Mi organizacion</label> 
+						 	<input type="checkbox" name="contraparte" value="Mia">Mi organizacion</label> 
 						 </li>
 						 <li>
-						 	<label class="checkbox"><input type="checkbox" name="JUAN VIII" value="Cheese">Juan 23 </input></label> 
+						 	<label class="checkbox"><input type="checkbox" name="contraparte" value="Juan">Juan 23 </input></label> 
 						 </li>
-						 <li>
-						 	<label class="checkbox"><input type="checkbox" name="JUAN VIII" value="Cheese">Juan 23 </input></label> 
-						 </li>						 <li>
-						 	<label class="checkbox"><input type="checkbox" name="JUAN VIII" value="Cheese">Juan 23 </input></label> 
-						 </li>						 <li>
-						 	<label class="checkbox"><input type="checkbox" name="JUAN VIII" value="Cheese">Juan 23 </input></label> 
-						 </li>						 <li>
-						 	<label class="checkbox"><input type="checkbox" name="JUAN VIII" value="Cheese">Juan 23 </input></label> 
-						 </li>						 <li>
-						 	<label class="checkbox"><input type="checkbox" name="JUAN VIII" value="Cheese">Juan 23 </input></label> 
-						 </li>						 <li>
-						 	<label class="checkbox"><input type="checkbox" name="JUAN VIII" value="Cheese">Juan 23 </input></label> 
-						 </li>						 <li>
-						 	<label class="checkbox"><input type="checkbox" name="JUAN VIII" value="Cheese">Juan 23 </input></label> 
-						 </li>						 <li>
-						 	<label class="checkbox"><input type="checkbox" name="JUAN VIII" value="Cheese">Juan 23 </input></label> 
-						 </li>						 <li>
-						 	<label class="checkbox"><input type="checkbox" name="JUAN VIII" value="Cheese">Juan 23 </input></label> 
-						 </li>						 <li>
-						 	<label class="checkbox"><input type="checkbox" name="JUAN VIII" value="Cheese">Juan 23 </input></label> 
-						 </li>						 <li>
-						 	<label class="checkbox"><input type="checkbox" name="JUAN VIII" value="Cheese">Juan 23 </input></label> 
-						 </li>
+	
 						 <hr>
 						<li>
 						<button type="submit" class="btn">Mostrar</button>

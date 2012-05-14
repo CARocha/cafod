@@ -1,11 +1,129 @@
-{% extends "base.html" %}
+{% extends "baseadmin.html" %}
 
+
+
+{% block extra_js %}
+<link href="/files/css/fullcalendar.css" rel="stylesheet" type="text/css">
+<link href="/files/css/cupertino/theme.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="/files/js/fullcalendar.min.js"></script>
+<script type='text/javascript'>
+	$(document).ready(function() {
+
+		var date = new Date();
+		var d = date.getDate();
+		var m = date.getMonth();
+		var y = date.getFullYear();
+		m = m-1;
+
+		$('#calendar').fullCalendar({
+			minTime: '8:00',
+			maxTime: '6:00pm',
+			defaultView: 'month',
+			dayNames: ['Domingo', 'Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado'],
+			dayNamesShort: ['Dom', 'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab'],
+			monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+			monthNamesShort: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
+            contentHeight: 350,
+			header: {
+				left: 'prev,next today',
+				center: 'title',
+				right: ''
+			},
+            buttonText: {   
+                today: 'Hoy',
+                month: 'Mes',
+                day: 'Día',
+                week: 'Semana'
+            },
+			eventClick: function(calEvent, jsEvent, view) {
+                window.location = '/agendas/calendario/' + calEvent.id;
+                },
+			editable: false,
+			events: "/agendas/calendario/"
+
+		});	
+	});
+</script>
+{%endblock%}
 {% block contenido %}
-<br>
-    {% for agenda in object_list %}
-    	<a href="{{agenda.get_absolute_url}}">{{agenda.evento}}</a><br>
-        {{agenda.descripcion|safe}} <br>
-        <hr>
-    {% endfor %}
-
+<div class="row">
+	<div class="encabezado">
+	  <div class="container">
+		    <div class="row">
+			    <div class="span5">
+			    	<div class="encabezado-title">
+			      		AGENDA DE ACTIVIDADES
+			  		</div>
+			    </div>
+			    <div class="span7">
+					<div class="btn-group filtrospais">
+					  <a class="btn"href="/agendas/crear">Agregar Actividad</a>
+					</div>
+			    </div>
+	        </div>
+	  </div>
+	</div>
+</div>
+<div class="row">
+	<div class="container">
+		{%if actividad %}
+		<div class="row">
+			<div class="span12">
+				<div class="alert alert-success">
+					<b>{{actividad.evento}}</b><br>
+					{{actividad.descripcion|safe}}
+				</div>
+			</div>
+		</div>
+		{%endif%}
+		<div class="row">
+			<div class="span9">
+				<div id='calendar'></div>
+			</div>
+			<div class="span3">
+				<ul class="nav nav-list well">
+						<li class="nav-header">
+					    OPCIONES DE VISUALIZACION
+					  </li>
+					  						<form  action="." method="GET">
+						 <li>
+						 	<label class="checkbox">
+						 	<input type="checkbox" name="Mi organizacion" value="Cheese">Mi organizacion</label> 
+						 </li>
+						 <li>
+						 	<label class="checkbox"><input type="checkbox" name="JUAN VIII" value="Cheese">Juan 23 </input></label> 
+						 </li>
+						 <li>
+						 	<label class="checkbox"><input type="checkbox" name="JUAN VIII" value="Cheese">Juan 23 </input></label> 
+						 </li>						 <li>
+						 	<label class="checkbox"><input type="checkbox" name="JUAN VIII" value="Cheese">Juan 23 </input></label> 
+						 </li>						 <li>
+						 	<label class="checkbox"><input type="checkbox" name="JUAN VIII" value="Cheese">Juan 23 </input></label> 
+						 </li>						 <li>
+						 	<label class="checkbox"><input type="checkbox" name="JUAN VIII" value="Cheese">Juan 23 </input></label> 
+						 </li>						 <li>
+						 	<label class="checkbox"><input type="checkbox" name="JUAN VIII" value="Cheese">Juan 23 </input></label> 
+						 </li>						 <li>
+						 	<label class="checkbox"><input type="checkbox" name="JUAN VIII" value="Cheese">Juan 23 </input></label> 
+						 </li>						 <li>
+						 	<label class="checkbox"><input type="checkbox" name="JUAN VIII" value="Cheese">Juan 23 </input></label> 
+						 </li>						 <li>
+						 	<label class="checkbox"><input type="checkbox" name="JUAN VIII" value="Cheese">Juan 23 </input></label> 
+						 </li>						 <li>
+						 	<label class="checkbox"><input type="checkbox" name="JUAN VIII" value="Cheese">Juan 23 </input></label> 
+						 </li>						 <li>
+						 	<label class="checkbox"><input type="checkbox" name="JUAN VIII" value="Cheese">Juan 23 </input></label> 
+						 </li>						 <li>
+						 	<label class="checkbox"><input type="checkbox" name="JUAN VIII" value="Cheese">Juan 23 </input></label> 
+						 </li>
+						 <hr>
+						<li>
+						<button type="submit" class="btn">Mostrar</button>
+						</li>
+						</form>
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
 {% endblock %}

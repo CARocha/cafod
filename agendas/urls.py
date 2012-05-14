@@ -12,4 +12,6 @@ urlpatterns = patterns('agendas.views',
     url(r'^crear/$', 'crear_agenda', name="crear-agenda"),
     url(r'^editar/(?P<id>\d+)/$', 'editar_agenda', name='editar-agenda'),
     url(r'^borrar/(?P<id>\d+)/$', 'borrar_agenda', name='borrar-agenda'),
+    url(r'^calendario/$', 'calendario', name='calendario'),
+    url(r'^calendario/(?P<id>\d+)/$', 'calendario', name='calendario'),
     )

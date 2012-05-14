@@ -91,7 +91,7 @@ def calendario(request,id=None):
         fecha1 = datetime.date(start.year, start.month, start.day)
         fecha2 = datetime.date(end.year, end.month, end.day)
         
-        eventos = Agendas.objects.filter(inicio__range=(fecha1, fecha2))
+        eventos = Agendas.objects.filter(inicio__range=(fecha1, fecha2), user__userprofile__contraparte=request.user.userprofile.contraparte)
         var = []        
         for evento in eventos:
             d = {

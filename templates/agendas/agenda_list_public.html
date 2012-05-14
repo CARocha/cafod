@@ -96,7 +96,11 @@
 			</div>
 			<div class="span3"><br><br>
 				<div class="alert alert-warning">
-					Calendario que presenta las principales actividades de las organizaciones presentes en esta plataforma. Sientase libre de hacer clic en cualquier actividad para obtener mayor informacion	
+					<ul>
+						{%for c in contrapartes%}
+						<li>{{c.nombre}} <div style="width:20px;height: 20px; background:{{c.font_color}}"></div>
+						</li>
+						{%endfor%}
 				</div>
 			</div>
 		</div>

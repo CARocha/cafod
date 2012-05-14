@@ -102,7 +102,7 @@ def calendario(request,id=None):
                  'start':str(evento.inicio), 
                  'end':str(evento.final), 
                  'allDay': True,
-               #  'color':str(evento.user.user_profile.contraparte.color)
+                 'color':str(evento.user.userprofile.contraparte.font_color)
                  }
             var.append(d)
         return HttpResponse(simplejson.dumps(var), mimetype='application/json')
@@ -127,11 +127,13 @@ def calendario_publico(request,id=None):
                  'start':str(evento.inicio), 
                  'end':str(evento.final), 
                  'allDay': True,
+                 'color':str(evento.user.userprofile.contraparte.font_color),
                  }
             var.append(d)
         return HttpResponse(simplejson.dumps(var), mimetype='application/json')
     if not id==None:
         actividad = Agendas.objects.get(pk=id)
+    contrapartes = Contraparte.objects.all()
     return render_to_response('agendas/agenda_list_public.html',locals(),
                               context_instance = RequestContext(request))
 

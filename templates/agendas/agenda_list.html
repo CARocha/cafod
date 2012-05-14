@@ -75,7 +75,7 @@
 					</div>
 					<div class="titulo-medio">{{actividad.evento}}</div>
 					{{actividad.descripcion|safe}}
-					{% if notas.user == request.user or request.user.is_superuser %}
+					{% if actividad.user == request.user or request.user.is_superuser %}
 						<div class="botones-evento">
 					    <a class="btn btn-mini" href="/agendas/editar/{{actividad.id}}"><i class="icon-pencil"></i>Editar</a>
 					    <a  data-toggle="modal" data-target="#myModal" class="btn btn-mini btn-danger" href=""><i class="icon-trash icon-white"></i>Borrar</a>

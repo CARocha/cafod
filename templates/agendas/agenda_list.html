@@ -1,7 +1,4 @@
 {% extends "baseadmin.html" %}
-
-
-
 {% block extra_js %}
 <link href="/files/css/fullcalendar.css" rel="stylesheet" type="text/css">
 <link href="/files/css/cupertino/theme.css" rel="stylesheet" type="text/css">
@@ -72,6 +69,9 @@
 				<div class="alert alert-success">
 					<b>{{actividad.evento}}</b><br>
 					{{actividad.descripcion|safe}}
+{% if notas.user == request.user or request.user.is_superuser %}
+    <a href="/agendas/editar/{{actividad.id}}">[editar]</a>|
+    <a href="/agendas/borrar/{{actividad.id}}">[borrar]</a>{% endif %}
 				</div>
 			</div>
 		</div>

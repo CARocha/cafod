@@ -75,8 +75,8 @@ def borrar_agenda(request, id):
     else:
         return redirect('/')
 
+@login_required
 def calendario(request,id=None):
-    '''effin calenadar!'''
     if request.is_ajax():
         start = datetime.datetime.fromtimestamp(float(request.GET['start']))
         end = datetime.datetime.fromtimestamp(float(request.GET['end']))
@@ -98,4 +98,28 @@ def calendario(request,id=None):
     if not id==None:
         actividad = Agendas.objects.get(pk=id)
     return render_to_response('agendas/agenda_list.html',locals(),
+                              context_instance = RequestContext(request))
+
+def calendario_publico(request,id=None):
+    if request.is_ajax():
+        start = datetime.datetime.fromtimestamp(float(request.GET['start']))
+        end = datetime.datetime.fromtimestamp(float(request.GET['end']))
+        fecha1 = datetime.date(start.year, start.month, start.day)
+        fecha2 = datetime.date(end.year, end.month, end.day)
+        
+        eventos = Agendas.objects.filter(inicio__range=(fecha1, fecha2),publico=True)
+        var = []        
+        for evento in eventos:
+            d = {
+                 'id': str(evento.id),
+                 'title': str(evento.evento), 
+                 'start':str(evento.inicio), 
+                 'end':str(evento.final), 
+                 'allDay': True,
+                 }
+            var.append(d)
+        return HttpResponse(simplejson.dumps(var), mimetype='application/json')
+    if not id==None:
+        actividad = Agendas.objects.get(pk=id)
+    return render_to_response('agendas/agenda_list_public.html',locals(),
                               context_instance = RequestContext(request))

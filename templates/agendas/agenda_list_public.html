@@ -1,0 +1,104 @@
+{% extends "baseinterna.html" %}ß
+{% block extra_js %}
+<link href="/files/css/fullcalendar.css" rel="stylesheet" type="text/css">
+<link href="/files/css/cupertino/theme.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="/files/js/fullcalendar.min.js"></script>
+<script type='text/javascript'>
+	$(document).ready(function() {
+
+		var date = new Date();
+		var d = date.getDate();
+		var m = date.getMonth();
+		var y = date.getFullYear();
+		m = m-1;
+
+		$('#calendar').fullCalendar({
+			minTime: '8:00',
+			maxTime: '6:00pm',
+			defaultView: 'month',
+			dayNames: ['Domingo', 'Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado'],
+			dayNamesShort: ['Dom', 'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab'],
+			monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+			monthNamesShort: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
+            contentHeight: 350,
+			header: {
+				left: 'prev,next today',
+				center: 'title',
+				right: ''
+			},
+            buttonText: {   
+                today: 'Hoy',
+                month: 'Mes',
+                day: 'Día',
+                week: 'Semana'
+            },
+			eventClick: function(calEvent, jsEvent, view) {
+                window.location = '/agendas/eventos/' + calEvent.id;
+                },
+			editable: false,
+			events: "/agendas/eventos"
+
+		});	
+	});
+</script>
+{%endblock%}
+{% block contenido %}
+<div class="row">
+	<div class="encabezado">
+	  <div class="container">
+		    <div class="row">
+			    <div class="span5">
+			    	<div class="encabezado-title">
+			      		AGENDA DE ACTIVIDADES
+			  		</div>
+			    </div>
+	        </div>
+	  </div>
+	</div>
+</div>
+<div class="row">
+	<div class="container">
+		{%if actividad %}
+		<div class="row">
+			<div {%if actividad.adjunto.all %}class="span8"{%else%} class="span12"{%endif%}>
+				<div class="evento evento">
+					<div class="fechas">
+						<span class="badge badge-warning"><i class="icon-calendar icon-white"></i>{{actividad.inicio|date:"d M"}}</span>
+						{%if actividad.final%}
+							→ <span class="badge badge-warning"><i class="icon-calendar icon-white"></i>{{actividad.final|date:"d M"}}</span>
+						{%endif%}
+					</div>
+					<div class="titulo-medio">{{actividad.evento}}</div>
+					{{actividad.descripcion|safe}}
+				</div>
+			</div>
+			{%if actividad.adjunto.all %}
+			<div class="span4">				
+				<div class="sidebar-title">Documentos</div>
+                <table class="table  table-bordered table-condensed doc-sidebar">
+                  <tbody>
+                    {% for doc in actividad.adjunto.all%}
+                    <tr>
+                        <td>{{doc.nombre_doc}}</td>
+                        <td><center><a href="/uploads/{{doc.adjunto}}" class=" btn btn-info btn-mini dropdown-toggle"><i class="icon-download-alt icon-white"></i>Descargar</a></center></td>
+                    </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+			</div>
+			{%endif%}
+		</div>
+		{%endif%}
+		<div class="row">
+			<div class="span9">
+				<div id='calendar'></div><Br>
+			</div>
+			<div class="span3"><br><br>
+				<div class="alert alert-warning">
+					Calendario que presenta las principales actividades de las organizaciones presentes en esta plataforma. Sientase libre de hacer clic en cualquier actividad para obtener mayor informacion	
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}

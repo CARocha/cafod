@@ -124,15 +124,16 @@
 						<li class="nav-header">
 					    OPCIONES DE VISUALIZACION
 					  </li>
-					  						<form  action="." method="POST">
-						 <li>
-						 	<label class="checkbox">
-						 	<input type="checkbox" name="contraparte" value="Mia">Mi organizacion</label> 
-						 </li>
-						 <li>
-						 	<label class="checkbox"><input type="checkbox" name="contraparte" value="Juan">Juan 23 </input></label> 
-						 </li>
-	
+					  	<form  action="." method="POST">
+						 {% for pais in paises %}
+						 	<strong>{{pais}}</strong><br>
+
+						 	{% for contraparte in contrapartes %}
+						 		{% if contraparte.pais.id == pais.id%}
+			<label class="checkbox"><input type="checkbox" name="contraparte" value="{{contraparte}}">{{contraparte}}</input></label>
+						 		{%endif%}
+						 	{% endfor %}
+						 {% endfor %}
 						 <hr>
 						<li>
 						<button type="submit" class="btn">Mostrar</button>

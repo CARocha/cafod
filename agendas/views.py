@@ -84,6 +84,8 @@ def calendario(request,id=None):
     #             request.session['cooperativa'] = cooperativa
     #             request.session['fecha'] = form.cleaned_data['fecha']
     #             request.session['departamento'] = form.cleaned_data['departamento']
+    paises = Pais.objects.all()
+    contrapartes = Contraparte.objects.all()
 
     if request.is_ajax():
         start = datetime.datetime.fromtimestamp(float(request.GET['start']))
@@ -132,3 +134,6 @@ def calendario_publico(request,id=None):
         actividad = Agendas.objects.get(pk=id)
     return render_to_response('agendas/agenda_list_public.html',locals(),
                               context_instance = RequestContext(request))
+
+def calendario_full_contraparte(request,ids):
+    pass

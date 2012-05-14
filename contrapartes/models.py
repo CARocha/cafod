@@ -50,7 +50,7 @@ class Contraparte(models.Model):
     telefono = models.IntegerField(blank=True, null=True)
     sitio_web = models.URLField(blank=True, null=True)
     rss = models.CharField(max_length=200,blank=True, null=True)
-    font_color = ColorField(blank=True)
+    font_color = ColorField(blank=True,unique=True)
 
     class Meta:
         verbose_name_plural = "Contrapartes"

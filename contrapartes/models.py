@@ -9,7 +9,20 @@ from ckeditor.fields import RichTextField
 
 add_introspection_rules ([], ["^ckeditor\.fields\.RichTextField"])
 
+add_introspection_rules ([], ["^contrapartes\.models\.ColorField"])
+
 # Create your models here.
+from contrapartes.widgets import ColorPickerWidget
+
+class ColorField(models.CharField):
+    def __init__(self, *args, **kwargs):
+        kwargs['max_length'] = 10
+        super(ColorField, self).__init__(*args, **kwargs)
+
+    def formfield(self, **kwargs):
+        kwargs['widget'] = ColorPickerWidget
+        return super(ColorField, self).formfield(**kwargs)
+
 class Pais(models.Model):
     nombre = models.CharField(max_length=200)
     latitud = models.FloatField(blank=True, null=True)
@@ -37,9 +50,11 @@ class Contraparte(models.Model):
     telefono = models.IntegerField(blank=True, null=True)
     sitio_web = models.URLField(blank=True, null=True)
     rss = models.CharField(max_length=200,blank=True, null=True)
+    font_color = ColorField(blank=True)
 
     class Meta:
         verbose_name_plural = "Contrapartes"
+        unique_together = ("font_color", "nombre")
 
     def __unicode__(self):
         return self.nombre

@@ -71,12 +71,20 @@ def borrar_agenda(request, id):
 
     if agenda.user == request.user or request.user.is_superuser:
         agenda.delete()
-        return redirect('/agendas')
+        return redirect('/agendas/calendario')
     else:
         return redirect('/')
 
 @login_required
 def calendario(request,id=None):
+    # if request.method == 'POST':
+    #         form = CecocafenForm(request.POST)
+    #         if form.is_valid():
+    #             cooperativa = form.cleaned_data['cooperativa']
+    #             request.session['cooperativa'] = cooperativa
+    #             request.session['fecha'] = form.cleaned_data['fecha']
+    #             request.session['departamento'] = form.cleaned_data['departamento']
+
     if request.is_ajax():
         start = datetime.datetime.fromtimestamp(float(request.GET['start']))
         end = datetime.datetime.fromtimestamp(float(request.GET['end']))
@@ -92,6 +100,7 @@ def calendario(request,id=None):
                  'start':str(evento.inicio), 
                  'end':str(evento.final), 
                  'allDay': True,
+               #  'color':str(evento.user.user_profile.contraparte.color)
                  }
             var.append(d)
         return HttpResponse(simplejson.dumps(var), mimetype='application/json')

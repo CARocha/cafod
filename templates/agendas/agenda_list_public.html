@@ -61,7 +61,7 @@
 		{%if actividad %}
 		<div class="row">
 			<div {%if actividad.adjunto.all %}class="span8"{%else%} class="span12"{%endif%}>
-				<div class="evento evento">
+				<div class="evento">
 					<div class="fechas">
 						<span class="badge badge-warning"><i class="icon-calendar icon-white"></i>{{actividad.inicio|date:"d M"}}</span>
 						{%if actividad.final%}
@@ -88,6 +88,7 @@
 			</div>
 			{%endif%}
 		</div>
+		<hr>
 		{%endif%}
 		<div class="row">
 			<div class="span9">

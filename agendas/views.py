@@ -11,6 +11,7 @@ from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes.generic import generic_inlineformset_factory
 from django.utils import simplejson
 import datetime
+from django.template.defaultfilters import escape
 # Create your views here.
 
 @login_required
@@ -91,7 +92,7 @@ def calendario(request,id=None):
         for evento in eventos:
             d = {
                  'id': str(evento.id),
-                 'title': str(evento.evento), 
+                 'title': u'%s' % (evento.evento), 
                  'start':str(evento.inicio), 
                  'end':str(evento.final), 
                  'allDay': True,
@@ -118,7 +119,7 @@ def calendario_publico(request,id=None):
         for evento in eventos:
             d = {
                  'id': str(evento.id),
-                 'title': str(evento.evento), 
+                 'title': u'%s' % (evento.evento), 
                  'start':str(evento.inicio), 
                  'end':str(evento.final), 
                  'allDay': True,
@@ -126,6 +127,7 @@ def calendario_publico(request,id=None):
                  }
             var.append(d)
         return HttpResponse(simplejson.dumps(var), mimetype='application/json')
+
     if not id==None:
         actividad = Agendas.objects.get(pk=id)
     return render_to_response('agendas/agenda_list_public.html',locals(),
@@ -151,7 +153,7 @@ def calendario_full_contraparte(request,id=None):
         for evento in eventos:
             d = {
                  'id': str(evento.id),
-                 'title': str(evento.evento), 
+                 'title': u'%s' % (evento.evento), 
                  'start':str(evento.inicio), 
                  'end':str(evento.final), 
                  'allDay': True,

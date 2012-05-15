@@ -24,7 +24,7 @@ class Agendas(models.Model):
     	verbose_name_plural = "Agendas"
 
     def __unicode__(self):
-    	return self.evento
+    	return u'%s' % self.evento
 
     def get_absolute_url(self):
         return '/agendas/%d/' % (self.id,)

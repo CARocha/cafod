@@ -127,10 +127,12 @@
 					  	<form  action="/agendas/calendar/" method="POST">{% csrf_token %}
 						 {% for pais in paises %}
 						 	<strong>{{pais}}</strong><br>
-
 						 	{% for contraparte in contrapartes %}
 						 		{% if contraparte.pais.id == pais.id%}
-			<label class="checkbox"><input type="checkbox" name="contraparte" value="{{contraparte.id}}">{{contraparte}}</input></label>
+						 		<div class="leyenda"style ="background:{{contraparte.font_color}}"></div>
+						 		<li>
+									<label class="checkbox"><input type="checkbox" name="contraparte" value="{{contraparte.id}}">{{contraparte}}</input></label>
+								</li>
 						 		{%endif%}
 						 	{% endfor %}
 						 {% endfor %}

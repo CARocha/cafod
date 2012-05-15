@@ -105,6 +105,8 @@ def calendario(request,id=None):
                               context_instance = RequestContext(request))
 
 def calendario_publico(request,id=None):
+    paises = Pais.objects.all()
+    contrapartes = Contraparte.objects.all()
     if request.is_ajax():
         start = datetime.datetime.fromtimestamp(float(request.GET['start']))
         end = datetime.datetime.fromtimestamp(float(request.GET['end']))
@@ -126,7 +128,6 @@ def calendario_publico(request,id=None):
         return HttpResponse(simplejson.dumps(var), mimetype='application/json')
     if not id==None:
         actividad = Agendas.objects.get(pk=id)
-    contrapartes = Contraparte.objects.all()
     return render_to_response('agendas/agenda_list_public.html',locals(),
                               context_instance = RequestContext(request))
 

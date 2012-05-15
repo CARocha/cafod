@@ -95,13 +95,26 @@
 				<div id='calendar'></div><Br>
 			</div>
 			<div class="span3"><br><br>
-				<div class="alert alert-warning">
-					<ul>
-						{%for c in contrapartes%}
-						<li>{{c.nombre}} <div style="width:20px;height: 20px; background:{{c.font_color}}"></div>
-						</li>
-						{%endfor%}
-				</div>
+				<ul class="nav nav-list well">
+
+						 {% for pais in paises %}
+						<li class="nav-header">
+					    {{pais}}
+					  </li>
+
+						 	{% for contraparte in contrapartes %}
+						 		{% if contraparte.pais.id == pais.id%}
+						 		<div class="leyenda"style ="margin-right:5px;background:{{contraparte.font_color}}"></div>
+						 		<li>
+									{{contraparte}}
+								</li>
+								<div class="clean" style="margin-bottom:5px"></div>
+						 		{%endif%}
+						 	{% endfor %}
+						 {% endfor %}
+						</form>
+				</ul>
+
 			</div>
 		</div>
 	</div>

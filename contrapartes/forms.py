@@ -8,6 +8,7 @@ from django.contrib.auth.models import User
 from django.forms.fields import DateField, ChoiceField, MultipleChoiceField
 from django.forms.widgets import RadioSelect, CheckboxSelectMultiple
 from django.forms.extras.widgets import SelectDateWidget
+from contrapartes.widgets import ColorPickerWidget
 
 class ContraparteForms(forms.ModelForm):
     temas = forms.CharField(widget=CKEditorWidget())
@@ -18,7 +19,8 @@ class ContraparteForms(forms.ModelForm):
     telefono = forms.IntegerField(required=False,widget=forms.TextInput(attrs={'rel':"tooltip", 'title':"Formato ### - ######## "}))
     sitio_web = forms.URLField(required=False,widget=forms.TextInput(attrs={'rel':"tooltip", 'title':"con este formato http://www.dominio.com "}))
     rss = forms.CharField(required=False,widget=forms.TextInput(attrs={'rel':"tooltip", 'title':"Direccion rss de contenido sindicado"}))
-    
+    font_color = forms.CharField(required=False, widget=ColorPickerWidget, label="Color")
+
     class Meta:
         model = Contraparte
 	exclude = ('user',)

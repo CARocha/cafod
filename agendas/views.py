@@ -27,7 +27,7 @@ def crear_agenda(request):
                 form1_uncommitd = form1.save(commit=False)
                 form1_uncommitd.content_object = form_uncommited
                 form1_uncommitd.save()
-            return HttpResponseRedirect('/agendas')
+            return HttpResponseRedirect('/agendas/calendario')
     else:
         form = AgendaForm()
         form1 = DocuForm()
@@ -57,7 +57,7 @@ def editar_agenda(request, id):
             #form1_uncommitd.content_object = form_uncommited
             #form1_uncommitd.save()
             form1.save()
-            return HttpResponseRedirect('/agendas')
+            return HttpResponseRedirect('/agendas/calendario')
     else:
         form = AgendaForm(instance=agenda)
         form1 = AgendaFormSet(instance=agenda)

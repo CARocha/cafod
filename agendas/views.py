@@ -134,7 +134,6 @@ def calendario_publico(request,id=None):
 @login_required
 def calendario_full_contraparte(request,id=None):
     paises = Pais.objects.all()
-    contrapartes = Contraparte.objects.all()
     if request.method == 'POST':
         request.session['p'] = request.POST.getlist('contraparte')
         
@@ -162,5 +161,7 @@ def calendario_full_contraparte(request,id=None):
         return HttpResponse(simplejson.dumps(var), mimetype='application/json')
     if not id==None:
         actividad = Agendas.objects.get(pk=id)
+    contrapartes_sel = Contraparte.objects.filter(id__in=request.session['p'])
+    contrapartes_otras = Contraparte.objects.exclude(id__in=request.session['p'])
     return render_to_response('agendas/agenda_list_full.html',locals(),
                               context_instance = RequestContext(request))

@@ -117,6 +117,9 @@
 		{%endif%}
 		<div class="row">
 			<div class="span9">
+													{%for a in request.session.p %}
+										{{a}}
+									{%endfor%}
 				<div id='calendar'></div>
 			</div>
 			<div class="span3">
@@ -128,11 +131,26 @@
 						 {% for pais in paises %}
 						 	<strong>{{pais}}</strong><br>
 
-						 	{% for contraparte in contrapartes %}
+						 	{% for contraparte in contrapartes_sel %}
 						 		{% if contraparte.pais.id == pais.id%}
-			<label class="checkbox"><input type="checkbox" name="contraparte" value="{{contraparte.id}}">{{contraparte}}</input></label>
+						 		<div class="leyenda"style ="background:{{contraparte.font_color}}"></div>
+								<label class="checkbox">
+								<input type="checkbox" name="contraparte" value="{{contraparte.id}}" checked>
+								{{contraparte}}	
+								</label>
 						 		{%endif%}
 						 	{% endfor %}
+
+						 	{% for contraparte in contrapartes_otras %}
+						 		{% if contraparte.pais.id == pais.id%}
+						 		<div class="leyenda"style ="background:{{contraparte.font_color}}"></div>
+								<label class="checkbox">
+								<input type="checkbox" name="contraparte" value="{{contraparte.id}}">
+								{{contraparte}}
+								</label>
+						 		{%endif%}
+						 	{% endfor %}
+
 						 {% endfor %}
 						 <hr>
 						<li>

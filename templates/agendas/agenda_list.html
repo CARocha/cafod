@@ -130,7 +130,7 @@
 
 						 	{% for contraparte in contrapartes %}
 						 		{% if contraparte.pais.id == pais.id%}
-			<label class="checkbox"><input type="checkbox" name="contraparte" value="{{contraparte}}">{{contraparte}}</input></label>
+			<label class="checkbox"><input type="checkbox" name="contraparte" value="{{contraparte.id}}">{{contraparte}}</input></label>
 						 		{%endif%}
 						 	{% endfor %}
 						 {% endfor %}

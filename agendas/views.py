@@ -134,18 +134,18 @@ def calendario_publico(request,id=None):
 def calendario_full_contraparte(request,id=None):
     paises = Pais.objects.all()
     contrapartes = Contraparte.objects.all()
-    
     if request.method == 'POST':
-        p = request.POST.getlist('contraparte')
+        request.session['p'] = request.POST.getlist('contraparte')
+        
     if request.is_ajax():
         start = datetime.datetime.fromtimestamp(float(request.GET['start']))
         end = datetime.datetime.fromtimestamp(float(request.GET['end']))
         fecha1 = datetime.date(start.year, start.month, start.day)
         fecha2 = datetime.date(end.year, end.month, end.day)
-        p = request.POST.getlist('contraparte')
-        print p
-        eventos = Agendas.objects.filter(inicio__range=(fecha1, fecha2))
-                  #user__userprofile__contraparte__in=['sacrac','Simas'])
+
+        
+        eventos = Agendas.objects.filter(inicio__range=(fecha1, fecha2),
+                  user__userprofile__contraparte__id__in=request.session['p'])
         
         var = []        
         for evento in eventos:
@@ -163,5 +163,3 @@ def calendario_full_contraparte(request,id=None):
         actividad = Agendas.objects.get(pk=id)
     return render_to_response('agendas/agenda_list_full.html',locals(),
                               context_instance = RequestContext(request))
-    #print request.POST.getlist('contraparte')
-    #pass

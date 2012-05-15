@@ -33,10 +33,10 @@
                 week: 'Semana'
             },
 			eventClick: function(calEvent, jsEvent, view) {
-                window.location = '/agendas/calendario/' + calEvent.id;
+                window.location = '/agendas/calendar/' + calEvent.id;
                 },
 			editable: false,
-			events: "/agendas/calendario/"
+			events: "/agendas/calendar/"
 
 		});	
 	});
@@ -117,7 +117,6 @@
 		{%endif%}
 		<div class="row">
 			<div class="span9">
-				que cosas es esto
 				<div id='calendar'></div>
 			</div>
 			<div class="span3">
@@ -131,7 +130,7 @@
 
 						 	{% for contraparte in contrapartes %}
 						 		{% if contraparte.pais.id == pais.id%}
-			<label class="checkbox"><input type="checkbox" name="contraparte" value="{{contraparte}}">{{contraparte}}</input></label>
+			<label class="checkbox"><input type="checkbox" name="contraparte" value="{{contraparte.id}}">{{contraparte}}</input></label>
 						 		{%endif%}
 						 	{% endfor %}
 						 {% endfor %}

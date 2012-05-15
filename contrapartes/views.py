@@ -59,7 +59,7 @@ def editar_contraparte(request, id):
             form_uncommited = form.save(commit=False)
             form_uncommited.user = request.user
             form_uncommited.save()
-            return HttpResponseRedirect('%s?shva=ok' % contra.get_absolute_url())
+            return HttpResponseRedirect('%s?shva=ok' % '/foros/perfil/')
     else:
         form = ContraparteForms(instance=contra)
     return render_to_response('contrapartes/crear_contraparte.html', locals(),

@@ -77,13 +77,6 @@ def borrar_agenda(request, id):
 
 @login_required
 def calendario(request,id=None):
-    # if request.method == 'POST':
-    #         form = CecocafenForm(request.POST)
-    #         if form.is_valid():
-    #             cooperativa = form.cleaned_data['cooperativa']
-    #             request.session['cooperativa'] = cooperativa
-    #             request.session['fecha'] = form.cleaned_data['fecha']
-    #             request.session['departamento'] = form.cleaned_data['departamento']
     paises = Pais.objects.all()
     contrapartes = Contraparte.objects.all()
 
@@ -137,5 +130,38 @@ def calendario_publico(request,id=None):
     return render_to_response('agendas/agenda_list_public.html',locals(),
                               context_instance = RequestContext(request))
 
-def calendario_full_contraparte(request,ids):
-    pass
+@login_required
+def calendario_full_contraparte(request,id=None):
+    paises = Pais.objects.all()
+    contrapartes = Contraparte.objects.all()
+    
+    if request.method == 'POST':
+        p = request.POST.getlist('contraparte')
+    if request.is_ajax():
+        start = datetime.datetime.fromtimestamp(float(request.GET['start']))
+        end = datetime.datetime.fromtimestamp(float(request.GET['end']))
+        fecha1 = datetime.date(start.year, start.month, start.day)
+        fecha2 = datetime.date(end.year, end.month, end.day)
+        p = request.POST.getlist('contraparte')
+        print p
+        eventos = Agendas.objects.filter(inicio__range=(fecha1, fecha2))
+                  #user__userprofile__contraparte__in=['sacrac','Simas'])
+        
+        var = []        
+        for evento in eventos:
+            d = {
+                 'id': str(evento.id),
+                 'title': str(evento.evento), 
+                 'start':str(evento.inicio), 
+                 'end':str(evento.final), 
+                 'allDay': True,
+                 'color':str(evento.user.userprofile.contraparte.font_color)
+                 }
+            var.append(d)
+        return HttpResponse(simplejson.dumps(var), mimetype='application/json')
+    if not id==None:
+        actividad = Agendas.objects.get(pk=id)
+    return render_to_response('agendas/agenda_list_full.html',locals(),
+                              context_instance = RequestContext(request))
+    #print request.POST.getlist('contraparte')
+    #pass

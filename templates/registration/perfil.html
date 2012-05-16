@@ -34,7 +34,7 @@
                 		<a href="/contrapartes/editar/{{user.userprofile.contraparte.id}}" class="btn">Editar</a>
                 	</div>
                 </div>
-                <div class="span6">
+                <div class="span6" style="display:none">
                 	<div class="alert">Espacio reservado para un calendario de actividades<br><br><br>
                         {% for agenda in agendas %}
                             {{agenda.evento}}<br>
@@ -44,7 +44,7 @@
                 </div>
             </div>
             <div class="row">
-            	<div class="span12">
+            	<div class="span12" style="display:none">
             		<div class="alert">Espacio reservado para mostrar las ultimas activiades del foro<br><br><br>
                         {% for foro in foros %}
                             {{foro.nombre}}<br>

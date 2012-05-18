@@ -128,7 +128,7 @@ def notify_user_mensaje(mensaje):
                                    'mensajes': mensaje,
                                    'url': '%s/contrapartes/mensaje/ver/' % (site,)
                                     })
-    send_mail('Nuevo mensaje CAFOD', contenido, 'develop@cafodca.org', [user.email for user in mensaje.user.all() if user.email])
+    send_mail('Nuevo mensaje CAFOD', contenido, 'cafod@cafodca.org', [user.email for user in mensaje.user.all() if user.email])
 
 @login_required
 def estadisticas(request):

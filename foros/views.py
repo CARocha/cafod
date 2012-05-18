@@ -401,7 +401,7 @@ def notify_all_foro(foros):
                                  'url': '%s/foros/ver/%s' % (site, foros.id),
                                  'url_aporte': '%s/foros/ver/%s/#formaporte' % (site, foros.id),
                                  })
-    send_mail('Nuevo Foro en CAFOD', contenido, 'develop@cafodca.org', [user.email for user in users if user.email])
+    send_mail('Nuevo Foro en CAFOD', contenido, 'cafod@cafodca.org', [user.email for user in users if user.email])
 
 def notify_all_aporte(aportes):
     site = Site.objects.get_current()
@@ -410,7 +410,7 @@ def notify_all_aporte(aportes):
                                  #'url': '%s/foros/ver/%s' % (site, foros.id),
                                  'url_aporte': '%s/foros/ver/%s/#%s' % (site, aportes.foro.id, aportes.id),
                                  })
-    send_mail('Nuevo Aporte en CAFOD', contenido, 'develop@cafodca.org', [user.email for user in users if user.email])
+    send_mail('Nuevo Aporte en CAFOD', contenido, 'cafod@cafodca.org', [user.email for user in users if user.email])
 
 def notify_user_comentario(comentario):
     site = Site.objects.get_current()
@@ -418,7 +418,7 @@ def notify_user_comentario(comentario):
                                    'comentario': comentario,
                                    'url': '%s/foros/ver/%s' % (site, comentario.aporte.foro.id)
                                     })
-    send_mail('Nuevo comentario CAFOD', contenido, 'develop@cafodca.org', [comentario.aporte.user.email])
+    send_mail('Nuevo comentario CAFOD', contenido, 'cafod@cafodca.org', [comentario.aporte.user.email])
 
 @login_required
 def editar_aporte(request, aporte_id):

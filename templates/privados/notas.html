@@ -57,9 +57,9 @@
 	        </li>
 	        {% endif %}
 	        <li class="active">
-	            <!-- current page -->
-	               <a href="#"> Page {{ notas.number }} of {{ notas.paginator.num_pages }}</a>
-	            <!-- end current page -->
+	            {% for numero in notas.paginator.page_range%}
+	            	<a href="{% url notas-personales %}?page={{numero}}">{{numero}}</a>
+	            {%endfor%}
 	        </li>
 	        {% if notas.has_next %}
 	         <li>

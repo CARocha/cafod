@@ -59,11 +59,13 @@
 	            ← Anterior</a>
 	        </li>
 	        {% endif %}
+
 	        <li class="active">
-	            <!-- current page -->
-	               <a href="#"> Page {{ notas.number }} of {{ notas.paginator.num_pages }}</a>
-	            <!-- end current page -->
+	            {% for numero in notas.paginator.page_range%}
+	            	<a href="{% url notas_list %}?page={{numero}}">{{numero}}</a>
+	            {%endfor%}
 	        </li>
+
 	        {% if notas.has_next %}
 	         <li>
 	         <a href="{% url notas_list %}?page={{ notas.next_page_number }}">

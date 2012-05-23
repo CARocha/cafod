@@ -111,7 +111,7 @@ $(document).ready(function() {
 	                    {% for doc in discusion.documentos.all%}
 	                    <tr>
 	                        <td>{{doc.nombre_doc}}</td>
-	                        <td><center><a href="{{doc.adjunto}}" class=" btn btn-info btn-mini dropdown-toggle"><i class="icon-download-alt icon-white"></i>Descargar</a></center></td>
+	                        <td><center><a href="/uploads/{{doc.adjunto}}" class=" btn btn-info btn-mini dropdown-toggle"><i class="icon-download-alt icon-white"></i>Descargar</a></center></td>
 	                    </tr>
 	                    {% endfor %}
 	                  </tbody>

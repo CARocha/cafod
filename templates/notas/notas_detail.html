@@ -116,6 +116,41 @@ $(".alert").alert();
                 
             </div>
         </div>
+
+         {%if request.user.is_authenticated%}
+                <div class="row">
+                  <div class="span12">
+                    <div class="dividerline"></div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="span12">
+                    <div class="encabezado-title raya">COMENTARIOS</div>
+                    {% for comentario in nota.comentarionotas_set.all %}         
+                    <div class="well" id="cmt{{comentario.id}}">{{comentario.comentario|safe}}
+                      <div class="user-info"><i>escrito por</i> <img src="/files/img/avatarpeque.png" width="25" height="25"> <b>{{comentario.usuario.username}}</b> - {{comentario.fecha|date:"d M"}}
+                        {% if comentario.usuario == request.user or request.user.is_superuser %}
+                            <div class="btn-group foro-edit" style="float:right;">
+                          <a data-fancybox-type="iframe"  class=" fancybox btn btn-mini" href="/foros/comentario/editar/{{comentario.id}}"><i class="icon-pencil"></i></a>
+                          <a class="btn btn-mini" href="/foros/comentario/borrar/{{comentario.id}}"><i class="icon-trash"></i></a>
+                          </div>
+                        {% endif %}
+                      </div>
+                    </div>  
+                    {%endfor%}
+                    <div class="well"> 
+                    <form action="." method="post">{% csrf_token %}
+                            {{form.media}}
+                            {{form.as_p}}
+
+                            <input class="btn btn-large btn-success " style="" type="submit" id="submitfoo" value="Guardar" />
+                          
+                    </form>  
+                  </div>
+                  </div>
+                </div>
+        {%endif%}
+
     </div>
 </div>
 {% endblock %}

@@ -102,7 +102,7 @@ def crear_nota(request):
                 form3_uncommited.save()
 
             thread.start_new_thread(notify_all_notas, (form_uncommited,))
-            return HttpResponseRedirect('/notas')
+            return HttpResponseRedirect('/foros/privado/nota/')
     else:
         form = NotasForms()
         form2 = FotoForm()

@@ -87,11 +87,11 @@ $(".alert").alert();
                   </div>
                 {% endif %}
                <h1 class="titulo-grande">{{nota.titulo}}</h1>
-               <div class="extrainfofull">{{nota.fecha}}  |  {{nota.pais.nombre}}</div>
+               <div class="extrainfofull">{{nota.fecha}}  |  {{nota.user.userprofile.pais.nombre}}</div>
             </div>
             <div class="span5">
                 
-                <a class="contraparte-nota btn " href="/contrapartes/{{notas.contraparte.id}}"><img src="{{nota.contraparte.logo.url_70x60}}">{{nota.contraparte.nombre}}</a>
+                <a class="contraparte-nota btn " href="/contrapartes/{{notas.contraparte.id}}"><img src="{{nota.contraparte.logo.url_70x60}}">{{nota.user.userprofile.contraparte.nombre}}</a>
             </div>
         </div>
         <div class="row ">

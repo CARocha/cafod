@@ -179,9 +179,9 @@ $(document).ready(function() {
 
 		{% for respuesta in discusion.aportes_set.all %}
 
-		<div class="row ">
+		<div class="row " id="{{respuesta.id}}">
 			<div class="span1">
-				<div class="label">Aporte # {{respuesta.id}}</div>
+				<div class="label"><center>Aporte </center></div>
 				<div class="user-info">{{respuesta.fecha|date:"d M"}}</div>
 				<br><img src="/files/img/avatarpeque.png"><br>
 				<small>{{respuesta.user}}</small>

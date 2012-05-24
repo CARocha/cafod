@@ -28,7 +28,8 @@ $(document).ready(function() {
         $("#"+id)
         	.animate({backgroundColor: '#BEDA53'}, 10)
         	.animate( { backgroundColor: '#F5F5F5' }, 2000);
-	}	
+	}
+ $('.username').tooltip({'placement':'bottom'});	
 });
 
 </script>
@@ -188,7 +189,7 @@ $(document).ready(function() {
 				{%else%}
 				<img src="/files/img/avatarpeque.png"><br>
 				{%endif%}
-				<small>{{respuesta.user}}</small>
+				<small><a class="username" href="" rel="tooltip" title="{{respuesta.user.first_name}} - {{respuesta.user.userprofile.contraparte}}">{{respuesta.user}}</a></small>
 				{% if respuesta.user == request.user or request.user.is_superuser %}
 					<div class="btn-group foro-edit">
 					    <a class="btn btn-mini" href="/foros/aporte/editar/{{respuesta.id}}"><i class="icon-pencil"></i></a>
@@ -210,7 +211,7 @@ $(document).ready(function() {
 							{%else%}
 							<img src="/files/img/avatarpeque.png" width="25" height="25">
 							{%endif%}
-		       				<b>{{comentario.usuario.username}}</b> - {{comentario.fecha|date:"d M"}}
+		       				<b><a class="username" href="" rel="tooltip" title="{{comentario.usuario.first_name}} - {{comentario.usuario.userprofile.contraparte}}">{{comentario.usuario.username}}</a></b> - {{comentario.fecha|date:"d M"}}
 					        {% if comentario.usuario == request.user or request.user.is_superuser %}
 							<div class="btn-group foro-edit" style="float:right;">
 					    			<a data-fancybox-type="iframe"  class=" fancybox btn btn-mini" href="/foros/comentario/editar/{{comentario.id}}"><i class="icon-pencil"></i></a>

@@ -40,18 +40,25 @@ def lista_notas(request):
     return render_to_response('notas/notas_list.html', locals(),
                               context_instance=RequestContext(request))
 
-#def detalle_notas(request, pk):
-#    objects = get_object_or_404(Notas, pk=pk)
-#    adjuntos = objects.adjuntos.all()
-#    var1 = 0
-#    for a in adjuntos:
-#        if a.nombre_doc == '':
-#            var1 = 0
-#        else:
- #           var1 = 1
-    
-#    return render_to_response('notas/notas_detail.html', locals(),
- #                                context_instance=RequestContext(request))
+def detalle_notas(request, id):
+    nota = get_object_or_404(Notas, id=id)
+
+    if request.method == 'POST':
+        form = ComentarioForm(request.POST)
+
+        if form.is_valid():
+            form_uncommited = form.save(commit=False)
+            form_uncommited.user = request.user
+            form_uncommited.nota = nota
+            form_uncommited.save()
+
+        return HttpResponseRedirect('/notas/%d/#cmt%d' % (nota.id,form.instance.id) )
+
+    else:
+        form = ComentarioForm()
+
+    return render_to_response('notas/notas_detail.html', locals(),
+                                 context_instance=RequestContext(request))  
 
 def lista_notas_pais(request,id):
     notas_list = Notas.objects.filter(user__userprofile__contraparte__pais__id=id).order_by('-fecha')

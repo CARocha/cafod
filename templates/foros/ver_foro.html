@@ -183,7 +183,11 @@ $(document).ready(function() {
 			<div class="span1">
 				<div class="label"><center>Aporte </center></div>
 				<div class="user-info">{{respuesta.fecha|date:"d M"}}</div>
-				<br><img src="/files/img/avatarpeque.png"><br>
+				{%if respuesta.user.userprofile.avatar %}
+				<img src="{{respuesta.user.userprofile.avatar.url_70x60}}"><br>
+				{%else%}
+				<img src="/files/img/avatarpeque.png"><br>
+				{%endif%}
 				<small>{{respuesta.user}}</small>
 				{% if respuesta.user == request.user or request.user.is_superuser %}
 					<div class="btn-group foro-edit">
@@ -199,7 +203,14 @@ $(document).ready(function() {
 				    </p>				    
 			        {% for comentario in respuesta.comentarios_set.all %}					
 		       		<div class="well" id="cmt{{comentario.id}}">{{comentario.comentario|safe}}
-		       			<div class="user-info"><i>escrito por</i> <img src="/files/img/avatarpeque.png" width="25" height="25"> <b>{{comentario.usuario.username}}</b> - {{comentario.fecha|date:"d M"}}
+		       			<div class="user-info">
+		       				<i>escrito por</i> 
+							{%if comentario.usuario.userprofile.avatar %}
+							<img src="{{comentario.usuario.userprofile.avatar.url_70x60}}" width="25" height="25">
+							{%else%}
+							<img src="/files/img/avatarpeque.png" width="25" height="25">
+							{%endif%}
+		       				<b>{{comentario.usuario.username}}</b> - {{comentario.fecha|date:"d M"}}
 					        {% if comentario.usuario == request.user or request.user.is_superuser %}
 							<div class="btn-group foro-edit" style="float:right;">
 					    			<a data-fancybox-type="iframe"  class=" fancybox btn btn-mini" href="/foros/comentario/editar/{{comentario.id}}"><i class="icon-pencil"></i></a>

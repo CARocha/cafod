@@ -6,27 +6,30 @@
   <![endif]-->
 	<title>{%block title%}CAFOD{%endblock%}</title>
   <!--[<link type="text/css" rel="stylesheet"  href="/files/css/cafod.css">-->
+  {% load compress %} 
+  {% compress css %}
+    <link type="text/css" rel="stylesheet"  href="/files/bootstrap/css/bootstrap.min.css" >
+    <link type="text/css" rel="stylesheet"  href="/files/css/cafod.css">
+    <link type="text/css" rel="stylesheet"  href="/files/css/jquery.fancybox.css" >
+    <link type="text/css" rel="stylesheet"  href="/files/css/jqueryui.css" >
+  {% endcompress %}
   <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-  <link type="text/css" rel="stylesheet"  href="/files/bootstrap/css/bootstrap.css" >
-  <script type="text/javascript" src="/files/bootstrap/js/bootstrap.js"></script>
-  <script type="text/javascript" src="/files/bootstrap/js/bootstrap-transition.js"></script>
-  <script type="text/javascript" src="/files/js/jqueryui.js"></script>
-  <link type="text/css" rel="stylesheet"  href="/files/css/jqueryui.css" >
-  <link type="text/css" rel="stylesheet/less" href="/files/css/cafod.less">
-  <script type="text/javascript" src="/files/js/less.min.js"></script>
-   <script type="text/javascript" src="/files/js/fancybox.pack.js"></script>
-  <link type="text/css" rel="stylesheet"  href="/files/css/jquery.fancybox.css" >
-  <script type="text/javascript">
-    $(function() {
-    $("#id_apertura , #id_cierre , #id_fecha_skype , #id_memoria, #id_inicio, #id_final").datepicker({ 
-        dateFormat: 'dd/mm/yy', 
-        dayNamesMin: ['Do', 'Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sa'], 
-        monthNames: ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'],
-        changeYear: true
-      });
-  });
-  </script>
-
+  {% compress js %}
+    <script type="text/javascript" src="/files/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/files/bootstrap/js/bootstrap-transition.js"></script>
+    <script type="text/javascript" src="/files/js/fancybox.pack.js"></script>
+    <script type="text/javascript" src="/files/js/jqueryui.js"></script>
+    <script type="text/javascript">
+      $(function() {
+      $("#id_apertura , #id_cierre , #id_fecha_skype , #id_memoria, #id_inicio, #id_final").datepicker({ 
+          dateFormat: 'dd/mm/yy', 
+          dayNamesMin: ['Do', 'Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sa'], 
+          monthNames: ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'],
+          changeYear: true
+        });
+    });
+    </script>
+  {% endcompress %}
   {%block extra_js%}{%endblock%}
 </head>
 <body>

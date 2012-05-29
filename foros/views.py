@@ -488,7 +488,7 @@ def borrar_aporte(request, id):
         aporte.delete()
         return redirect('/foros')
     else:
-        return redirect('/')
+        return redirect('/foros')
 
 @login_required
 def borrar_comentario(request, id):

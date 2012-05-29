@@ -193,9 +193,22 @@ $(document).ready(function() {
 				{% if respuesta.user == request.user or request.user.is_superuser %}
 					<div class="btn-group foro-edit">
 					    <a class="btn btn-mini" href="/foros/aporte/editar/{{respuesta.id}}"><i class="icon-pencil"></i></a>
-					    <a class="btn btn-mini" href="/foros/aporte/borrar/{{respuesta.id}}"><i class="icon-trash"></i></a>
+					    <a class="btn btn-mini" data-toggle="modal" data-target="#myModal"><i class="icon-trash"></i></a>
 				        </div>
 				{% endif %}
+                <div class="modal fade hide" id="myModal">
+                  <div class="modal-header">
+                    <a class="close" data-dismiss="modal">×</a>
+                    <h3>Esta Seguro?</h3>
+                  </div>
+                  <div class="modal-body">
+                    <p>El aporte sera borrado permanentemente y no podra ser recuperado</p>
+                  </div>
+                  <div class="modal-footer">
+                    <a href="#" data-dismiss="modal" class="btn">Cerrar</a>
+                    <a href="/foros/aporte/borrar/{{respuesta.id}}"class="btn btn-danger">Borrar Permanentemente</a>
+                  </div>
+                </div>  
 			</div>
 			<div class="span7">
 				{{respuesta.contenido|safe}}
@@ -215,9 +228,22 @@ $(document).ready(function() {
 					        {% if comentario.usuario == request.user or request.user.is_superuser %}
 							<div class="btn-group foro-edit" style="float:right;">
 					    			<a data-fancybox-type="iframe"  class=" fancybox btn btn-mini" href="/foros/comentario/editar/{{comentario.id}}"><i class="icon-pencil"></i></a>
-					    			<a class="btn btn-mini" href="/foros/comentario/borrar/{{comentario.id}}"><i class="icon-trash"></i></a>
+					    			<a class="btn btn-mini" data-toggle="modal" data-target="#myModalcomment"><i class="icon-trash"></i></a>
 				        		</div>
 				       		{% endif %}
+			                <div class="modal fade hide" id="myModalcomment">
+			                  <div class="modal-header">
+			                    <a class="close" data-dismiss="modal">×</a>
+			                    <h3>Esta Seguro?</h3>
+			                  </div>
+			                  <div class="modal-body">
+			                    <p>El comentario sera borrado permanentemente y no podra ser recuperado</p>
+			                  </div>
+			                  <div class="modal-footer">
+			                    <a href="#" data-dismiss="modal" class="btn">Cerrar</a>
+			                    <a href="/foros/comentario/borrar/{{comentario.id}}"class="btn btn-danger">Borrar Permanentemente</a>
+			                  </div>
+			                </div>  
 		       			</div>
 		       		</div>
 			        {% endfor %}

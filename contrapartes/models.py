@@ -6,6 +6,7 @@ from thumbs_logo import ImageWithThumbsField
 from utils import *
 from south.modelsinspector import add_introspection_rules
 from ckeditor.fields import RichTextField
+import datetime
 
 add_introspection_rules ([], ["^ckeditor\.fields\.RichTextField"])
 
@@ -80,7 +81,7 @@ class UserProfile(models.Model):
 
 class Mensajero(models.Model):
     user = models.ManyToManyField(User)
-    fecha = models.DateField()
+    fecha = models.DateField(default=datetime.date.today())
     mensaje = RichTextField()
     usuario = models.CharField(max_length=200,blank=True, null=True)
 

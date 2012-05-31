@@ -107,7 +107,8 @@ def enviar_mensaje(request):
     if request.method == 'POST':
         form = MensajeForm(request.POST)
         if form.is_valid():
-            #form.save()
+            form.save()
+            form_uncommited.usuario = request.user
             form_uncommited = form.save(commit=False)
             #form_uncommited.user = form.cleaned_data['user']
             form_uncommited.save()
@@ -143,7 +144,7 @@ def estadisticas(request):
         videos = Videos.objects.filter(object_id=usuario.id).count()
         audios = Audios.objects.filter(object_id=usuario.id).count()
 
-        total[usuario] = (foro,nota,aporte,comentario,documentos,imagenes,videos,audios)
+        total[usuario] = (nota,foro,aporte,comentario,documentos,imagenes,videos,audios)
 
     return render_to_response('privados/estadisticas.html', locals(),
                                  context_instance=RequestContext(request))    

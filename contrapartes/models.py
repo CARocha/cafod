@@ -82,6 +82,7 @@ class Mensajero(models.Model):
     user = models.ManyToManyField(User)
     fecha = models.DateField()
     mensaje = RichTextField()
+    usuario = models.CharField(max_length=200,blank=True, null=True)
 
     def __unicode__(self):
         return u'%s - %s ' % (self.fecha, self.mensaje)

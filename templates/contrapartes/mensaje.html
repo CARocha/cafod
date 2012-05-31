@@ -1,17 +1,42 @@
 {% extends "baseadmin.html" %}
-
 {% block contenido %}
-mensajes<br>
-{% for a in mensaje %}
-	{{a.mensaje|safe}}, {% for b in a.user.all %} {{b}} {% endfor %}
-	<hr>
-{% endfor %}
 
+<div class="row" >
+    <div class="encabezado">
+      <div class="container">
+        <div class="row">
+          <div class="span5">
+            <div class="encabezado-title">
+            MENSAJES
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
 
-<form action="." method="post" accept-charset="utf-8">{% csrf_token %}
-	{{form.media}}
-	{{form.as_p}}
-	<input type="submit" name="enviar" value="Enviar">
-</form>
+<div class="row">
+	<div class="container">
+		<div class="row">
+			<div class="span6">
+				<div class="well">
+					<form action="." method="post" accept-charset="utf-8">{% csrf_token %}
+						{{form.media}}
+						{{form.as_p}}
+						<input type="submit" name="enviar" value="Enviar">
+					</form>
+				</div>
+			</div>
+			<div class="span6">
+				<div class="alert">Mensajes recibidos</div>
+				{% for a in mensaje %}
+					{{a.mensaje|safe}}, {% for b in a.user.all %} {{b}} {% endfor %}
+					<hr>
+				{% endfor %}
+			</div>
+		</div>
+	</div>
+</div>
+
 
 {% endblock %}

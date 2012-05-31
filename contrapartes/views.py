@@ -108,8 +108,8 @@ def enviar_mensaje(request):
         form = MensajeForm(request.POST)
         if form.is_valid():
             form.save()
-            form_uncommited.usuario = request.user
             form_uncommited = form.save(commit=False)
+            form_uncommited.usuario = request.user
             #form_uncommited.user = form.cleaned_data['user']
             form_uncommited.save()
             form.save_m2m()

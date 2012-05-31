@@ -23,7 +23,7 @@ class ContraparteForms(forms.ModelForm):
 
     class Meta:
         model = Contraparte
-	exclude = ('user',)
+        exclude = ('user',)
 
 class UserForm(ModelForm):
     class Meta:
@@ -41,3 +41,4 @@ class MensajeForm(forms.ModelForm):
     class Meta:
         widgets = {'user': forms.CheckboxSelectMultiple}
     	model = Mensajero
+        exclude = ('usuario','fecha')

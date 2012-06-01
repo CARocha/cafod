@@ -98,6 +98,7 @@ CKEDITOR_CONFIGS = {
 }
 
 SITE_ID = 1
+CX_CODE = '005566980429085431315:e2ov4hqoxcm'
 
 INSTALLED_APPS = (
     'django.contrib.auth',
@@ -121,6 +122,7 @@ INSTALLED_APPS = (
     'tagging_autocomplete',
     'ckeditor',
     'compressor',
+    'django_google_cse',
 )
 
 # A sample logging configuration. The only tangible logging

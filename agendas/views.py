@@ -58,7 +58,7 @@ def editar_agenda(request, id):
             #form1_uncommitd.content_object = form_uncommited
             #form1_uncommitd.save()
             form1.save()
-            return HttpResponseRedirect('/agendas/calendario')
+            return HttpResponseRedirect('/agendas/calendario/?shva=editada')
     else:
         form = AgendaForm(instance=agenda)
         form1 = AgendaFormSet(instance=agenda)
@@ -72,7 +72,7 @@ def borrar_agenda(request, id):
 
     if agenda.user == request.user or request.user.is_superuser:
         agenda.delete()
-        return redirect('/agendas/calendario')
+        return redirect('/agendas/calendario/?shva=erase')
     else:
         return redirect('/')
 

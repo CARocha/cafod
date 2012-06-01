@@ -27,7 +27,13 @@
 	<div class="container">
 		{% if request.GET.shva == 'erase' %}
             <div class="alert fade in">
-                Se ha eliminado la nota de forma permanente
+                Se ha eliminado el evento de forma permanente
+                <a class="close" href="#" data-dismiss="alert">x</a>
+            </div>
+        {% endif %}
+		{% if request.GET.shva == 'editada' %}
+            <div class="alert fade in">
+                El evento ha sido editado
                 <a class="close" href="#" data-dismiss="alert">x</a>
             </div>
         {% endif %}

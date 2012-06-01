@@ -162,7 +162,7 @@ def editar_foro(request, id):
             form3.save()
             form4.save()
             form5.save()
-            return HttpResponseRedirect('/foros/ver/'+id)
+            return HttpResponseRedirect('/foros/ver/'+id+'/?b=editado')
             
     else:
         form = ForosForm(instance=foro)
@@ -178,7 +178,7 @@ def borrar_foro(request, id):
     foro = get_object_or_404(Foros, id=id)
     if foro.contraparte == request.user or request.user.is_superuser:
         foro.delete()
-        return redirect('/foros')
+        return redirect('/foros/?b=borrado')
     else:
         return redirect('/')
 

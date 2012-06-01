@@ -5,7 +5,11 @@
 <script type="text/javascript" src="/files/js/visualize.jQuery.js"></script>
 <script type="text/javascript">
 $(function(){
-    $('table').visualize({type: 'bar', width: '860px'});
+    $('table').visualize({
+      type: 'bar', 
+      width: '860px',
+      colors: ['#be1e2d','#666699','#92d5ea','#ee8310','#8d10ee','#5a3b16','#26a4ed','#f45a90','#e9e744','#986601','#980101','#d9bb7a','#aaccee','#0197fd','#98fc66','#015a01','#ff00ff','#6600cc','#0197fd','#888888'],
+    });
     $('.username').tooltip({'placement':'right'});
 });
 </script>

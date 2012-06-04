@@ -38,6 +38,7 @@ class Pais(models.Model):
 
 class Contraparte(models.Model):
     nombre = models.CharField(max_length=200)
+    siglas = models.CharField("Siglas o Nombre Corto",help_text="Siglas o Nombre corto de la oganización",max_length=200,blank=True, null=True)
     logo = ImageWithThumbsField(upload_to=get_file_path,
                                    sizes=((350,250), (70,60),(180,160)), 
                                    null=True, blank=True)

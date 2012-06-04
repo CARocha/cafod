@@ -29,6 +29,19 @@
              <a href="/notas/{{nota.id}}" class="btn btn-inverse btn-mini">Leer mas</a>
            </div>
         {% endfor %}
+        <div class="span3 eventoindex">
+          {%for e in evento%}
+            <div class="index-fechaevento">
+              <center>{{e.inicio|date:"d F" }}</center>
+            </div>
+            <div class="index-nombreevento">
+              <a href="/agendas/eventos/{{e.id}}">{{e.evento}} </a>
+            </div>
+            <div class="index-descripevento">
+              {{e.descripcion|safe|truncatewords_html:15}} 
+          {%endfor%}
+          </div>
+        </div>
       </div>
     </div>
   </div>

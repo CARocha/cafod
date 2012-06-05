@@ -134,13 +134,16 @@ def notify_user_mensaje(mensaje):
 
 @login_required
 def estadisticas(request):
+    from django.db.models import Count
     total = {}
     for usuario in User.objects.all():
         foro = Foros.objects.filter(contraparte=usuario).count()
-        nota = Notas.objects.filter(user=usuario).count()
+        nota = Notas.objects.filter(user=usuario)
         aporte = Aportes.objects.filter(user=usuario).count()
         comentario = Comentarios.objects.filter(usuario=usuario).count()
-        documentos = Documentos.objects.filter(object_id=usuario.id).count()
+        documentos = nota.aggregate(Count('adjuntos'))#Documentos.objects.filter(object_id=usuario.id)
+        docu=nota.aggregate(Count('adjuntos'))
+        print docu
         imagenes = Imagen.objects.filter(object_id=usuario.id).count()
         videos = Videos.objects.filter(object_id=usuario.id).count()
         audios = Audios.objects.filter(object_id=usuario.id).count()

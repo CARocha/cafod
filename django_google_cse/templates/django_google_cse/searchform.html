@@ -1,0 +1,28 @@
+<form class="navbar-search pull-right" action="{% url django_google_cse.views.search %}" id="cse-search-box" method='GET'>
+    <input onclick="updateState.focus();" onblur="updateState.blur();" type="text" name="q" id="searchfield" class="search-query" placeholder="Buscar">
+</form>
+
+<script type="text/javascript">
+    var searchfield = document.getElementById('searchfield');
+    var updateState = {
+        focus: function(){
+            if (searchfield.value == 'Buscar...'){
+                searchfield.value = '';
+            }
+        },
+        blur: function(){
+            if (searchfield.value == ''){
+                searchfield.value = 'Buscar...';
+            }    
+        }
+    }
+    try{
+        if (parseQueryFromUrl() != ''){
+            window.onload=function(){
+                searchfield.value = '' + parseQueryFromUrl();
+            }
+        }
+    }catch (err){
+
+    }
+</script>

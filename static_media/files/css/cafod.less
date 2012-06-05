@@ -544,6 +544,17 @@ form hr{margin-top:10px; margin-bottom:10px;}
 	height:100px;
 }
 
+.opacidad-50{
+	opacity: 0.5;
+	-moz-opacity: 0.5;
+	filter:alpha(opacity=5);
+}
+
+.opacidad-70{
+	opacity: 0.7;
+	-moz-opacity: 0.7;
+	filter:alpha(opacity=7);
+}
 //foro
 
 .aportes{
@@ -576,6 +587,7 @@ form hr{margin-top:10px; margin-bottom:10px;}
 }
 
 .user-info{
+	margin-top:10px;
 	font-size:11px;
 	color:#646464;
 }
@@ -649,4 +661,30 @@ form hr{margin-top:10px; margin-bottom:10px;}
 	height:20px;
 	float: left;
 	margin-right:20px;
+}
+
+/// mensajes
+
+.mensajeform{
+	ul li input{
+		float: left;
+		margin-right:10px;
+		
+	}
+	ul li{
+				border:#d6d6d6 1px solid;
+		.rounded-corners(4px);
+		width:120px;
+		float:left;
+		list-style:none;
+		margin:4px;
+		font-size:11px !important;
+		padding:4px;
+		.linear-gradient(#fff,#eee,15%)
+	}
+	ul li label{font-size:9px !important;}
+	ul{
+		list-style:none;
+		margin-left:0px;
+	}
 }

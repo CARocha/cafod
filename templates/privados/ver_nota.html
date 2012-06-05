@@ -37,7 +37,7 @@ $(".alert").alert();
         }
       }
   });
-
+  $('.username').tooltip({'placement':'bottom'});
 });
 </script>
 {%endblock%}
@@ -87,11 +87,11 @@ $(".alert").alert();
                   </div>
                 {% endif %}
                <h1 class="titulo-grande">{{nota.titulo}}</h1>
-               <div class="extrainfofull">{{nota.fecha}}  |  {{nota.pais.nombre}}</div>
+               <div class="extrainfofull">{{nota.fecha}}  |  {{nota.user.userprofile.pais.nombre}}</div>
             </div>
             <div class="span5">
                 
-                <a class="contraparte-nota btn " href="/contrapartes/{{notas.contraparte.id}}"><img src="{{nota.contraparte.logo.url_70x60}}">{{nota.contraparte.nombre}}</a>
+                <a class="contraparte-nota btn " href="/contrapartes/{{nota.contraparte.id}}"><img src="{{nota.contraparte.logo.url_70x60}}">{{nota.user.userprofile.contraparte.nombre}}</a>
             </div>
         </div>
         <div class="row ">
@@ -133,32 +133,48 @@ $(".alert").alert();
                 
             </div>
         </div>
+        {%if request.user.is_authenticated%}
+        <div class="row">
+          <div class="span12">
+            <div class="dividerline"></div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="span12">
+            <div class="encabezado-title raya">COMENTARIOS</div>
+            {% for comentario in nota.comentarionotas_set.all %}         
+            <div class="well" id="cmt{{comentario.id}}">{{comentario.comentario|safe}}
+              <div class="user-info">
+                <i>escrito por</i>
+                {%if comentario.user.userprofile.avatar %}
+                <img src="{{comentario.user.userprofile.avatar.url_70x60}}" width="25" height="25">
+                {%else%}
+                <img src="/files/img/avatarpeque.png" width="25" height="25">
+                {%endif%}
+
+                 <b><a class="username" href="#" rel="tooltip" title="{{comentario.user.first_name}} - {{comentario.user.userprofile.contraparte}}">{{comentario.user.username}}</a></b> - {{comentario.fecha|date:"d M"}}
+                {% if comentario.user == request.user or request.user.is_superuser %}
+                    <div class="btn-group foro-edit" style="float:right;">
+                  <a data-fancybox-type="iframe"  class=" fancybox btn btn-mini" href="/foros/comentario/editar/{{comentario.id}}"><i class="icon-pencil"></i></a>
+                  <a class="btn btn-mini" href="/foros/comentario/borrar/{{comentario.id}}"><i class="icon-trash"></i></a>
+                  </div>
+                {% endif %}
+              </div>
+            </div>  
+            {%endfor%}
+            <div class="well"> 
+            <form action="." method="post">{% csrf_token %}
+                    {{form.media}}
+                    {{form.as_p}}
+
+                    <input class="btn btn-large btn-success " style="" type="submit" id="submitfoo" value="Guardar" />
+                  
+            </form>  
+          </div>
+          </div>
+        </div>
+        {%endif%}
     </div>
 </div>
-Comentarios
-    {% for respuesta in nota.comentarionotas_set.all %}
-    
-        <div class="label">Comentario #{{respuesta.id}}</div>
-        
-        <small>{{respuesta.user}}</small>
-        {% if respuesta.user == request.user or request.user.is_superuser %}
-          <div class="btn-group foro-edit">
-              <a class="btn btn-mini" href="/foros/aporte/editar/{{respuesta.id}}"><i class="icon-pencil"></i></a>
-              <a class="btn btn-mini" href="/foros/aporte/borrar/{{respuesta.id}}"><i class="icon-trash"></i></a>
-                </div>
-        {% endif %}
-     <br>
-      
-        {{respuesta.comentario|safe}}
-
-      {% endfor %}
-     
-
-<form action="." method="post">{% csrf_token %}
-        {{form.media}}
-        {{form.as_p}}
-
-        <input class="btn btn-large btn-success " style="" type="submit" id="submitfoo" value="Guardar" />
-      
-</form>         
+       
 {% endblock %}

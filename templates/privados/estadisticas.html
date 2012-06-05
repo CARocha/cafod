@@ -1,30 +1,67 @@
 {% extends "baseadmin.html" %}
-
+  {%block extra_js%}
+  <link type="text/css" rel="stylesheet"  href="/files/css/visualize.css" >
+    <link type="text/css" rel="stylesheet"  href="/files/css/visualize-light.css" >
+<script type="text/javascript" src="/files/js/visualize.jQuery.js"></script>
+<script type="text/javascript">
+$(function(){
+    $('table').visualize({
+      type: 'bar', 
+      width: '860px',
+      colors: ['#be1e2d','#666699','#92d5ea','#ee8310','#8d10ee','#5a3b16','#26a4ed','#f45a90','#e9e744','#986601','#980101','#d9bb7a','#aaccee','#0197fd','#98fc66','#015a01','#ff00ff','#6600cc','#0197fd','#888888'],
+    });
+    $('.username').tooltip({'placement':'right'});
+});
+</script>
+  {%endblock%}
 {% block contenido %}
-
-<table border="1">
-<thead>
-	<tr>
-             <th>Nombre</th>
-             <th>Foros</th>
-             <th>Notas</th>
-             <th>Aportes</th>
-             <th>Comentarios</th>
-             <th>Documentos</th>
-             <th>Imagenes</th>
-             <th>Videos</th>
-             <th>Audios</th>
-	</tr>
-</thead>
-<tbody>
-    {% for k,v in total.items %}
-    <tr>
-    	<td>{{k}}</td>
-    	{% for a in v%}
-    	    <td>{{a}}</td>
-    	{%endfor%}
-    </tr>
-    {% endfor %}
-</tbody>
-</table>
+<div class="row" >
+    <div class="encabezado">
+      <div class="container">
+        <div class="row">
+          <div class="span5">
+            <div class="encabezado-title">
+            ESTADISTICAS GENERALES DE MIEMBROS DE PLATAFORMA
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+<div class="row">
+      <div class="container">
+          <div class="row">
+            <div class="span12">
+                <table class="table  table-bordered table-condensed table-striped">
+                    <caption> Estadisticas</caption>
+                <thead>
+                    <tr>
+                         <td>Nombre</td>
+                         <th scope="col"><i class="icon-list-alt"></i>Notas</th>
+                         <th scope="col"><i class="icon-comment"></i>Foros</th>
+                         <th scope="col"><i class="icon-comment"></i>Aportes</th>
+                         <th scope="col"><i class="icon-comment"></i>Comentarios</th>
+                         <th scope="col"><i class="icon-file"></i>Documentos</th>
+                         <th scope="col"><i class="icon-picture"></i>Imagenes</th>
+                         <th scope="col"><i class="icon-facetime-video"></i>Videos</th>
+                         <th scope="col"><i class="icon-volume-up"></i>Audios</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for k,v in total.items %}
+                    <tr>
+                        <th scope="row" ><a class="username" href="" rel="tooltip" title="{{k.first_name}} - 
+                            {{k.userprofile.contraparte}}">{{k}}</a></th>
+                        {% for a in v%}
+                            <td>{{a}}</td>
+                        {%endfor%}
+                    </tr>
+                    {% endfor %}
+                </tbody>
+                </table>
+            </div>
+         </div>
+    </div>
+</div>
+<br><br>
 {% endblock %}

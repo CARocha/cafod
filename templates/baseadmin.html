@@ -6,27 +6,30 @@
   <![endif]-->
 	<title>{%block title%}CAFOD{%endblock%}</title>
   <!--[<link type="text/css" rel="stylesheet"  href="/files/css/cafod.css">-->
+  {% load compress %} 
+  {% compress css %}
+    <link type="text/css" rel="stylesheet"  href="/files/bootstrap/css/bootstrap.min.css" >
+    <link type="text/css" rel="stylesheet"  href="/files/css/cafod.css">
+    <link type="text/css" rel="stylesheet"  href="/files/css/jquery.fancybox.css" >
+    <link type="text/css" rel="stylesheet"  href="/files/css/jqueryui.css" >
+  {% endcompress %}
   <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-  <link type="text/css" rel="stylesheet"  href="/files/bootstrap/css/bootstrap.css" >
-  <script type="text/javascript" src="/files/bootstrap/js/bootstrap.js"></script>
-  <script type="text/javascript" src="/files/bootstrap/js/bootstrap-transition.js"></script>
-  <script type="text/javascript" src="/files/js/jqueryui.js"></script>
-  <link type="text/css" rel="stylesheet"  href="/files/css/jqueryui.css" >
-  <link type="text/css" rel="stylesheet/less" href="/files/css/cafod.less">
-  <script type="text/javascript" src="/files/js/less.min.js"></script>
-   <script type="text/javascript" src="/files/js/fancybox.pack.js"></script>
-  <link type="text/css" rel="stylesheet"  href="/files/css/jquery.fancybox.css" >
-  <script type="text/javascript">
-    $(function() {
-    $("#id_apertura , #id_cierre , #id_fecha_skype , #id_memoria, #id_inicio, #id_final").datepicker({ 
-        dateFormat: 'dd/mm/yy', 
-        dayNamesMin: ['Do', 'Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sa'], 
-        monthNames: ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'],
-        changeYear: true
-      });
-  });
-  </script>
-
+  {% compress js %}
+    <script type="text/javascript" src="/files/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/files/bootstrap/js/bootstrap-transition.js"></script>
+    <script type="text/javascript" src="/files/js/fancybox.pack.js"></script>
+    <script type="text/javascript" src="/files/js/jqueryui.js"></script>
+    <script type="text/javascript">
+      $(function() {
+      $("#id_apertura , #id_cierre , #id_fecha_skype , #id_memoria, #id_inicio, #id_final").datepicker({ 
+          dateFormat: 'dd/mm/yy', 
+          dayNamesMin: ['Do', 'Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sa'], 
+          monthNames: ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'],
+          changeYear: true
+        });
+    });
+    </script>
+  {% endcompress %}
   {%block extra_js%}{%endblock%}
 </head>
 <body>
@@ -37,16 +40,18 @@
         <div class="navbar-inner">
             <div class="container">
               <a class="brand" href="/">
-                Plataforma de comunicacion y aprendizaje
+                <i class="icon-home icon-white opacidad-50"></i>Plataforma de comunicacion y aprendizaje
               </a>
               <ul class="nav pull-right">
                   <li class="divider-vertical"></li>
                   {% if user.username %}
-                    <li ><a href="/foros/perfil">Bienvenido {{ user.username }}</a></li>
+                    <li ><a href="/foros/perfil"><i class="icon-user icon-white opacidad-50"></i>Bienvenido {{ user.username }}</a></li>
                     <li class="divider-vertical"></li>
-                    <li><a href="/accounts/logout" title="Salir de Administración">Salir</a></li>
+                    <li ><a href="/contrapartes/estadisticas/ver"><i class="icon-signal opacidad-50 icon-white"></i>Estadisticas</a></li>
+                    <li class="divider-vertical"></li>
+                    <li><a href="/accounts/logout" title="Salir de Administración"><i class="icon-off opacidad-50 icon-white"></i>Salir</a></li>
                   {% else %}
-                    <li><a href="/accounts/login">Entrar</a></li>
+                    <li><a href="/accounts/login"><i class="icon-user opacidad-50 icon-white"></i>Entrar</a></li>
                   {% endif %}
               </ul>
               <form class="navbar-search pull-right">
@@ -73,7 +78,7 @@
             <div class="divisor-barra-admin"></div>
             <a href="/foros/privado/multimedia_fotos" class="multimediaiconadmin">Multimedia</a>
             <div class="divisor-barra-admin"></div>
-            <a href="/foros/privado/multimedia_fotos" class="adminmensaje">Mensajes</a>
+            <a href="/contrapartes/mensaje/ver" class="adminmensaje">Mensajes</a>
             <div class="clean"></div>
           </div>
       </div>

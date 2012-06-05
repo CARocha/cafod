@@ -28,7 +28,8 @@ $(document).ready(function() {
         $("#"+id)
         	.animate({backgroundColor: '#BEDA53'}, 10)
         	.animate( { backgroundColor: '#F5F5F5' }, 2000);
-	}	
+	}
+ $('.username').tooltip({'placement':'bottom'});	
 });
 
 </script>
@@ -50,8 +51,22 @@ $(document).ready(function() {
                     <div class="btn-group filtrospais">
                         <a href="/foros/editar/{{discusion.id}}" class="btn"><i class="icon-pencil"></i>Editar foro</a>
                         <a href="#formaporte" class="btn"><i class="icon-comment"></i>Aportar al foro</a>
+                        <a class="btn" data-toggle="modal" data-target="#myModal"  ><i class="icon-remove-sign"></i>Borrar</a>
                     </div>
                     {%endif%}
+		               <div class="modal fade hide" id="myModal">
+		                          <div class="modal-header">
+		                            <a class="close" data-dismiss="modal">×</a>
+		                            <h3>Esta Seguro?</h3>
+		                          </div>
+		                          <div class="modal-body">
+		                            <p>El foro y todos sus aportes seran borrados permanentemente y no podran ser recuperados</p>
+		                          </div>
+		                          <div class="modal-footer">
+		                            <a href="#" data-dismiss="modal" class="btn">Cerrar</a>
+		                            <a href="/foros/borrar/{{discusion.id}}" class="btn btn-danger">Borrar Permanentemente</a>
+		                          </div>
+		                 </div>  
                 </div>
             </div>
       </div>
@@ -59,6 +74,12 @@ $(document).ready(function() {
 </div>
 <div class="row">
 	<div class="container">
+		{% if request.GET.b == 'editado' %}
+            <div class="alert fade in">
+                 El foro ha sido editado
+                <a class="close" href="#" data-dismiss="alert">x</a>
+            </div>
+        {% endif %}
 		<div class="row">
 			<div class="span8">
 				<h1 class="titulo-grande">{{discusion.nombre}}</h1>
@@ -111,7 +132,7 @@ $(document).ready(function() {
 	                    {% for doc in discusion.documentos.all%}
 	                    <tr>
 	                        <td>{{doc.nombre_doc}}</td>
-	                        <td><center><a href="{{doc.adjunto}}" class=" btn btn-info btn-mini dropdown-toggle"><i class="icon-download-alt icon-white"></i>Descargar</a></center></td>
+	                        <td><center><a href="/uploads/{{doc.adjunto}}" class=" btn btn-info btn-mini dropdown-toggle"><i class="icon-download-alt icon-white"></i>Descargar</a></center></td>
 	                    </tr>
 	                    {% endfor %}
 	                  </tbody>
@@ -179,18 +200,35 @@ $(document).ready(function() {
 
 		{% for respuesta in discusion.aportes_set.all %}
 
-		<div class="row ">
+		<div class="row " id="{{respuesta.id}}">
 			<div class="span1">
-				<div class="label">Aporte # {{respuesta.id}}</div>
+				<div class="label"><center>Aporte </center></div>
 				<div class="user-info">{{respuesta.fecha|date:"d M"}}</div>
-				<br><img src="/files/img/avatarpeque.png"><br>
-				<small>{{respuesta.user}}</small>
+				{%if respuesta.user.userprofile.avatar %}
+				<img src="{{respuesta.user.userprofile.avatar.url_70x60}}"><br>
+				{%else%}
+				<img src="/files/img/avatarpeque.png"><br>
+				{%endif%}
+				<small><a class="username" href="" rel="tooltip" title="{{respuesta.user.first_name}} - {{respuesta.user.userprofile.contraparte}}">{{respuesta.user}}</a></small>
 				{% if respuesta.user == request.user or request.user.is_superuser %}
 					<div class="btn-group foro-edit">
 					    <a class="btn btn-mini" href="/foros/aporte/editar/{{respuesta.id}}"><i class="icon-pencil"></i></a>
-					    <a class="btn btn-mini" href="/foros/aporte/borrar/{{respuesta.id}}"><i class="icon-trash"></i></a>
+					    <a class="btn btn-mini" data-toggle="modal" data-target="#myModal"><i class="icon-trash"></i></a>
 				        </div>
 				{% endif %}
+                <div class="modal fade hide" id="myModal">
+                  <div class="modal-header">
+                    <a class="close" data-dismiss="modal">×</a>
+                    <h3>Esta Seguro?</h3>
+                  </div>
+                  <div class="modal-body">
+                    <p>El aporte sera borrado permanentemente y no podra ser recuperado</p>
+                  </div>
+                  <div class="modal-footer">
+                    <a href="#" data-dismiss="modal" class="btn">Cerrar</a>
+                    <a href="/foros/aporte/borrar/{{respuesta.id}}"class="btn btn-danger">Borrar Permanentemente</a>
+                  </div>
+                </div>  
 			</div>
 			<div class="span7">
 				{{respuesta.contenido|safe}}
@@ -199,13 +237,33 @@ $(document).ready(function() {
 				    </p>				    
 			        {% for comentario in respuesta.comentarios_set.all %}					
 		       		<div class="well" id="cmt{{comentario.id}}">{{comentario.comentario|safe}}
-		       			<div class="user-info"><i>escrito por</i> <img src="/files/img/avatarpeque.png" width="25" height="25"> <b>{{comentario.usuario.username}}</b> - {{comentario.fecha|date:"d M"}}
+		       			<div class="user-info">
+		       				<i>escrito por</i> 
+							{%if comentario.usuario.userprofile.avatar %}
+							<img src="{{comentario.usuario.userprofile.avatar.url_70x60}}" width="25" height="25">
+							{%else%}
+							<img src="/files/img/avatarpeque.png" width="25" height="25">
+							{%endif%}
+		       				<b><a class="username" href="" rel="tooltip" title="{{comentario.usuario.first_name}} - {{comentario.usuario.userprofile.contraparte}}">{{comentario.usuario.username}}</a></b> - {{comentario.fecha|date:"d M"}}
 					        {% if comentario.usuario == request.user or request.user.is_superuser %}
 							<div class="btn-group foro-edit" style="float:right;">
 					    			<a data-fancybox-type="iframe"  class=" fancybox btn btn-mini" href="/foros/comentario/editar/{{comentario.id}}"><i class="icon-pencil"></i></a>
-					    			<a class="btn btn-mini" href="/foros/comentario/borrar/{{comentario.id}}"><i class="icon-trash"></i></a>
+					    			<a class="btn btn-mini" data-toggle="modal" data-target="#myModalcomment"><i class="icon-trash"></i></a>
 				        		</div>
 				       		{% endif %}
+			                <div class="modal fade hide" id="myModalcomment">
+			                  <div class="modal-header">
+			                    <a class="close" data-dismiss="modal">×</a>
+			                    <h3>Esta Seguro?</h3>
+			                  </div>
+			                  <div class="modal-body">
+			                    <p>El comentario sera borrado permanentemente y no podra ser recuperado</p>
+			                  </div>
+			                  <div class="modal-footer">
+			                    <a href="#" data-dismiss="modal" class="btn">Cerrar</a>
+			                    <a href="/foros/comentario/borrar/{{comentario.id}}"class="btn btn-danger">Borrar Permanentemente</a>
+			                  </div>
+			                </div>  
 		       			</div>
 		       		</div>
 			        {% endfor %}

@@ -103,19 +103,21 @@ def editar_usuario_perfil(request):
 
 @login_required
 def enviar_mensaje(request):
-    mensaje = Mensajero.objects.filter(user=request.user)
+    mensaje = Mensajero.objects.filter(user=request.user).order_by('-fecha')
     if request.method == 'POST':
         form = MensajeForm(request.POST)
         if form.is_valid():
             #form.save()
             form_uncommited = form.save(commit=False)
+            form_uncommited.usuario = request.user
             #form_uncommited.user = form.cleaned_data['user']
             form_uncommited.save()
             form.save_m2m()
 
             thread.start_new_thread(notify_user_mensaje, (form_uncommited, ))
+            guardado=1
 
-            return HttpResponseRedirect('/contrapartes/mensaje/ver/')
+            return HttpResponseRedirect('/contrapartes/mensaje/ver/?guardado=ok')
 
     else:
         form = MensajeForm()
@@ -143,7 +145,7 @@ def estadisticas(request):
         videos = Videos.objects.filter(object_id=usuario.id).count()
         audios = Audios.objects.filter(object_id=usuario.id).count()
 
-        total[usuario] = (foro,nota,aporte,comentario,documentos,imagenes,videos,audios)
+        total[usuario] = (nota,foro,aporte,comentario,documentos,imagenes,videos,audios)
 
     return render_to_response('privados/estadisticas.html', locals(),
                                  context_instance=RequestContext(request))    

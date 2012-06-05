@@ -41,7 +41,7 @@
 	             {%endfor%}
 				</div>
 				<div class="span9">
-						<div class="extrainfo">{{nota.fecha}}  |  {{nota.pais.nombre}} | {{nota.contraparte.nombre}}</div>
+						<div class="extrainfo">{{nota.fecha}}  |  {{nota.user.userprofile.pais.nombre}} | {{nota.user.userprofile.contraparte.nombre}}</div>
 						<a href="/notas/ver/{{nota.id}}" class="titulo-medio">{{nota.titulo}}</a><br>
 						{{nota.contenido|safe|truncatewords_html:50}} <br><br>
 						<a href="/notas/ver/{{nota.id}}" class="btn btn-success btn-mini">Leer mas</a>

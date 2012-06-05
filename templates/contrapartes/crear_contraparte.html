@@ -5,12 +5,11 @@
 		$('input').tooltip({'placement':'right'})
 	});
 </script>
-<style type="text/css">
-	.fixed{position: fixed; top: 10px;}
-</style>
+
 <script type="text/javascript">
 	$(function() {
 		$elem = $('#actionbuttons');
+		
 		// detectar el scroll de la ventana y fixear el elemento
 	    $(window).bind('scroll', function() {
 	    	var windowTop = $(this).scrollTop();
@@ -21,11 +20,10 @@
 	    		$elem.removeClass('fixed');
 	    	}
 	    }); 
-	    var $file = $('.file > a');
-	    var url = $file.text();
-	    $file.html('');
-	    $file.append('<img src="/uploads/'+url+'" width="60" height="60">');
 
+	    //para definir el alto de las tabs igual a su contenido
+	    var alto = $('.tab-content').height();
+	    $('.nav-tab-media').height(alto);
 	});
 </script>
 {%endblock%}

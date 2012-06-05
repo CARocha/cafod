@@ -36,6 +36,7 @@ STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 #    'django.contrib.staticfiles.finders.DefaultStorageFinder',
+    'compressor.finders.CompressorFinder',
 )
 
 # Make this unique, and don't share it with anybody.
@@ -97,6 +98,7 @@ CKEDITOR_CONFIGS = {
 }
 
 SITE_ID = 1
+CX_CODE = '005566980429085431315:e2ov4hqoxcm'
 
 INSTALLED_APPS = (
     'django.contrib.auth',
@@ -119,6 +121,8 @@ INSTALLED_APPS = (
     'tagging',
     'tagging_autocomplete',
     'ckeditor',
+    'compressor',
+    'django_google_cse',
 )
 
 # A sample logging configuration. The only tangible logging
@@ -151,7 +155,7 @@ LOGGING = {
 }
 AUTH_PROFILE_MODULE = 'contrapartes.UserProfile'
 LOGIN_REDIRECT_URL = '/foros/perfil'
-
+COMPRESS_ENABLED = True
 CKEDITOR_CONFIGS = {
     'default': {
         'toolbar': [

@@ -1,17 +1,79 @@
 {% extends "baseadmin.html" %}
-
 {% block contenido %}
-mensajes<br>
-{% for a in mensaje %}
-	{{a.mensaje|safe}}, {% for b in a.user.all %} {{b}} {% endfor %}
-	<hr>
-{% endfor %}
+  {%block extra_js%}
+{%if request.GET.guardado == 'ok'%}
+<script type="text/javascript">
+  $(document).ready(function(){
+    $('#myModal').modal('show');
+});
+</script>
+  {%endif%}
+  {%endblock%}
+<div class="row" >
+    <div class="encabezado">
+      <div class="container">
+        <div class="row">
+          <div class="span5">
+            <div class="encabezado-title">
+            MENSAJES
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+{%if request.GET.guardado == 'ok'%}
+                        <div class="modal fade hide" id="myModal">
+                          <div class="modal-header">
+                            <a class="close" data-dismiss="modal">×</a>
+                            <h3>Enviado con exito</h3>
+                          </div>
+                          <div class="modal-body">
+                            <p>Su mensaje ha sido enviado con exito a todos los destinatarios</p>
+                          </div>
+                          <div class="modal-footer">
+                            <a href="#" data-dismiss="modal" class="btn">Cerrar</a>
+                          </div>
+                        </div>  
+    {%endif%}
+<div class="row">
+	<div class="container">
+		<div class="row">
+			<div class="span6">
+				<div class="alert alert-success">Crear mensajes</div>
+				<div class="well mensajeform">
+					<form action="." method="post" accept-charset="utf-8">{% csrf_token %}
+						{{form.media}}
+						{{form.user}}
+						<div class="clean"></div><br>
+						{{form.mensaje}}<Br>
+						<input type="submit" class="btn btn-success" name="enviar" value="Enviar">
+					</form>
+				</div>
+			</div>
+			<div class="span6">
+				<div class="alert">Mensajes recibidos</div>
+				<table class="table table-bordered table-condensed table-striped">
+					<tbody>
+						{% for a in mensaje %}
+						<tr>
+							<td>
+								<div style="float:right;margin:10px 10px;"class="opacidad-70">
+								<span class="badge badge-info">enviado por {{a.usuario}}</span>
+								<span class="badge">{{a.fecha}}</span>
+								</div>
+								<div class="clean"></div>
+								{{a.mensaje|safe}}
+									
+							</td>
+						</tr>
+						{% endfor %}
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>
 
-
-<form action="." method="post" accept-charset="utf-8">{% csrf_token %}
-	{{form.media}}
-	{{form.as_p}}
-	<input type="submit" name="enviar" value="Enviar">
-</form>
 
 {% endblock %}

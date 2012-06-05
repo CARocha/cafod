@@ -25,6 +25,7 @@ urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
     url(r'^tagging_autocomplete/', include('tagging_autocomplete.urls')),
     url(r'^foros/', include('foros.urls')),
+    url(r'^busqueda/$', include('django_google_cse.urls')),
 )
 
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns

@@ -6,6 +6,7 @@ from django.contrib.auth import logout
 from django.http import HttpResponseRedirect, HttpResponse
 from django.template import RequestContext
 from models import *
+from agendas.models import *
 from contrapartes.models import *
 from forms import *
 from django.contrib.contenttypes.generic import generic_inlineformset_factory
@@ -81,7 +82,8 @@ def lista_notas_pais(request,id):
 
 def index(request):
 
-    notas = Notas.objects.all().order_by('-fecha')[:4]
+    notas = Notas.objects.all().order_by('-fecha')[:3]
+    evento = Agendas.objects.filter(publico=True).order_by('-inicio')[:1]
     paises = Pais.objects.all()
     contrapartes = Contraparte.objects.all()
 

@@ -12,6 +12,7 @@ from contrapartes.widgets import ColorPickerWidget
 
 class ContraparteForms(forms.ModelForm):
     temas = forms.CharField(widget=CKEditorWidget())
+    siglas = forms.CharField(widget=forms.TextInput(attrs={'rel':"tooltip", 'title':"Siglas o nombre corto"}))
     generalidades = forms.CharField(widget=CKEditorWidget())
     nombre = forms.CharField(widget=forms.TextInput(attrs={'class':'span7','rel':"tooltip", 'title':"Nombre Completo de la Contraparte"}))
     fundacion = forms.CharField(widget=forms.TextInput(attrs={'rel':"tooltip", 'title':"Año en que fue fundada la organización"}))

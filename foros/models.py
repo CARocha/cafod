@@ -118,7 +118,7 @@ class Aportes(models.Model):
     fecha = models.DateField(default=datetime.datetime.now())
     contenido = RichTextField()
     user = models.ForeignKey(User)
-    documentos = generic.GenericRelation(Documentos)
+    adjuntos = generic.GenericRelation(Documentos)
     fotos = generic.GenericRelation(Imagen)
     video = generic.GenericRelation(Videos)
     audio = generic.GenericRelation(Audios)

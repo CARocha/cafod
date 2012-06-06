@@ -8,6 +8,7 @@ from django.template import RequestContext
 from models import *
 from forms import *
 from notas.models import *
+from agendas.models import *
 from django.contrib.sites.models import Site
 from django.core.mail import send_mail
 import operator
@@ -138,16 +139,61 @@ def estadisticas(request):
     total = {}
     for usuario in User.objects.all():
         foro = Foros.objects.filter(contraparte=usuario).count()
-        nota = Notas.objects.filter(user=usuario)
+        nota = Notas.objects.filter(user=usuario).count()
         aporte = Aportes.objects.filter(user=usuario).count()
         comentario = Comentarios.objects.filter(usuario=usuario).count()
-        documentos = nota.aggregate(Count('adjuntos'))#Documentos.objects.filter(object_id=usuario.id)
-        docu=nota.aggregate(Count('adjuntos'))
-        print docu
-        imagenes = Imagen.objects.filter(object_id=usuario.id).count()
-        videos = Videos.objects.filter(object_id=usuario.id).count()
-        audios = Audios.objects.filter(object_id=usuario.id).count()
+        #Estadisticas sobre documentos,imagenes,videos,audios
 
+        lista_documentos_notas = []
+        lista_imagenes_notas = []
+        for documentos in Notas.objects.filter(user=usuario):
+            for numero in documentos.adjuntos.all():
+                lista_documentos_notas.append(numero)
+            for foto in documentos.fotos.all():
+                lista_imagenes_notas.append(foto)
+
+        lista_documentos_eventos = []
+        for eventos in Agendas.objects.filter(user=usuario):
+            for numero in eventos.adjunto.all():
+                lista_documentos_eventos.append(numero)
+
+        lista_documentos_foros = []
+        lista_imagenes_foros = []
+        lista_videos_foros = []
+        lista_audios_foros = []
+        for foros in Foros.objects.filter(contraparte=usuario):
+            for numero in foros.documentos.all():
+                lista_documentos_foros.append(numero)
+            for imagen in foros.fotos.all():
+                lista_imagenes_foros.append(imagen)
+            for video in foros.video.all():
+                lista_videos_foros.append(video)
+            for audio in foros.audio.all():
+                lista_audios_foros.append(audio)
+
+        lista_documentos_aporte = []
+        lista_imagen_aporte = []
+        lista_videos_aporte = []
+        lista_audios_aporte = []
+        for aportes in Aportes.objects.filter(user=usuario):
+            for numero in aportes.adjuntos.all():
+                lista_documentos_aporte.append(numero)
+            for imagen in aportes.fotos.all():
+                lista_imagen_aporte.append(imagen)
+            for video in aportes.video.all():
+                lista_videos_aporte.append(video)
+            for audio in aportes.audio.all():
+                lista_audios_aporte.append(audio)
+
+
+        documentos = len(lista_documentos_notas) + len(lista_documentos_eventos) + \
+        len(lista_documentos_foros) + len(lista_documentos_aporte)
+        imagenes = len(lista_imagenes_notas) + len(lista_imagenes_foros) + \
+        len(lista_imagen_aporte)
+        #documentos = foro2.aggregate(documentos=Count('documentos'))['documentos']
+        #imagenes = aporte2.aggregate(imagenes=Count('fotos'))['imagenes']
+        videos = len(lista_videos_foros) + len(lista_videos_aporte)
+        audios = len(lista_audios_foros) + len(lista_audios_aporte)
         total[usuario] = (nota,foro,aporte,comentario,documentos,imagenes,videos,audios)
 
     return render_to_response('privados/estadisticas.html', locals(),

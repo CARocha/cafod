@@ -283,11 +283,11 @@ $(document).ready(function() {
 						<div class="clean"></div>
 					    </div>
 					{%endif%}
-				{%if respuesta.documentos.all %}
+				{%if respuesta.adjuntos.all %}
 					<div class="sidebar-title">Documentos</div>
 	                <table class="table  table-bordered table-condensed doc-sidebar">
 	                  <tbody>
-	                    {% for doc in respuesta.documentos.all%}
+	                    {% for doc in respuesta.adjuntos.all%}
 	                    <tr>
 	                        <td>{{doc.nombre_doc}}</td>
 	                        <td><center><a href="/uploads/{{doc.adjunto}}" class=" btn btn-info btn-mini dropdown-toggle"><i class="icon-download-alt icon-white"></i>Descargar</a></center></td>

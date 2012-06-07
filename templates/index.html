@@ -63,7 +63,7 @@
                <ul>
                   {%for c in contrapartes%}
                       {%if c.pais.id == p.id %}
-                         <li><a href="{{c.get_absolute_url}}">{{c.nombre}}</a></li>  
+                         <li><a href="{{c.get_absolute_url}}">{{c.siglas}}</a></li>  
                       {%endif%}
                   {%endfor%}       
                </ul>

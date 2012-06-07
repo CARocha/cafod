@@ -117,7 +117,7 @@ $(".alert").alert();
                     <div class="clean"></div>
                 </div>
                 {%endif%}
-                
+                {%if notas.adjuntos.count > 1%}
                     <div class="sidebar-title">Documentos</div>
                     <div class="dividerline"></div>
                     <table class="table  table-bordered table-condensed doc-sidebar">
@@ -130,7 +130,7 @@ $(".alert").alert();
                         {% endfor %}
                       </tbody>
                     </table>
-                
+                {%endif%}
             </div>
         </div>
         {%if request.user.is_authenticated%}

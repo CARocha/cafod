@@ -63,7 +63,11 @@ form hr{margin-top:10px; margin-bottom:10px;}
 	
 }
 
-#menu a{
+#menu {
+	z-index:1000;
+	position: relative;
+	padding-left:80px;
+	a{
 	display: block;
 	padding-left:31px;
 	float:left;
@@ -77,6 +81,16 @@ form hr{margin-top:10px; margin-bottom:10px;}
 		text-decoration:none;
 		color:#000;
 	}
+}
+}
+
+.iniciomenu{
+	background:url(/files/img/homeicon.png) no-repeat 0px 26px;
+}
+
+.iniciomenu:hover{
+	background:url(/files/img/homeicon.png) no-repeat 0px 26px,
+	url(/files/img/hovermenu.png) no-repeat center bottom;
 }
 
 .blogmenu{

@@ -1,5 +1,37 @@
 {% extends "baseadmin.html" %}
+{% block extra_js %}
+<script type="text/javascript">
+$(document).ready(function() {
+	$(".fancybox").fancybox({
+    	openEffect	: 'elastic',
+    	closeEffect	: 'elastic',
+    	autoSize : true,
+    	width : 600,
+    	height : 1000,
 
+    	helpers : {
+    		title : {
+    			type : 'inside'
+    		}
+    	}
+    	//afterClose: function() { window.location.href='/foros/ver/{{discusion.id}}';}
+	});
+    
+	// 	$(document).ready(function(){
+ //    		$('a.dale').on('click', function(e){
+ //    			e.preventDefault();
+ //    			$('#resultados').css('display', 'block');
+ //    			$("#resultados").load("/password_change/", function(data){
+
+ //    			});
+ //    			//$("#resultados").load("/password_change/", function(){
+ //    			//});
+ //    		});
+    		
+	// });
+	</script>
+	
+{% endblock %}
 {% block contenido %}
 <div class="row">
     <div class="encabezado">
@@ -16,24 +48,20 @@
       </div>
     </div>
 </div>
-<form enctype="multipart/form-data" method="post" action=".">{% csrf_token %}
-
-				
-	
-				
-</form>
 <div class="row">
 	<div class="container">
 		<div class="row">
 
 			<form enctype="multipart/form-data" method="post" action=".">{% csrf_token %}
-					{{ form.media }}
 			<div class="span9">
 							<div class="well">
 				{{ form.media }}
 
 	{{form.as_p}}
-	{{form1.as_p}}	
+	{{form1.as_p}}
+	<br>
+	<a data-fancybox-type="iframe" class="iframe" href="/password_change/">Cambiar contraseña</a>
+	<div id="resultados" style="display: none"></div>	
 </div>
 			</div>
 			<div class="span3">

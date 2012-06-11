@@ -42,9 +42,10 @@
 			<div class="span6">
 				<div class="alert alert-success">Crear mensajes</div>
 				<div class="well mensajeform">
-					<form action="." method="post" accept-charset="utf-8">{% csrf_token %}
+					<form name='fl' action="." method="post" accept-charset="utf-8">{% csrf_token %}
 						{{form.media}}
-						{{form.user}}
+						{{form.user}}<br>
+						<a class='btn-success' href="javascript:seleccionar_todo()">Seleccionar todos</a>
 						<div class="clean"></div><br>
 						{{form.mensaje}}<Br>
 						<input type="submit" class="btn btn-success" name="enviar" value="Enviar">
@@ -73,7 +74,14 @@
 			</div>
 		</div>
 	</div>
-</div>
 
+	<script type="text/javascript">
+	function seleccionar_todo(){ 
+   		for (i=0;i<document.fl.elements.length;i++) 
+      		if(document.fl.elements[i].type == "checkbox")	
+         		document.fl.elements[i].checked=1;
+		} 
+</script>
+</div>
 
 {% endblock %}

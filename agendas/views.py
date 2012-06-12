@@ -43,7 +43,7 @@ def editar_agenda(request, id):
     AgendaFormSet = generic_inlineformset_factory(Documentos, extra=2)
     form1 = AgendaFormSet(instance=agenda)
 
-    if not agenda.user == request.user:
+    if not agenda.user.userprofile.contraparte == request.user.userprofile.contraparte:
     	return HttpResponse("Usted no puede editar esta Agenda")
 
     if request.method == 'POST':

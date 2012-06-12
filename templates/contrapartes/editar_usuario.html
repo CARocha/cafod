@@ -1,35 +1,24 @@
 {% extends "baseadmin.html" %}
 {% block extra_js %}
 <script type="text/javascript">
-$(document).ready(function() {
-	$(".fancybox").fancybox({
-    	openEffect	: 'elastic',
-    	closeEffect	: 'elastic',
-    	autoSize : true,
-    	width : 600,
-    	height : 1000,
+	$(document).ready(function() {
+		$(".fancybox").fancybox({
+    		openEffect	: 'elastic',
+    		closeEffect	: 'elastic',
+    		autoSize : true,
+    		width : 600,
+    		height : 1000,
 
-    	helpers : {
-    		title : {
-    			type : 'inside'
-    		}
-    	}
-    	//afterClose: function() { window.location.href='/foros/ver/{{discusion.id}}';}
+    		helpers : {
+    			title : {
+    				type : 'inside'
+    			}
+    		},
+    		afterClose: function() { window.location.href='/foros/perfil';}
 	});
-    
-	// 	$(document).ready(function(){
- //    		$('a.dale').on('click', function(e){
- //    			e.preventDefault();
- //    			$('#resultados').css('display', 'block');
- //    			$("#resultados").load("/password_change/", function(data){
+ });   
 
- //    			});
- //    			//$("#resultados").load("/password_change/", function(){
- //    			//});
- //    		});
-    		
-	// });
-	</script>
+</script>
 	
 {% endblock %}
 {% block contenido %}
@@ -60,7 +49,7 @@ $(document).ready(function() {
 	{{form.as_p}}
 	{{form1.as_p}}
 	<br>
-	<a data-fancybox-type="iframe" class="iframe" href="/password_change/">Cambiar contraseña</a>
+	<a data-fancybox-type="iframe" class="fancybox" href="/password_change/">Cambiar contraseña</a>
 	<div id="resultados" style="display: none"></div>	
 </div>
 			</div>

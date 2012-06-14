@@ -24,7 +24,7 @@ class Notas(models.Model):
 
     class Meta:
     	verbose_name_plural = "Notas"
-        ordering = ['-fecha']
+        ordering = ['-fecha','-id']
 
     def __unicode__(self):
     	return self.titulo

@@ -25,7 +25,7 @@ def logout_page(request):
   return HttpResponseRedirect('/')
 
 def lista_notas(request):
-    notas_list = Notas.objects.all().order_by('-fecha')
+    notas_list = Notas.objects.all().order_by('-fecha','-id')
     paises = Pais.objects.all()
 
     paginator = Paginator(notas_list, 4)
@@ -62,7 +62,7 @@ def detalle_notas(request, id):
                                  context_instance=RequestContext(request))  
 
 def lista_notas_pais(request,id):
-    notas_list = Notas.objects.filter(user__userprofile__contraparte__pais__id=id).order_by('-fecha')
+    notas_list = Notas.objects.filter(user__userprofile__contraparte__pais__id=id).order_by('-fecha','-id')
     paises = Pais.objects.all()
     pais_selecto = Pais.objects.get(pk=id)
 
@@ -82,7 +82,7 @@ def lista_notas_pais(request,id):
 
 def index(request):
 
-    notas = Notas.objects.all().order_by('-fecha')[:3]
+    notas = Notas.objects.all().order_by('-fecha','-id')[:3]
     evento = Agendas.objects.filter(publico=True).order_by('-inicio')[:1]
     paises = Pais.objects.all()
     contrapartes = Contraparte.objects.all()

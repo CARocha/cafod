@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+{% load google_cse_tags %}
 <head>
   <!--[if lt IE 9]>
     <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -42,9 +43,7 @@
                     <li><a href="/accounts/login"><i class="icon-user opacidad-50 icon-white"></i>Entrar</a></li>
                   {% endif %}
               </ul>
-              <form class="navbar-search pull-right">
-                <input type="text" class="search-query" placeholder="Buscar">
-              </form>
+              {% load_searchform %}
             </div>
         </div>
     </div>

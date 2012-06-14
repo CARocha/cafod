@@ -24,7 +24,7 @@
 			<form method="post" action="{% url django.contrib.auth.views.login %}">{% csrf_token %}
 				{%if form.errors%}
 				<div class="alert">
-					{{form.errors}}
+					{{form.non_field_errors}}
 				</div>
 				{%endif%}
 			        <div>

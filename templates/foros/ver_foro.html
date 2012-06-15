@@ -57,14 +57,14 @@ $(document).ready(function() {
 		               <div class="modal fade hide" id="myModal">
 		                          <div class="modal-header">
 		                            <a class="close" data-dismiss="modal">×</a>
-		                            <h3>Esta Seguro?</h3>
+		                            <h3>¿Está seguro?</h3>
 		                          </div>
 		                          <div class="modal-body">
-		                            <p>El foro y todos sus aportes seran borrados permanentemente y no podran ser recuperados</p>
+		                            <p>El foro y todos sus aportes serán borrados permanentemente y no podrán ser recuperados</p>
 		                          </div>
 		                          <div class="modal-footer">
 		                            <a href="#" data-dismiss="modal" class="btn">Cerrar</a>
-		                            <a href="/foros/borrar/{{discusion.id}}" class="btn btn-danger">Borrar Permanentemente</a>
+		                            <a href="/foros/borrar/{{discusion.id}}" class="btn btn-danger">Borrar permanentemente</a>
 		                          </div>
 		                 </div>  
                 </div>
@@ -105,7 +105,7 @@ $(document).ready(function() {
 						</tr>
 						<tr>
 							<td><img src="/files/img/date.png"></td>
-							<td><b>Fecha de Creación</b></td>
+							<td><b>Fecha de creación</b></td>
 							<td>{{discusion.creacion}}</td>
 						</tr>
 						<tr>
@@ -120,7 +120,7 @@ $(document).ready(function() {
 						</tr>
 						<tr>
 							<td><img src="/files/img/user_comment.png"></td>
-							<td><b>Reunion skype</b></td>
+							<td><b>Reunión skype</b></td>
 							<td>{{discusion.fecha_skype}}</td>
 						</tr>
 						<tr>
@@ -224,14 +224,14 @@ $(document).ready(function() {
                 <div class="modal fade hide" id="myModal">
                   <div class="modal-header">
                     <a class="close" data-dismiss="modal">×</a>
-                    <h3>Esta Seguro?</h3>
+                    <h3>¿Está seguro?</h3>
                   </div>
                   <div class="modal-body">
-                    <p>El aporte sera borrado permanentemente y no podra ser recuperado</p>
+                    <p>El aporte será borrado permanentemente y no podrá ser recuperado</p>
                   </div>
                   <div class="modal-footer">
                     <a href="#" data-dismiss="modal" class="btn">Cerrar</a>
-                    <a href="/foros/aporte/borrar/{{respuesta.id}}"class="btn btn-danger">Borrar Permanentemente</a>
+                    <a href="/foros/aporte/borrar/{{respuesta.id}}"class="btn btn-danger">Borrar permanentemente</a>
                   </div>
                 </div>  
 			</div>
@@ -259,14 +259,14 @@ $(document).ready(function() {
 			                <div class="modal fade hide" id="myModalcomment">
 			                  <div class="modal-header">
 			                    <a class="close" data-dismiss="modal">×</a>
-			                    <h3>Esta Seguro?</h3>
+			                    <h3>¿Está seguro?</h3>
 			                  </div>
 			                  <div class="modal-body">
-			                    <p>El comentario sera borrado permanentemente y no podra ser recuperado</p>
+			                    <p>El comentario será borrado permanentemente y no podrá ser recuperado</p>
 			                  </div>
 			                  <div class="modal-footer">
 			                    <a href="#" data-dismiss="modal" class="btn">Cerrar</a>
-			                    <a href="/foros/comentario/borrar/{{comentario.id}}"class="btn btn-danger">Borrar Permanentemente</a>
+			                    <a href="/foros/comentario/borrar/{{comentario.id}}"class="btn btn-danger">Borrar permanentemente</a>
 			                  </div>
 			                </div>  
 		       			</div>
@@ -368,7 +368,7 @@ $(document).ready(function() {
                  {{form.as_p}}
                 <div class="tabbable tabs-left">
                         <ul class="nav nav-tabs nav-tab-media">
-                          <li class="active"><a href="#fotos" data-toggle="tab"><i class="icon-camera"></i>Fotos e imagenes</a></li>
+                          <li class="active"><a href="#fotos" data-toggle="tab"><i class="icon-camera"></i>Fotos e imágenes</a></li>
                           <li><a href="#documentos" data-toggle="tab"><i class="icon-file"></i>Documentos</a></li>
                           <li><a href="#videos" data-toggle="tab"><i class="icon-film"></i>Videos</a></li>
                           <li><a href="#audios" data-toggle="tab"><i class="icon-volume-up"></i>Audios</a></li>
@@ -386,7 +386,7 @@ $(document).ready(function() {
                                 <hr>
                           </div>
                           <div class="tab-pane" id="documentos">
-                                <span class="label label-warning">DODCUMENTOS</span><hr>
+                                <span class="label label-warning">DOCUMENTOS</span><hr>
                                 {{ form3.management_form }}
                                 {% for docu in form3 %}
                                 <div class="media-form-inline">

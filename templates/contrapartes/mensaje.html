@@ -26,10 +26,10 @@
                         <div class="modal fade hide" id="myModal">
                           <div class="modal-header">
                             <a class="close" data-dismiss="modal">×</a>
-                            <h3>Enviado con exito</h3>
+                            <h3>Enviado con éxito</h3>
                           </div>
                           <div class="modal-body">
-                            <p>Su mensaje ha sido enviado con exito a todos los destinatarios</p>
+                            <p>Su mensaje ha sido enviado con éxito a todos los destinatarios</p>
                           </div>
                           <div class="modal-footer">
                             <a href="#" data-dismiss="modal" class="btn">Cerrar</a>
@@ -40,7 +40,7 @@
 	<div class="container">
 		<div class="row">
 			<div class="span6">
-				<div class="alert alert-success">Crear mensajes</div>
+				<div class="alert alert-success">Crear mensaje</div>
 				<div class="well mensajeform">
 					<form name='fl' action="." method="post" accept-charset="utf-8">{% csrf_token %}
 						{{form.media}}
@@ -60,7 +60,7 @@
 						<tr>
 							<td>
 								<div style="float:right;margin:10px 10px;"class="opacidad-70">
-								<span class="badge badge-info">enviado por {{a.usuario}}</span>
+								<span class="badge badge-info">Enviado por {{a.usuario}}</span>
 								<span class="badge">{{a.fecha}}</span>
 								</div>
 								<div class="clean"></div>

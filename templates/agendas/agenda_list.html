@@ -16,7 +16,7 @@
 			minTime: '8:00',
 			maxTime: '6:00pm',
 			defaultView: 'month',
-			dayNames: ['Domingo', 'Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado'],
+			dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
 			dayNamesShort: ['Dom', 'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab'],
 			monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
 			monthNamesShort: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
@@ -96,10 +96,10 @@
 	                        <div class="modal fade hide" id="myModal">
 	                          <div class="modal-header">
 	                            <a class="close" data-dismiss="modal">×</a>
-	                            <h3>Esta Seguro?</h3>
+	                            <h3>¿Está seguro?</h3>
 	                          </div>
 	                          <div class="modal-body">
-	                            <p>El evento sera borrado permanentemente y no podra ser recuperado</p>
+	                            <p>El evento será borrado permanentemente y no podrá ser recuperado</p>
 	                          </div>
 	                          <div class="modal-footer">
 	                            <a href="#" data-dismiss="modal" class="btn">No Borrar</a>
@@ -134,7 +134,7 @@
 			<div class="span3">
 				<ul class="nav nav-list well">
 						<li class="nav-header">
-					    OPCIONES DE VISUALIZACION
+					    OPCIONES DE VISUALIZACIÓN
 					  </li>
 					  	<form  action="/agendas/calendar/" method="POST">{% csrf_token %}
 						 {% for pais in paises %}

@@ -28,23 +28,23 @@ class Pais(models.Model):
     nombre = models.CharField(max_length=200)
     latitud = models.FloatField(blank=True, null=True)
     longitud = models.FloatField(blank=True, null=True)
-    codigo = models.CharField(max_length=2, help_text='Codigo de 2 letras del pais, ejemplo : Nicaragua (ni)')
+    codigo = models.CharField(max_length=2, help_text='Código de 2 letras del país, ejemplo : Nicaragua (ni)')
 
     class Meta:
-        verbose_name_plural = "Paises"
+        verbose_name_plural = "Países"
 
     def __unicode__(self):
         return self.nombre
 
 class Contraparte(models.Model):
     nombre = models.CharField(max_length=200)
-    siglas = models.CharField("Siglas o Nombre Corto",help_text="Siglas o Nombre corto de la oganización",max_length=200,blank=True, null=True)
+    siglas = models.CharField("Siglas o nombre corto",help_text="Siglas o nombre corto de la oganización",max_length=200,blank=True, null=True)
     logo = ImageWithThumbsField(upload_to=get_file_path,
                                    sizes=((350,250), (70,60),(180,160)), 
                                    null=True, blank=True)
     fileDir = 'contrapartes/logos/'
     pais = models.ForeignKey(Pais)
-    fundacion = models.CharField('Año de fundacion', max_length=200, 
+    fundacion = models.CharField('Año de fundación', max_length=200, 
                                  blank=True, null=True)
     temas = RichTextField(blank=True, null=True)
     generalidades = RichTextField(blank=True, null=True)

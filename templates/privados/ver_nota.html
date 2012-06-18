@@ -61,10 +61,10 @@ $(".alert").alert();
                         <div class="modal fade hide" id="myModal">
                           <div class="modal-header">
                             <a class="close" data-dismiss="modal">×</a>
-                            <h3>Esta Seguro?</h3>
+                            <h3>¿Está seguro?</h3>
                           </div>
                           <div class="modal-body">
-                            <p>La nota sera borrada permanentemente y no podra ser recuperada</p>
+                            <p>La nota será borrada permanentemente y no podrá ser recuperada</p>
                           </div>
                           <div class="modal-footer">
                             <a href="#" data-dismiss="modal" class="btn">No Borrar</a>
@@ -117,7 +117,7 @@ $(".alert").alert();
                     <div class="clean"></div>
                 </div>
                 {%endif%}
-                {%if notas.adjuntos.count > 1%}
+                {%if nota.adjuntos.count >= 1%}
                     <div class="sidebar-title">Documentos</div>
                     <div class="dividerline"></div>
                     <table class="table  table-bordered table-condensed doc-sidebar">

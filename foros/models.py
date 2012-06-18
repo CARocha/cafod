@@ -32,7 +32,7 @@ class Imagen(models.Model):
     tags_img = TagAutocompleteField("Tags",help_text='Separar elementos con "," ', null=True, blank=True)
     fileDir = 'fotos/'
     class Meta:
-    	verbose_name_plural = "Imagenes"
+    	verbose_name_plural = "Imágenes"
 
     def __unicode__(self):
     	return self.nombre_img
@@ -92,9 +92,9 @@ class Audios(models.Model):
 class Foros(models.Model):
     nombre = models.CharField(max_length=200)
     creacion = models.DateField(default=datetime.datetime.now())
-    apertura = models.DateField('Apertura y recepción de aporte')
+    apertura = models.DateField('Apertura y recepción de aportes')
     cierre = models.DateField('Cierre de aportes')
-    fecha_skype = models.DateField('Propuesta de reunion skype')
+    fecha_skype = models.DateField('Propuesta de reunión skype')
     memoria = models.DateField('Propuesta entrega de memoria')
     contenido = RichTextField()
     contraparte = models.ForeignKey(User)

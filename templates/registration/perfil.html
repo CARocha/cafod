@@ -45,7 +45,7 @@
             </div>
             <div class="row">
             	<div class="span12" style="display:none">
-            		<div class="alert">Espacio reservado para mostrar las ultimas activiades del foro<br><br><br>
+            		<div class="alert">Espacio reservado para mostrar las últimas activiades del foro<br><br><br>
                         {% for foro in foros %}
                             {{foro.nombre}}<br>
                             {{foro.contenido|safe|truncatewords:10}}<br>

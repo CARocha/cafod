@@ -101,7 +101,7 @@ $(".alert").alert();
                     <div class="clean"></div>
                 </div>
                 {%endif%}
-                    {%if notas.adjuntos.count > 1%}
+                    {%if nota.adjuntos.all.count >= 1%}
                     <div class="sidebar-title">Documentos</div>
                     <div class="dividerline"></div>
                     <table class="table  table-bordered table-condensed doc-sidebar">
@@ -131,7 +131,7 @@ $(".alert").alert();
             {% for comentario in nota.comentarionotas_set.all %}         
             <div class="well" id="cmt{{comentario.id}}">{{comentario.comentario|safe}}
               <div class="user-info">
-                <i>escrito por</i>
+                <i>Escrito por:</i>
                 {%if comentario.user.userprofile.avatar %}
                 <img src="{{comentario.user.userprofile.avatar.url_70x60}}" width="25" height="25">
                 {%else%}

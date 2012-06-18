@@ -1,26 +1,5 @@
 {% extends "baseadmin.html" %}
-{% block extra_js %}
-<script type="text/javascript">
-	$(document).ready(function() {
-		$(".fancybox").fancybox({
-    		openEffect	: 'elastic',
-    		closeEffect	: 'elastic',
-    		autoSize : true,
-    		width : 600,
-    		height : 1000,
 
-    		helpers : {
-    			title : {
-    				type : 'inside'
-    			}
-    		},
-    		afterClose: function() { window.location.href='/foros/perfil';}
-	});
- });   
-
-</script>
-	
-{% endblock %}
 {% block contenido %}
 <div class="row">
     <div class="encabezado">
@@ -45,11 +24,10 @@
 			<div class="span9">
 							<div class="well">
 				{{ form.media }}
-
-	{{form.as_p}}
-	{{form1.as_p}}
+                {{form.as_p}}
+	           {{form1.as_p}}
 	<br>
-	<a data-fancybox-type="iframe" class="fancybox btn" href="/password_change/"><i class="icon-lock"></i>Cambiar contraseña</a>
+	<a class="fancybox btn" href="/password_change/"><i class="icon-lock"></i>Cambiar contraseña</a>
 </div>
 			</div>
 			<div class="span3">

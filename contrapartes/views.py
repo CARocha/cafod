@@ -104,7 +104,7 @@ def editar_usuario_perfil(request):
 
 @login_required
 def enviar_mensaje(request):
-    mensaje = Mensajero.objects.filter(user=request.user).order_by('-fecha')
+    mensaje = Mensajero.objects.filter(user=request.user).order_by('-id')
     if request.method == 'POST':
         form = MensajeForm(request.POST)
         if form.is_valid():

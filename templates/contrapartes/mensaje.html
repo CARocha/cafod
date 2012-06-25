@@ -56,7 +56,7 @@
 				<div class="alert">Mensajes recibidos</div>
 				<table class="table table-bordered table-condensed table-striped">
 					<tbody>
-						{% for a in mensaje %}
+						{% for a in mensajes %}
 						<tr>
 							<td>
 								<div style="float:right;margin:10px 10px;"class="opacidad-70">
@@ -72,6 +72,29 @@
 					</tbody>
 				</table>
 			</div>
+
+			<ul class="pagination">
+	        {% if mensajes.has_previous %}
+	        <li>
+	          <a href="{% url enviar-mensaje %}?page={{ mensajes.previous_page_number }}">
+	            ← Anterior</a>
+	        </li>
+	        {% endif %}
+
+	        <li class="active">
+	            {% for numero in mensajes.paginator.page_range%}
+	            	<a href="{% url enviar-mensaje %}?page={{numero}}">{{numero}}</a>
+	            {%endfor%}
+	        </li>
+
+	        {% if mensajes.has_next %}
+	         <li>
+	         <a href="{% url enviar-mensaje %}?page={{ mensajes.next_page_number }}">
+	                Siguiente →</a>
+	         </li>
+	         {% endif %}
+	    </ul>
+
 		</div>
 	</div>
 

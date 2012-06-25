@@ -15,6 +15,7 @@ import operator
 import thread
 import datetime
 from django.template.loader import render_to_string
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 # Create your views here.
 #def contrapartes_index(request):
@@ -105,6 +106,15 @@ def editar_usuario_perfil(request):
 @login_required
 def enviar_mensaje(request):
     mensaje = Mensajero.objects.filter(user=request.user).order_by('-id')
+    paginator = Paginator(mensaje, 5)
+    page = request.GET.get('page')
+    try:
+        mensajes = paginator.page(page)
+    except PageNotAnInteger:
+        mensajes = paginator.page(1)
+    except EmptyPage:
+        mensajes = paginator.page(paginator.num_pages)
+
     if request.method == 'POST':
         form = MensajeForm(request.POST)
         if form.is_valid():

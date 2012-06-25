@@ -71,9 +71,8 @@
 						{% endfor %}
 					</tbody>
 				</table>
-			</div>
 
-			<ul class="pagination">
+				<ul class="pagination">
 	        {% if mensajes.has_previous %}
 	        <li>
 	          <a href="{% url enviar-mensaje %}?page={{ mensajes.previous_page_number }}">
@@ -94,7 +93,7 @@
 	         </li>
 	         {% endif %}
 	    </ul>
-
+			</div>
 		</div>
 	</div>
 

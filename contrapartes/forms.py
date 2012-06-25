@@ -37,9 +37,9 @@ class UserProfileForm(ModelForm):
 	fields = ('avatar',)
 
 class MensajeForm(forms.ModelForm):
-    #user = forms.ModelMultipleChoiceField(queryset = User.objects.all(),
-                                            #widget = forms.CheckboxSelectMultiple())
+    user = forms.ModelMultipleChoiceField(queryset = User.objects.order_by('username'),
+                                          widget = forms.CheckboxSelectMultiple())
     class Meta:
-        widgets = {'user': forms.CheckboxSelectMultiple}
+        #widgets = {'user': forms.CheckboxSelectMultiple}
     	model = Mensajero
         exclude = ('usuario','fecha')

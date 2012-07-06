@@ -1,5 +1,22 @@
 {% extends "base.html"%}
+{% block extra_js%}
+<script type="text/javascript" src="/files/js/jquery.bxSlider.min.js"></script>
+<script type="text/javascript">
+  $(document).ready(function(){
 
+  var slider = $('#slider1').bxSlider({
+    controls: true,
+    auto:true,
+    pause:8000,
+    speed:1500,
+    prevImage:'/files/img/prev.png',
+    nextImage:'/files/img/next.png',
+  });
+
+});
+</script>
+
+{%endblock%}
 {%block contenido%}
 
   <div class="row" id="actualidad">
@@ -14,31 +31,56 @@
     </div>
     <div class="container">
       <div class="row">
-         {% for nota in notas%}
-            <div class="span3">
-             <div class="pais-index">{{nota.user.userprofile.contraparte.pais.nombre}}<img src="/files/img/{{nota.user.userprofile.contraparte.pais.codigo}}.png"></div>
-             {%for thumb in nota.fotos.all|slice:"1"%} 
-                   <img class="imagen-noticia-index" src="{{thumb.foto.url_220x160}}">
-             {%endfor%}
-             <div class="titulo-noticia-index">
-               {{nota.titulo}}
-             </div>
-             <div class="detalle-noticia-index">
-               {{nota.contenido|safe|truncatewords_html:20}}
-             </div>
-             <a href="/notas/{{nota.id}}" class="btn btn-inverse btn-mini">Leer más</a>
-           </div>
-        {% endfor %}
-        <div class="span3 eventoindex">
+<div class="span9">
+    <div id="slider1">
+        <div>
+               {% for nota in notas%}
+                  <div class="cuadronota">
+                   <div class="pais-index">{{nota.user.userprofile.contraparte.pais.nombre}}<img src="/files/img/{{nota.user.userprofile.contraparte.pais.codigo}}.png"></div>
+                   {%for thumb in nota.fotos.all|slice:"1"%} 
+                         <img class="imagen-noticia-index" src="{{thumb.foto.url_220x160}}">
+                   {%endfor%}
+                   <div class="titulo-noticia-index">
+                     {{nota.titulo}}
+                   </div>
+                   <div class="detalle-noticia-index">
+                     {{nota.contenido|safe|truncatewords_html:20}}
+                   </div>
+                   <a href="/notas/{{nota.id}}" class="btn btn-inverse btn-mini">Leer más</a>
+                 </div>
+              {% endfor %}   
+          </div> 
+          <div>
+               {% for nota in notas2%}
+                  <div class=" cuadronota">
+                   <div class="pais-index">{{nota.user.userprofile.contraparte.pais.nombre}}<img src="/files/img/{{nota.user.userprofile.contraparte.pais.codigo}}.png"></div>
+                   {%for thumb in nota.fotos.all|slice:"1"%} 
+                         <img class="imagen-noticia-index" src="{{thumb.foto.url_220x160}}">
+                   {%endfor%}
+                   <div class="titulo-noticia-index">
+                     {{nota.titulo}}
+                   </div>
+                   <div class="detalle-noticia-index">
+                     {{nota.contenido|safe|truncatewords_html:20}}
+                   </div>
+                   <a href="/notas/{{nota.id}}" class="btn btn-inverse btn-mini">Leer más</a>
+                 </div>
+              {% endfor %}
+          </div>
+    </div>
+</div>
+
+        <div class="span3 eventoindex-nuevo">
+           <div class="pais-index">Próximos Eventos</div>
+           <div class="clean"></div>
           {%for e in evento%}
-            <div class="index-fechaevento">
+            <div class="index-fechaevento-nuevo">
               <center>{{e.inicio|date:"d F" }}</center>
             </div>
-            <div class="index-nombreevento">
-              <a href="/agendas/eventos/{{e.id}}">{{e.evento}} </a>
+            <div class="index-nombreevento-nuevo">
+              <a href="/agendas/eventos/{{e.id}}">{{e.evento|safe|truncatewords_html:8}} </a>
             </div>
-            <div class="index-descripevento">
-              {{e.descripcion|safe|truncatewords_html:15}} 
+            <div class="clean"></div>
           {%endfor%}
           </div>
         </div>

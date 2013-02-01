@@ -1,5 +1,12 @@
 Usted tienen un nuevo mensaje privado
-por favor siga el link para leer el mensaje completo
+
+------------
+{{mensajes.mensaje}}
+
+----------
+
+por favor si quiere responder este mensaje siga 
+el siguiente link.
 
 http://{{url}}
 

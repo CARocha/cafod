@@ -137,7 +137,7 @@ def enviar_mensaje(request):
 
 def notify_user_mensaje(mensaje):
     site = Site.objects.get_current()
-    contenido = render_to_string('contrapartes/notify_new_mensaje.txt', {
+    contenido = render_to_string('contrapartes/notify_new_mensaje.html', {
                                    'mensajes': mensaje,
                                    'url': '%s/contrapartes/mensaje/ver/' % (site,)
                                     })
@@ -148,7 +148,6 @@ def notify_user_mensaje(mensaje):
 
 @login_required
 def estadisticas(request):
-    from django.db.models import Count
     total = {}
     for usuario in User.objects.all():
         foro = Foros.objects.filter(contraparte=usuario).count()

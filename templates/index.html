@@ -37,13 +37,15 @@
                {% for nota in notas%}
                   <div class="cuadronota">
                    <div class="pais-index">{{nota.user.userprofile.contraparte.pais.nombre}}<img src="/files/img/{{nota.user.userprofile.contraparte.pais.codigo}}.png"></div>
-                   {% if nota.fotos.all %}
-                   {%for thumb in nota.fotos.all%} 
-                         <img class="imagen-noticia-index" src="{{thumb.foto.url_220x160}}">
-                   {%endfor%}
-                   {%else%}
+                   
+                   {%for thumb in nota.fotos.all|slice:"1"%}
+                      {%if not thumb.foto.url_220x160 %}
                         <img class="imagen-noticia-index" src="">
-                    {%endif%}
+                      {%else%} 
+                        <img class="imagen-noticia-index" src="{{thumb.foto.url_220x160}}">
+                      {%endif%}
+                   {%endfor%}
+                  
                    <div class="titulo-noticia-index">
                      {{nota.titulo}}
                    </div>

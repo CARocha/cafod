@@ -218,10 +218,10 @@ $(document).ready(function() {
 				{% if respuesta.user == request.user or request.user.is_superuser %}
 					<div class="btn-group foro-edit">
 					    <a class="btn btn-mini" href="/foros/aporte/editar/{{respuesta.id}}"><i class="icon-pencil"></i></a>
-					    <a class="btn btn-mini" data-toggle="modal" data-target="#myModal"><i class="icon-trash"></i></a>
+					    <a class="btn btn-mini" data-toggle="modal" data-target="#myModalAporte"><i class="icon-trash"></i></a>
 				        </div>
 				{% endif %}
-                <div class="modal fade hide" id="myModal">
+                <div class="modal fade hide" id="myModalAporte">
                   <div class="modal-header">
                     <a class="close" data-dismiss="modal">×</a>
                     <h3>¿Está seguro?</h3>

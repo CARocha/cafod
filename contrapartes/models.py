@@ -77,6 +77,9 @@ class UserProfile(models.Model):
     def __unicode__(self):
         return u"%s - %s" % (self.user.username, self.contraparte.nombre)
 
+    def __fecha_registro__(self):
+        return u"%s" % (self.user.date_joined)
+
     def get_absolute_url(self):
         return '/usuario/%d/' % (self.user.id)
 

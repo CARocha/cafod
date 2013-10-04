@@ -23,11 +23,20 @@ class ForoAdmin(admin.ModelAdmin):
     inlines = [DocumentosInline, ImagenInline, 
               VideosInline, AudiosInline]
     form = ForosForm
+    list_display = ['nombre','creacion','contraparte',
+                    '__documento__','__fotos__', '__video__',
+                    '__audio__']
+    date_hierarchy = 'creacion'
 
 class AportesAdmin(admin.ModelAdmin):
     inlines = [DocumentosInline, ImagenInline, 
               VideosInline, AudiosInline]
     form = AporteForm
+    list_display = ['__unicode__','fecha','user',
+                    '__documento__','__fotos__', 
+                    '__video__','__audio__']
+    list_filter = ['user','fecha']
+    date_hierarchy = 'fecha'
 
 class ComentariosAdmin(admin.ModelAdmin):
     list_display = ('fecha', 'usuario', 'aporte')

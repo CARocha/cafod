@@ -110,6 +110,30 @@ class Foros(models.Model):
     def __unicode__(self):
     	return self.nombre
 
+    def __documento__(self):
+        lista = []
+        for obj in self.documentos.all():
+            lista.append(obj)
+        return lista
+
+    def __fotos__(self):
+        lista = []
+        for obj in self.fotos.all():
+            lista.append(obj)
+        return lista
+
+    def __video__(self):
+        lista = []
+        for obj in self.video.all():
+            lista.append(obj)
+        return lista
+
+    def __audio__(self):
+        lista = []
+        for obj in self.audio.all():
+            lista.append(obj)
+        return lista
+
     def get_absolute_url(self):
         return "/foros/ver/%d" % (self.id)
 
@@ -128,6 +152,30 @@ class Aportes(models.Model):
 
     def __unicode__(self):
         return self.foro.nombre
+        
+    def __documento__(self):
+        lista = []
+        for obj in self.adjuntos.all():
+            lista.append(obj)
+        return lista
+
+    def __fotos__(self):
+        lista = []
+        for obj in self.fotos.all():
+            lista.append(obj)
+        return lista
+
+    def __video__(self):
+        lista = []
+        for obj in self.video.all():
+            lista.append(obj)
+        return lista
+
+    def __audio__(self):
+        lista = []
+        for obj in self.audio.all():
+            lista.append(obj)
+        return lista
 
 class Comentarios(models.Model):
     fecha = models.DateField(default=datetime.datetime.now())

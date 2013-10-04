@@ -9,7 +9,10 @@ class ContraparteAdmin(admin.ModelAdmin):
     #    js = ['../files/js/tiny_mce/tiny_mce.js',
     #          '../files/js/editores/textareas.js',]
 
+class UserProfileAdmin(admin.ModelAdmin):
+    list_display = ['__unicode__','__fecha_registro__']
+
 admin.site.register(Pais)
 admin.site.register(Contraparte, ContraparteAdmin)
-admin.site.register(UserProfile)
+admin.site.register(UserProfile, UserProfileAdmin)
 admin.site.register(Mensajero)

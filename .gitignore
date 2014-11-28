@@ -25,3 +25,4 @@ uploads/
 .ropeproject
 *.sublime-project
 *.sublime-workspace
+/CACHE/

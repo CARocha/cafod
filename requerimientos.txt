@@ -1,5 +1,7 @@
 Django==1.4
 South==0.7.4
+django-ckeditor==4.0.2
 django-tagging==0.3.1
+django-compressor==1.4
 -e svn+http://django-tagging-autocomplete.googlecode.com/svn/trunk@24#egg=django_tagging_autocomplete-0.3.1-py2.7-dev_r24
 wsgiref==0.1.2

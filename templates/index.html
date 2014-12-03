@@ -1,6 +1,6 @@
 {% extends "base.html"%}
 {% block extra_js%}
-<script type="text/javascript" src="/files/js/jquery.bxSlider.min.js"></script>
+<link href="/files/js/bxslider/jquery.bxslider.css" rel="stylesheet" /><!-- bxSlider CSS file -->
 <script type="text/javascript">
   $(document).ready(function(){
 
@@ -29,64 +29,145 @@
       </div>
       </div>
     </div>
-    <div class="container">
-      <div class="row">
-<div class="span9">
-    <div id="slider1">
-        <div>
-               {% for nota in notas%}
-                  <div class="cuadronota">
-                   <div class="pais-index">{{nota.user.userprofile.contraparte.pais.nombre}}<img src="/files/img/{{nota.user.userprofile.contraparte.pais.codigo}}.png"></div>
-                   {%for thumb in nota.fotos.all|slice:"1"%} 
-                         <img class="imagen-noticia-index" src="{{thumb.foto.url_220x160}}">
-                   {%endfor%}
-                   <div class="titulo-noticia-index">
-                     {{nota.titulo}}
-                   </div>
-                   <div class="detalle-noticia-index">
-                     {{nota.contenido|safe|truncatewords_html:20}}
-                   </div>
-                   <a href="/notas/{{nota.id}}" class="btn btn-inverse btn-mini">Leer más</a>
-                 </div>
-              {% endfor %}   
-          </div> 
-          <div>
-               {% for nota in notas2%}
-                  <div class=" cuadronota">
-                   <div class="pais-index">{{nota.user.userprofile.contraparte.pais.nombre}}<img src="/files/img/{{nota.user.userprofile.contraparte.pais.codigo}}.png"></div>
-                   {%for thumb in nota.fotos.all|slice:"1"%} 
-                         <img class="imagen-noticia-index" src="{{thumb.foto.url_220x160}}">
-                   {%endfor%}
-                   <div class="titulo-noticia-index">
-                     {{nota.titulo}}
-                   </div>
-                   <div class="detalle-noticia-index">
-                     {{nota.contenido|safe|truncatewords_html:20}}
-                   </div>
-                   <a href="/notas/{{nota.id}}" class="btn btn-inverse btn-mini">Leer más</a>
-                 </div>
-              {% endfor %}
+    
+<div class="container">
+<div class="row">
+
+<div class="span9 tablet-contenido">
+
+  <div class="span4 tablet-noticia">
+      <div class='wrapper'>  
+        
+          <img src='/files/img/imgprueba.jpg' width="300" height="200" />  
+                      
+          <div class='description'>  
+                            
+          <p class='description_content'>Titulo de la noticia</p>  
+                            
           </div>
+
+      </div>
+  </div>
+  <div class="span4 tablet-noticia">
+    <div class="span4 tablet-noticia">  
+        <div class="info-new">
+          <div class="up-event-user">Martin Cuadra</div>
+          <div class="up-event-date">Jul 25, 2015</div>
+
+        
+        </div>
     </div>
+
+    <div class="span4 tablet-noticia">
+    Fortaleciendo la alianza entre las organizaciones socias del programa "Medios de vida sostenible" de CAFOD en Centroamérica, para mejorar el aprendizaje e impacto de los proyectos.
+    <br><br>
+    <a class="btn leermas" href="">Leer mas..</a>
+    <br>
+    </div>
+  </div>
+
+<div class="row">
+    <div class="span9 slider tablet-contenido">
+
+      <div class="slidernews">
+
+        <div class="slide">
+          <img src="http://placehold.it/300x300">
+          <div class='description'>         
+            <p class='description_content-slider'>Titulo de la noticia</p>   
+          </div>
+        </div>
+        <div class="slide">
+          <img src="http://placehold.it/300x300">
+          <div class='description'>         
+            <p class='description_content-slider'>Titulo de la noticia</p>   
+          </div>
+        </div>
+        <div class="slide">
+          <img src="http://placehold.it/300x300">
+          <div class='description'>         
+            <p class='description_content-slider'>Titulo de la noticia</p>   
+          </div>
+        </div>
+        <div class="slide">
+          <img src="http://placehold.it/300x300">
+          <div class='description'>         
+            <p class='description_content-slider'>Titulo de la noticia</p>   
+          </div>
+        </div>
+
+        </div>
+    </div>
+  </div>
 </div>
 
-        <div class="span3 eventoindex-nuevo">
-           <div class="pais-index">Próximos Eventos</div>
-           <div class="clean"></div>
-          {%for e in evento%}
-            <div class="index-fechaevento-nuevo">
-              <center>{{e.inicio|date:"d F" }}</center>
-            </div>
-            <div class="index-nombreevento-nuevo">
-              <a href="/agendas/eventos/{{e.id}}">{{e.evento|safe|truncatewords_html:8}} </a>
-            </div>
-            <div class="clean"></div>
-          {%endfor%}
-          </div>
+
+<h4 class="eventitle">Eventos</h4>
+        <div class="span2 evento ">
+
+             
+
+            <article class="event">
+              <div class="fecha">
+                  <span class="day">06</span>
+                  <span class="month">Dic</span>
+                  <span class="year">2014</span>
+              </div>
+              <div class="event-data">
+                  <h5>Informacion</h5>
+                  <p>Lugar: Managua</p>
+              </div>
+              <a href="" data-reveal-id="myModal">VER MAS</a>
+            </article>
+
+                        <article class="event">
+              <div class="fecha">
+                  <span class="day">06</span>
+                  <span class="month">Dic</span>
+                  <span class="year">2014</span>
+              </div>
+              <div class="event-data">
+                  <h5>Informacion</h5>
+                  <p>Lugar: Managua</p>
+              </div>
+              <a href="" data-reveal-id="myModal">VER MAS</a>
+            </article>
+
+                <article class="event">
+              <div class="fecha">
+                  <span class="day">06</span>
+                  <span class="month">Dic</span>
+                  <span class="year">2014</span>
+              </div>
+              <div class="event-data">
+                  <h5>Informacion</h5>
+                  <p>Lugar: Managua</p>
+              </div>
+              <a href="" data-reveal-id="myModal">VER MAS</a>
+            </article>
+
+                        <article class="event">
+              <div class="fecha">
+                  <span class="day">06</span>
+                  <span class="month">Dic</span>
+                  <span class="year">2014</span>
+              </div>
+              <div class="event-data">
+                  <h5>Informacion</h5>
+                  <p>Lugar: Managua</p>
+              </div>
+              <a href="" data-reveal-id="myModal">VER MAS</a>
+            </article>
+
+
         </div>
       </div>
     </div>
-  </div>
+</div>
+
+
+
+
   <div class="row">
     <div class="encabezado">
       <div class="container">
@@ -114,4 +195,21 @@
       </div>
     </div>
   </div>
+    <script src="/files/js/bxslider/jquery.bxslider.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+          $('.slidernews').bxSlider({
+            slideWidth: 195,
+            minSlides: 1,
+            maxSlides: 4,
+            moveSlides: 1,
+            slideMargin: 10,
+            auto: true,
+            autoHover:true,
+            preventDefaultSwipeX:false,
+            pager:false
+           
+          });
+        });
+    </script>
 {%endblock%}

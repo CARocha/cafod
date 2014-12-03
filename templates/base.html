@@ -11,7 +11,9 @@
   {# {% load compress %} #}
    {#{% compress css %}#}
     <link type="text/css" rel="stylesheet"  href="/files/bootstrap/css/bootstrap.min.css" >
+    <link href="/files/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
     <link type="text/css" rel="stylesheet"  href="/files/css/cafod.css">
+    <link type="text/css" rel="stylesheet"  href="/files/css/newcafod.css">
   {#{% endcompress %}#}
   <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
    {#{% compress js %}#}
@@ -24,7 +26,7 @@
 
 {% block header %}
   
-    <div class="navbar ">
+    <div class="navbar hidden-tablet hidden-phone">
         <div class="navbar-inner">
             <div class="container">
               <a class="brand" href="/">
@@ -46,12 +48,77 @@
             </div>
         </div>
     </div>
+
+          <!--menu tablet-->
+        <div class="row visible-tablet visible-desktop menu-tablet">
+          <div class="navbar  span12 ">
+            <div class="navbar-inner">
+              <img class="brand" src="/files/img/cafodlogo.jpg">
+             
+              <ul class="nav nav-tablet">
+                <li><a href="/" class="iniciomenu"> Inicio</a></li>
+                <li><a href="/notas" class="blogmenu">Notas</a></li>
+                <li><a href="/acerca" class="acercamenu">Acerca de</a></li>
+                <li><a href="/contrapartes" class="contrapartemenu">Contrapartes</a></li>
+                <li><a href="/agendas/eventos" class="eventomenu">Eventos</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+
+        <!--menu Portrait tablet to landscape and desktop -->
+        <div class="navbar nav-tablet-phone visible-phone">
+          <div class="navbar-inner">
+            <div class="container">
+         
+              <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+              <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </a>
+         
+              <!-- Be sure to leave the brand out there if you want it shown -->
+              <a class="brand" href="/">Plataforma de comunicación y aprendizaje
+              </a>
+         
+              <!-- Everything you want hidden at 940px or less, place within here -->
+              <div class="nav-collapse collapse">
+              <ul class="nav ">
+                <li><a href="/"><i class="icon-home icon-white"></i> Inicio</a></li>
+                <li><a href="/notas"><i class="icon-leaf icon-white"></i> Notas</a></li>
+                <li><a href="/acerca"><i class="icon-file icon-white"></i>  Acerca de</a></li>
+                <li><a href="/contrapartes"><i class="icon-user icon-white"></i>Contrapartes</a></li>
+                <li><a href="/agendas/eventos"><i class="icon-calendar icon-white"></i>Eventos</a></li>
+              </ul>
+              <ul class="nav pull-right">
+                  <li class="divider-vertical"></li>
+                  {% if user.username %}
+                    <li ><a href="/foros/perfil"><i class="icon-user icon-white"></i>Bienvenido {{ user.username }}</a></li>
+                    <li class="divider-vertical"></li>
+                    <li ><a href="/contrapartes/estadisticas/ver"><i class="icon-signal icon-white"></i>Estadísticas</a></li>
+                    <li class="divider-vertical"></li>
+                    <li><a href="/accounts/logout" title="Salir de Administración"><i class="icon-off icon-white"></i>Salir</a></li>
+                  {% else %}
+                    <li><a href="/accounts/login"><i class="icon-user icon-white"></i>Entrar</a></li>
+                  {% endif %}
+              </ul>
+              {% load_searchform %}
+              </div>
+         
+            </div>
+          </div>
+        </div>
+
+
     <div class="row" id="grisheader">
+
       <div class="container">
         <div class="row">
-          <div class="span12" id="menulogo">
+          <div class="span9 hidden-tablet" id="menulogo">
               <div class="row">
-                  <div class="span8 offset4" id="menu">
+                  <div class="span6 offset2" id="menu">
                     <a href="/" class="iniciomenu">Inicio</a>
                       <a href="/notas" class="blogmenu">Notas</a>
                       <a href="/acerca" class="acercamenu">Acerca de</a>
@@ -61,12 +128,15 @@
                   </div>
               </div>
           </div>
-          <div class="span12">
+
+
+
+          <div class="span12 magen-tablet">
             <div class="row">
                <div class="span6" id="banner">
                     <img src="/files/img/banner.png">
                 </div>
-               <div class="span6 bienvenida">
+               <div class="span5 bienvenida hidden-tablet">
                    <div id="bienvenida-title">Programa Medios de Vida Sostenible y Gestión de Riesgo </div>
                    Fortaleciendo la alianza entre las organizaciones socias del programa "Medios de vida sostenible" de CAFOD en Centroamérica, para mejorar el aprendizaje e impacto de los proyectos.
                </div>

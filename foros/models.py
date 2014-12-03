@@ -27,7 +27,7 @@ class Imagen(models.Model):
 
     nombre_img = models.CharField("Nombre",max_length=200, null=True, blank=True)
     foto = ImageWithThumbsField("Foto",upload_to=get_file_path,
-                                   sizes=((220,160), (80,80),(380,250),(640,480)), 
+                                   sizes=((220,160), (80,80),(380,250),(640,480),(300,200),(300,300),), 
                                    null=True, blank=True)
     tags_img = TagAutocompleteField("Tags",help_text='Separar elementos con "," ', null=True, blank=True)
     fileDir = 'fotos/'

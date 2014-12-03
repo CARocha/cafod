@@ -34,67 +34,50 @@
 <div class="row">
 
 <div class="span9 tablet-contenido">
-
+{% for nota in notas|slice:"1" %}
   <div class="span4 tablet-noticia">
       <div class='wrapper'>  
-        
-          <img src='/files/img/imgprueba.jpg' width="300" height="200" />  
-                      
-          <div class='description'>  
-                            
-          <p class='description_content'>Titulo de la noticia</p>  
-                            
-          </div>
-
+          
+            {%for thumb in nota.fotos.all|slice:"1"%}        
+               <img src="{{thumb.foto.url_300x200}}">  
+            {%endfor%} 
+            <div class='description'>              
+              <p class='description_content'><a href="#">{{nota.titulo}}</a></p> 
+            </div> 
+                  
       </div>
   </div>
   <div class="span4 tablet-noticia">
     <div class="span4 tablet-noticia">  
         <div class="info-new">
-          <div class="up-event-user">Martin Cuadra</div>
-          <div class="up-event-date">Jul 25, 2015</div>
-
+          <div class="up-event-user">{{nota.user.first_name}} {{nota.user.last_name}}</div>
+          <div class="up-event-date">{{nota.fecha|date:"M t, Y"}}</div>
         
         </div>
     </div>
 
     <div class="span4 news-desc tablet-noticia">
-    Fortaleciendo la alianza entre las organizaciones socias del programa "Medios de vida sostenible" de CAFOD en Centroamérica, para mejorar el aprendizaje e impacto de los proyectos.
+    {{nota.contenido|safe|truncatewords_html:30}}
     <br><br>
-    <a class="btn leermas" href="">Leer mas..</a>
+    <a class="btn leermas" href="/notas/{{nota.id}}">Leer más..</a>
     <br>
     </div>
   </div>
-
+{%endfor%}
 <div class="row">
     <div class="span9 slider tablet-contenido">
 
       <div class="slidernews">
-
+      {% for nota in notas2 %}
         <div class="slide">
-          <img src="http://placehold.it/300x300">
+          {%for thumb in nota.fotos.all|slice:"1"%}        
+               <img src="{{thumb.foto.url_220x160}}">  
+            {%endfor%}
           <div class='description'>         
-            <p class='description_content-slider'>Titulo de la noticia</p>   
+            <p class='description_content-slider'><a href="/notas/{{nota.id}}">{{nota.titulo|truncatewords:5}}</a></p>   
           </div>
         </div>
-        <div class="slide">
-          <img src="http://placehold.it/300x300">
-          <div class='description'>         
-            <p class='description_content-slider'>Titulo de la noticia</p>   
-          </div>
-        </div>
-        <div class="slide">
-          <img src="http://placehold.it/300x300">
-          <div class='description'>         
-            <p class='description_content-slider'>Titulo de la noticia</p>   
-          </div>
-        </div>
-        <div class="slide">
-          <img src="http://placehold.it/300x300">
-          <div class='description'>         
-            <p class='description_content-slider'>Titulo de la noticia</p>   
-          </div>
-        </div>
+      {%endfor%}
 
         </div>
     </div>
@@ -103,62 +86,22 @@
 
 
 <h4 class="eventitle">Eventos</h4>
-        <div class="span2 evento ">
-
-             
-
+        <div class="span2 evento ">   
+        {% for even in evento %}
+          
             <article class="event">
               <div class="fecha">
-                  <span class="day">06</span>
-                  <span class="month">Dic</span>
-                  <span class="year">2014</span>
+                  <span class="day">{{even.inicio|date:"t"}}</span>
+                  <span class="month">{{even.inicio|date:"M"}}</span>
+                  <span class="year">{{even.inicio|date:"Y"}}</span>
               </div>
               <div class="event-data">
-                  <h5>Informacion</h5>
-                  <p>Lugar: Managua</p>
+                  <h5>{{even.evento|truncatewords:"4"}}</h5>
               </div>
-              <a href="" data-reveal-id="myModal">VER MAS</a>
+              <a href="/agendas/eventos/{{even.id}}">VER MÁS</a>
             </article>
 
-                        <article class="event">
-              <div class="fecha">
-                  <span class="day">06</span>
-                  <span class="month">Dic</span>
-                  <span class="year">2014</span>
-              </div>
-              <div class="event-data">
-                  <h5>Informacion</h5>
-                  <p>Lugar: Managua</p>
-              </div>
-              <a href="" data-reveal-id="myModal">VER MAS</a>
-            </article>
-
-                <article class="event">
-              <div class="fecha">
-                  <span class="day">06</span>
-                  <span class="month">Dic</span>
-                  <span class="year">2014</span>
-              </div>
-              <div class="event-data">
-                  <h5>Informacion</h5>
-                  <p>Lugar: Managua</p>
-              </div>
-              <a href="" data-reveal-id="myModal">VER MAS</a>
-            </article>
-
-                        <article class="event">
-              <div class="fecha">
-                  <span class="day">06</span>
-                  <span class="month">Dic</span>
-                  <span class="year">2014</span>
-              </div>
-              <div class="event-data">
-                  <h5>Informacion</h5>
-                  <p>Lugar: Managua</p>
-              </div>
-              <a href="" data-reveal-id="myModal">VER MAS</a>
-            </article>
-
+        {% endfor %}
 
         </div>
       </div>

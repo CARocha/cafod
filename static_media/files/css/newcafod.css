@@ -1,10 +1,20 @@
 
 /*---------------------------------------------Nuevo diseno----------------------------------------------------------------*/
+body{
+	font-family: Droid Serif !important;
+}
+
+h1,h2,h3,h4,h5 {
+	font-family: Montserrat !important;
+}
+
+
 div.wrapper{  
     float:left; /* important */  
     position:relative; /* important(so we can absolutely position the description div */
     margin-bottom: 2em;
     margin-left: 5em;
+
    
 }  
 div.description{  
@@ -28,6 +38,10 @@ position:absolute;
     font-size:22px;
     color:white;
     font-weight: bold;
+    font-family: Montserrat !important;
+}
+.news-desc{
+	margin-top: 10px;
 }
 .up-event-user { 
 	float: left; 
@@ -37,7 +51,8 @@ position:absolute;
 	text-transform: uppercase; 
 	padding: 5px 15px; 
 	border-top: 1px solid rgba( 0, 0, 0, 0.05 ); 
-	border-bottom: 1px solid rgba( 0, 0, 0, 0.05 ); 
+	border-bottom: 1px solid rgba( 0, 0, 0, 0.05 );
+	font-family: Montserrat !important; 
 }
 .up-event-date { 
 	float: left; 
@@ -45,7 +60,9 @@ position:absolute;
 	font-weight: 400; 
 	padding: 5px 15px; 
 	border-top: 1px solid rgba( 0, 0, 0, 0.05 ); 
-	border-bottom: 1px solid rgba( 0, 0, 0, 0.05 ); 
+	border-bottom: 1px solid rgba( 0, 0, 0, 0.05 );
+	border-left: 1px solid rgba( 0, 0, 0, 0.05 );
+	font-family: Montserrat !important; 
 }
 
 .event {
@@ -57,7 +74,7 @@ position:absolute;
 }
 
 .eventitle{
-    font-family: 'Roboto-Light', Helvetica, Arial, sans-serif;
+    font-family: Montserrat !important;
     line-height: normal;
     font-weight: 600;
     font-size: 16px;
@@ -84,8 +101,8 @@ position:absolute;
 .event .fecha .year { font-size: 12px; }
 .event .event-data { padding-left: 50px; }
 .event .event-data p {
+	font-family: Droid Serif !important;
     font-weight: normal;
-    font-style: italic;
     font-size: 14px;
     margin-bottom: 10px;
 }
@@ -116,6 +133,7 @@ p.description_content-slider{
     font-size:14px;
     color:white;
     font-weight: bold;
+    font-family: Montserrat !important;
 }
 .bienvenida{
 	padding: 20px;

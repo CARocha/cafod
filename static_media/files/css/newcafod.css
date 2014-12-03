@@ -146,6 +146,22 @@ p.description_content-slider{
 	
 	border: none !important;
 }
+.footer .footerinterior{
+	padding-left: 10px;
+}
+
+
+@media (max-width: 350px) {
+	div.wrapper{
+		margin-left: -29px !important;
+	}
+	.footer .footerinterior{
+		height: 100px;
+
+	}
+
+}
+
 
 /* Landscape phones and down */
 @media (max-width: 700px) {

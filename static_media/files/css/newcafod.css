@@ -167,6 +167,10 @@ p.description_content-slider{
 	.footer .footerinterior{
 		background-image: none;
 	}
+	#banner img{
+		width: 80%;
+		margin-left: 1em;
+	}
 
 }
 

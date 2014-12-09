@@ -3,12 +3,19 @@
 body{
 	font-family: Droid Serif !important;
 }
-
+#extrainfo a, span{
+	font-family: Droid Serif !important;
+}
 h1,h2,h3,h4,h5 {
 	font-family: Montserrat !important;
 }
 
-
+.title-a{
+	color: white;
+}
+.title-a:hover{
+	color: white;
+}
 div.wrapper{  
     float:left; /* important */  
     position:relative; /* important(so we can absolutely position the description div */
@@ -107,9 +114,9 @@ position:absolute;
     margin-bottom: 10px;
 }
 .leermas{
-	background-color: #ccb28b !important;
+	background-color: #BE9661 !important;
 	color: white;
-	background-image:-webkit-linear-gradient(top, #ccb28b, #ccb28b);
+	background-image:-webkit-linear-gradient(top, #BE9661, #BE9661);
 	text-shadow:none;
 	font-size: 12px;
 	font-weight: bold;
@@ -138,7 +145,7 @@ p.description_content-slider{
 .bienvenida{
 	padding: 20px;
 	background-color: rgba( 255, 255, 255, 0.5);
-	padding: 45px 23px;
+	padding: 45px 16px;
 	margin: 36px -134px;
 
 }

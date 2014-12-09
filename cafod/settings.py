@@ -97,6 +97,31 @@ CKEDITOR_CONFIGS = {
     },
 }
 
+CKEDITOR_CONFIGS = {
+    'default': {
+        'toolbar': [
+            [      'Undo', 'Redo',
+              '-', 'Bold', 'Italic', 'Underline',
+              '-','JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock',
+              '-', 'Link', 'Unlink', 'Anchor',
+              '-', 'Format',
+              '-', 'SpellChecker', 'Scayt',
+              '-', 'Maximize',
+            ],
+            [      'HorizontalRule',
+              '-', 'Table',
+              '-', 'BulletedList', 'NumberedList','-','Outdent','Indent',
+              '-', 'Cut','Copy','PasteText',
+              '-', 'Source',
+            ]
+        ],
+        'width': 'auto',
+        'height': 170,
+        'toolbarCanCollapse': False,
+        'uiColor': '',
+    }
+}
+
 SITE_ID = 1
 CX_CODE = '005566980429085431315:e2ov4hqoxcm'
 
@@ -156,28 +181,4 @@ LOGGING = {
 AUTH_PROFILE_MODULE = 'contrapartes.UserProfile'
 LOGIN_REDIRECT_URL = '/foros/perfil'
 COMPRESS_ENABLED = True
-CKEDITOR_CONFIGS = {
-    'default': {
-        'toolbar': [
-            [      'Undo', 'Redo',
-              '-', 'Bold', 'Italic', 'Underline',
-              '-','JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock',
-              '-', 'Link', 'Unlink', 'Anchor',
-              '-', 'Format',
-              '-', 'SpellChecker', 'Scayt',
-              '-', 'Maximize',
-            ],
-            [      'HorizontalRule',
-              '-', 'Table',
-              '-', 'BulletedList', 'NumberedList','-','Outdent','Indent',
-              '-', 'Cut','Copy','PasteText',
-              '-', 'Source',
-            ]
-        ],
-        'width': 'auto',
-        'height': 170,
-        'toolbarCanCollapse': False,
-        'skin':'kama',
-        'uiColor': '#EEe',
-    }
-}
+

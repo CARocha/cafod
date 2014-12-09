@@ -42,7 +42,7 @@
                <img src="{{thumb.foto.url_300x200}}">  
             {%endfor%} 
             <div class='description'>              
-              <p class='description_content'><a href="#">{{nota.titulo}}</a></p> 
+              <p class='description_content'><a class="title-a" href="#">{{nota.titulo}}</a></p> 
             </div> 
                   
       </div>
@@ -74,7 +74,7 @@
                <img src="{{thumb.foto.url_220x160}}">  
             {%endfor%}
           <div class='description'>         
-            <p class='description_content-slider'><a href="/notas/{{nota.id}}">{{nota.titulo|truncatewords:5}}</a></p>   
+            <p class='description_content-slider'><a class="title-a" href="/notas/{{nota.id}}">{{nota.titulo|truncatewords:5}}</a></p>   
           </div>
         </div>
       {%endfor%}

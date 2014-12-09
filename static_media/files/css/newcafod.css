@@ -1,13 +1,13 @@
 
 /*---------------------------------------------Nuevo diseno----------------------------------------------------------------*/
 body{
-	font-family: Droid Serif !important;
+	font-family: "Droid Serif" !important;
 }
 #extrainfo a, span{
-	font-family: Droid Serif !important;
+	font-family: "Droid Serif" !important;
 }
 h1,h2,h3,h4,h5 {
-	font-family: Montserrat !important;
+	font-family: "Montserrat" !important;
 }
 
 .title-a{
@@ -156,7 +156,18 @@ p.description_content-slider{
 .footer .footerinterior{
 	padding-left: 10px;
 }
-
+.titulo-medio {
+	font-family: Montserrat !important;
+}
+.cuerpo-nota p{
+	font-family: Droid Serif !important;
+}
+.titulo-grande{
+	font-family: "Montserrat" !important;
+}
+.acerca	p{
+	font-family: Droid Serif !important;
+}
 
 @media (max-width: 350px) {
 	div.wrapper{

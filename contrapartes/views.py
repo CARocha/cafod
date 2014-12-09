@@ -149,6 +149,7 @@ def notify_user_mensaje(mensaje):
 @login_required
 def estadisticas(request):
     total = {}
+    
     for usuario in User.objects.all():
         foro = Foros.objects.filter(contraparte=usuario).count()
         nota = Notas.objects.filter(user=usuario).count()

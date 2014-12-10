@@ -149,7 +149,22 @@ def notify_user_mensaje(mensaje):
 @login_required
 def estadisticas(request):
     total = {}
-    
+
+    lista_noticias = {}
+    lista_foros = {}
+    lista_aportes = {}
+    lista_comentarios = {}
+
+    for obj in Contraparte.objects.all():
+        noticias = Notas.objects.filter(user__userprofile__contraparte=obj).count()
+        lista_noticias[obj.siglas] = noticias
+        foros = Foros.objects.filter(contraparte__userprofile__contraparte=obj).count()
+        lista_foros[obj.siglas] = foros
+        aportes = Aportes.objects.filter(user__userprofile__contraparte=obj).count()
+        lista_aportes[obj.siglas] = aportes
+        comentarios = Comentarios.objects.filter(usuario__userprofile__contraparte=obj).count()
+        lista_comentarios[obj.siglas] = comentarios
+
     for usuario in User.objects.all():
         foro = Foros.objects.filter(contraparte=usuario).count()
         nota = Notas.objects.filter(user=usuario).count()

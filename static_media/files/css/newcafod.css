@@ -1,4 +1,6 @@
-
+html * {
+	font-family: "Droid Serif" !important;
+}
 /*---------------------------------------------Nuevo diseno----------------------------------------------------------------*/
 body{
 	font-family: "Droid Serif" !important;

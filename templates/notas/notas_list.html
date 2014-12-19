@@ -20,7 +20,7 @@
 					<div class="btn-group filtrospais">
 					  <a class="btn disabled">Filtrar por</a>
 					  {%for pais in paises%}
-					  <a href="/notas/pais/{{pais.id}}" {%if pais.id == pais_selecto.id %} class="btn active"{%else%}class="btn"{%endif%}><img src="/files/img/{{pais.codigo}}.png">{{pais.nombre}}</a>
+					  <a href="/notas/pais/{{pais.id}}" {%if pais.id == pais_selecto.id %} class="btn active"{%else%}class="btn"{%endif%}><img src="/files/img/{{pais.codigo}}.png">{{pais.pais_selecto}}</a>
 					  {%endfor%}
 					</div>
 			    </div>

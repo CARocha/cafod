@@ -196,6 +196,10 @@ p.description_content-slider{
 		margin-left: 0em !important;
 
 	}
+	#grisheader{
+		background:#d9d9d5;
+		height:330px
+	}
 	.evento{
 		width: 160px;
 	}

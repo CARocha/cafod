@@ -83,7 +83,7 @@ def lista_notas_pais(request,id):
 def index(request):
 
     notas = Notas.objects.all().order_by('-fecha','-id')[:3]
-    notas2 = Notas.objects.all().order_by('-fecha','-id')[2:9]
+    notas2 = Notas.objects.all().order_by('-fecha','-id')[1:9]
     evento = Agendas.objects.filter(publico=True).order_by('-inicio')[:4]
     paises = Pais.objects.all()
     contrapartes = Contraparte.objects.all()
